@@ -13,12 +13,14 @@ class Libro extends Model
         'datos',
         'precio',
         'autor_id',
-        'editorial_id'
+        'collection_id',
+        'agno',
+        'imagen'
     ];
     public function autor(){
         return $this->belongsTo(Autor::class);
     }
     public function editorial(){
-        return $this->belongsTo(Editorial::class);
+        return $this->belongsTo(Collection::class);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Collection;
+use App\Role;
 use Illuminate\Http\Request;
 
-class EditorialController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class EditorialController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Collection  $editorial
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Collection $editorial)
+    public function show(Role $role)
     {
         //
     }
@@ -52,10 +52,10 @@ class EditorialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Collection  $editorial
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Collection $editorial)
+    public function edit(Role $role)
     {
         //
     }
@@ -64,10 +64,10 @@ class EditorialController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Collection  $editorial
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Collection $editorial)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -75,10 +75,10 @@ class EditorialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Collection  $editorial
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Collection $editorial)
+    public function destroy(Role $role)
     {
         //
     }
