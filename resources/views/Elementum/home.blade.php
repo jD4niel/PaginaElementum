@@ -42,12 +42,14 @@
        <div class="container">
             <div class="row center align-items-center text-center align-content-center" >
                  @foreach($libros as $item)
-                <div class="cajas col-md-3 align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
+                     <div class="cajon col-md-3">
+                <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
                     <img height="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="mmom">
                     <hr>
                     <button class="btnDetalle">Ver detalle</button>
                     <button class="btnComprar">Comprar</button>
                 </div>
+                     </div>
                 @endforeach
             </div>
         </div>
@@ -282,4 +284,37 @@
     </div>
 
 
+@endsection
+
+@section('script_home')
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+                $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
+                $('#blogid').css({'border-right':'1px solid #9FA09D'});
+                $('#iconos').css('border-bottom','#00374e');
+                $('#barraleft').css('border-left','1px solid #9FA09D');
+                $('.social_icons').css({'border':'2px solid #00364F'});
+                $('nav ul li a').css({'color':'#1d3b4f'});
+                $('nav ul li i').css({'color':'#1d3b4f'});
+                $('nav ul li a').css({'font-weight':'bold'});
+                $('#logoElementum1').hide();
+                $('#logoElementum2').show();
+                // $(nav-container ul li a').css('color','#1b2d49');
+            } else {
+                $('.navigation').css({'background-color':'rgba(0, 0, 0, 0)'},{'border-bottom':'1px solid rgba(255, 255, 255, 0.85)'});
+                $('.navigation').css({'border-bottom':'1px solid #fff'});
+                $('#blogid').css({'border-right':'1px solid white'});
+                $('#iconos').css('border-bottom ','#1d3b4f');
+                $('#barraleft').css('border-left','1px solid white');
+                $('.social_icons').css({'border':'2px solid #ffffff'});
+                $('nav ul li a').css('color','white');
+                $('nav ul li i').css({'color':'white'});
+                $('nav ul li a').css({'font-weight':'normal'});
+                $('#logoElementum2').hide();
+                $('#logoElementum1').show();
+            }
+        });
+    </script>
 @endsection

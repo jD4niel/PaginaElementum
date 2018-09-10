@@ -13,9 +13,9 @@ class LibroTableSeeder extends Seeder
     {
         \App\Libro::create([
             'nombre'=>'Ansina se dice, ansina se escribe',
-            'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'descripcion'=> '',
+            'datos'=> '978-607-9298-26-5 Encuadernación rústica, 88 páginas, 13.5 x 21 cm',
+            'precio'=> 110,
             'autor_id'=>1,
             'collection_id'=>1,
             'agno'=>2016,
@@ -29,7 +29,7 @@ class LibroTableSeeder extends Seeder
             'autor_id'=>4,
             'collection_id'=>1,
             'agno'=>2018,
-            'imagen'=>'ansina.png'
+            'imagen'=>'construir_personae copia.png'
         ]);
         \App\Libro::create([
             'nombre'=>'El libro negro de la comunicación online. Manual para dependencias gubernamentales y afines',
@@ -50,7 +50,7 @@ class LibroTableSeeder extends Seeder
             'collection_id'=>1,
             'agno'=>2016,
             'imagen'=>'ellas.png'
-        ]);
+        ]);/*
         \App\Libro::create([
             'nombre'=>'Cruces identitarios. Investigadores, estudiantes y medios definen las nuevas caras de la comunicación',
             'descripcion'=> 'Historias de histeria de habla popular',
@@ -60,11 +60,11 @@ class LibroTableSeeder extends Seeder
             'collection_id'=>1,
             'agno'=>2018,
             'imagen'=>'ellas.png'
-        ]);
+        ]);*/
         \App\Libro::create([
-            'nombre'=>'Trump y otros retos. Fragmentatio de la comunicación rupestre',
-            'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
+            'nombre'=>'Fragmentatio de la comunicación rupestre',
+            'descripcion'=> 'Trump y otros retos',
+            'datos'=> '978-607-9298-31-9 Encuadernación rústica, 224 páginas, 13.5 x 21 cm.',
             'precio'=> 250,
             'autor_id'=>9,
             'collection_id'=>1,
@@ -73,14 +73,14 @@ class LibroTableSeeder extends Seeder
         ]);
         \App\Libro::create([
             'nombre'=>' Las que aman el futbol y otras que no tanto',
-            'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'descripcion'=> '',
+            'datos'=> '978-607-92-98-47-0 Encuadernación rústica, 238 páginas, 13.5 x 21 com',
+            'precio'=> 130,
             'autor_id'=>9,
             'collection_id'=>1,
             'agno'=>2014,
             'imagen'=>'lasqueaman.png'
-        ]);
+        ]);/*
         \App\Libro::create([
             'nombre'=>'Relatos sonoros. Diez años del programa Quinto poder',
             'descripcion'=> 'Historias de histeria de habla popular',
@@ -90,7 +90,7 @@ class LibroTableSeeder extends Seeder
             'collection_id'=>1,
             'agno'=>2016,
             'imagen'=>'relatos.png'
-        ]);
+        ]);*/
         \App\Libro::create([
             'nombre'=>'Periodismo contra la transfobia',
             'descripcion'=> 'Historias de histeria de habla popular',
@@ -104,9 +104,9 @@ class LibroTableSeeder extends Seeder
         /***********/
         \App\Libro::create([
             'nombre'=>'Callejeros. Cuentos soñados de mundos soñados',
-            'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'descripcion'=> 'Cuentos urbanos de mundos soñados',
+            'datos'=> '978-607-9298-41-8 Encuadernación rústica, 184 páginas, 13.5 x 21 cm.',
+            'precio'=> 200,
             'autor_id'=>2,
             'collection_id'=>2,
             'agno'=>2017,
@@ -115,8 +115,8 @@ class LibroTableSeeder extends Seeder
         \App\Libro::create([
             'nombre'=>'Cuentos de un hombre solo',
             'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'datos'=> '978-607-9298-29-6 Encuadernación rústica, 88 páginas,13.5 x 21 cm.',
+            'precio'=> 200,
             'autor_id'=>6,
             'collection_id'=>2,
             'agno'=>2016,
@@ -125,8 +125,8 @@ class LibroTableSeeder extends Seeder
         \App\Libro::create([
             'nombre'=>'Flores sin sol',
             'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'datos'=> '978-607-9298-15-9 Encuadernación rústica, 98 páginas, 13.5 x 21 cm. ',
+            'precio'=> 90,
             'autor_id'=>11,
             'collection_id'=>2,
             'agno'=>2014,
@@ -140,8 +140,8 @@ class LibroTableSeeder extends Seeder
             'autor_id'=>12,
             'collection_id'=>2,
             'agno'=>2017,
-            'imagen'=>'flores.png'
-        ]);
+            'imagen'=>'homosexual.png'
+        ]);/*
         \App\Libro::create([
             'nombre'=>' Microrrelatos a intervalos',
             'descripcion'=> 'Historias de histeria de habla popular',
@@ -151,12 +151,12 @@ class LibroTableSeeder extends Seeder
             'collection_id'=>2,
             'agno'=>2017,
             'imagen'=>'microrrelatos.png'
-        ]);
+        ]);*/
         \App\Libro::create([
             'nombre'=>'¿Y dónde están los calcetines?',
             'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'datos'=> 'ISBN:978-607-9298-21-0 Encuadernación rústica, 24 páginas, 18 x 21 cm.',
+            'precio'=> 110,
             'autor_id'=>11,
             'collection_id'=>2,
             'agno'=>2015,
@@ -165,9 +165,9 @@ class LibroTableSeeder extends Seeder
         /***********************/
         \App\Libro::create([
             'nombre'=>'Los sueños de Raquel',
-            'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'descripcion'=> 'Crónicas iniciáticas',
+            'datos'=> 'ISBN:978-607-9298-44-9 Encuadernación rústica, 192 páginas, 15.5 x 22 cm.',
+            'precio'=> 180,
             'autor_id'=>13,
             'collection_id'=>3,
             'agno'=>2017,
@@ -175,9 +175,9 @@ class LibroTableSeeder extends Seeder
         ]);
         \App\Libro::create([
             'nombre'=>'Un despertar consciente',
-            'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
-            'precio'=> 250,
+            'descripcion'=> '',
+            'datos'=> '978-607-92-98-47-0 15.5 x 22 cm',
+            'precio'=> 180,
             'autor_id'=>14,
             'collection_id'=>3,
             'agno'=>2017,
@@ -186,7 +186,7 @@ class LibroTableSeeder extends Seeder
         \App\Libro::create([
             'nombre'=>'La herida de Ulises',
             'descripcion'=> 'Historias de histeria de habla popular',
-            'datos'=> 'medidas x x',
+            'datos'=> 'ISBN:978-607-9298-43-2 Encuadernación rústica, 60 páginas, 15.5 x 22 cm.',
             'precio'=> 250,
             'autor_id'=>15,
             'collection_id'=>4,

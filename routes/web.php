@@ -15,4 +15,6 @@ Route::get('/', 'LibroController@index');
 Route::get('/descarga_manual','LibroController@descarga')->name('libros.manual');
 Route::get('/colecciones','LibroController@colecciones')->name('libros.colecciones');
 Route::get('/colecciones/buscar','LibroController@buscar')->name('buscar.libros');
-Route::get('/colecciones/ver','LibroController@ver')->name('ver.libros');
+Route::get('/colecciones/libros','LibroController@ver')->name('ver.libros');
+Route::post('/colecciones/ver','LibroController@detalle')->name('detalle.libros');
+Route::POST('/danoenver','LibroController@ir')->name('det.libros');

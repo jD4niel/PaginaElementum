@@ -4,16 +4,26 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Elementum</title>
 
         <!-- Fonts -->
        {{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">--}}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ URL::to('/') }}/fonts/InriaSerif/Web/fonts.css">
         <!-- Styles -->
         <style>
             /*@charset "UTF-8";*/
+            @font-face {
+                font-family: fuenteGlobal;
+                src: url({{ URL::to('/') }}/fonts/InriaSans-Regular.ttf);
+            }
+            html *:not(.fab){
+                font-family: 'fuenteGlobal' !important;
+                /*font-weight: bold;*/
+                font-style: normal;
+            }
             .navigation {
                 background: rgba(0,0,0,0);
                 position: sticky;
@@ -25,7 +35,6 @@
                 border-bottom: 1px solid rgba(255, 255, 255, 0.85);
                 transition: all 300ms ease-in-out;
             }
-
             .brand {
                 position: absolute;
                 padding-left: 0px;
@@ -34,8 +43,6 @@
                 text-transform: uppercase;
                 font-size: 1.4em;
                 padding-bottom:9px;
-
-
             }
             .brand a,
             .brand a:visited {
@@ -43,7 +50,6 @@
                 text-decoration: none;
 
             }
-
             .nav-container {
                 max-width: 1100px;
                 margin: 0 auto;
@@ -91,7 +97,6 @@
                 padding: 15px;
                 line-height: 20px;
             }
-
             .nav-dropdown {
                 position: absolute;
                 display: none;
@@ -99,7 +104,6 @@
                 box-shadow: 0 3px 12px rgba(0, 0, 0, 0.44);
                 background-color: rgba(134, 143, 148, 0.58);
             }
-
             /* Mobile navigation */
             .nav-mobile {
                 display: none;
@@ -110,12 +114,10 @@
                 height: 70px;
                 width: 70px;
             }
-
             @media only screen and (max-width: 798px) {
                 .nav-mobile {
                     display: block;
                 }
-
                 nav {
                     width: 100%;
                     padding: 70px 0 15px;
@@ -133,7 +135,6 @@
                 nav ul li ul li a {
                     padding-left: 30px;
                 }
-
                 .nav-dropdown {
                     position: static;
                 }
@@ -181,7 +182,6 @@
             #nav-toggle.active span:after {
                 transform: rotate(-45deg);
             }
-
             article {
                 max-width: 1000px;
                 margin: 0 auto;
@@ -197,8 +197,12 @@
                 width: 15px;
                 height: 15px;
             }
+            #logoElementum1{
+                width: 70%;
+                margin-top:-12px;
 
-            #logoElementum{
+            }
+            #logoElementum2{
                 width: 70%;
                 margin-top:-12px;
 
@@ -217,18 +221,24 @@
                 -moz-box-shadow: none !important;
                 box-shadow: none !important;
             }
-
-
+            .cajon{
+                padding: 15px;
+                margin:auto;
+                transition-duration: 0.15s;
+            }
+            .cajon:hover{
+                padding-top: 1px;
+                margin:auto;
+            }
             .cajas{
                 background-color: #F3F3F3;
                 border-radius: 8px;
                 box-shadow: 0px 0px 3px 2px rgba(0,0,0,0.2);
                 border:none;
-                margin:15px;
+                /*margin:15px;*/
                 transition-duration: 0.15s;
             }
             .cajas:hover{
-                margin:12px;
                 box-shadow: 0px 0px 3px 2px #B2CDFF;
             }
             .btnComprar{
@@ -249,7 +259,6 @@
              .btnDetalle:hover{
                 cursor:pointer;
             }
-
              .social_icons{
                  color: #ffffff;
                  border:2px solid #ffffff;
@@ -377,7 +386,6 @@
                 background-color: #e3e3e3;
                 padding:20px;
                 transition-duration: 0.3s;
-
             }
             .contenedor_colecciones img{
                 max-height: 100%;
@@ -395,23 +403,76 @@
                 cursor: pointer;
                 background-color: #f8f8f8;
             }
+            .imgbox{
+                margin: 15px auto;
+            }
+            .imgbox img{
+                padding: 5px;
+                background-color: white;
+                box-shadow: -5px 6px 4px -2px rgba(0, 0, 0, 0.42);
+                border:2px solid rgba(246, 246, 246, 0.65);
 
+                transition-duration: 0.2s;
+            }
+            .imgbox img:hover{
+                filter: brightness(37%) contrast(118%);
+                cursor: pointer;
+            }
+            .imgbox figcaption{
+                display: none;
+                font-size: 35px;
+                position: absolute;
+                z-index: 10;
+                vertical-align:middle;
+                text-align: center;
+                margin: auto;
+                top: 200px;
+                left: 120px;
+                color: white;
+            }
+            #formato_compra{
+             /*font-size: 30px;*/
+                border: 1px solid #ffef00;
+            }
+            #btnComprar{
+                transition-duration: 0.1s;
+            }
+            #btnComprar:hover{
+                cursor: pointer;
+                padding: 2px;
+            }
+            #btnFrag {
+                color: #fff;
+                background-color: #1f374b;
+                font-size: 18px;
+                border: none;
+                padding-top: 5px;
+                vertical-align: center;
+            }
+            #btnFrag:hover{
+                cursor: pointer;
+                background-color: #23465d;
+            }
+            .float_r{
+                float: right;
+            }
         </style>
     </head>
     <body>
     <section class="navigation">
         <div class="nav-container">
             <div class="brand" style="">
-                <img id="logoElementum" src="{{ URL::to('/') }}/images/logoblanco.png" alt="Editorial Elementum logo">
+                <img id="logoElementum1" src="{{ URL::to('/') }}/images/logoblanco.png" alt="Editorial Elementum logo">
+                <img id="logoElementum2" class="hide" src="{{ URL::to('/') }}/images/logocolor.png" alt="Editorial Elementum logo">
             </div>
             <nav>
                 <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
                 <ul class="nav-list">
-                    <li style="border-left: 1px solid white;">
+                    <li id="barraleft" style="border-left: 1px solid white;">
                         <a href="#!">Nosotros</a>
                     </li>
                     <li>
-                        <a href="#!">Colecciones</a>
+                        <a href="{{route('libros.colecciones')}}">Colecciones</a>
                     </li>
                     <li>
                         <a href="#!">Servicios</a>
@@ -444,10 +505,10 @@
                             </li>
                         </ul>
                     </li>
-                    <li style="border-right: 1px solid white;">
+                    <li id="blogid" style="border-right: 1px solid white;">
                         <a href="#!">Blog</a>
                     </li>
-                    <li style="padding-top: 15px; padding-left: 15px; padding-bottom: 24px; border-bottom: 1px solid white;">
+                    <li id="iconos" class="" style="padding-top: 15px; padding-left: 15px; padding-bottom: 24px; border-bottom: 1px solid white;">
                         <i class="fab fa-facebook-f social_icons"></i>
                         <i class="fab fa-twitter social_icons"></i>
                         <i class="fab fa-instagram social_icons"></i>
@@ -457,7 +518,8 @@
         </div>
     </section>
     @yield('home')
-    <footer>
+
+    <footer id="foter">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -481,7 +543,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    @yield('script_home')
      <script>
+         $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+         $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
+         $('#blogid').css({'border-right':'1px solid #9FA09D'});
+         $('#iconos').css('border-bottom','#00374e');
+         $('#barraleft').css('border-left','1px solid #9FA09D');
+         $('.social_icons').css({'border':'2px solid #00364F'});
+         $('nav ul li a').css({'color':'#1d3b4f'});
+         $('nav ul li i').css({'color':'#1d3b4f'});
+         $('nav ul li a').css({'font-weight':'bold'});
+         $('#logoElementum1').hide();
+         $('#logoElementum2').show();
     (function($) { // Begin jQuery
         $(function() { // DOM ready
             // If a link has a dropdown, add sub menu toggle.
@@ -497,9 +571,7 @@
             });
             // Toggle open and close nav styles on click
             $('#nav-toggle').click(function() {
-                //alert("hola");
                 $('nav ul').toggle();
-
             });
             // Hamburger to X toggle
             $('#nav-toggle').on('click', function() {
@@ -509,13 +581,8 @@
     })(jQuery); // end jQuery
 
     //scroll
-    $(window).scroll(function() {
-        if ($(document).scrollTop() > 50) {
-            $('.navigation').css('background-color','rgba(0, 0, 0, 0.7)');
-        } else {
-            $('.navigation').css('background-color','rgba(0, 0, 0, 0)');
-        }
-    });
+
+
     $(document).ready(function(){
         $(".descripcion").hide();
 

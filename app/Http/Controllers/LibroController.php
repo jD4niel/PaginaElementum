@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libro;
+use View;
 use Illuminate\Http\Request;
 
 class LibroController extends Controller
@@ -14,7 +15,7 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libros= Libro::orderBy('id', 'desc')->take(6)->get();
+        $libros= Libro::orderBy('id', 'desc')->take(8)->get();
         //dd($libros->imagen);
         return view('Elementum.home',compact('libros'));
     }
@@ -89,11 +90,22 @@ class LibroController extends Controller
     public function buscar(Request $request){
         $data = $request;
         $libros= Libro::where('nombre','like','%'.$data->nombre.'%')->get();
-        return view::make('collection',compact('libros'));
+        return view('Elementum.collection',compact('libros'));
     }
     public function ver(Request $request){
         $data = $request;
-        $libros= Libro::where('nombre','like','%'.$data->nombre.'%')->get();
-        return view::make('collection',compact('libros'));
+        $libros= Libro::where('collection_id',$data->coleccion)->get();
+        return  response()->json($libros);
     }
+    public function detalle(Request $request){
+        $id = $request;
+            $libros= Libro::find($id);
+         return view('Elementum.libro',compact('libros'));
+    }
+    public function ir(Request $request){
+
+        $libros= Libro::find($id);
+        return $libros;
+    }
+
 }
