@@ -11,7 +11,12 @@ class Autor extends Model
         'nombre',
         'apellido_p',
         'apellido_m',
-        'foto'
+        'foto',
+        'breve_desc',
+        'facebook',
+        'twitter',
+        'instagram',
+        'semblanza'
     ];
     public function libro(){
         return $this->hasMany(Libro::class);

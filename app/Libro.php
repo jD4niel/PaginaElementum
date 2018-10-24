@@ -15,7 +15,8 @@ class Libro extends Model
         'autor_id',
         'collection_id',
         'agno',
-        'imagen'
+        'imagen',
+        'review'
     ];
     public function autor(){
         return $this->belongsTo(Autor::class);

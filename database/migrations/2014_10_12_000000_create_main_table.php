@@ -59,6 +59,7 @@ class CreateMainTable extends Migration
             $table->unsignedInteger('collection_id');
             $table->year('agno');
             $table->string('imagen');
+            $table->longText('review');
             $table->timestamps();
 
             $table->foreign('autor_id')->references('id')->on('autors')->onUpdate('cascade')->onDelete('cascade');

@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ URL::to('/') }}/fonts/InriaSerif/Web/fonts.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <!-- Styles -->
         <style>
             /*@charset "UTF-8";*/
@@ -200,12 +201,20 @@
             #logoElementum1{
                 width: 70%;
                 margin-top:-12px;
-
+                transition: all 150ms ease-in-out;
+            }
+            #logoElementum1:hover{
+                width: 72%;
+                cursor: pointer;
             }
             #logoElementum2{
                 width: 70%;
                 margin-top:-12px;
-
+                transition: all 150ms ease-in-out;
+            }
+            #logoElementum2:hover{
+                width: 72%;
+                cursor: pointer;
             }
             #Slider{
                 position: relative;
@@ -379,8 +388,8 @@
                 margin:auto;
             }
             .contenedor_colecciones{
-                width: 350px;
-                height: 150px;
+                width: 200px;
+                height: 100px;
                 margin: auto;
                 border-radius: 15px;
                 background-color: #e3e3e3;
@@ -388,16 +397,10 @@
                 transition-duration: 0.3s;
             }
             .contenedor_colecciones img{
-                max-height: 100%;
-                max-width: 100%;
-                width: auto;
-                height: auto;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                margin: auto;
+                text-align: center;
+                max-height: 90%;
+                max-width: 90%;
+                vertical-align: center;
             }
             .contenedor_colecciones:hover{
                 cursor: pointer;
@@ -456,6 +459,96 @@
             .float_r{
                 float: right;
             }
+            .owl-item{
+                padding: 0;
+            }
+            .btn_acerca_autor{
+                color: white;
+                border: none;
+                padding: 7px;
+                font-size: 18px;
+                background-color: #0d8e76;
+                transition-duration: 0.1s;
+                width: 180px;
+            }
+            .btn_acerca_autor:hover{
+                cursor: pointer;
+                background-color: #0dab93;
+                font-size: 18.5px;
+            }
+            .nombre_autor{
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .obra{
+                font-size: 15px;
+            }
+            .btn_contacto_autor{
+                color: white;
+                padding: 8px;
+                background-color: #1f374b;
+                border: none;
+                width: 250px;
+                vertical-align: center;
+                padding-top: 12px;
+                margin-bottom: 10px;
+            }
+            .btn_contacto_autor:hover{
+                cursor: pointer;
+                background-color: #214459;
+            }
+            #tituloAutores{
+                top:200px;
+                right: 15px;
+                align-self: right;
+                text-align: right;
+                position: absolute;
+                float: right;
+                font-size: 10em;
+                color: white;
+                line-height: 0.6em;
+            }
+            .contact-form{
+                margin-top: 35px;
+                margin-bottom: 5px;
+                border-radius: 15px;
+            }
+            .btn-enviar{
+                border: none;
+                color: white;
+                background-color: #31a591;
+                border-radius: 25px;
+                padding: 5px;
+                padding-top: 10px;
+                width: 8em;
+                margin-top: 35px;
+                margin-bottom: 20px;
+            }
+            .font-contacto-color{
+                color: #2b4c6a;
+            }
+            #imgContacto{
+                position:absolute;
+                left:0px;
+                top:-300px;
+                z-index:-1;
+            }
+            .map-responsive{
+                overflow:hidden;
+                padding-bottom:56.25%;
+                position:relative;
+                height:0;
+            }
+            .map-responsive iframe{
+                left:0;
+                top:0;
+                height:100%;
+                width:100%;
+                position:absolute;
+            }
+            .data-location{
+                font-size: 20px;
+            }
         </style>
     </head>
     <body>
@@ -475,35 +568,13 @@
                         <a href="{{route('libros.colecciones')}}">Colecciones</a>
                     </li>
                     <li>
-                        <a href="#!">Servicios</a>
-                        <ul class="nav-dropdown">
-                            <li>
-                                <a href="#!">list item</a>
-                            </li>
-                            <li>
-                                <a href="#!">list item</a>
-                            </li>
-                            <li>
-                                <a href="#!">list item</a>
-                            </li>
-                        </ul>
+                        <a href="{{route('autores.libros')}}">Autores</a>
                     </li>
                     <li>
                         <a href="#!">Elementario</a>
                     </li>
                     <li>
-                        <a href="#!">Contacto</a>
-                        <ul class="nav-dropdown">
-                            <li>
-                                <a href="#!">list item</a>
-                            </li>
-                            <li>
-                                <a href="#!">list item</a>
-                            </li>
-                            <li>
-                                <a href="#!">list item</a>
-                            </li>
-                        </ul>
+                        <a href="{{route('contacto.elementum')}}">Contacto</a>
                     </li>
                     <li id="blogid" style="border-right: 1px solid white;">
                         <a href="#!">Blog</a>
@@ -518,7 +589,8 @@
         </div>
     </section>
     @yield('home')
-
+    @yield('libro')
+    @yield('autores')
     <footer id="foter">
         <div class="container">
             <div class="row">
@@ -543,6 +615,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     @yield('script_home')
      <script>
          $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
@@ -585,7 +658,21 @@
 
     $(document).ready(function(){
         $(".descripcion").hide();
-
+        $('i.fa-facebook-f').on("click",function () {
+            window.open("https://www.facebook.com/edielementum/","_blank");
+        });
+        $('i.fa-twitter').on("click",function () {
+            window.open("https://twitter.com/edi_elementum","_blank");
+        });
+        $('i.fa-instagram').on("click",function () {
+            window.open("https://www.instagram.com/edi_elementum/?hl=es-la","_blank");
+        });
+        $('#logoElementum1').on("click",function () {
+            window.location.href = "{{route('index')}}";
+        });
+        $('#logoElementum2').on("click",function () {
+            window.location.href = "{{route('index')}}";
+        });
     });
     $('#logocreativaindependiente').on("click", function(event) {
         $("#logocreativaindependiente div").css({'background-color':'#559688'},2000);
@@ -619,7 +706,6 @@
     $('#logometrica').on("click", function(event) {
         $("#logometrica div").css({'background-color':'#d4752d'},2000);
         $("#logometrica div img").css({'filter':'brightness(0) invert(1)'});
-
         $("#logocreativaindependiente div").css({'background-color':'#e3e3e3'},600);
         $("#logocreativaindependiente div img").css({'filter':'brightness(1) invert(0)'});
         $("#logoloselementales div").css({'background-color':'#e3e3e3'},2000);
@@ -694,7 +780,10 @@
             url: route,
             data: {'nombre': nombre},
             type: 'get',
+            dataType: 'json',
             success: function (data) {
+                console.log(data);
+                console.log(data[0]["id"]);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);

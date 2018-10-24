@@ -40,18 +40,23 @@
     </div> {{--contenedor fin--}}
     <div style="background-color:#DCDDDE;">
        <div class="container">
-            <div class="row center align-items-center text-center align-content-center" >
+            <div id="cajaLibros" class="row center align-items-center text-center align-content-center" >
                  @foreach($libros as $item)
                      <div class="cajon col-md-3">
                 <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
                     <img height="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="mmom">
                     <hr>
-                    <button class="btnDetalle">Ver detalle</button>
-                    <button class="btnComprar">Comprar</button>
+                    <a href="{{route("detalle.libros",$item->id)}}" style="text-decoration: none; color: white;padding-top:10px; width:50px;" class="btnDetalle">Ver detalle</a>
+                    <a class="btnComprar" style="text-decoration: none; color: white;padding-top:10px; width:50px;">Comprar</a>
                 </div>
                      </div>
                 @endforeach
             </div>
+           <br>
+           <div style="text-align: center; font-size: 1.5em; margin: auto;">
+               <a href="{{route('libros.colecciones')}}">Ver todo</a>
+           </div>
+           <br>
         </div>
     </div>
     <div class="container">
@@ -282,7 +287,6 @@
 
         </div>
     </div>
-
 
 @endsection
 
