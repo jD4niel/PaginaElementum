@@ -2,7 +2,7 @@
 @section('autores')
 
     <figure>
-        <img width="100%" src="{{ URL::to('/') }}/images/fotoportadautores.jpg" alt="">
+        <img style="margin-top: -300px;" width="100%" src="{{ URL::to('/') }}/images/fotoportadautores.jpg" alt="">
         <figcaption id="tituloAutores">Autores <br>Elementum</figcaption>
     </figure>
     <div class="container ">
@@ -25,30 +25,34 @@
 
     </div> {{--contenedor fin--}}
 
-    <div class="container">
+    <div class="container" style="margin: 0 auto;width: 100%;">
         <div class="row">
+        @foreach($autors as $item)
 
-            <div class="foto_autor col-md-3 text-center" style="margin: auto;">
-                <button class="btn_acerca_autor">Acerca del autor</button>
+                <div class="foto_autor col-md-4 text-center" style="margin: auto;padding-bottom: 150px;">
+                    <div>
+                {{--<button class="btn_acerca_autor">Acerca del autor</button>--}}
                 <br><br>
-                    <img class="img-fluid" src="{{ URL::to('/') }}/images/fotos_autores/agustincadena.png" alt="">
+                <figure class="fig_aut">
+                    <img class="img-fluid img-autor" width="70%" src="{{ URL::to('/') }}/images/fotos_autores/{{$item->imagen}}" alt="">
+                </figure>
               {{--  <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">--}}
                 <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">
-                <div class="nombre_autor">Agustín Cadena</div>
+                <div class="nombre_autor">{{$item->nombre}}&nbsp;{{$item->apellido_p}}</div>
                 <br>
-                <div class="obra">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi dignissimos dolorem expedita fugiat harum, itaque </div>
+                <div class="obra" style="height: 80px; width: 80%;margin: 0 auto;">{{$item->breve_desc}}</div>
                 <br>
-                <button class="btn_contacto_autor">Contacto</button>
-                <br>
+                <a href="{{route('autores.detalle',$item->id)}}" style="text-decoration: none;"><button class="btn_contacto_autor">Acerca del autor</button></a>
                 <div class="autor_icons icons">
-                    <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color:black;" class="fab fa-facebook-f social_icons"></i>
-                    <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color:black;" class="fab fa-twitter social_icons"></i>
-                    <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color:black;" class="fab fa-instagram social_icons"></i>
+                    <a class="icon_social {{$item->facebook}}  " target="_blank" data-icon="{{$item->facebook}}" href="{{$item->facebook}}"><i class="icon_autor_list fab fa-facebook-f social_icons"></i></a>
+                    <a class="icon_social {{$item->twitter}}  " target="_blank" data-icon="{{$item->twiter}}" href="{{$item->twiter}}"><i class="icon_autor_list fab fa-twitter social_icons"></i></a>
+                    <a class="icon_social {{$item->instagram}}  " target="_blank" data-icon="{{$item->instagram}}" href="{{$item->instagram}}"><i class="icon_autor_list fab fa-instagram social_icons"></i></a>
 
                 </div>
                 <br>
             </div>
-
+                </div>
+        @endforeach
         </div>
     </div>
 @endsection
@@ -60,13 +64,12 @@
             $('#blogid').css({'border-right':'1px solid #9FA09D'});
             $('#iconos').css('border-bottom','#00374e');
             $('#barraleft').css('border-left','1px solid #9FA09D');
-            $('.social_icons').css({'border':'2px solid #00364F'});
             $('nav ul li a').css({'color':'#1d3b4f'});
             $('nav ul li i').css({'color':'#1d3b4f'});
             $('nav ul li a').css({'font-weight':'bold'});
             $('#logoElementum1').hide();
             $('#logoElementum2').show();
+            /*----------------------------*/
         });
-
     </script>
 @endsection

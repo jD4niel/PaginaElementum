@@ -22,5 +22,6 @@ Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
 Route::get('/colecciones/{id}','LibroController@detalle')->name('detalle.libros');
 
 Route::get('/autores','LibroController@autors')->name('autores.libros');
+Route::get('/autores/{id}','LibroController@autors_details')->name('autores.detalle');
 
 Route::get('/ir','LibroController@ir')->name('det.libros');

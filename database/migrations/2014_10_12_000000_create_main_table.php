@@ -41,7 +41,12 @@ class CreateMainTable extends Migration
             $table->string('nombre');
             $table->string('apellido_p');
             $table->string('apellido_m');
-            $table->string('foto');
+            $table->string('breve_desc');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('instagram');
+            $table->longText('semblanza');
+            $table->string('imagen');
             $table->timestamps();
         });
         Schema::create('collections', function (Blueprint $table) {
@@ -52,17 +57,21 @@ class CreateMainTable extends Migration
         Schema::create('libros', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('descripcion');
-            $table->string('datos');
-            $table->float('precio');
+            $table->string('subtitulo');
             $table->unsignedInteger('autor_id');
+            $table->unsignedInteger('rol_id');
             $table->unsignedInteger('collection_id');
-            $table->year('agno');
+            $table->string('isbn');
+            $table->string('tamaño');
+            $table->float('precio');
+            $table->longText('semblanza');
+            $table->string('ebook');
+            $table->string('url');
             $table->string('imagen');
-            $table->longText('review');
             $table->timestamps();
 
             $table->foreign('autor_id')->references('id')->on('autors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('rol_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('collection_id')->references('id')->on('collections')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -74,10 +83,12 @@ class CreateMainTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('passwords');
-        Schema::dropIfExists('autors');
-        Schema::dropIfExists('collections');
         Schema::dropIfExists('libros');
+        Schema::dropIfExists('collections');
+        Schema::dropIfExists('autors');
+        Schema::dropIfExists('passwords');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('passwords_resets');
     }
 }

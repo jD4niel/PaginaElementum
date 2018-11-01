@@ -11,23 +11,29 @@
         <div class="col-md-7">
             {{--<h1> | {{libros}} |</h1>--}}
             <h1>{{$libros->nombre}}</h1>
-            <h5>{{$libros->descripcion}}</h5>
-            <p>{{$libros->review}} </p>
+            <h5>{{$libros->subtitulo}}</h5>
+            <p style="text-align: justify;">{{$libros->semblanza}} </p>
             <div>
-                <span>Autor: </span><span>{{$libros->autor->nombre}}&nbsp;{{$libros->autor->apellido_p}}&nbsp;{{$libros->autor->apellido_m}}</span>
+                <strong>Autor: </strong><span>{{$libros->autor->nombre}}&nbsp;{{$libros->autor->apellido_p}}&nbsp;{{$libros->autor->apellido_m}}</span>
             </div>
             <br>
             <div>
                 <h2>${{$libros->precio}}</h2>
             </div>
-
-
+            <br>
+            <div style="float: right;">Compartir &nbsp;<i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color: black" class="fab fa-facebook-f social_icons"></i>
+                <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color: black" class="fab fa-twitter social_icons"></i>
+                <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color: black" class="fab fa-instagram social_icons"></i>
+            </div>
+            <br>
+            <hr>
         </div>
     </div>
     <div class="separador"></div>
     <div class="row">
-        <div style="padding-left: 50px;" class="table-responsive col-md-6 center-block">
-            <table id="formato_compra" class="">
+        <div style="padding-left: 10px;" class="table-responsive col-md-6 center-block">
+            <a href="{{$libros->url}}" target="_blank"><button class="btn btn-warning btn-block col-md-6">Comprar</button></a>
+            {{--<table id="formato_compra" class="">
                 <thead class="bg-warning"><tr><th colspan="2" scope="col">México</th></tr></thead>
                 <tbody>
                 <tr>
@@ -47,19 +53,13 @@
                 <tfoot class="bg-warning"><tr>
                     <td id="btnComprar" colspan="2">Comprar</td>
                 </tr></tfoot>
-            </table>
+            </table>--}}
         </div>
         <div class="col-md-6" >
-            <button id="btnFrag" style="float: right;">Leer fragmento</button>
-            <br>
-            <br>
+            {{--<button id="btnFrag" style="float: right;">Leer fragmento</button>--}}
             <div style="text-align: right;">
-                {{$libros->datos}}
-            </div>
-            <br>
-            <div style="float: right;">Compartir &nbsp;<i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color: black" class="fab fa-facebook-f social_icons"></i>
-                <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color: black" class="fab fa-twitter social_icons"></i>
-                <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px; color: black" class="fab fa-instagram social_icons"></i>
+                {{$libros->tamaño}}<br>
+                {{$libros->isbn}}
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
                 <div id="imgboxId{{$item->id}}" class="imgbox col-md-10 align-content-center text-center" onmouseleave="salir({{$item->id}})" onmouseover="ver({{$item->id}})" style="padding-top: 30px;padding-bottom: 20px;">
                     <a href="{{route('detalle.libros',$item->id)}}">
                         <figure>
-                            <img width="150px" src="{{ URL::to('/') }}/images/libros2/{{$item->imagen}}">
+                            <img width="150px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}">
                             <figcaption>ver</figcaption>
                         </figure>
                     </a>

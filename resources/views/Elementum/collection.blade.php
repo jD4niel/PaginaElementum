@@ -20,7 +20,7 @@
                 <div id="imgboxId{{$item->id}}" class="imgbox col-md-3 align-content-center text-center" onmouseleave="salir({{$item->id}})" onmouseover="ver({{$item->id}})" style="padding-top: 30px;padding-bottom: 20px;">
                     <a href="{{route("detalle.libros",$item->id)}}">
                     <figure>
-                         <img width="250px" src="{{ URL::to('/') }}/images/libros2/{{$item->imagen}}">
+                         <img width="250px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}">
                           <figcaption>ver</figcaption>
                     </figure>
                     </a>
@@ -58,7 +58,7 @@
                     for(var i=0; i<data.length;i++){
                         $('#contenedor_libros').append('  <div id="imgboxId'+data[i]["id"]+'" class="imgbox col-md-3 align-content-center text-center" onmouseleave="salir('+data[i]["id"]+')" onmouseover="ver('+data[i]["id"]+')" style="padding-top: 30px;padding-bottom: 20px;">\n' +
                             '                    <figure>\n' +
-                            '                         <img width="250px" src="{{ URL::to('/') }}/images/libros2/'+data[i]["imagen"]+'">\n' +
+                            '                         <img width="250px" src="{{ URL::to('/') }}/images/libros/'+data[i]["imagen"]+'">\n' +
                             '                          <figcaption>ver</figcaption>\n' +
                             '                    </figure>\n' +
                             '                </div>');

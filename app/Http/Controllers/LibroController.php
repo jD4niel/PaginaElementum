@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Autor;
 use App\Collection;
 use App\Libro;
 use View;
@@ -107,7 +108,13 @@ class LibroController extends Controller
         return view('libro');
     }
     public function autors(){
-        return view('Elementum.autors');
+        $autors = Autor::all();
+        return view('Elementum.autors',compact('autors'));
+    }
+    public function autors_details($id){
+        $autor=Autor::findOrFail($id);
+        $libros=Libro::where('autor_id','=',$id)->get();
+        return view('Elementum.autor_detalle',compact('autor','libros'));
     }
     public function contacto(){
         return view('Elementum.contacto');
