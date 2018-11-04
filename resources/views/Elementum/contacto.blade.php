@@ -1,5 +1,5 @@
 @extends('template')
-@section('home')
+@section('autores')
     <div class="separador"></div>
     <div class="container">
         <div class="row">
@@ -44,32 +44,22 @@
 @endsection
 @section('script_collection')
     <script>
-        $(window).scroll(function() {
-            if ($(document).scrollTop() > 50) {
-                $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
-                $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
-                $('#blogid').css({'border-right':'1px solid #9FA09D'});
-                $('#iconos').css('border-bottom','#00374e');
-                $('#barraleft').css('border-left','1px solid #9FA09D');
-                $('.social_icons').css({'border':'2px solid #00364F'});
-                $('nav ul li a').css({'color':'#1d3b4f'});
-                $('nav ul li i').css({'color':'#1d3b4f'});
-                $('nav ul li a').css({'font-weight':'bold'});
-                $('#logoElementum1').hide();
-                $('#logoElementum2').show();
-                // $(nav-container ul li a').css('color','#1b2d49');
-            } else {
-                $('.navigation').css({'background-color':'rgba(0, 0, 0, 0)'},{'border-bottom':'1px solid rgba(255, 255, 255, 0.85)'});
-                $('.navigation').css({'border-bottom':'1px solid #fff'});
-                $('#blogid').css({'border-right':'1px solid white'});
-                $('#iconos').css('border-bottom ','#1d3b4f');
-                $('#barraleft').css('border-left','1px solid white');
-                $('.social_icons').css({'border':'2px solid #ffffff'});
-                $('nav ul li a').css('color','white');
-                $('nav ul li i').css({'color':'white'});
-                $('nav ul li a').css({'font-weight':'normal'});
-                $('#logoElementum2').hide();
-                $('#logoElementum1').show();
-            }
+      $(document).ready(function() {
+        $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+        $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
+        $('#blogid').css({'border-right':'1px solid #9FA09D'});
+        $('#iconos').css('border-bottom','#00374e');
+        $('#barraleft').css('border-left','1px solid #9FA09D');
+        $('nav ul li a').css({'color':'#1d3b4f'});
+        $('nav ul li i').css({'color':'#1d3b4f'});
+        $('nav ul li a').css({'font-weight':'bold'});
+        $('#logoElementum1').hide();
+        $('#logoElementum2').show();
+        $('nav ul li a').hover(function(){
+            $(this).css({'color':'#fff'})
+        },function() {
+          $(this).css({'color':'#1d3b4f'})
         });
+      });
+      </script>
 @endsection

@@ -11,10 +11,12 @@
             <h1>{{$autor->nombre}}{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h1>
             <hr>
             {{--<h5>{{$libros->descripcion}}</h5>--}}
-            <p style="text-align: justify;text-justify: inter-word;">{{$autor->semblanza}} </p>
+            <p style="text-align: justify;text-justify: inter-word;">{!! $autor->semblanza!!} </p>
             <br>
-            <div class="col-md-12">
-                <div class="btn-group right text-right col-md-5" style="float: right; border-top:1px solid #869ea4;padding-top: 10px;text-align: right;">
+            <div class="col-md-12 text-right">
+              <span class="col-md-12" style="font-size:1.8em;">Contacto con autor</span>
+              <br>
+                <div class="btn-group right text-right col-md-5" style="float: right; border-top:1px solid #869ea4;padding-top: 10px;text-align: right;margin:auto;">
                     <a href="{{$autor->facebook}}"><button type="button" class="btn btn-face"> <i class="redes fab fa-facebook"></i></button></a>
                     <a href="https://twitter.com/{{$autor->twitter}}"><button type="button" class="btn btn-tw"> <i class="redes fab fa-twitter"></i></button></a>
                     <a href="instagram.com/{{$autor->instagram}}"><button type="button" class="btn btn-insta"> <i class="redes fab fa-instagram"></i></button></a>
@@ -86,7 +88,23 @@
 @section('script_collection')
     <script>
         $(document).ready(function () {
+          $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+          $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
+          $('#blogid').css({'border-right':'1px solid #9FA09D'});
+          $('#iconos').css('border-bottom','#00374e');
+          $('#barraleft').css('border-left','1px solid #9FA09D');
+          $('nav ul li a').css({'color':'#1d3b4f'});
+          $('nav ul li i').css({'color':'#1d3b4f'});
+          $('nav ul li a').css({'font-weight':'bold'});
+          $('#logoElementum1').hide();
+          $('#logoElementum2').show();
+          $('nav ul li a').hover(function(){
+              $(this).css({'color':'#fff'})
+          },function() {
+            $(this).css({'color':'#1d3b4f'})
+          });
             $(".owl-carousel").owlCarousel();
+
         });
         /***************************************/
         var owl = $('.owl-carousel');

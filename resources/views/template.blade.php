@@ -17,12 +17,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <!-- Styles -->
         <style>
+            .personal_el{
+              margin:13px auto;
+            }
             /*@charset "UTF-8";*/
             @font-face {
                 font-family: fuenteGlobal;
                 src: url({{ URL::to('/') }}/fonts/InriaSans-Regular.ttf);
             }
-            html *:not(.fab):not(.fas){
+            html *:not(.fab):not(.fas):not(.titulo_style){
                 font-family: 'fuenteGlobal' !important;
                 /*font-weight: bold;*/
                 font-style: normal;
@@ -86,7 +89,7 @@
             nav ul li a:hover,
             nav ul li a:visited:hover {
                 background: #589688;
-                color: #ffffff;
+                color: #fff;/*social*/
             }
             nav ul li a:not(:only-child):after,
             nav ul li a:visited:not(:only-child):after {
@@ -272,7 +275,7 @@
             }
              .social_icons{
                  color: #ffffff;
-                 border:2px solid #ffffff;
+                /* border:*/
                  border-radius: 80px;
                  height: 40px;
                  width: 40px;
@@ -281,10 +284,23 @@
                  border: 2px solid rgb(40, 54, 91);
                  transition-duration: 0.15s;
              }
-             .social_icons:hover{
+             .social_icons:hover.fa-twitter:not(.not_){
                  cursor: pointer;
-                 border:2px solid #ffffff;
-                 color: #ffe543;
+                 border:2px solid #006c83;
+                 color: #1a9abb;
+                 background-color: #fff;
+             }
+             .social_icons:hover.fa-facebook-f:not(.not_){
+                 cursor: pointer;
+                 border:2px solid #00187e;
+                 color: #113a94;
+                 background-color: #fff;
+             }
+             .social_icons:hover.fa-instagram:not(.not_){
+                 cursor: pointer;
+                 border:2px solid #651751;
+                 color: #d1073e;
+                 background-color: #fff;
              }
             /* footer */
             footer{
@@ -622,10 +638,13 @@
                 color: #868686;
 
                 border: 2px solid rgb(125, 137, 143);
+
             }
             .not_ i:hover{
                 background-color: rgba(220, 223, 245, 0);
                 color: #868686;
+                cursor: context-menu;
+                border: 2px solid rgb(125, 137, 143);
             }
             .icon_autor_list{
                 font-size: 15px; padding-top:6px;height: 30px; width: 30px; color:black;
@@ -646,6 +665,11 @@
                 background-color: #ffea00;
                 color:black;
             }
+             .titulo_style{
+              font-family: 'fuenteGlobal' !important;
+               font-weight: bold;
+               font-style: italic;
+             }
            /* #vision p:hover{
                 margin-top: 10px;
             }*/
@@ -680,9 +704,9 @@
                         <a href="#!">Blog</a>
                     </li>
                     <li id="iconos" class="" style="padding-top: 15px; padding-left: 15px; padding-bottom: 24px; border-bottom: 1px solid white;">
-                        <i class="fab fa-facebook-f social_icons link"></i>
-                        <i class="fab fa-twitter social_icons link"></i>
-                        <i class="fab fa-instagram social_icons link"></i>
+                        <i onclick="window.location.href='https://www.facebook.com/edielementum'" class="fab social_icons fa-facebook-f link"></i>
+                        <i onclick="window.location.href='https://twitter.com/edi_elementum'" class="fab social_icons fa-twitter link"></i>
+                        <i onclick="window.location.href='https://www.instagram.com/edi_elementum/'" class="fab fa-instagram social_icons link"></i>
                     </li>
                 </ul>
             </nav>
@@ -701,9 +725,9 @@
                     <hr style="background-color: white; width: 250px; float:left;">
                 </div>
                 <div class="col-md-6 align-content-right" style="align-content: right; text-align: right;">
-                    <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link"></i>
-                    <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link"></i>
-                    <i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link"></i>
+                    <a target="_blank" href="https://www.facebook.com/edielementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link"></i></a>
+                    <a target="_blank" href="https://twitter.com/edi_elementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/edi_elementum/"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link"></i></a>
                     <br>
                     Teléfono <br>
                     (771) 71 5 05 67 <br>
@@ -718,16 +742,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     @yield('script_home')
      <script>
-         $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
-         $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
-         $('#blogid').css({'border-right':'1px solid #9FA09D'});
-         $('#iconos').css('border-bottom','#00374e');
-         $('#barraleft').css('border-left','1px solid #9FA09D');
-         $('nav ul li a').css({'color':'#1d3b4f'});
-         $('nav ul li i').css({'color':'#1d3b4f'});
-         $('nav ul li a').css({'font-weight':'bold'});
-         $('#logoElementum1').hide();
-         $('#logoElementum2').show();
+         // $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+         // $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
+         // $('#blogid').css({'border-right':'1px solid #9FA09D'});
+         // $('#iconos').css('border-bottom','#00374e');
+         // $('#barraleft').css('border-left','1px solid #9FA09D');
+         // $('nav ul li a').css({'color':'#1d3b4f'});
+         // $('nav ul li i').css({'color':'#1d3b4f'});
+         // $('nav ul li a').css({'font-weight':'bold'});
+         // $('#logoElementum1').hide();
+         // $('#logoElementum2').show();
     (function($) { // Begin jQuery
         $(function() { // DOM ready
             // If a link has a dropdown, add sub menu toggle.
@@ -756,6 +780,7 @@
 
 
     $(document).ready(function(){
+
         $(".descripcion").hide();
         $('i.fa-facebook-f link').on("click",function () {
             window.open("https://www.facebook.com/edielementum/","_blank");

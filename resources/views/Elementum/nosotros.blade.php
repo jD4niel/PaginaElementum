@@ -46,19 +46,37 @@
         </center>
         <br>
         <div class="row" style="font-size: 25px;text-align: center;">
-            <div class="col-md-6"><i class="fab fa-accusoft"></i>&nbsp;Mayte Romo</div>
-            <div class="col-md-6"><i class="fas fa-object-ungroup"></i>&nbsp;Angélica Alba</div>
-            <div class="col-md-6"><i class="fas fa-align-left"></i>&nbsp;Jovanny Cruz</div>
-            <div class="col-md-6"><i class="fas fa-edit"></i>&nbsp;Alejandra Olguín</div>
-            <div class="col-md-6"><i class="fas fa-fax"></i>&nbsp;Evelin Ramos</div>
-            <div class="col-md-6"><i class="fas fa-columns"></i>&nbsp;Victoria Amezcua</div>
-            <div class="col-md-6"><i class="fas fa-drafting-compass"></i>&nbsp;Paulina Sánchez</div>
-            <div class="col-md-6"><i class="fas fa-pen-nib"></i>&nbsp;Alejandro Jiménez</div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fab fa-accusoft"></i>&nbsp;Mayte Romo</div></div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-object-ungroup"></i>&nbsp;Angélica Alba</div></div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-align-left"></i>&nbsp;Jovanny Cruz</div></div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-edit"></i>&nbsp;Alejandra Olguín</div></div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-fax"></i>&nbsp;Evelin Ramos</div></div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-columns"></i>&nbsp;Victoria Amezcua</div></div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-drafting-compass"></i>&nbsp;Paulina Sánchez</div></div>
+            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-pen-nib"></i>&nbsp;Alejandro Jiménez</div></div>
         </div>
         <div class="separador"></div>
     </div>
 
 @endsection
 @section('script_collection')
-
+  <script>
+    $(document).ready(function() {
+      $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+      $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
+      $('#blogid').css({'border-right':'1px solid #9FA09D'});
+      $('#iconos').css('border-bottom','#00374e');
+      $('#barraleft').css('border-left','1px solid #9FA09D');
+      $('nav ul li a').css({'color':'#1d3b4f'});
+      $('nav ul li i').css({'color':'#1d3b4f'});
+      $('nav ul li a').css({'font-weight':'bold'});
+      $('#logoElementum1').hide();
+      $('#logoElementum2').show();
+      $('nav ul li a').hover(function(){
+          $(this).css({'color':'#fff'})
+      },function() {
+        $(this).css({'color':'#1d3b4f'})
+      });
+    });
+  </script>
 @endsection

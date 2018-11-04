@@ -1,6 +1,6 @@
+
 @extends('template')
 @section('autores')
-
     <figure>
         <img style="margin-top: -300px;" width="100%" src="{{ URL::to('/') }}/images/fotoportadautores.jpg" alt="">
         <figcaption id="tituloAutores">Autores <br>Elementum</figcaption>
@@ -34,7 +34,7 @@
                 {{--<button class="btn_acerca_autor">Acerca del autor</button>--}}
                 <br><br>
                 <figure class="fig_aut">
-                    <img class="img-fluid img-autor" width="70%" src="{{ URL::to('/') }}/images/fotos_autores/{{$item->imagen}}" alt="">
+                    <img class="img-fluid img-autor" onclick="trigger_a({{$item->id}})" width="70%" src="{{ URL::to('/') }}/images/fotos_autores/{{$item->imagen}}" alt="">
                 </figure>
               {{--  <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">--}}
                 <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">
@@ -42,11 +42,11 @@
                 <br>
                 <div class="obra" style="height: 80px; width: 80%;margin: 0 auto;">{{$item->breve_desc}}</div>
                 <br>
-                <a href="{{route('autores.detalle',$item->id)}}" style="text-decoration: none;"><button class="btn_contacto_autor">Acerca del autor</button></a>
+                <a id="btn-id-{{$item->id}}" href="{{route('autores.detalle',$item->id)}}" style="text-decoration: none;"><button class="btn_contacto_autor">Acerca del autor</button></a>
                 <div class="autor_icons icons">
-                    <a class="icon_social {{$item->facebook}}  " target="_blank" data-icon="{{$item->facebook}}" href="{{$item->facebook}}"><i class="icon_autor_list fab fa-facebook-f social_icons"></i></a>
-                    <a class="icon_social {{$item->twitter}}  " target="_blank" data-icon="{{$item->twiter}}" href="{{$item->twiter}}"><i class="icon_autor_list fab fa-twitter social_icons"></i></a>
-                    <a class="icon_social {{$item->instagram}}  " target="_blank" data-icon="{{$item->instagram}}" href="{{$item->instagram}}"><i class="icon_autor_list fab fa-instagram social_icons"></i></a>
+                    <a id="fb-{{$item->id}}" class="icon_social {{$item->facebook}}  " target="_blank" data-icon="{{$item->facebook}}" href="{{$item->facebook}}"><i class="icon_autor_list fab fa-facebook-f social_icons {{$item->facebook}}"></i></a>
+                    <a id="tw-{{$item->id}}"class="icon_social {{$item->twitter}}  " target="_blank" data-icon="{{$item->twiter}}" href="{{$item->twiter}}"><i class="icon_autor_list fab fa-twitter social_icons {{$item->twitter}}"></i></a>
+                    <a id="in-{{$item->id}}"class="icon_social {{$item->instagram}}  " target="_blank" data-icon="{{$item->instagram}}" href="{{$item->instagram}}"><i class="icon_autor_list fab fa-instagram social_icons {{$item->instagram}}"></i></a>
 
                 </div>
                 <br>
@@ -69,7 +69,24 @@
             $('nav ul li a').css({'font-weight':'bold'});
             $('#logoElementum1').hide();
             $('#logoElementum2').show();
-            /*----------------------------*/
+            $('nav ul li a').hover(function(){
+                $(this).css({'color':'#fff'})
+            },function() {
+              $(this).css({'color':'#1d3b4f'})
+            });
+            // /*----------------------------*/
+            if($('a').hasClass('not_')){
+              //$('.not_>i').css('color','red');
+              $('.not_').removeAttr("href");
+              $('.not_').removeAttr("target");
+              $('.not_').prop("title","No disponible");
+            }
+            //Home
+            @yield('estilos') //aquiwe
         });
+        function trigger_a(id){
+          var a = document.URL;
+          window.location.href=a+"/"+id;
+        }
     </script>
 @endsection

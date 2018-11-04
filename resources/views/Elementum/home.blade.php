@@ -1,6 +1,9 @@
 @extends('template')
 @section('home')
-
+    <script>
+       $('.social_icons').css("border","2px solid #ffffff");
+    </script>
+    
     <div id="Slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#Slider" data-slide-to="0" class="active"></li>
@@ -24,7 +27,7 @@
         </div>
     </div>
 
-    <div class="container"> 
+    <div class="container">
         <div class="row">
             <div class="col-md-12" style="margin-top: -80px;">
                 <div class="input-group mb-3">
@@ -35,7 +38,7 @@
                 </div>
             </div>
         </div>
-      
+
 
     </div> {{--contenedor fin--}}
     <div style="background-color:#DCDDDE;">
@@ -292,6 +295,9 @@
 
 @section('script_home')
     <script>
+    $(document).ready(function() {
+         $('.social_icons').css("border","2px solid #ffffff");
+    });
         $(window).scroll(function() {
             if ($(document).scrollTop() > 50) {
                 $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
