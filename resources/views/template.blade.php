@@ -17,8 +17,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <!-- Styles -->
         <style>
+
+                .links{
+            }
             .personal_el{
-              margin:13px auto;
+              margin:13px auto;;
             }
             /*@charset "UTF-8";*/
             @font-face {
@@ -78,7 +81,7 @@
                 position: relative;
             }
             nav ul li a,
-            nav ul li a:visited {
+            nav ul li a:not(.links):visited {
                 display: block;
                 padding: 0 20px;
                 line-height: 70px;
@@ -86,13 +89,13 @@
                 color: #ffffff;
                 text-decoration: none;
             }
-            nav ul li a:hover,
-            nav ul li a:visited:hover {
+            nav ul li a:not(.links):hover,
+            nav ul li a:not(.links):visited:hover {
                 background: #589688;
                 color: #fff;/*social*/
             }
             nav ul li a:not(:only-child):after,
-            nav ul li a:visited:not(:only-child):after {
+            nav ul li a:not(.links):visited:not(:only-child):after {
                 padding-left: 4px;
                 content: ' ▾';
             }
@@ -356,14 +359,14 @@
                 margin-right: -30px;
                 width: 335px;
             }
-            .modal .modal-content{
+            .modal .modal-content:not(.normal-content){
                 background-color: rgba(19, 148, 144, 0.81);
                 color: white;
             }
-            .modal-content button{
+            .modal-content button:not(.btn-content){
                 color: white;
             }
-            .modal-content button:hover{
+            .modal-content button:hover:not(.btn-content){
                 color: #ffce0d;
             }
             .hide{
@@ -667,12 +670,14 @@
             }
              .titulo_style{
               font-family: 'fuenteGlobal' !important;
-               font-weight: bold;
                font-style: italic;
              }
            /* #vision p:hover{
                 margin-top: 10px;
             }*/
+            .remove{
+              display:none;
+            }
         </style>
     </head>
     <body>
@@ -704,9 +709,9 @@
                         <a href="#!">Blog</a>
                     </li>
                     <li id="iconos" class="" style="padding-top: 15px; padding-left: 15px; padding-bottom: 24px; border-bottom: 1px solid white;">
-                        <i onclick="window.location.href='https://www.facebook.com/edielementum'" class="fab social_icons fa-facebook-f link"></i>
-                        <i onclick="window.location.href='https://twitter.com/edi_elementum'" class="fab social_icons fa-twitter link"></i>
-                        <i onclick="window.location.href='https://www.instagram.com/edi_elementum/'" class="fab fa-instagram social_icons link"></i>
+                        <i onclick="openInNewTab('https://www.facebook.com/edielementum')"class="fab social_icons fa-facebook-f link"></i>
+                        <i onclick="openInNewTab('https://twitter.com/edi_elementum')" class="fab social_icons fa-twitter link"></i>
+                        <i onclick="openInNewTab('https://www.instagram.com/edi_elementum/')" class="fab fa-instagram social_icons link"></i>
                     </li>
                 </ul>
             </nav>
@@ -725,9 +730,9 @@
                     <hr style="background-color: white; width: 250px; float:left;">
                 </div>
                 <div class="col-md-6 align-content-right" style="align-content: right; text-align: right;">
-                    <a target="_blank" href="https://www.facebook.com/edielementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link"></i></a>
-                    <a target="_blank" href="https://twitter.com/edi_elementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link"></i></a>
-                    <a target="_blank" href="https://www.instagram.com/edi_elementum/"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link"></i></a>
+                    <a id="fb_link" target="_blank" href="https://www.facebook.com/edielementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link"></i></a>
+                    <a id="tw_link" target="_blank" href="https://twitter.com/edi_elementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link"></i></a>
+                    <a id="insta_link" target="_blank" href="https://www.instagram.com/edi_elementum/"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link"></i></a>
                     <br>
                     Teléfono <br>
                     (771) 71 5 05 67 <br>
@@ -778,7 +783,10 @@
 
     //scroll
 
-
+    function openInNewTab(url) {
+      var win = window.open(url, '_blank');
+      win.focus();
+    }
     $(document).ready(function(){
 
         $(".descripcion").hide();

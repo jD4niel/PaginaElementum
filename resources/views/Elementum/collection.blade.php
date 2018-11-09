@@ -3,15 +3,15 @@
 <div class="container ">
     <div class="row align-content-center text-center">
         <div id="logoloselementales" onclick="cambio(2)"  data-num="1" class="col-md-2 cont uno"><div class="contenedor_colecciones">
-                <a href="#contenedor_libro"><img src="{{ URL::to('/') }}/images/colecciones/logoloselementales.png" alt=""></a></div></div>
+                <a><img src="{{ URL::to('/') }}/images/colecciones/logoloselementales.png" alt=""></a></div></div>
         <div id="logocreativaindependiente" onclick="cambio(1)"  data-num="2" class="col-md-2 cont dos"><div class="contenedor_colecciones">
-                <a href="#contenedor_libro"><img src="{{ URL::to('/') }}/images/colecciones/logocreativaindependiente.png" alt=""></a></div></div>
+                <a><img src="{{ URL::to('/') }}/images/colecciones/logocreativaindependiente.png" alt=""></a></div></div>
         <div id="logometrica"  data-num="3" onclick="cambio(4)" class="col-md-2 cont tres"><div class="contenedor_colecciones">
-                <a href="#contenedor_libro"><img src="{{ URL::to('/') }}/images/colecciones/logometrica.png" alt=""></a></div></div>
+                <a><img src="{{ URL::to('/') }}/images/colecciones/logometrica.png" alt=""></a></div></div>
         <div id="logotravesia"  data-num="4" onclick="cambio(3)" class="col-md-2 cont cuatro"><div class="contenedor_colecciones">
-                <a href="#contenedor_libro"><img src="{{ URL::to('/') }}/images/colecciones/logotravesia.png" alt=""></a></div></div>
+                <a><img src="{{ URL::to('/') }}/images/colecciones/logotravesia.png" alt=""></a></div></div>
         <div id="logoteatro"  data-num="5" onclick="cambio(5)" class="col-md-2 cont cinco"><div class="contenedor_colecciones">
-                <a href="#contenedor_libro"><img src="{{ URL::to('/') }}/images/colecciones/logoteatro.png" alt=""></a></div></div>
+                <a><img src="{{ URL::to('/') }}/images/colecciones/logoteatro.png" alt=""></a></div></div>
     </div>
     <hr>
     <div id="contenedor_libros" class="row">
@@ -57,7 +57,8 @@
             $('#imgboxId'+a+' figcaption').hide();
         }
         function cambio(a){
-            $('#contenedor_libros').slideUp(500);
+           var current_url=window.location.href;
+            //$('#contenedor_libros').slideUp(500);
             var nombre = $('#buscartxt').val();
             var route = "{{ route("ver.libros")}}";
             $.ajax({
@@ -71,13 +72,13 @@
                     console.log(data.length);
                     for(var i=0; i<data.length;i++){
                         $('#contenedor_libros').append('  <div id="imgboxId'+data[i]["id"]+'" class="imgbox col-md-3 align-content-center text-center" onmouseleave="salir('+data[i]["id"]+')" onmouseover="ver('+data[i]["id"]+')" style="padding-top: 30px;padding-bottom: 20px;">\n' +
-                            '                    <figure>\n' +
+                            '                    <a id="imgboxId'+data[i]["id"]+'" href="'+current_url+'/'+data[i]["id"]+'"><figure>\n' +
                             '                         <img width="250px" src="{{ URL::to('/') }}/images/libros/'+data[i]["imagen"]+'">\n' +
                             '                          <figcaption>ver</figcaption>\n' +
-                            '                    </figure>\n' +
+                            '                    </figure></a>\n' +
                             '                </div>');
                     }
-                    $('#contenedor_libros').slideDown(700);
+                  //  $('#contenedor_libros').slideDown(700);
 
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

@@ -3,7 +3,7 @@
     <script>
        $('.social_icons').css("border","2px solid #ffffff");
     </script>
-    
+
     <div id="Slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#Slider" data-slide-to="0" class="active"></li>
@@ -94,7 +94,7 @@
                 <div class="col-md-6 iconoservicios">
                     <figure>
                         <img src="{{ URL::to('/') }}/images/iconos/iconoservicios.png" alt="servicio promocion cultural" data-backdrop="false" data-toggle="modal" data-target="#ServicioPromocion">
-                        <figcaption>Servicios de promocion <br>cultural editorial</figcaption>
+                        <figcaption>Servicios de promoción <br>cultural editorial</figcaption>
                     </figure>
                 </div>
 
@@ -225,9 +225,10 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>La transformación de cultura, imaginación, conocimientos y cosmovisión en textos pertinentes y funcionales se logra a
-                        través de la gestión de contenidos. Elementum tiene las habilidades y la capacidad instalada para redactar y
-                        corregir textos, de acuerdo con las necesidades de documentos de diversa naturaleza. </p>
+                    <p>   El diseño editorial, que incluye portadas e interiores, parte de un análisis del discurso textual para
+                          crear un discurso gráfico que logre armonía entre la palabra escrita y la imagen, en beneficio del mensaje.
+                          El trabajo de ilustración, lejos de ser accesorio, es la síntesis plástica del discurso, que también puede
+                          dotar de matices icónicos al libro. </p>
                 </div>
             </div>
 
@@ -244,10 +245,10 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>El diseño editorial, que incluye portadas e interiores, parte de un análisis del discurso textual para
-                        crear un discurso gráfico que logre armonía entre la palabra escrita y la imagen, en beneficio del mensaje.
-                        El trabajo de ilustración, lejos de ser accesorio, es la síntesis plástica del discurso, que también puede
-                        dotar de matices icónicos al libro.</p>
+                    <p>
+                    La transformación de cultura, imaginación, conocimientos y cosmovisión en textos pertinentes y funcionales se logra a
+                  través de la gestión de contenidos. Elementum tiene las habilidades y la capacidad instalada para redactar y
+                  corregir textos, de acuerdo con las necesidades de documentos de diversa naturaleza.</p>
                 </div>
             </div>
 

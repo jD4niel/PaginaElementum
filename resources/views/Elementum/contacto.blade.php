@@ -6,13 +6,13 @@
             <div class="col-md-6">
                 <h1 class="font-contacto-color">Contacto</h1>
                 <hr style="background-color: #1278a7">
-                <br><br><br>
+                <br>
                 <div class="font-contacto-color data-location">
                     Teléfono <br>
                     (771) 715 05 67
                 </div>
                 <br>
-                <div class="font-contacto-color data-location">Editorial Elementum S.A de C.V</div>
+                <div class="font-contacto-color data-location">Editorial Elementum S.A. de C.V.</div>
                 <div class="font-contacto-color data-location">Jardín Colón No. 8, col. Centro</div>
                 <div class="font-contacto-color data-location">Pachuca,Hgo.</div>
                 <br><br>
@@ -22,7 +22,7 @@
                 <form action="" class="form text-center">
                     <input class="form-control contact-form" type="text" placeholder="Nombre" required>
                     <input class="form-control contact-form" type="email" placeholder="Correo eléctronico" required>
-                    <input class="form-control contact-form" type="number" min="0" placeholder="Número telefónico" required>
+                    <input class="form-control contact-form" type="tel" min="0" placeholder="Número telefónico" required>
                     <textarea class="form-control contact-form" name="mensaje" id="" cols="30" placeholder="Mensaje" rows="10" required></textarea>
                     <input class="btn-enviar" type="submit" value="Enviar">
                 </form>

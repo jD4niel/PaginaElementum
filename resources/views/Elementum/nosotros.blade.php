@@ -34,7 +34,7 @@
             <div class="valores_list col-md-6">Apertura</div>
             <div class="valores_list col-md-6">Democracia</div>
             <div class="valores_list col-md-6">Tolerancia</div>
-            <div class="valores_list col-md-12">Transparencia</div>
+            <div class="valores_list col-md-6">Transparencia</div>
             <hr>
         </div>
     </div>
@@ -45,15 +45,15 @@
             <hr width="50%">
         </center>
         <br>
-        <div class="row" style="font-size: 25px;text-align: center;">
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fab fa-accusoft"></i>&nbsp;Mayte Romo</div></div>
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-object-ungroup"></i>&nbsp;Angélica Alba</div></div>
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-align-left"></i>&nbsp;Jovanny Cruz</div></div>
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-edit"></i>&nbsp;Alejandra Olguín</div></div>
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-fax"></i>&nbsp;Evelin Ramos</div></div>
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-columns"></i>&nbsp;Victoria Amezcua</div></div>
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-drafting-compass"></i>&nbsp;Paulina Sánchez</div></div>
-            <div class="personal_el col-md-6"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-pen-nib"></i>&nbsp;Alejandro Jiménez</div></div>
+        <div class="row" style="font-size: 25px;text-align: left; ">
+            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fab fa-accusoft"></i>&nbsp;Mayte Romo</div></div>
+            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-object-ungroup"></i>&nbsp;Angélica Alba</div></div>
+            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-align-left"></i>&nbsp;Jovany Cruz</div></div>
+            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-edit"></i>&nbsp;Alejandra Olguín</div></div>
+            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-fax"></i>&nbsp;Evelin Ramos</div></div>
+            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-columns"></i>&nbsp;Victoria Amezcua</div></div>
+            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-drafting-compass"></i>&nbsp;Paulina Sánchez</div></div>
+            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-pen-nib"></i>&nbsp;Alejandro Jiménez</div></div>
         </div>
         <div class="separador"></div>
     </div>

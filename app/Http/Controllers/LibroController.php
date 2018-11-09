@@ -101,7 +101,7 @@ class LibroController extends Controller
     }
     public function detalle($id){
         $libros= Libro::find($id);
-        $recomendados = Libro::where('collection_id',$libros->collection_id)->get();
+        $recomendados = Libro::where('collection_id',$libros->collection_id)->where('id','!=',$id)->get();
         return view('libro',compact('libros','recomendados'));
     }
     public function ir(){
