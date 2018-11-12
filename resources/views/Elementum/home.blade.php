@@ -9,21 +9,21 @@
             <li data-target="#Slider" data-slide-to="0" class="active"></li>
             <li data-target="#Slider" data-slide-to="1"></li>
             <li data-target="#Slider" data-slide-to="2"></li>
-            <li data-target="#Slider" data-slide-to="3"></li>
+            <!-- <li data-target="#Slider" data-slide-to="3"></li> -->
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100 h-100" height="700px"  src="{{ URL::to('/') }}/images/slider/fotoslider1.png" alt="First slide">
+                <img class="d-block w-100 " height="80%" style="margin-top:-250px;"  src="{{ URL::to('/') }}/images/slider/foto1.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100 h-100" height="700px" src="{{ URL::to('/') }}/images/slider/fotoslider2.png" alt="Second slide">
+                <img class="d-block w-100 " height="80%" style="margin-top:-250px;" src="{{ URL::to('/') }}/images/slider/foto2.jpg" alt="Second slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100 h-100" height="700px" src="{{ URL::to('/') }}/images/slider/fotoslider3.png" alt="Third slide">
+                <img class="d-block w-100 " height="80%" style="margin-top:-250px;" src="{{ URL::to('/') }}/images/slider/foto3.jpg" alt="Third slide">
             </div>
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
                 <img class="d-block w-100 h-100" height="700px" src="{{ URL::to('/') }}/images/slider/fotoslider4.png" alt="Four slide">
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -116,10 +116,42 @@
     </div>
     <div class="separador"></div>
     <div style="background-color:#DCDDDE;">
-        <div class="container-full">
-            <div class="row col-md-12 align-content-center text-center center-block">
-                <div class="col-md-1" style="margin-left: -20px;"></div>
-              <div id="eventosDiv1" class="col-md-3 eventosDiv  text-center align-content-center">
+        <div class="container" style="background-color:#DCDDDE;padding:50px 0 50px 0;">
+            <div class="row text-center">
+                <!-- <div class="col-md-1" style="margin-left: -20px;"></div> -->
+                <div class="card" style="width: 22rem;margin:auto;">
+                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/taller1.png" alt="Card image cap">
+                        <div class="card-body" onclick="reveal(1)" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
+                              <h5 class="card-title">Re-cuentos: El artifício de escribir historias</h5>
+                              <i class="fas fa-sort-down"></i>
+                              <p class="card-text text-card-1" style="text-align:justify; display:none;">Cada creación es un bien patrimonial para su creador. Elementum brinda asesorías en esta materia, además de gestionar el registro de las obras ante Indautor para la obtención de un certificado que acredita estos derechos al creador.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                              <li class="list-group-item"><strong>Duración:</strong><br>4 sesiones, martes 20 y 27 de noviembre y 4 y 11 de diciembre, de 17 a 20 hrs. </li>
+                              <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li>
+                              <li style="display:none;" class="list-group-item text-card-1"><strong>Sede:</strong><br> Elementario / Jardín Colón #8, col. Centro, Pachuca, Hgo.</li>
+                        </ul>
+                        <div style="display:none;" class="card-body text-card-1">
+                              Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
+                        </div>
+                </div>
+                <div class="card" style="width: 22rem;margin:auto;">
+                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/taller2.jpg" alt="Card image cap">
+                        <div class="card-body" onclick="reveal(2)" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
+                              <h5 class="card-title">Elementour: Un viaje de la palabra al libro</h5>
+                              <i class="fas fa-sort-down"></i>
+                              <p class="card-text text-card-2" style="text-align:justify; display:none;">Tiene el objetivo de que sus asistentes identifiquen los oficios implicados en la creación de libros y que reconozcan, a través de ese ejercicio, su propia capacidad de sumarse como creadores. Acompañados de un grupo de profesionales dedicados al mundo editorial.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                              <li class="list-group-item"><strong>Duración:</strong><br>1 sesión de 3 hrs. Grupos a partir de 15 niños (Edad de 8 a 12 años).</li>
+                              <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li>
+                              <li style="display:none;" class="list-group-item text-card-2"><strong>Sede:</strong><br> Elementario / Jardín Colón #8, col. Centro, Pachuca, Hgo.</li>
+                        </ul>
+                        <div style="display:none;" class="card-body text-card-2">
+                              Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
+                        </div>
+                </div>
+              <!-- <div id="eventosDiv1" class="col-md-3 eventosDiv  text-center align-content-center">
                   <figure>
                       <img class="" src="{{ URL::to('/') }}/images/img_ref.jpg" alt="">
                       <figcaption class="figbox titulo_caja" style="text-transform: uppercase;">Taller de Narrativa básica</figcaption>
@@ -136,8 +168,6 @@
                   <hr>
                       <div class="duracion_caja "><strong>Duración:</strong>  3 meses, sesiones semanales <br> de 2 horas</div>
                       <div class="inversion_caja "><strong>Inversión: </strong>$1,000</div>
-
-
 
               </div>
               <div id="eventosDiv2" class="col-md-3 eventosDiv  text-center align-content-center">
@@ -157,10 +187,8 @@
                       <div class="duracion_caja "><strong>Duración:</strong>  3 meses, sesiones semanales <br> de 2 horas</div>
                       <div class="inversion_caja "><strong>Inversión: </strong>$1,000</div>
 
-
-
-              </div>
-              <div id="eventosDiv3" class="col-md-3 eventosDiv  text-center align-content-center">
+              </div> -->
+              <!-- <div id="eventosDiv3" class="col-md-3 eventosDiv  text-center align-content-center">
                   <figure>
                       <img class="" src="{{ URL::to('/') }}/images/img_ref.jpg" alt="">
                       <figcaption class="figbox titulo_caja" style="text-transform: uppercase;">Taller de Autobiografías</figcaption>
@@ -178,7 +206,7 @@
                   <hr>
                       <div class="duracion_caja "><strong>Duración:</strong>  6 meses, sesiones semanales  <br> de 2 horas</div>
                       <div class="inversion_caja "><strong>Inversión: </strong>$2,400</div>
-              </div>
+              </div> -->
             </div>
         </div>
     </div>
@@ -202,9 +230,9 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Elementum hace y vende libros dentro de una dinámica cultural que involucra la participación de editores, autores y lectores.
-                        Se trata de una propuesta sustentada en un equipo profesional que incluye una retribución social pertinente a la comunidad.
-                        Cuenta entre sus valores la calidad, la satisfacción al cliente, el respeto al lector, la inclusión, la democracia y la fraternidad.
+                    <p>La transformación de cultura, imaginación, conocimientos y cosmovisión en textos pertinentes y funcionales se
+                       logra a través de la gestión de contenidos. Elementum tiene las habilidades y la capacidad instalada para redactar
+                       y corregir textos, de acuerdo con las necesidades de documentos de diversa naturaleza.
                     </p>
                 </div>
                 {{--<div class="modal-footer">
@@ -246,9 +274,10 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                    La transformación de cultura, imaginación, conocimientos y cosmovisión en textos pertinentes y funcionales se logra a
-                  través de la gestión de contenidos. Elementum tiene las habilidades y la capacidad instalada para redactar y
-                  corregir textos, de acuerdo con las necesidades de documentos de diversa naturaleza.</p>
+                    Cada creación es un bien patrimonial para su creador. La reivindicación de ese derecho,
+                     así como del derecho moral de ser reconocido como autor, parte del conocimiento de sus alcances
+                     y límites legales, y se concreta en el registro de las obras ante las autoridades competentes.
+                     Elementum brinda asesoría básica en esta materia.</p>
                 </div>
             </div>
 
@@ -265,7 +294,10 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Elementario ha tomado la iniciativa de formar a escritores en el estado a través de su espacio educativo, El aula. En este lugar los asistentes encontrarán talleres en torno al fomento de la escritura y la lectura. Asimismo, El aula ofrece capacitaciones para especialistas que deseen de conocer más acerca del mundo editorial. En su primer ciclo escolar se ofrecerán talleres de narrativa y poesía básica.</p>
+                    <p>Lectores y autores potenciales interesados en acercarse a los oficios del libro
+                      encuentran en los talleres de Elementum una alternativa pedagógica para concretar,
+                      parcial o totalmente, sus propias publicaciones. Asimismo, Elementum brinda
+                      capacitaciones en redacción dirigidas a públicos con diversos niveles de dominio de la palabra escrita.</p>
                 </div>
             </div>
 
@@ -282,14 +314,11 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>En Elementario hemos aceptado el reto de promover de forma constante las actividades artísticas que se desarrollan en Hidalgo,
-                        en un espacio que ofrece todo lo necesario para que los creativos expresen sus ideas y su visión del mundo que nos rodea.
-                        Asumimos el reto de despertar el interés por la cultura por medio de exhibiciones, debates, conversatorios presentaciones
-                        musicales y, sobre todo, propuestas escénicas de fomento a la lectura.</p>
-                </div>
+                    <p>El colosal reto de despertar interés hacia los productos editoriales en un país que no se caracteriza por sus arraigados hábitos de lectura es afrontado por Elementum a través de diversas actividades de promoción y difusión, como presentaciones editoriales aderezadas con exhibiciones cinematográficas, debates, conversatorios y recitales, entre otras, que buscan romper esquemas tradicionales y crear públicos lectores.</p>
             </div>
 
         </div>
+    </div>
     </div>
 
 @endsection
@@ -327,5 +356,8 @@
                 $('#logoElementum1').show();
             }
         });
+       function reveal(a){
+         $('.text-card-'+a).slideToggle();
+        }
     </script>
 @endsection
