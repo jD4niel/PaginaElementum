@@ -10,6 +10,7 @@ class Libro extends Model
         'nombre',
         'subtitulo',
         'autor_id',
+        'user_id',
         'rol_id',
         'collection_id',
         'isbn',
@@ -26,7 +27,7 @@ class Libro extends Model
     public function collection(){
         return $this->belongsTo(Collection::class);
     }
-    public function rol(){
-        return $this->belongsTo(Role::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

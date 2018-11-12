@@ -19,7 +19,4 @@ class Role extends Model
     {
         return $this->hasOne('App\User');
     }
-    public function libro(){
-        return $this->hasMany('App\Libro');
-    }
 }

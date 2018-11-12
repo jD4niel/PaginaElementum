@@ -3,10 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h1>Mis entradas</h1>
+        <h1>Usuarios</h1>
     </div>
     <div class="row">
-        <table id="entradas_id" class="table-responsive">
+        <table id="entradas_id" class="table">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
@@ -22,9 +23,9 @@
                 <tr id="id{{$item->id}}">
                     <td>{{$item->id}}</td>
                     <td>{{$item->name}}</td>
+                    <td>{{$item->last_name}}&nbsp;{{$item->second_last_name}}</td>
                     <td>{{$item->role->type}}</td>
-                    <td>{{$item->last_name}}{{$item->second_last_name}}</td>
-                    <td>{{$item->blog->entradas->id}}</td>
+                    <td>entradas</td>
                     <td>
                         <button onclick="borrar({{$item->id}})" class="btn btn-danger">Borrar</button>
                         <button onclick="modificar('{{$item->id}}" class="btn btn-success"  data-toggle="modal" data-target="#ModificarEntrada">Modificar</button>
@@ -45,6 +46,8 @@
         jQuery( document ).ready(function( $ ) {
             $('#entradas_id').DataTable();
         } );
+
+
     </script>
 @endsection
 
