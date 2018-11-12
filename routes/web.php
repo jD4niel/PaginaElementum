@@ -25,3 +25,10 @@ Route::get('/autores','LibroController@autors')->name('autores.libros');
 Route::get('/autores/{id}','LibroController@autors_details')->name('autores.detalle');
 
 Route::get('/ir','LibroController@ir')->name('det.libros');
+/*Módulo de blog*/
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/entradas', 'EntradasController@index')->name('entradas');
+Route::get('/usuarios', 'UserController@index')->name('users');
+
+

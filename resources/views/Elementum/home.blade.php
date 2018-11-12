@@ -124,7 +124,10 @@
                         <div class="card-body" onclick="reveal(1)" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
                               <h5 class="card-title">Re-cuentos: El artifício de escribir historias</h5>
                               <i class="fas fa-sort-down"></i>
-                              <p class="card-text text-card-1" style="text-align:justify; display:none;">Cada creación es un bien patrimonial para su creador. Elementum brinda asesorías en esta materia, además de gestionar el registro de las obras ante Indautor para la obtención de un certificado que acredita estos derechos al creador.</p>
+                              <p class="card-text text-card-1" style="text-align:justify; display:none;">El taller de Narrativa tiene como objetivo formar
+                                  nuevos autores que tengan nociones básicas de los
+                                  géneros narrativos y sus ele mentos, a través de actividades
+                                  de exploración, análisis, lectura, escritura y crítica de textos.</p>
                         </div>
                         <ul class="list-group list-group-flush">
                               <li class="list-group-item"><strong>Duración:</strong><br>4 sesiones, martes 20 y 27 de noviembre y 4 y 11 de diciembre, de 17 a 20 hrs. </li>
@@ -144,7 +147,7 @@
                         </div>
                         <ul class="list-group list-group-flush">
                               <li class="list-group-item"><strong>Duración:</strong><br>1 sesión de 3 hrs. Grupos a partir de 15 niños (Edad de 8 a 12 años).</li>
-                              <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li>
+                              <!-- <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li> -->
                               <li style="display:none;" class="list-group-item text-card-2"><strong>Sede:</strong><br> Elementario / Jardín Colón #8, col. Centro, Pachuca, Hgo.</li>
                         </ul>
                         <div style="display:none;" class="card-body text-card-2">

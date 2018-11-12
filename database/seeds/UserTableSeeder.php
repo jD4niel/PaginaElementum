@@ -19,5 +19,29 @@ class UserTableSeeder extends Seeder
         'password' => bcrypt('secret'),
         'role_id' => '1'
         ]);
+        \App\User::create([
+        'name' => 'Mayte',
+        'last_name' => 'Romo',
+        'second_last_name' => '',
+        'email' => 'mayte@gmail.com',
+        'password' => bcrypt('secret'),
+        'role_id' => '1'
+        ]);
+        \App\User::create([
+        'name' => 'Jovany',
+        'last_name' => 'Cruz',
+        'second_last_name' => '',
+        'email' => 'jovany@gmail.com',
+        'password' => bcrypt('secret'),
+        'role_id' => '2'
+        ]);
+        \App\User::create([
+        'name' => 'Alejandra',
+        'last_name' => 'Olguín',
+        'second_last_name' => '',
+        'email' => 'ale@gmail.com',
+        'password' => bcrypt('secret'),
+        'role_id' => '3'
+        ]);
     }
 }
