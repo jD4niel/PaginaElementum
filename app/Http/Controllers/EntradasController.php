@@ -18,6 +18,9 @@ class EntradasController extends Controller
         return view('blog.entrada',compact('entradas'));
     }
 
+    public function go(){
+        return view('blog.create-post');
+    }
     /**
      * Show the form for creating a new resource.
      *

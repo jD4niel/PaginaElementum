@@ -29,6 +29,13 @@ Route::get('/ir','LibroController@ir')->name('det.libros');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/entradas', 'EntradasController@index')->name('entradas');
+
+
+//Usuario CRUD
 Route::get('/usuarios', 'UserController@index')->name('users');
+Route::delete('/usuario/borrar/{id}', 'UserController@destroy')->name('user.delete');
+Route::put('/usuario/modificar/{id}', 'UserController@update')->name('user.update');
+Route::get('/usuario/crear', 'UserController@createView')->name('user.crear');
 
-
+//Post
+Route::get('/crear/entrada', 'EntradasController@go')->name('users');

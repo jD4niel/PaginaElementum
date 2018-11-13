@@ -81,6 +81,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::destroy($id);
+        return response()->json($user);
+    }
+    public function createView(){
+        return view('blog.create-user');
     }
 }

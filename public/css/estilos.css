@@ -1,0 +1,40 @@
+.btn-add-new{
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 7px;
+    font-size: 20px;
+    background: linear-gradient(90deg, #89009c, #4d45a7);
+    transition-timing-function: ease-in-out;
+    transition: 2000ms;
+    margin: 10px auto;
+}
+.btn-add-new:hover{
+    cursor: pointer;
+    background: linear-gradient(90deg, #a100b5, #534bc9);
+
+}
+.form-registry{
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 6px 10px 5px -4px rgba(91, 91, 91, 0.38);
+    padding: 25px;
+}
+
+
+.btn-registry{
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 55px 7px 55px;
+    font-size: 20px;
+    background: linear-gradient(90deg, #00aa69, #0018a7);
+    box-shadow: 6px 10px 5px -4px rgba(91, 91, 91, 0.38);
+    transition-duration: 2000ms;
+    margin: 10px auto;
+}
+.btn-registry:hover{
+    cursor: pointer;
+
+    background: linear-gradient(90deg, #32aa7a, #0048c1);
+}
