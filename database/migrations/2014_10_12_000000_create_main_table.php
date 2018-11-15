@@ -13,7 +13,7 @@ class CreateMainTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+    /*    Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type', 30);
             $table->string('module', 30);
@@ -60,39 +60,36 @@ class CreateMainTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('subtitulo');
-            $table->unsignedInteger('autor_id');
+            $table->unsignedInteger('autor_id')->nullable();
             $table->string('rol_id');
             $table->unsignedInteger('collection_id');
             $table->string('isbn');
             $table->string('tamaño');
             $table->float('precio');
             $table->longText('semblanza');
-            $table->string('ebook');
-            $table->string('url');
-            $table->string('imagen');
+            $table->string('ebook')->nullable();
+            $table->string('url')->nullable();
+            $table->string('imagen')->nullable();
             $table->timestamps();
             $table->unsignedInteger('user_id')->nulleable();
 
             $table->foreign('autor_id')->references('id')->on('autors')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('collection_id')->references('id')->on('collections')->onUpdate('cascade')->onDelete('cascade');
-        });
+        });*/
         Schema::create('entradas', function (Blueprint $table) {
             $table->increments('id');
+            $table->longText('intro');
+            $table->string('imagen');
             $table->string('nombre');
             $table->longText('texto');
-            $table->timestamps();
-        });
-
-        Schema::create('blogs', function (Blueprint $table) {
-            $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('entrada_id');
             $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('entrada_id')->references('id')->on('entradas')->onUpdate('cascade')->onDelete('cascade');
 
         });
+
     }
 
     /**
@@ -100,9 +97,8 @@ class CreateMainTable extends Migration
      *
      * @return void
      */
-    public function down()
+    /*public function down()
     {
-        Schema::dropIfExists('blogs');
         Schema::dropIfExists('entradas');
         Schema::dropIfExists('libros');
         Schema::dropIfExists('collections');
@@ -111,5 +107,5 @@ class CreateMainTable extends Migration
         Schema::dropIfExists('passwords_resets');
         Schema::dropIfExists('users');
         Schema::dropIfExists('roles');
-    }
+    }*/
 }

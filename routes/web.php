@@ -18,6 +18,8 @@ Route::get('/colecciones/buscar','LibroController@buscar')->name('buscar.libros'
 Route::get('/colecciones/libros','LibroController@ver')->name('ver.libros');
 Route::get('/contacto','LibroController@contacto')->name('contacto.elementum');
 Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
+Route::get('/blog','EntradasController@blog')->name('blog.elementum');
+Route::get('/blog/entrada/{id}','EntradasController@entrada')->name('blog.entrada.elementum');
 
 Route::get('/colecciones/{id}','LibroController@detalle')->name('detalle.libros');
 
@@ -38,4 +40,7 @@ Route::put('/usuario/modificar/{id}', 'UserController@update')->name('user.updat
 Route::get('/usuario/crear', 'UserController@createView')->name('user.crear');
 
 //Post
-Route::get('/crear/entrada', 'EntradasController@go')->name('users');
+Route::get('/crear/entrada', 'EntradasController@go')->name('entrada');
+Route::post('/crear/entrada/post', 'EntradasController@store')->name('crear.entrada');
+Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up');
+

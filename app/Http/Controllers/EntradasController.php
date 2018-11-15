@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Entradas;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use App\Traits\DatesTranslator;
+use Illuminate\Support\Facades\DB;
+use Jenssegers\Date\Date;
 
 class EntradasController extends Controller
 {
@@ -15,11 +23,57 @@ class EntradasController extends Controller
     public function index()
     {
         $entradas=Entradas::all();
+
         return view('blog.entrada',compact('entradas'));
     }
 
     public function go(){
         return view('blog.create-post');
+    }
+    public function entrada($id){
+        Date::setLocale('es');
+        $entrada=Entradas::findOrFail($id);
+        $fecha=$entrada->created_at->format('d M');
+        $autor = User::find($entrada->user_id);
+        return view('blog.entrada-blog',compact('entrada','fecha','autor'));
+    }
+
+    public function blog(){
+        $entrada= Entradas::all();
+        return view('blog.blog');
+    }
+
+    public function uploadImg(Request $request){
+
+        //DB::beginTransaction();
+        try{
+
+            $data = $request;
+            $file = $data["file"];
+                $filename_img = $file->getClientOriginalName();
+                $mime = $file->getMimeType();
+
+                if (($mime == 'image/jpeg') || ($mime == 'image/jpg' ) || ($mime == 'image/png') || ($mime == 'image/PNG')) {
+
+                    $destinationPath = public_path() . '/images/entradas';
+                    $filename_img = $file->getClientOriginalName();
+                    if (!File::exists($destinationPath)) {
+                        File::makeDirectory($destinationPath, 0755, true);
+                    }
+                    $destinationPath1 = $destinationPath . '/' . $filename_img;
+
+                    copy($file, $destinationPath1);
+                    return $data;
+                } else {
+                    return $mime;
+                    abort(500);
+                }
+        }catch (\Exception $e){
+            //DB::rollBack();
+            return $e . "mal we";
+        }
+       // DB::commit();
+
     }
     /**
      * Show the form for creating a new resource.
@@ -39,7 +93,14 @@ class EntradasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $entrada = new Entradas();
+        $entrada->intro=$request['intro'];
+        $entrada->imagen=$request['imagen'];
+        $entrada->nombre=$request['titulo'];
+        $entrada->texto=$request['texto'];
+        $entrada->user_id=Auth::id();
+        $entrada->save();
+        return response()->json($entrada);
     }
 
     /**
@@ -54,6 +115,7 @@ class EntradasController extends Controller
     }
 
     /**
+use Illuminate\Support\Facades\DB;
      * Show the form for editing the specified resource.
      *
      * @param  \App\Entradas  $entradas

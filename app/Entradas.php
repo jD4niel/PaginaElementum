@@ -9,8 +9,8 @@ class Entradas extends Model
     //
     protected $fillable=['texto'];
 
-    public function blog()
+    public function user()
     {
-        return $this->hasMany('App\Blog');
+        return $this->belongsTo('App\User');
     }
 }

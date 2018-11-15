@@ -33,7 +33,7 @@ class User extends Authenticatable
     }
     public function blog()
     {
-        return $this->hasMany('App\Blog');
+        return $this->hasMany('App\Entradas');
     }
     public function libro()
     {

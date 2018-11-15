@@ -25,10 +25,18 @@
             }
             /*@charset "UTF-8";*/
             @font-face {
+                font-family: fuenteSerif;
+                src: url({{ URL::to('/') }}/fonts/InriaSerif/TTFInriaSerif-Regular.ttf);
+            }
+            .serif{
+                font-family: fuenteSerif;
+                font-style: normal;
+            }
+            @font-face {
                 font-family: fuenteGlobal;
                 src: url({{ URL::to('/') }}/fonts/InriaSans-Regular.ttf);
             }
-            html *:not(.fab):not(.fas):not(.titulo_style){
+            html *:not(.fab):not(.fas):not(.titulo_style):not(.serif){
                 font-family: 'fuenteGlobal' !important;
                 /*font-weight: bold;*/
                 font-style: normal;
