@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Jenssegers\Date\DateServiceProvider',
+        Unisharp\Ckeditor\ServiceProvider::class,
 
         /*
          * Package Service Providers...

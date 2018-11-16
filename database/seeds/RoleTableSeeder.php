@@ -25,7 +25,12 @@ class RoleTableSeeder extends Seeder
         App\Role::create([
             'type' => 'Editor',
             'module' => 'edit',
-            'description' => 'Rol para acceso y actualizacion del blog de la pagina'
+            'description' => 'Rol para acceso y actualizacion del blog y la pagina'
+        ]);
+        App\Role::create([
+            'type' => 'Escritor',
+            'module' => 'edit',
+            'description' => 'Rol para escribir en el blog de la pagina'
         ]);
 
     }

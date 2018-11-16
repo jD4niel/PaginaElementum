@@ -29,18 +29,18 @@ Route::get('/autores/{id}','LibroController@autors_details')->name('autores.deta
 Route::get('/ir','LibroController@ir')->name('det.libros');
 /*Módulo de blog*/
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/entradas', 'EntradasController@index')->name('entradas');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/entradas', 'EntradasController@index')->name('entradas')->middleware('auth');
 
 
 //Usuario CRUD
 Route::get('/usuarios', 'UserController@index')->name('users');
-Route::delete('/usuario/borrar/{id}', 'UserController@destroy')->name('user.delete');
-Route::put('/usuario/modificar/{id}', 'UserController@update')->name('user.update');
-Route::get('/usuario/crear', 'UserController@createView')->name('user.crear');
+Route::delete('/usuario/borrar/{id}', 'UserController@destroy')->name('user.delete')->middleware('auth','admin');
+Route::put('/usuario/modificar/{id}', 'UserController@update')->name('user.update')->middleware('auth','admin');
+Route::get('/usuario/crear', 'UserController@createView')->name('user.crear')->middleware('auth','admin');
 
 //Post
-Route::get('/crear/entrada', 'EntradasController@go')->name('entrada');
-Route::post('/crear/entrada/post', 'EntradasController@store')->name('crear.entrada');
-Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up');
+Route::get('/crear/entrada', 'EntradasController@go')->name('entrada')->middleware('auth');
+Route::post('/crear/entrada/post', 'EntradasController@store')->name('crear.entrada')->middleware('auth');
+Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up')->middleware('auth');
 

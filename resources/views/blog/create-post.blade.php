@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
+<div class="container-fluid" style="background-color: #1d3b4f">
+    <div class="row col-md-12" style="margin:auto;">
         <form class="form-horizontal col-md-12 form-registry">
             <h1 class="h1 text-center">Nueva entrada</h1>
             <hr>
@@ -16,8 +16,6 @@
                         <input type="hidden" id="imagen_nombre">
                     </div>
                 </div>
-
-                {{--dropzone para subir imagenes--}}
                 <div class="  form-group col-md-3 text-center" id="drop" >
                     <div class="dropzone dropzone-file-area" id="my-dropzone" style="width: 100%; height: 250px; border-width: 4px; border-color: rgb(54, 198, 211);">
                         <div class="fallback text-center">
@@ -27,56 +25,25 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-md-11">
-                    <button type="button" class="fontStyle" onclick="document.execCommand('italic',false,null);" title="Italicize Highlighted Text"><i>I</i>
-                    </button>
-                    <button type="button" class="fontStyle" onclick="document.execCommand( 'bold',false,null);" title="Bold Highlighted Text"><b>B</b>
-                    </button>
-                    <button type="button" class="fontStyle" onclick="document.execCommand( 'underline',false,null);"><u>U</u>
-                    </button>
-                    <button type="button" class="fontStyle" onclick="aumentar()">A+
-                    </button>
-                    <select onchange="tamanoLetra()" name="" id="fonts">
-                        <option value="1">6</option>
-                        <option value="2">7</option>
-                        <option value="3">8</option>
-                        <option value="4">9</option>
-                        <option value="5">10</option>
-                        <option value="6">10.5</option>
-                        <option value="7">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="18">18</option>
-                        <option value="20">20</option>
-                        <option value="22">22</option>
-                        <option value="24">24</option>
-                        <option value="26">26</option>
-                        <option value="28">28</option>
-                    </select>
-                </div>
+                <textarea class="form-control" id="summary-ckeditor"></textarea>
             </div>
-            <div class="form-group row">
-                <div id="texto" class="col-md-11" contenteditable="true" style="height:750px;border:solid 1px rgba(108,120,132,0.45);border-radius: 10px;">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                </div>
-            </div>
-
-
             <br>
             <hr>
             <div class="form-group-row text-center">
                 <input id="submit" type="button" value="Registrar entrada" class="btn-add-new">
             </div>
         </form>
+
     </div>
 </div>
 @endsection
 
 @section('script_section')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+
+    <script>
+        CKEDITOR.replace( 'summary-ckeditor' );
+    </script>
     <script>
         // Codigo js para subir imagenes /DropZone/
         Dropzone.options.myDropzone = {
@@ -174,7 +141,7 @@
             var intro = $('#intro').val();
             var imagen = $('#imagen_nombre').val();
             var titulo = $('#titulo').val();
-            var texto = $('#texto').html();
+            var texto = $('#summary-ckeditor').html();
             var route = '{{route('crear.entrada')}}'
 
             $.ajax({

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row text-right">
         <!-- <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
@@ -18,9 +18,43 @@
                 </div>
             </div>
         </div> -->
-            <a href="{{route('users')}}"><button class="btn btn-success btn-lg">Escritores</button></a>
-            <a href=""><button class="btn btn-warning btn-lg">Entradas</button></a>
-            <a href=""><button class="btn btn-danger btn-lg">Pagina Elementum</button></a>
+            <a href="{{route('users')}}" class="a-free col-md-3">
+                <div class="card" style="width: 26rem; margin:10px;background-color: #3d7fcb;">
+                    <div class="card-body">
+                        <h2 class="card-title" style="z-index: 50;">Escritores</h2>
+                        <h4 class="card-subtitle    mb-2 " style="color:#fff;">control</h4>
+                        <i class="far fa-edit card-fa"></i>
+                        <div class="variable-card text-right">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="{{route('users')}}" class="a-free col-md-3">
+                <div class="card" style="width: 26rem; margin:10px;background-color: #cb304f;">
+                    <div class="card-body">
+                        <h2 class="card-title" style="z-index: 50;">Entradas</h2>
+                        <h4 class="card-subtitle    mb-2 " style="color:#fff;">al blog</h4>
+                        <i class="far fa-file-alt card-fa"></i>
+                        <div class="variable-card text-right">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="{{route('users')}}" class="a-free col-md-3">
+                <div class="card" style="width: 26rem; margin:10px;background-color: #17bb3a;">
+                    <div class="card-body">
+                        <h2 class="card-title" style="z-index: 50;">Control</h2>
+                        <h4 class="card-subtitle    mb-2 " style="color:#fff;">de la página</h4>
+                        <i class="fas fa-outdent card-fa"></i>
+                        <div class="variable-card text-right">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </a>
+
     </div>
 </div>
 @endsection
