@@ -21,6 +21,11 @@ Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
 Route::get('/blog','EntradasController@blog')->name('blog.elementum');
 Route::get('/blog/entrada/{id}','EntradasController@entrada')->name('blog.entrada.elementum');
 
+
+
+Route::get('/info','PDFController@info')->name('info');
+
+
 Route::get('/colecciones/{id}','LibroController@detalle')->name('detalle.libros');
 
 Route::get('/autores','LibroController@autors')->name('autores.libros');
@@ -43,4 +48,8 @@ Route::get('/usuario/crear', 'UserController@createView')->name('user.crear')->m
 Route::get('/crear/entrada', 'EntradasController@go')->name('entrada')->middleware('auth');
 Route::post('/crear/entrada/post', 'EntradasController@store')->name('crear.entrada')->middleware('auth');
 Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up')->middleware('auth');
+
+Route::get('/info/subir',function (){return view('controller.subirpdf');})->name('subirpdf')->middleware('auth');
+
+Route::post('/info/pdf','PDFController@uploadPDF')->name('pdf.up')->middleware('auth');
 

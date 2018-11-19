@@ -47,6 +47,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/loginStyle') }}/css/main.css">
     <!--===============================================================================================-->
     <link href="{{ asset('css/TemplateStyle.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
 </head>
 <body>
 <div id="app">
