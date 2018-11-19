@@ -67,6 +67,19 @@
                 </div>
             </a>
 
+            <a href="{{route('subirpdf')}}" class="a-free col-md-3">
+                <div class="card" style="width: 26rem; margin:10px;background-color: #13a597;">
+                    <div class="card-body">
+                        <h2 class="card-title" style="z-index: 50;">Subir PDF</h2>
+                        <h4 class="card-subtitle    mb-2 " style="color:#fff;"></h4>
+                        <i class="fas fa-align-left card-fa"></i>
+                        <div class="variable-card text-right">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </a>
+
     </div>
 </div>
 @endsection

@@ -98,7 +98,7 @@
 
                 this.on("success", function (file, response) {
                     console.log("guardado");
-
+                    window.location.reload();
                 });
             }
         };
