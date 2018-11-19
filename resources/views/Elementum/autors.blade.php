@@ -1,9 +1,10 @@
 
 @extends('template')
 @section('autores')
-    <figure>
+    <figure class="figure">
         <img style="margin-top: -300px;" width="100%" src="{{ URL::to('/') }}/images/fotoportadautores.jpg" alt="">
-        <figcaption id="tituloAutores">Autores <br>Elementum</figcaption>
+        <figcaption  id="tituloAutores"><div style="margin-bottom: 10vh;"class="col-md-6">Autores</div>
+            <div  class="col-md-6">Elementum</div> </figcaption>
     </figure>
     <div class="container ">
     </div>

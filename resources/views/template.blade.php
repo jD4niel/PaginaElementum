@@ -36,7 +36,7 @@
                 font-family: fuenteGlobal;
                 src: url({{ URL::to('/') }}/fonts/InriaSans-Regular.ttf);
             }
-            html *:not(.fab):not(.fas):not(.titulo_style):not(.serif){
+            html *:not(.fab):not(.fas):not(.titulo_style):not(.serif):not(.fa):not(.fade-up){
                 font-family: 'fuenteGlobal' !important;
                 /*font-weight: bold;*/
                 font-style: normal;
@@ -279,7 +279,8 @@
                 color: white;
                 background-color: #2B669D;
                 border:none;
-                padding: 5px 10px 5px 10px;
+                border-radius: 5px;
+                padding: 10px 25px 10px 25px;
             }
              .btnDetalle:hover{
                 cursor:pointer;
@@ -536,7 +537,7 @@
                 text-align: right;
                 position: absolute;
                 float: right;
-                font-size: 10em;
+                font-size: 8em;
                 color: white;
                 line-height: 0.6em;
             }
@@ -687,6 +688,10 @@
               display:none;
             }
         </style>
+        <script src="{{asset('js/wow.js')}}"></script>
+        <script>
+            new WOW().init();
+        </script>
     </head>
     <body>
     <section class="navigation">
@@ -747,12 +752,16 @@
                     <hr style="background-color: white; width: 200px; float: right;">
                 </div>
             </div>
+            <div class="row">
+                <div style="margin:0 auto -35px auto;">Todos los derechos reservados para Editorial Elementum 2012</div>
+            </div>
         </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
     @yield('script_home')
      <script>
          // $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
@@ -933,5 +942,6 @@
    }
 </script>
      @yield('script_collection')
+
 </body>
 </html>

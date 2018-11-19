@@ -3,8 +3,23 @@
     <div class="separador"></div>
 <div class="container ">
     <div class="row">
-        <div class="col-md-5">
-                <img style="filter: drop-shadow(-5px 7px 2px #4e4e4eb5);" class="img-responsive" src="{{ URL::to('/') }}/images/libros/{{$libros->imagen}}" alt="" height="400px">
+        <div class="col-md-5 text-center">
+            <figure class="figure">
+                <img style="filter: drop-shadow(-5px 7px 2px #4e4e4eb5); margin: 0 auto; height: 400px;" class="img-responsive" src="{{ URL::to('/') }}/images/libros/{{$libros->imagen}}" alt="" >
+                <figcaption class="">
+                @if($libros->precio>0)
+                    @if($libros->url=='')
+                        <div class="" style="margin-top: 15px;">
+                            <button data-toggle="modal" data-target="#comprarModal" class="btn btn-warning btn-block ">Comprar</button>
+                        </div>
+                    @else
+                        <div style="margin-top: 15px;">
+                            <a href="{{$libros->url}}" target="_blank"><button class="btn btn-warning btn-block">Comprar</button></a>
+                        </div>
+                    @endif
+                @endif
+                </figcaption>
+            </figure>
 
 
         </div>
@@ -21,7 +36,7 @@
                 @if($libros->precio>0)
                 <h2>${{$libros->precio}}</h2>
                 @else
-                <h2 style="color:rgb(0, 163, 255)">Encuentralo en Elementario</h2>
+                <h2 style="color:rgb(0, 163, 255)">Encuéntralo en Elementario</h2>
                 @endif
             </div>
             <br>
@@ -34,23 +49,11 @@
             <hr>
         </div>
     </div>
-    <div class="separador"></div>
     <div class="row">
-        @if($libros->precio>0)
-            @if($libros->url=='')
-            <div style="padding-left: 10px;" class="table-responsive col-md-6 center-block">
-                <button data-toggle="modal" data-target="#comprarModal" class="btn btn-warning btn-block col-md-6">Comprar</button>
-            </div>
-            @else
-            <div style="padding-left: 10px;" class="table-responsive col-md-6 center-block">
-                <a href="{{$libros->url}}" target="_blank"><button class="btn btn-warning btn-block col-md-6">Comprar</button></a>
-            </div>
-            @endif
-        @else
-        <div class="">
+
+        <div class="col-md-6">
 
         </div>
-        @endif
         <div class="col-md-6" >
             {{--<button id="btnFrag" style="float: right;">Leer fragmento</button>--}}
             <div style="text-align: right;">
@@ -61,10 +64,26 @@
     </div>
     <br>
     <div class="separador"></div>
-
+    @if(count($recomendados)<1)
+        <div class="separador"></div>
+    @else
     <h1>OBRAS RELACIONADAS </h1>
+        <hr>
     <div class="row">
-        @if(count($recomendados)>4)
+        @if(count($recomendados)==1)
+                @foreach($recomendados as $item)
+
+                    <div id="imgboxId{{$item->id}}" class="imgbox col-md-10 align-content-center text-left" onmouseleave="salir({{$item->id}})" onmouseover="ver({{$item->id}})" style="padding-top: 30px;padding-bottom: 20px;">
+                        <a href="{{route('detalle.libros',$item->id)}}">
+                            <figure>
+                                <img width="250px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}">
+                                <figcaption>ver</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+
+                @endforeach
+        @elseif(count($recomendados)>4)
         <div class="owl-carousel">
             @foreach($recomendados as $item)
 
@@ -94,6 +113,7 @@
             @endforeach
         @endif
     </div>
+        @endif
 </div>
 <div id="comprarModal" class="modal fade" role="dialog">
   <div class="modal-dialog">

@@ -1,9 +1,5 @@
 @extends('template')
 @section('home')
-    <script>
-       $('.social_icons').css("border","2px solid #ffffff");
-    </script>
-
     <div id="Slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#Slider" data-slide-to="0" class="active"></li>
@@ -31,7 +27,7 @@
         <div class="row">
             <div class="col-md-12" style="margin-top: -80px;">
                 <div class="input-group mb-3">
-                    <input  id="buscartxt" type="text" class="form-control simplebox" placeholder="Búsqueda" aria-label="Recipient's username" aria-describedby="basic-addon2" style="background-color:#e9f2ef;border-top-left-radius: 15px;border-bottom-left-radius: 15px; height:45px;font-size: 20px; border:none;">
+                    <input  id="buscartxt" type="text" class="form-control simplebox fade-up" placeholder="Búsqueda" aria-label="Recipient's username" aria-describedby="basic-addon2" style="background-color:#e9f2ef;border-top-left-radius: 15px;border-bottom-left-radius: 15px; height:45px;font-size: 20px; border:none;">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" onclick="buscar()" type="button" style="background-color:#e9f2ef;font-size:20px;border-top-right-radius: 18px;border-bottom-right-radius: 18px;border:none;"><i class="fa fa-search"></i></button>
                     </div>
@@ -45,12 +41,11 @@
        <div class="container">
             <div id="cajaLibros" class="row center align-items-center text-center align-content-center" >
                  @foreach($libros as $item)
-                     <div class="cajon col-md-3">
+                     <div class="cajon col-md-3 wow fadeInUp">
                 <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
                     <img height="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="mmom">
                     <hr>
-                    <a href="{{route("detalle.libros",$item->id)}}" style="text-decoration: none; color: white;padding-top:10px; width:50px;" class="btnDetalle">Ver detalle</a>
-                    <a class="btnComprar" style="text-decoration: none; color: white;padding-top:10px; width:50px;">Comprar</a>
+                    <a href="{{route("detalle.libros",$item->id)}}"  class="btnDetalle">Ver detalle</a>
                 </div>
                      </div>
                 @endforeach
@@ -104,7 +99,7 @@
     <div style="">
         <div class="container-fluid">
             <div class="row">
-                <figure  class="col-md-8" style="margin: 0; padding: 0;" >
+                <figure  class="col-md-7" style="margin: 0; padding: 0;" >
                     <img style="width: 110%" class="img-fluid" src="{{ URL::to('/') }}/images/img_ref.jpg">
                     <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf"><figcaption class="figImagen">Descarga el catálogo de talleres aquí &nbsp;<img width="20px" src="{{ URL::to('/') }}/images/iconos/iconodescarga.png" alt=""></figcaption></a>
                 </figure>
@@ -344,6 +339,11 @@
                 $('nav ul li a').css({'font-weight':'bold'});
                 $('#logoElementum1').hide();
                 $('#logoElementum2').show();
+                $('nav ul li a').hover(function(){
+                    $(this).css({'color':'#fff'})
+                },function() {
+                    $(this).css({'color':'#1d3b4f'})
+                });
                 // $(nav-container ul li a').css('color','#1b2d49');
             } else {
                 $('.navigation').css({'background-color':'rgba(0, 0, 0, 0)'},{'border-bottom':'1px solid rgba(255, 255, 255, 0.85)'});
@@ -357,6 +357,21 @@
                 $('nav ul li a').css({'font-weight':'normal'});
                 $('#logoElementum2').hide();
                 $('#logoElementum1').show();
+                $('.fa-twitter').hover(function(){
+                    $(this).css({'color':'#1a9abb'})
+                },function() {
+                    $(this).css({'color':'#fff'})
+                });
+                $('.fa-facebook-f').hover(function(){
+                    $(this).css({'color':'#1b46bb'})
+                },function() {
+                    $(this).css({'color':'#fff'})
+                });
+                $('.fa-instagram').hover(function(){
+                    $(this).css({'color':'#d1073e'})
+                },function() {
+                    $(this).css({'color':'#fff'})
+                });
             }
         });
        function reveal(a){
