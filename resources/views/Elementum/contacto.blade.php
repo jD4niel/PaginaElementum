@@ -39,8 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="separador"></div><br>
-    <img id="imgContacto" src="{{ URL::to('/') }}/images/fotocontacto.jpg" width="100%" alt="">
+    <img id="imgContacto" src="{{ URL::to('/') }}/images/fotocontacto.jpg" alt="">
 @endsection
 @section('script_collection')
     <script>

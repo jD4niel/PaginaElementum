@@ -26,8 +26,57 @@
     </div>
     <br>
     <div class="separador"></div>
-    <div class="row">
-        <h1>OBRAS PUBLICADAS </h1>
+    <div class="container">
+        @if(count($libros)<1)
+            <div class="separador"></div>
+        @else
+            <h1>OBRAS PUBLICADAS </h1>
+            <hr>
+            <div class="row">
+                @if(count($libros)==1)
+                    @foreach($libros as $item)
+                        <div id="imgboxId{{$item->id}}" class="imgbox col-md-10 align-content-center" onmouseleave="salir({{$item->id}})" onmouseover="ver({{$item->id}})" style="padding-top: 30px;padding-bottom: 20px;">
+                            <a href="{{route('detalle.libros',$item->id)}}">
+                                <figure>
+                                    <img width="250px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}">
+                                    <figcaption>ver</figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                    @endforeach
+                @elseif(count($libros)>4)
+                    <div class="owl-carousel">
+                        @foreach($libros as $item)
+
+                            <div id="imgboxId{{$item->id}}" class="imgbox col-md-10 align-content-center text-center" onmouseleave="salir({{$item->id}})" onmouseover="ver({{$item->id}})" style="padding-top: 30px;padding-bottom: 20px;">
+                                <a href="{{route('detalle.libros',$item->id)}}">
+                                    <figure>
+                                        <img width="150px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}">
+                                        <figcaption>ver</figcaption>
+                                    </figure>
+                                </a>
+                            </div>
+
+                        @endforeach
+                    </div>
+                @else
+                    @foreach($libros as $item)
+
+                        <div id="imgboxId{{$item->id}}" class="imgbox col-md-3 align-content-center text-center" onmouseleave="salir({{$item->id}})" onmouseover="ver({{$item->id}})" style="padding-top: 30px;padding-bottom: 20px;">
+                            <a href="{{route('detalle.libros',$item->id)}}">
+                                <figure>
+                                    <img class="img-responsive" width="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}">
+                                    <figcaption>ver</figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                    @endforeach
+                @endif
+            </div>
+        @endif
+       {{-- <h1>OBRAS PUBLICADAS </h1>
         <hr>
         <div class="owl-carousel">
            @foreach($libros as $item)
@@ -42,7 +91,7 @@
                 </div>
 
             @endforeach
-        </div>
+        </div>--}}
     </div>
 </div>
 @endsection

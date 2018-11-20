@@ -43,7 +43,7 @@
                  @foreach($libros as $item)
                      <div class="cajon col-md-3 wow fadeInUp">
                 <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
-                    <img height="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="mmom">
+                    <img height="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="">
                     <hr>
                     <a href="{{route("detalle.libros",$item->id)}}"  class="btnDetalle">Ver detalle</a>
                 </div>
@@ -114,7 +114,7 @@
         <div class="container" style="background-color:#DCDDDE;padding:50px 0 50px 0;">
             <div class="row text-center">
                 <!-- <div class="col-md-1" style="margin-left: -20px;"></div> -->
-                <div class="card" style="width: 22rem;margin:auto;">
+                {{--<div class="card" style="width: 22rem;margin:auto;">
                         <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/taller1.png" alt="Card image cap">
                         <div class="card-body" onclick="reveal(1)" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
                               <h5 class="card-title">Re-cuentos: El artifício de escribir historias</h5>
@@ -132,7 +132,7 @@
                         <div style="display:none;" class="card-body text-card-1">
                               Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
                         </div>
-                </div>
+                </div>--}}
                 <div class="card" style="width: 22rem;margin:auto;">
                         <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/taller2.jpg" alt="Card image cap">
                         <div class="card-body" onclick="reveal(2)" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
@@ -344,6 +344,22 @@
                 },function() {
                     $(this).css({'color':'#1d3b4f'})
                 });
+
+                $('.fa-twitter').hover(function(){
+                    $(this).css({'color':'#1a9abb'})
+                },function() {
+                    $(this).css({'color':'#1d3b4f'})
+                });
+                $('.fa-facebook-f').hover(function(){
+                    $(this).css({'color':'#1b46bb'})
+                },function() {
+                    $(this).css({'color':'#1d3b4f'})
+                });
+                $('.fa-instagram').hover(function(){
+                    $(this).css({'color':'#d1073e'})
+                },function() {
+                    $(this).css({'color':'#1d3b4f'})
+                });
                 // $(nav-container ul li a').css('color','#1b2d49');
             } else {
                 $('.navigation').css({'background-color':'rgba(0, 0, 0, 0)'},{'border-bottom':'1px solid rgba(255, 255, 255, 0.85)'});
@@ -357,6 +373,12 @@
                 $('nav ul li a').css({'font-weight':'normal'});
                 $('#logoElementum2').hide();
                 $('#logoElementum1').show();
+                $('nav ul li a').hover(function(){
+                    $(this).css({'color':'#fff'})
+                },function() {
+                    $(this).css({'color':'#fff5fd'})
+                });
+
                 $('.fa-twitter').hover(function(){
                     $(this).css({'color':'#1a9abb'})
                 },function() {

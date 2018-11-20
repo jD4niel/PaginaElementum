@@ -1,11 +1,8 @@
 
 @extends('template')
 @section('autores')
-    <figure class="figure">
-        <img style="margin-top: -300px;" width="100%" src="{{ URL::to('/') }}/images/fotoportadautores.jpg" alt="">
-        <figcaption  id="tituloAutores"><div style="margin-bottom: 10vh;"class="col-md-6">Autores</div>
-            <div  class="col-md-6">Elementum</div> </figcaption>
-    </figure>
+        <img  width="100%" src="{{ URL::to('/') }}/images/autores.png" alt="">
+
     <div class="container ">
     </div>
     <div class="separador"></div>
@@ -41,7 +38,7 @@
                 <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">
                 <div class="nombre_autor">{{$item->nombre}}&nbsp;{{$item->apellido_p}}</div>
                 <br>
-                <div class="obra" style="height: 80px; width: 80%;margin: 0 auto;">{{$item->breve_desc}}</div>
+                <div class="obra" style="height: 80px; width: 80%;margin: 0 auto;">{!! $item->breve_desc !!}</div>
                 <br>
                 <a id="btn-id-{{$item->id}}" href="{{route('autores.detalle',$item->id)}}" style="text-decoration: none;"><button class="btn_contacto_autor">Acerca del autor</button></a>
                 <div class="autor_icons icons">

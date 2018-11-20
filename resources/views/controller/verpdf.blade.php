@@ -18,7 +18,6 @@
             @endforeach
         @endif
     </div>
-<div style="margin-bottom: 20em"></div>
 </div>
 @endsection
 

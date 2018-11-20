@@ -1,23 +1,20 @@
 @extends('template')
 @section('home')
-    <figure>
-        <img style="margin-top: -300px;" width="100%" src="{{ URL::to('/') }}/images/fotoportadautores.jpg" alt="">
-        <figcaption id="tituloAutores">Nosotros</figcaption>
-    </figure>
+    <img  width="100%" src="{{ URL::to('/') }}/images/nosotros.png" alt="">
     <div class="separador"></div>
     <div class="container">
         <div class="row text-center">
             <div id="mision" class="col-md-6 ">
                 <h2>Misión</h2>
                 <hr   class="col-md-6" style="">
-                <p class="col-md-8"  style="text-align: justify;font-size: 20px;margin:0 auto;">
+                <p class="col-md-8"  style="text-align: left;font-size: 20px;margin:0 auto;">
                     La misión de Elementum consiste en llevar a cabo todos los trabajos involucrados en la cadena del libro, para ello acompaña a sus autores en cada paso de la creación de una publicación y a sus lectores en el descubrimiento de nuevos títulos. Complementa su misión la oferta a la comunidad de actividades de fomento a la lectura, el libro y la escritura.
                 </p>
             </div>
             <div id="vision" class="col-md-6">
                 <h2 >Visión</h2>
                 <hr class="col-md-6">
-                <p class="col-md-8"  style="text-align: justify;font-size: 20px;margin:0 auto;">
+                <p class="col-md-8"  style="text-align: left;font-size: 20px;margin:0 auto;">
                     Los lectores identifican la línea editorial de los títulos que publica Elementum. El centro cultural Elementario presenta un programa de actividades que atiende públicos especializados y amateurs, y logra una publicación anual como resultado directo de sus talleres. La librería es autosustentable y sus clientes encuentran alternativas para conseguir el libro que buscan.
                 </p>
             </div>
@@ -46,14 +43,32 @@
         </center>
         <br>
         <div class="row" style="font-size: 25px;text-align: left; ">
-            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fab fa-accusoft"></i>&nbsp;Mayte Romo</div></div>
-            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-object-ungroup"></i>&nbsp;Angélica Alba</div></div>
-            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-align-left"></i>&nbsp;Jovany Cruz</div></div>
-            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-edit"></i>&nbsp;Alejandra Olguín</div></div>
-            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-fax"></i>&nbsp;Evelin Ramos</div></div>
-            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-columns"></i>&nbsp;Victoria Amezcua</div></div>
-            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-drafting-compass"></i>&nbsp;Paulina Sánchez</div></div>
-            <div class="personal_el col-md-6" ><div class="col-md-6" style="margin:0 auto;text-align:left;"> <i class="fas fa-pen-nib"></i>&nbsp;Alejandro Jiménez</div></div>
+            <div class="personal_el col-md-6" style="margin-right:-200px;">
+                <div id="mayte"
+                     class="col-md-6 puesto"
+                     style="margin:0 auto;text-align:left;"data-content="Dirección general"
+                     rel="popover" data-placement="left"
+                     data-original-title="Cargo" data-trigger="hover">
+
+                    <i class="fab fa-accusoft"></i>&nbsp;Mayte Romo</div></div>
+
+            <div class="personal_el col-md-6" >
+                <div class="col-md-6 puesto" style="margin:0 auto;text-align:left;"  data-content="Contraloría" rel="popover" data-placement="right" data-original-title="Cargo" data-trigger="hover"> <i class="fas fa-object-ungroup "></i>&nbsp;Angélica Alba</div>
+            </div>
+            <div class="personal_el col-md-6" style="margin-right:-200px;" ><div class="col-md-6 puesto" data-content="Dirección editorial" rel="popover" data-placement="left" data-original-title="Cargo" data-trigger="hover"style="margin:0 auto;text-align:left;"> <i class="fas fa-align-left"></i>&nbsp;Jovany Cruz</div></div>
+            <div class="personal_el col-md-6" ><div class="col-md-6 puesto" style="margin:0 auto;text-align:left;" data-content="Edición" rel="popover" data-placement="right" data-original-title="Cargo" data-trigger="hover"> <i class="fas fa-edit"></i>&nbsp;Alejandra Olguín</div></div>
+            <div class="personal_el col-md-6" style="margin-right:-200px;">
+                <div class="col-md-6 puesto"  data-content="Dirección administrativa" rel="popover" data-placement="left" data-original-title="Cargo" data-trigger="hover" style="margin:0 auto;text-align:left;"> <i class="fas fa-fax"></i>&nbsp;Evelin Ramos</div></div>
+
+            <div class="personal_el col-md-6" ><div class="col-md-6 puesto" style="margin:0 auto;text-align:left;" data-content="Diseño editorial" rel="popover" data-placement="right" data-original-title="Cargo" data-trigger="hover"> <i class="fas fa-columns"></i>&nbsp;Victoria Amezcua</div></div>
+
+            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6 puesto"  data-content="Distribución y ventas" rel="popover" data-placement="left" data-original-title="Cargo" data-trigger="hover" style="margin:0 auto;text-align:left;"> <i class="fas fa-boxes"></i> Ariadna Sánchez</div></div>
+
+            <div class="personal_el col-md-6" ><div class="col-md-6 puesto" style="margin:0 auto;text-align:left;" data-content="Ilustración y publicidad" rel="popover" data-placement="right" data-original-title="Cargo" data-trigger="hover"> <i class="fas fa-pen-nib"></i>&nbsp;Alejandro Jiménez</div></div>
+
+            <div class="personal_el col-md-6" style="margin-right:-200px;"><div class="col-md-6 puesto"  data-content="Encargado de librería y pedidos" rel="popover" data-placement="left" data-original-title="Cargo" data-trigger="hover"style="margin:0 auto;text-align:left;"> <i class="fas fa-book-open"></i>&nbsp;Julio Calva</div></div>
+
+            <div class="personal_el col-md-6"><div class="col-md-6 puesto"></div></div>
         </div>
         <div class="separador"></div>
     </div>
@@ -62,6 +77,7 @@
 @section('script_collection')
   <script>
     $(document).ready(function() {
+        $('.puesto').popover();
       $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
       $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
       $('#blogid').css({'border-right':'1px solid #9FA09D'});

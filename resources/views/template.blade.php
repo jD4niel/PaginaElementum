@@ -563,7 +563,9 @@
             #imgContacto{
                 position:absolute;
                 left:0px;
-                top:-300px;
+                top:0px;
+                height: 75em;
+                width: 100%;
                 z-index:-1;
             }
             .map-responsive{
@@ -667,11 +669,11 @@
                 padding: 7px;
                 transition-duration: 0.1s;
             }
-            .valores_list:hover{
+            /*.valores_list:hover{
                 font-size: 36px;
                 color: #305b9a;
                 cursor: pointer;
-            }
+            }*/
             .btn-comprar{
                 padding: 25px 10px 10px 10px;
                 background-color: #ffea00;
@@ -753,7 +755,7 @@
                 </div>
             </div>
             <div class="row">
-                <div style="margin:0 auto -35px auto;">Todos los derechos reservados para Editorial Elementum 2012</div>
+                <div style="margin:0 auto -35px auto;">© Todos los derechos reservados para Editorial Elementum 2012</div>
             </div>
         </div>
     </footer>
@@ -924,7 +926,7 @@
     function buscar(){
         var nombre = $('#buscartxt').val();
         var route = "{{ route("buscar.libros")}}";
-        alert(nombre);
+        var currentLocation = window.location+'/colecciones/';
         $.ajax({
             url: route,
             data: {'nombre': nombre},
@@ -932,7 +934,17 @@
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                console.log(data[0]["id"]);
+                for(i in data){
+                    $('#cajaLibros').html('' +
+                        '  <div class="cajon col-md-3 wow fadeInUp">\n' +
+                        '                <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">\n' +
+                        '                    <img height="200px" src="+{{ URL::to('/') }}+/images/libros/'+data[i]["imagen"]+'" alt="">\n' +
+                        '                    <hr>\n' +
+                        '                    <a href=""'+currentLocation+data[i]["id"]+'"  class="btnDetalle">Ver detalle</a>\n' +
+                        '                </div>\n' +
+                        '                     </div>' +
+                        '')
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
