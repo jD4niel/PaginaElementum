@@ -43,7 +43,7 @@
                 <a id="btn-id-{{$item->id}}" href="{{route('autores.detalle',$item->id)}}" style="text-decoration: none;"><button class="btn_contacto_autor">Acerca del autor</button></a>
                 <div class="autor_icons icons">
                     <a id="fb-{{$item->id}}" class="icon_social {{$item->facebook}}  " target="_blank" data-icon="{{$item->facebook}}" href="{{$item->facebook}}"><i class="icon_autor_list fab fa-facebook-f social_icons {{$item->facebook}}"></i></a>
-                    <a id="tw-{{$item->id}}"class="icon_social {{$item->twitter}}  " target="_blank" data-icon="{{$item->twiter}}" href="{{$item->twiter}}"><i class="icon_autor_list fab fa-twitter social_icons {{$item->twitter}}"></i></a>
+                    <a id="tw-{{$item->id}}"class="icon_social {{$item->twitter}}  " target="_blank" data-icon="{{$item->twitter}}" href="https://twitter.com/{{$item->twitter}}"><i class="icon_autor_list fab fa-twitter social_icons {{$item->twitter}}"></i></a>
                     <a id="in-{{$item->id}}"class="icon_social {{$item->instagram}}  " target="_blank" data-icon="{{$item->instagram}}" href="{{$item->instagram}}"><i class="icon_autor_list fab fa-instagram social_icons {{$item->instagram}}"></i></a>
 
                 </div>
