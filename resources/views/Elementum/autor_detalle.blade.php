@@ -7,19 +7,20 @@
                 <img style="filter: drop-shadow(-5px 7px 2px #4e4e4eb5);border-radius: 50%;height:auto;width: 100%;margin-top: 70px;text-align: center;" class="img-responsive" src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="" height="400px">
         </div>
         <div class="col-md-7" style="margin: 0 auto;">
-          <h1>{{$autor->nombre}}&nbsp;{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h1>
+          <h1>{{$autor->nombre}}{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h1>
             {{--<h1> | {{libros}} |</h1>--}}
             <hr>
+            {{--<hr>  cambiarNorma pperez vences--}}
             {{--<h5>{{$libros->descripcion}}</h5>--}}
             <p style="text-align: justify;text-justify: inter-word;">{!! $autor->semblanza!!} </p>
             <br>
             <div class="col-md-12 text-right">
               <span id="contacto-autor" class="col-md-12" style="font-size:1.8em;">Contacto con autor</span>
               <br>
-                <div class="btn-group right text-right col-md-5" style="float: right; border-top:1px solid #869ea4;padding-top: 10px;text-align: right;margin:auto;">
-                    <a href="{{$autor->facebook}}"><button id="btn-facebook" type="button" class="btn btn-face {{$autor->facebook}}"> <i class="redes fab fa-facebook "></i></button></a>
-                    <a href="https://twitter.com/{{$autor->twitter}}"><button id="btn-twitter" type="button" class="btn btn-tw {{$autor->twitter}}"> <i class="redes fab fa-twitter"></i></button></a>
-                    <a href="instagram.com/{{$autor->instagram}}"><button id="btn-insta" type="button" class="btn btn-insta {{$autor->instagram}}"> <i class="redes fab fa-instagram"></i></button></a>
+                <div class="btn-group right text-right col-md-5" s target="_blank" tyle="float: right; border-top:1px solid #869ea4;padding-top: 10px;text-align: right;margin:auto;">
+                    <a target="_blank" href="{{$autor->facebook}}"><button id="btn-facebook" type="button" class="btn btn-face {{$autor->facebook}}"> <i class="redes fab fa-facebook "></i></button></a>
+                    <a target="_blank" href="https://twitter.com/{{$autor->twitter}}"><button id="btn-twitter" type="button" class="btn btn-tw {{$autor->twitter}}"> <i class="redes fab fa-twitter"></i></button></a>
+                    <a target="_blank" href="instagram.com/{{$autor->instagram}}"><button id="btn-insta" type="button" class="btn btn-insta {{$autor->instagram}}"> <i class="redes fab fa-instagram"></i></button></a>
                 </div>
             </div>
         </div>

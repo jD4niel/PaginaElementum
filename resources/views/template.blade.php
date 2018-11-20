@@ -44,8 +44,8 @@
             .navigation {
                 background: rgba(0,0,0,0);
                 position: sticky;
-                left:0px;
-                top: 0px;
+                left:0;
+                top: 0;
                 z-index: 1000;
                 padding: 20px;
                 height: 100px;
@@ -934,16 +934,21 @@
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                for(i in data){
-                    $('#cajaLibros').html('' +
-                        '  <div class="cajon col-md-3 wow fadeInUp">\n' +
-                        '                <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">\n' +
-                        '                    <img height="200px" src="+{{ URL::to('/') }}+/images/libros/'+data[i]["imagen"]+'" alt="">\n' +
-                        '                    <hr>\n' +
-                        '                    <a href=""'+currentLocation+data[i]["id"]+'"  class="btnDetalle">Ver detalle</a>\n' +
-                        '                </div>\n' +
-                        '                     </div>' +
-                        '')
+                $('#cajaLibros').html('');
+                if(data.length<1){
+                    $('#cajaLibros').html('<h4 style="margin: 50px auto 0 auto;">No se encontraron libros</h4>');
+                }else{
+                    for(i in data){
+                        $('#cajaLibros').append('' +
+                            '  <div class="cajon col-md-3 wow fadeInUp">\n' +
+                            '                <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">\n' +
+                            '                    <img height="200px" src="{{ URL::to('/') }}/images/libros/'+data[i]["imagen"]+'" alt="">\n' +
+                            '                    <hr>\n' +
+                            '                    <a href=""'+currentLocation+data[i]["id"]+'"  class="btnDetalle">Ver detalle</a>\n' +
+                            '                </div>\n' +
+                            '                     </div>' +
+                            '')
+                    }
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {

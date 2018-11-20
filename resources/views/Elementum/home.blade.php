@@ -12,7 +12,7 @@
                 <img class="d-block w-100 " height="80%" style="margin-top:-250px;"  src="{{ URL::to('/') }}/images/slider/foto1.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100 " height="80%" style="margin-top:-250px;" src="{{ URL::to('/') }}/images/slider/foto2.jpg" alt="Second slide">
+                <img class="d-block w-100 " height="80%"  src="{{ URL::to('/') }}/images/slider/foto2.jpg" alt="Second slide">
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100 " height="80%" style="margin-top:-250px;" src="{{ URL::to('/') }}/images/slider/foto3.jpg" alt="Third slide">
