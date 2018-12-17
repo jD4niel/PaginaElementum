@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{route('users')}}" class="a-free col-md-3">
+            <a href="{{route('editarpagina')}}" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #17bb3a;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Control</h2>

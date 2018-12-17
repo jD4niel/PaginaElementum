@@ -90,4 +90,126 @@ textarea {
     height: 37px;
     margin: -10px auto 0 auto;
 }
+.slider-change figure img{
+    filter: brightness(100%);
+    transition-duration: 170ms;
+    top:10px;
+}
+.slider-change figure img:hover{
+    top:0;
+    filter: brightness(112%);
+}
 
+.dropzone .anuncio{
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 25%;
+    text-align: center;
+    transition-duration: 150ms;
+    background-color: rgba(186, 0, 6, 0.89);
+}
+.dropzone .anuncio:hover{
+    background-color: rgb(255, 0, 7);
+    padding-bottom: 8px;
+}
+.dropzone:hover .anuncio{
+    display: block;
+    vertical-align: center;
+    text-align: center;
+    font-size: 1.5em;
+    color:white;
+    cursor: pointer;
+}
+.dropzone{
+    filter: brightness(100%);
+    transition-duration: 170ms;
+    top:10px;
+}
+.dropzone:hover{
+    top:0;
+    filter: brightness(112%);
+    border: 1px solid #00aa93;
+}
+#img img{
+    display: none;
+    height: 150px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    border-radius: 15px;
+    border: 3px solid white;
+    box-shadow: -9px 10px 15px -5px rgba(0,0,0,0.75);
+}
+#img figcaption{
+    display: none;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top:145px;
+
+}
+.taller-body{
+    color: #184b48;
+    border: solid 3px #bc5fb1;
+    -webkit-box-shadow: 10px 10px 13px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 13px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 13px -6px rgba(0,0,0,0.75);
+}
+.taller-body:hover{
+    cursor: pointer;
+}
+.taller-body:hover .overlay{
+    display: block;
+    position: absolute;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.62);
+    cursor: pointer;
+}
+.contenedor-btn-taller{
+    display: none;
+}
+.taller-body:hover .overlay .contenedor-btn-taller{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: center;
+    position: absolute;
+    width: 100%;
+    top:10%;
+}
+.centrar-obj{
+    margin: 5px auto;
+    width: 80%;
+    font-size: 20px;
+}
+.taller-form{
+    background-color: white;
+    padding: 50px;
+}
+.edit-btn{
+    color:white;
+    font-size: 20px;
+    width: 50%;
+    border-radius: 35px;
+    padding: 10px 25px 10px 25px;
+    background: #3b5f8a; /* Old browsers */
+    background: linear-gradient(to right, #dd3cb4 1%, #ac26a2 50%, #5a0090 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    transition-duration: 170ms;
+}
+.edit-btn:hover{
+    width: 51%;
+    background: linear-gradient(to right, #f100d0 1%, #ce00c8 50%, #9200a3 100%);
+}
+#preview-img{
+    border: solid 3px #f9f6ff;
+    box-shadow: 10px 10px 13px -6px rgba(0,0,0,0.75);
+}

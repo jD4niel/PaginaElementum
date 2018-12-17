@@ -6,6 +6,7 @@ use App\Autor;
 use App\Collection;
 use App\Libro;
 use View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class LibroController extends Controller
@@ -19,7 +20,13 @@ class LibroController extends Controller
     {
         $libros= Libro::orderBy('id', 'desc')->take(8)->get();
         //dd($libros->imagen);
-        return view('Elementum.home',compact('libros'));
+        $slider = DB::table('slider')->get();
+        $first =DB::table('slider')->min('id');
+        $talleres = DB::table('talleres')->get();
+        return view('Elementum.home',compact('libros','slider','first','talleres'));
+    }
+    public function elementario(){
+        return view('Elementum.elementario');
     }
     /**
      * Show the form for creating a new resource.

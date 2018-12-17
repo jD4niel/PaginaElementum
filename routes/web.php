@@ -18,6 +18,7 @@ Route::get('/colecciones/buscar','LibroController@buscar')->name('buscar.libros'
 Route::get('/colecciones/libros','LibroController@ver')->name('ver.libros');
 Route::get('/contacto','LibroController@contacto')->name('contacto.elementum');
 Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
+Route::get('/elementario','LibroController@elementario')->name('elementario.elementum');
 Route::get('/blog','EntradasController@blog')->name('blog.elementum');
 Route::get('/blog/entrada/{id}','EntradasController@entrada')->name('blog.entrada.elementum');
 
@@ -52,4 +53,17 @@ Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.
 Route::get('/info/subir',function (){return view('controller.subirpdf');})->name('subirpdf')->middleware('auth');
 
 Route::post('/info/pdf','PDFController@uploadPDF')->name('pdf.up')->middleware('auth');
+
+
+Route::get('/editar', 'ControlController@index')->name('editarpagina')->middleware('auth');
+Route::post('/editar/slider', 'ControlController@slider')->name('editar.slider')->middleware('auth');
+Route::post('/editar/slider/imagen','ControlController@uploadImage')->name('slide.up')->middleware('auth');
+Route::post('/editar/slider/nueva','ControlController@uploadNewImage')->name('new.slide.up')->middleware('auth');
+Route::post('/editar/slider/borrar/{id}', 'ControlController@destroy')->name('slider.delete')->middleware('auth');
+Route::get('/editar/nuevo/taller', 'ControlController@taller')->name('new.taller')->middleware('auth');
+Route::get('/editar/taller/{id}', 'ControlController@EditarTaller')->name('edit.taller')->middleware('auth');
+Route::get('/editar/taller/data/{id}', 'ControlController@EditarTallerDatos')->name('edit.taller.data')->middleware('auth');
+Route::post('/editar/taller/editar', 'ControlController@EditarTallerSend')->name('edit.taller.send')->middleware('auth');
+Route::post('/agregar/taller/nuevo', 'ControlController@AgregarTallerSend')->name('new.taller.send')->middleware('auth');
+Route::delete('/editar/taller/borrar/{id}', 'ControlController@destroyTaller')->name('taller.delete')->middleware('auth');
 

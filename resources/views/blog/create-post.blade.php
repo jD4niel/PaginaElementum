@@ -133,7 +133,7 @@
         }
         function tamanoLetra() {
             var s = $('#fonts option:selected').val();
-            console.log(s)
+            //console.log(s)
             console.log(document.execCommand( 'fontSize',false,s))
             document.execCommand( 'fontSize',false,s);
         }
@@ -141,9 +141,8 @@
             var intro = $('#intro').val();
             var imagen = $('#imagen_nombre').val();
             var titulo = $('#titulo').val();
-            var texto = $('#summary-ckeditor').html();
+            var texto = CKEDITOR.instances['summary-ckeditor'].getData();
             var route = '{{route('crear.entrada')}}'
-
             $.ajax({
                 url: route,
                 headers: {

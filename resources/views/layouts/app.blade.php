@@ -48,6 +48,7 @@
     <!--===============================================================================================-->
     <link href="{{ asset('css/TemplateStyle.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js" ></script>
 </head>
 <body>
 <div id="app">

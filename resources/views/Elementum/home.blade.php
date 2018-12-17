@@ -2,24 +2,16 @@
 @section('home')
     <div id="Slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#Slider" data-slide-to="0" class="active"></li>
-            <li data-target="#Slider" data-slide-to="1"></li>
-            <li data-target="#Slider" data-slide-to="2"></li>
-            <!-- <li data-target="#Slider" data-slide-to="3"></li> -->
+            @for($i = 0; $i < count($slider); $i++)
+            <li data-target="#Slider" data-slide-to="{{$i}}" class="@if($i==$first) active @endif"></li>
+            @endfor
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100 " height="80%" style="margin-top:-250px;"  src="{{ URL::to('/') }}/images/slider/foto1.jpg" alt="First slide">
+            @foreach($slider as $item)
+            <div class="carousel-item @if($item->id == $first) active @endif">
+                <img class="d-block w-100 " height="80%" style="margin-top:-250px;"  src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
             </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 " height="80%"  src="{{ URL::to('/') }}/images/slider/foto2.jpg" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 " height="80%" style="margin-top:-250px;" src="{{ URL::to('/') }}/images/slider/foto3.jpg" alt="Third slide">
-            </div>
-            <!-- <div class="carousel-item">
-                <img class="d-block w-100 h-100" height="700px" src="{{ URL::to('/') }}/images/slider/fotoslider4.png" alt="Four slide">
-            </div> -->
+            @endforeach
         </div>
     </div>
 
@@ -96,7 +88,7 @@
             </div>
     </div>
     <div class="separador"></div>
-    <div style="">
+    {{--<div style="">
         <div class="container-fluid">
             <div class="row">
                 <figure  class="col-md-7" style="margin: 0; padding: 0;" >
@@ -108,103 +100,30 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
     <div class="separador"></div>
     <div style="background-color:#DCDDDE;">
         <div class="container" style="background-color:#DCDDDE;padding:50px 0 50px 0;">
+        <div class="text-center"><h1 class="h1" style="color:#00949c; font-size: 15vh;">TALLERES</h1></div>
             <div class="row text-center">
-                <!-- <div class="col-md-1" style="margin-left: -20px;"></div> -->
-                {{--<div class="card" style="width: 22rem;margin:auto;">
-                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/taller1.png" alt="Card image cap">
-                        <div class="card-body" onclick="reveal(1)" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
-                              <h5 class="card-title">Re-cuentos: El artifício de escribir historias</h5>
-                              <i class="fas fa-sort-down"></i>
-                              <p class="card-text text-card-1" style="text-align:justify; display:none;">El taller de Narrativa tiene como objetivo formar
-                                  nuevos autores que tengan nociones básicas de los
-                                  géneros narrativos y sus ele mentos, a través de actividades
-                                  de exploración, análisis, lectura, escritura y crítica de textos.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                              <li class="list-group-item"><strong>Duración:</strong><br>4 sesiones, martes 20 y 27 de noviembre y 4 y 11 de diciembre, de 17 a 20 hrs. </li>
-                              <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li>
-                              <li style="display:none;" class="list-group-item text-card-1"><strong>Sede:</strong><br> Elementario / Jardín Colón #8, col. Centro, Pachuca, Hgo.</li>
-                        </ul>
-                        <div style="display:none;" class="card-body text-card-1">
-                              Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
-                        </div>
-                </div>--}}
+                @foreach($talleres as $taller)
                 <div class="card" style="width: 22rem;margin:auto;">
-                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/taller2.jpg" alt="Card image cap">
-                        <div class="card-body" onclick="reveal(2)" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
-                              <h5 class="card-title">Elementour: Un viaje de la palabra al libro</h5>
+                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/{{$taller->imagen}}" alt="Card image cap">
+                        <div class="card-body" onclick="reveal({{$taller->id}})" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
+                              <h5 class="card-title">{{$taller->titulo}}</h5>
                               <i class="fas fa-sort-down"></i>
-                              <p class="card-text text-card-2" style="text-align:justify; display:none;">Tiene el objetivo de que sus asistentes identifiquen los oficios implicados en la creación de libros y que reconozcan, a través de ese ejercicio, su propia capacidad de sumarse como creadores. Acompañados de un grupo de profesionales dedicados al mundo editorial.</p>
+                              <div class="card-text text-card-{{$taller->id}}" style="text-align:justify; display:none;">{!! $taller->descripcion !!}</div>
                         </div>
                         <ul class="list-group list-group-flush">
-                              <li class="list-group-item"><strong>Duración:</strong><br>1 sesión de 3 hrs. Grupos a partir de 15 niños (Edad de 8 a 12 años).</li>
+                              <li class="list-group-item"><strong>Duración:</strong><br>{{$taller->duracion}}</li>
                               <!-- <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li> -->
-                              <li style="display:none;" class="list-group-item text-card-2"><strong>Sede:</strong><br> Elementario / Jardín Colón #8, col. Centro, Pachuca, Hgo.</li>
+                              <li style="display:none;" class="list-group-item text-card-{{$taller->id}}"><strong>Sede:</strong><br> {{$taller->sede}}</li>
                         </ul>
-                        <div style="display:none;" class="card-body text-card-2">
+                        <div style="display:none;" class="card-body text-card-{{$taller->id}}">
                               Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
                         </div>
                 </div>
-              <!-- <div id="eventosDiv1" class="col-md-3 eventosDiv  text-center align-content-center">
-                  <figure>
-                      <img class="" src="{{ URL::to('/') }}/images/img_ref.jpg" alt="">
-                      <figcaption class="figbox titulo_caja" style="text-transform: uppercase;">Taller de Narrativa básica</figcaption>
-                  </figure>
-
-                  <span class="imparte_caja"><strong>Imparte:&nbsp;</strong>
-                      María Elena Ortega </span>
-                  <br>
-                  <i class="fas fa-sort-down"></i>
-                  <div class="descripcion"><br>El taller de Narrativa tiene como objetivo formar
-                      nuevos autores que tengan nociones básicas de los
-                      géneros narrativos y sus ele mentos, a través de actividades
-                      de exploración, análisis, lectura, escritura y crítica de textos.</div>
-                  <hr>
-                      <div class="duracion_caja "><strong>Duración:</strong>  3 meses, sesiones semanales <br> de 2 horas</div>
-                      <div class="inversion_caja "><strong>Inversión: </strong>$1,000</div>
-
-              </div>
-              <div id="eventosDiv2" class="col-md-3 eventosDiv  text-center align-content-center">
-                  <figure>
-                      <img class="" src="{{ URL::to('/') }}/images/img_ref.jpg" alt="">
-                      <figcaption class="figbox titulo_caja" style="text-transform: uppercase;">Taller de Poesía básica</figcaption>
-                  </figure>
-
-                  <span class="imparte_caja"><strong>Imparte:&nbsp;</strong>
-                      Marcela Villalpando  </span>
-                  <br>
-                  <i class="fas fa-sort-down"></i>
-                  <div class="descripcion"><br>El taller de Poesía pretende formar nuevos escritores con bases sólidas
-                      en el género de la poesía mediante la adquisición de conceptos básicos, estructura y elementos,
-                      realizando actividades de lectura, análisis, comprensión y escritura.</div>
-                  <hr>
-                      <div class="duracion_caja "><strong>Duración:</strong>  3 meses, sesiones semanales <br> de 2 horas</div>
-                      <div class="inversion_caja "><strong>Inversión: </strong>$1,000</div>
-
-              </div> -->
-              <!-- <div id="eventosDiv3" class="col-md-3 eventosDiv  text-center align-content-center">
-                  <figure>
-                      <img class="" src="{{ URL::to('/') }}/images/img_ref.jpg" alt="">
-                      <figcaption class="figbox titulo_caja" style="text-transform: uppercase;">Taller de Autobiografías</figcaption>
-                  </figure>
-
-                  <span class="imparte_caja"><strong>Imparte:&nbsp;</strong>
-                     Flor de María Moreno y Diana Pérez Ortiz </span>
-                  <br>
-                  <i class="fas fa-sort-down"></i>
-                  <div class="descripcion"><br>Autobiografías es un taller que tiene como objetivo guiar a las asistentes
-                      hacia el conocimiento propio, que se refleje en su autoestima y el empoderamiento, dándoles las herramientas
-                      literarias necesarias para la creación de una autobiografía, que permita plasmar en sus escritos recuerdos,
-                      vivencias y dar voz a sus inquietudes, deseos y prioridades.
-                  </div>
-                  <hr>
-                      <div class="duracion_caja "><strong>Duración:</strong>  6 meses, sesiones semanales  <br> de 2 horas</div>
-                      <div class="inversion_caja "><strong>Inversión: </strong>$2,400</div>
-              </div> -->
+                @endforeach
             </div>
         </div>
     </div>
@@ -325,9 +244,11 @@
     <script>
     $(document).ready(function() {
          $('.social_icons').css("border","2px solid #ffffff");
+        $('.navigation').css({'position':'relative'},{'background-color':'red'});
     });
         $(window).scroll(function() {
             if ($(document).scrollTop() > 50) {
+                $('.navigation').css('position','sticky');
                 $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
                 $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
                 $('#blogid').css({'border-right':'1px solid #9FA09D'});
@@ -362,6 +283,8 @@
                 });
                 // $(nav-container ul li a').css('color','#1b2d49');
             } else {
+
+                $('.navigation').css('position','sticky');
                 $('.navigation').css({'background-color':'rgba(0, 0, 0, 0)'},{'border-bottom':'1px solid rgba(255, 255, 255, 0.85)'});
                 $('.navigation').css({'border-bottom':'1px solid #fff'});
                 $('#blogid').css({'border-right':'1px solid white'});
