@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Autor;
+use App\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -148,5 +150,62 @@ class ControlController extends Controller
         }else {
             return 0;
         }
+    }
+
+    public function AgregarLibro(Request $request){
+        $libros = DB::table('libros')
+            ->insertGetId([
+                'nombre'=>$request->nombre,
+                'subtitulo'=>$request->subtitulo,
+                'autor_id'=>$request->autor,
+                'rol_id'=>$request->rol,
+                'collection_id'=>$request->collection,
+                'isbn'=>$request->isbn,
+                'tamaño'=>$request->tamano,
+                'precio'=>$request->precio,
+                'semblanza'=>$request->des,
+                'fecha'=>$request->fecha,
+                'url'=>$request->url,
+                'imagen'=>$request->file('file')->getClientOriginalName()
+            ]);
+        if (($request->hasFile('file'))) {
+            $destinationPath = public_path() . '/images/libros/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+                return $request;
+        }else {
+            return 0;
+        }
+    }
+    public function AgregarAutor(Request $request){
+        $libros = DB::table('autors')
+            ->insertGetId([
+                'nombre'=>$request->nombre,
+                'apellido_p'=>$request->apa,
+                'apellido_m'=>$request->apm,
+                'breve_desc'=>$request->des,
+                'facebook'=>$request->face_in,
+                'twitter'=>$request->twitter_in,
+                'instagram'=>$request->insta_in,
+                'semblanza'=>$request->sem,
+                'imagen'=>$request->file('file')->getClientOriginalName()
+            ]);
+        if (($request->hasFile('file'))) {
+            $destinationPath = public_path() . '/images/fotos_autores/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+                return $request;
+        }else {
+            return 0;
+        }
+    }
+
+    public function createBook(){
+        $coleccion = Collection::all();
+        $autor = Autor::all();
+        return view('controller.crear-libro',compact('coleccion','autor'));
+    }
+    public function createAutor(){
+        return view('controller.crear-autor');
     }
 }

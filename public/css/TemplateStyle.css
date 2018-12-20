@@ -187,3 +187,33 @@ body{
     color:#fff;
     font-size: 16.5px;
 }
+.add-img{
+    background-color: #ffd500;border: none; padding: 10px; border-radius: 10px;color: #000;font-size: 20px;
+    margin:0 auto;
+    transition: all 100ms ease-in-out;
+}
+.add-img:hover{
+    background-color: #fff400;border: none; padding: 10.5px; font-size: 20.3px;
+}
+.img-temp{
+    height: 225px;
+    background-color: #e6deff;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 25px;
+}
+.img-temp div{
+    margin: 90px auto 0 auto;
+    color: #b6b6b6;
+}
+#save-book{
+    text-align: center;
+    background-color: #0ea632;border: none; padding: 10px; border-radius: 10px;color: #f9f6ff;font-size: 20px;
+    width: 50%;
+    margin:0 auto 0 auto;
+    transition: all 100ms ease-in-out;
+}
+#save-book:hover{
+    background-color: #24be43;
+    font-size: 21px;
+}
