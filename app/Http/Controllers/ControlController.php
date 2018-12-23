@@ -208,4 +208,12 @@ class ControlController extends Controller
     public function createAutor(){
         return view('controller.crear-autor');
     }
+    public function control(){
+        $autor = Autor::all();
+        return view('blog.elements-control',compact('autor'));
+    }
+    public function borrarAutor($id){
+        $autor = DB::table('autors')->where('id', $id)->delete();
+        return response()->json("borrado");
+    }
 }

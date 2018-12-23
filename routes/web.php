@@ -70,7 +70,15 @@ Route::delete('/editar/taller/borrar/{id}', 'ControlController@destroyTaller')->
 
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');
 Route::get('/crear/autor', 'ControlController@createAutor')->name('crear.autor')->middleware('auth');
+Route::get('/control/autor', 'ControlController@control')->name('control.autor')->middleware('auth');
+Route::get('/control/autor', 'ControlController@control')->name('control.libro')->middleware('auth');
 Route::post('/crear/libro/data', 'ControlController@AgregarLibro')->name('guardar.libro')->middleware('auth');
 Route::post('/crear/autor/data', 'ControlController@AgregarAutor')->name('guardar.autor')->middleware('auth');
+
+Route::post('/control/xd', 'AutorController@destroy')->name('autor.delete')->middleware('auth','admin');
+
+
+
+
 
 

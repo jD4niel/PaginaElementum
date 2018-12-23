@@ -41,10 +41,10 @@ class AutorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Autor  $autor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Autor $autor)
+    public function show($id)
     {
         //
     }
@@ -52,10 +52,10 @@ class AutorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Autor  $autor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Autor $autor)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +64,10 @@ class AutorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Autor  $autor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Autor $autor)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,11 +75,11 @@ class AutorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Autor  $autor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Autor $autor)
+    public function destroy()
     {
-        //
+        return response()->json('hola');
     }
 }
