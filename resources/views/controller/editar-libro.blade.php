@@ -4,38 +4,39 @@
     <div class="container text-center">
         <form action="" id="book_form" class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
             <div class="form-group text-center">
-                <h1>AGREGAR NUEVO LIBRO</h1>
+                <h1>EDITAR LIBRO</h1>
             </div>
             <hr>
             <div class="col-md-9">
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
                     <div class="form-group col-md-10">
-                        <input id="nombre" type="text" class="form-control" required>
+                        <input id="id_libro" type="hidden" class="form-control" value="{{ $libro->id }}" required>
+                        <input id="nombre" type="text" class="form-control" value="{{ $libro->nombre }}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="subtitulo">Subtitulo:</label>
                     <div class="form-group col-md-10">
-                        <input id="subtitulo" type="text" class="form-control">
+                        <input id="subtitulo" type="text" class="form-control" value="{{ $libro->subtitulo }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="tamano">Tamaño:</label>
                     <div class="form-group col-md-10">
-                        <input id="tamano" type="text" class="form-control" placeholder="Ej. Encuadernación rústica, 24 páginas, 18 x 21 cm.">
+                        <input id="tamano" type="text" class="form-control" value="{{ $libro->tamaño }}" placeholder="Ej. Encuadernación rústica, 24 páginas, 18 x 21 cm.">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="fecha">Fecha:</label>
                     <div class="form-group col-md-10">
-                        <input id="fecha" type="text" class="form-control" placeholder="Ej. mes/año, 04/2019">
+                        <input id="fecha" type="text" class="form-control" placeholder="Ej. mes/año, 04/2019" value="{{ $libro->fecha }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="isbn">ISBN:</label>
                     <div class="form-group col-md-4">
-                        <input id="isbn" type="text" class="form-control" placeholder="Ej. 978-607-9298-16-6">
+                        <input id="isbn" type="text" class="form-control" placeholder="Ej. 978-607-9298-16-6" value="{{ $libro->isbn }}">
                     </div>
 
                     <label class="form-control-label col-md-2" for="collection">Colección:</label>
@@ -51,11 +52,11 @@
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="precio">Precio:</label>
                             <div class="form-group col-md-4">
-                                <input id="precio" type="number" class="form-control" placeholder="$xx.xx">
+                                <input id="precio" type="number" class="form-control" placeholder="$xx.xx" value="{{ $libro->precio }}">
                             </div>
                             <label class="form-control-label col-md-2" for="url">URL:</label>
                             <div class="form-group col-md-4">
-                                <input id="url" type="text" class="form-control" placeholder="URL para la compra del libro">
+                                <input id="url" type="text" class="form-control" placeholder="URL para la compra del libro" value="{{ $libro->url }}">
                             </div>
                 </div>
                 <div class="form-group">
@@ -64,33 +65,33 @@
                         <select name="" id="autor" class="form-control">
                             <option class="" value="" disabled selected>- Seleccione un autor -</option>
                             @foreach($autor as $a)
-                                <option value="{{$a->id}}">{{$a->nombre}}{{$a->apellido_p}}</option>
+                                <option value="{{$a->id}}">{{$a->nombre}}{{$a->apellido_p}}&nbsp;</option>
                             @endforeach
                         </select>
                     </div>
                     <label class="form-control-label col-md-2" for="rol">Rol:</label>
                     <div class="form-group col-md-4">
-                        <input id="rol" type="text" class="form-control" placeholder="Ej. Autor">
+                        <input id="rol" type="text" class="form-control" placeholder="Ej. Autor" value="{{ $libro->rol_id }}">
                     </div>
                 </div>
             </div>
             <div class="row col-md-3 text-center">
-                <button id="addbtn" onclick="triggerFile()"  class="add-img">AGREGAR IMAGEN</button>
+                <button id="addbtn" type="button" onclick="triggerFile()"  class="add-img">CAMBIAR IMAGEN</button>
 
                 <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
                 <div class="col-md-12">
-                <img id="preview-img" src="" alt="" style="display: none;">
+                <img id="preview-img" src="{{ asset('/images/libros/') }}/{{ $libro->imagen }}" alt="" style="width: 200px">
                 </div>
-                <div id="temp" class="img-temp col-md-12">
+               {{-- <div id="temp" class="img-temp col-md-12">
                     <div>585 x 830</div>
-                </div>
+                </div>--}}
             </div>
             <div class="col-md-12">
                 <hr>
                 <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
                 <div class="form-group text-center">
                     <div class="form-group col-md-12 text-center">
-                        <textarea class="form-control" id="summary-ckeditor"></textarea>
+                        <textarea class="form-control" id="summary-ckeditor">{!! $libro->semblanza !!}</textarea>
                     </div>
                 </div>
             </div>
@@ -205,8 +206,13 @@
         };
     </script>
     <script>
+        $(document).ready(function () {
+            $("#autor").val('{{ $libro->autor_id }}');
+            $("#collection").val('{{ $libro->collection_id }}');
+        });
         //enviar foto al servidor
         function enviarFoto() {
+            var id = $("#id_libro").val();
             var nombre = $("#nombre").val();
             var subtitulo = $("#subtitulo").val();
             var tamano = $("#tamano").val();
@@ -233,13 +239,14 @@
                 swal("Debes de seleccionar un autor/colección", "", "error");
             }else if(descripcion == ""){
                 swal("El libro debe de tener una semblanza", "", "error");
-            }else if($("#fileUp").get(0).files.length === 0){
-                swal("Debes de seleccionar una imagen", "", "error");
+            }else if(rol == ""){
+                swal("Debes de llenar el campo rol", "", "error");
             }else{
 
 
                 myFormData.append('file', foto[0]['files'][0]);
 
+                myFormData.append('id',id);
                 myFormData.append('nombre',nombre);
                 myFormData.append('subtitulo',subtitulo);
                 myFormData.append('tamano',tamano);
@@ -253,9 +260,9 @@
                 myFormData.append('des',descripcion);
 
 
-                var url = '{{route('guardar.libro')}}';
+                var url = '{{route('editar.libro')}}';
                 swal({
-                    title: "¿Agregar libro?",
+                    title: "¿Editar libro?",
                     text: "Verifique que los datos esten correctamente antes de guardar los datos",
                     icon: "warning",
                     buttons: true,
@@ -274,12 +281,9 @@
                             processData: false, // NEEDED, DON'T OMIT THIS
                             success: function (response, file) {
                                 console.log(response);
-                                swal("El libro fue agregado correctamente", " ",{
+                                swal("El libro fue editado correctamente", " ",{
                                     icon: "success"
-                                }).then((value) => {
-                                    $("#book_form").submit();
-                            });
-
+                                });
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 console.log(textStatus + ': ' + errorThrown);

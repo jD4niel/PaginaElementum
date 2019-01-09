@@ -44,6 +44,8 @@
 @endsection
 
 @section('script_section')
+
+    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script>
         $.noConflict();
         jQuery( document ).ready(function( $ ) {
@@ -66,7 +68,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             data: {id: id},
-                            type: 'DELETE',
+                            type: 'post',
                             dataType: 'json',
                             success: function (data) {
                                 console.log(data);

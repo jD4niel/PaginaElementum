@@ -248,59 +248,109 @@
             var face_in = $("#face_in").val();
             var twitter_in = $("#twitter_in").val();
             var insta_in = $("#insta_in").val();
-            alert(face_in)
-
             var my_editor = "summary-ckeditor";
             var my_editor2 = "summary-ckeditor2";
-
             var descripcion = CKEDITOR.instances[my_editor].getData();
             var semblanza = CKEDITOR.instances[my_editor2].getData();
 
-            var myFormData = new FormData();
-            var foto = $("#fileUp");
+            if(nombre=="") {
+                $("#nombre").addClass('must_');
+                $("#apa").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal ( "Debes llenar todos los campos" ,  "" ,  "error" );
+            }else if(apa=="") {
+                $("#apa").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal ( "Debes llenar todos los campos" ,  "" ,  "error" );
+            }else if(face_in=="") {
+                $("#face_in").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#apa").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal("Debes llenar todos los campos", "", "error");
+            }else if(twitter_in=="") {
+                $("#twitter_in").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#apa").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal("Debes llenar todos los campos", "", "error");
+            }else if(insta_in=="") {
+                $("#insta_in").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#apa").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                swal("Debes llenar todos los campos", "", "error");
+            }else if($("#fileUp").get(0).files.length === 0){
+                swal ( "Debes seleccionar una imagen para el autor" ,  "" ,  "error" );
+            } else if(descripcion==""){
+                swal ( "El autor debe de tener una semblanza obligatoriamente" ,  "" ,  "error" );//inverso
+            }else if(semblanza==""){
+                swal ( "El autor debe de tener una corta descripción" ,  "" ,  "error" );
+            }
+                else {
+                    $("#nombre").removeClass('must_');
+                    $("#apa").removeClass('must_');
+                    $("#face_in").removeClass('must_');
+                    $("#twitter_in").removeClass('must_');
+                    $("#insta_in").removeClass('must_');
 
-            myFormData.append('file', foto[0]['files'][0]);
+                var myFormData = new FormData();
+                var foto = $("#fileUp");
+                myFormData.append('file', foto[0]['files'][0]);
+                myFormData.append('nombre', nombre);
+                myFormData.append('apa', apa);
+                myFormData.append('apm', apm);
+                myFormData.append('face_in', face_in);
+                myFormData.append('twitter_in', twitter_in);
+                myFormData.append('insta_in', insta_in);
 
-            myFormData.append('nombre',nombre);
-            myFormData.append('apa',apa );
-            myFormData.append('apm',apm);
-            myFormData.append('face_in',face_in);
-            myFormData.append('twitter_in',twitter_in);
-            myFormData.append('insta_in',insta_in);
-
-            myFormData.append('des',descripcion);
-            myFormData.append('sem',semblanza);
+                myFormData.append('des', descripcion);
+                myFormData.append('sem', semblanza);
 
 
-            var url = '{{route('guardar.autor')}}';
-            swal({
-                title: "¿Agregar autor?",
-                text: "Verifique que los datos esten correctamente antes de guardar los datos",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: url,
-                        data: myFormData,
-                        type: 'post',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-                        processData: false, // NEEDED, DON'T OMIT THIS
-                        success: function (response, file) {
-                            console.log(response);
-                            /*window.location.reload();*/
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.log(textStatus + ': ' + errorThrown);
-                        }
-                    });
-                }
-            });
+                var url = '{{route('guardar.autor')}}';
+                swal({
+                    title: "¿Agregar autor?",
+                    text: "Verifique que los datos esten correctamente antes de guardar los datos",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                    if(willDelete) {
+                        $.ajax({
+                            url: url,
+                            data: myFormData,
+                            type: 'post',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                            processData: false, // NEEDED, DON'T OMIT THIS
+                            success: function (response, file) {
+                                console.log(response);
+                                swal("El autor fue agregado correctamente", " ",{
+                                    icon: "success"
+                                }).then((value) => {
+                                 window.location.reload();
+                            });
+                                /*window.location.reload();*/
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log(textStatus + ': ' + errorThrown);
+                            }
+                        });
+                    }
+                });
+            }
         }
         function readURL(input) {
             if (input.files && input.files[0]) {

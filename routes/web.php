@@ -41,7 +41,7 @@ Route::get('/entradas', 'EntradasController@index')->name('entradas')->middlewar
 
 //Usuario CRUD
 Route::get('/usuarios', 'UserController@index')->name('users');
-Route::delete('/usuario/borrar/{id}', 'UserController@destroy')->name('user.delete')->middleware('auth','admin');
+Route::post('/usuario/borrar/{id}', 'UserController@destroy')->name('user.delete')->middleware('auth','admin');
 Route::put('/usuario/modificar/{id}', 'UserController@update')->name('user.update')->middleware('auth','admin');
 Route::get('/usuario/crear', 'UserController@createView')->name('user.crear')->middleware('auth','admin');
 
@@ -66,17 +66,19 @@ Route::get('/editar/taller/data/{id}', 'ControlController@EditarTallerDatos')->n
 Route::post('/editar/taller/editar', 'ControlController@EditarTallerSend')->name('edit.taller.send')->middleware('auth');
 Route::post('/agregar/taller/nuevo', 'ControlController@AgregarTallerSend')->name('new.taller.send')->middleware('auth');
 Route::delete('/editar/taller/borrar/{id}', 'ControlController@destroyTaller')->name('taller.delete')->middleware('auth');
+Route::post('/editar/pdf','ControlController@uploadPDF')->name('new.pdf.up')->middleware('auth');
 
 
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');
 Route::get('/crear/autor', 'ControlController@createAutor')->name('crear.autor')->middleware('auth');
-Route::get('/control/autor', 'ControlController@control')->name('control.autor')->middleware('auth');
-Route::get('/control/autor', 'ControlController@control')->name('control.libro')->middleware('auth');
+Route::get('/control/', 'ControlController@control')->name('control.gral')->middleware('auth');
 Route::post('/crear/libro/data', 'ControlController@AgregarLibro')->name('guardar.libro')->middleware('auth');
 Route::post('/crear/autor/data', 'ControlController@AgregarAutor')->name('guardar.autor')->middleware('auth');
-
-Route::post('/control/xd', 'AutorController@destroy')->name('autor.delete')->middleware('auth','admin');
-
+Route::post('/editar/libro/', 'LibroController@update')->name('editar.libro')->middleware('auth');
+Route::post('/editar/autor/', 'AutorController@update')->name('editar.autor')->middleware('auth');
+Route::post('/control/autor/borrar/{id}', 'AutorController@destroy')->name('borra.autor')->middleware('auth');
+Route::get('/control/autor/{id}', 'AutorController@edit')->name('modifica.autor')->middleware('auth');
+Route::get('/control/libro/{id}', 'LibroController@libroInd')->name('modifica.libro')->middleware('auth');
 
 
 

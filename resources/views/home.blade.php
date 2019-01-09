@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{route('subirpdf')}}" class="a-free col-md-3">
+            <a href="{{route('control.gral')}}" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #3f3fbb;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Control de</h2>

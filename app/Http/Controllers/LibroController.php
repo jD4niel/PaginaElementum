@@ -28,6 +28,12 @@ class LibroController extends Controller
     public function elementario(){
         return view('Elementum.elementario');
     }
+    public function libroInd($id){
+        $coleccion = Collection::all();
+        $autor = Autor::all();
+        $libro= Libro::find($id);
+        return view('controller.editar-libro',compact('libro','coleccion','autor'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -74,9 +80,31 @@ class LibroController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Libro $libro)
+    public function update(Request $request)
     {
-        //
+        $libro = DB::table('libros')
+            ->where('id','=',$request->id)
+            ->update([
+                'nombre'=>$request->nombre,
+                'subtitulo'=>$request->subtitulo,
+                'autor_id'=>$request->autor,
+                'rol_id'=>$request->rol,
+                'collection_id'=>$request->collection,
+                'isbn'=>$request->isbn,
+                'tamaño'=>$request->tamano,
+                'precio'=>$request->precio,
+                'semblanza'=>$request->des,
+                'fecha'=>$request->fecha,
+                'url'=>$request->url
+            ]);
+        if (($request->hasFile('file'))) {
+            $destinationPath = public_path() . '/images/libros/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+            return $request;
+        }else {
+            return $libro;
+        }
     }
     /**
      * Remove the specified resource from storage.

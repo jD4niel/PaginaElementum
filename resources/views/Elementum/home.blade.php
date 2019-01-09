@@ -88,19 +88,23 @@
             </div>
     </div>
     <div class="separador"></div>
-    {{--<div style="">
-        <div class="container-fluid">
-            <div class="row">
-                <figure  class="col-md-7" style="margin: 0; padding: 0;" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" style="margin: auto;">
+                <figure>
                     <img style="width: 110%" class="img-fluid" src="{{ URL::to('/') }}/images/img_ref.jpg">
-                    <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf"><figcaption class="figImagen">Descarga el catálogo de talleres aquí &nbsp;<img width="20px" src="{{ URL::to('/') }}/images/iconos/iconodescarga.png" alt=""></figcaption></a>
+                    <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
+                        <div class="col-md-12">
+                            <figcaption class="figImagen">
+                                Descarga el PDF aquí &nbsp;
+                                <img width="20px" src="{{ URL::to('/') }}/images/iconos/iconodescarga.png" alt="">
+                            </figcaption>
+                        </div>
+                    </a>
                 </figure>
-                <div class="col-md-4 text-center">
-                    <span style="color:#00949c;font-size: 200px; line-height: 180px;">TA <br>LLE<br>RES</span>
-                </div>
             </div>
         </div>
-    </div>--}}
+    </div>
     <div class="separador"></div>
     <div style="background-color:#DCDDDE;">
         <div class="container" style="background-color:#DCDDDE;padding:50px 0 50px 0;">

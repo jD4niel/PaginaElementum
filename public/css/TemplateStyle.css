@@ -217,3 +217,6 @@ body{
     background-color: #24be43;
     font-size: 21px;
 }
+.must_{
+    border: solid #ed4850 1px;
+}

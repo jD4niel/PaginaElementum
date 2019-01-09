@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Autor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AutorController extends Controller
 {
@@ -57,7 +58,9 @@ class AutorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $autor = Autor::find($id);
+       //dd($autor);
+        return view('controller.editar-autor', compact('autor'));
     }
 
     /**
@@ -67,9 +70,28 @@ class AutorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $taller = DB::table('autors')
+            ->where('id','=',$request->id)
+            ->update([
+                'nombre'=>$request->nombre,
+                'apellido_p'=>$request->apa,
+                'apellido_m'=>$request->apm,
+                'breve_desc'=>$request->des,
+                'facebook'=>$request->face_in,
+                'twitter'=>$request->twitter_in,
+                'instagram'=>$request->insta_in,
+                'semblanza'=>$request->sem
+            ]);
+        if (($request->hasFile('file'))) {
+            $destinationPath = public_path() . '/images/fotos_autores/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+            return $request;
+        }else {
+            return $taller;
+        }
     }
 
     /**
@@ -78,8 +100,9 @@ class AutorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-        return response()->json('hola');
+        $slider = DB::table('autors')->where('id', $id)->delete();
+        return response()->json($slider);
     }
 }

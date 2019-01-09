@@ -2,87 +2,88 @@
 
 @section('content')
     <div class="container text-center">
-        <form action="" id="book_form" class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
+        <div class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
             <div class="form-group text-center">
-                <h1>AGREGAR NUEVO LIBRO</h1>
+                <h1>EDITAR AUTOR </h1>
             </div>
             <hr>
             <div class="col-md-9">
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
                     <div class="form-group col-md-10">
-                        <input id="nombre" type="text" class="form-control" required>
+                        <input id="id_autor" type="hidden" class="form-control" value="{{ $autor->id }}">
+                        <input id="nombre" type="text" class="form-control" value="{{ $autor->nombre }}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label col-md-2" for="subtitulo">Subtitulo:</label>
-                    <div class="form-group col-md-10">
-                        <input id="subtitulo" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="tamano">Tamaño:</label>
-                    <div class="form-group col-md-10">
-                        <input id="tamano" type="text" class="form-control" placeholder="Ej. Encuadernación rústica, 24 páginas, 18 x 21 cm.">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="fecha">Fecha:</label>
-                    <div class="form-group col-md-10">
-                        <input id="fecha" type="text" class="form-control" placeholder="Ej. mes/año, 04/2019">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="isbn">ISBN:</label>
-                    <div class="form-group col-md-4">
-                        <input id="isbn" type="text" class="form-control" placeholder="Ej. 978-607-9298-16-6">
+                    <label class="form-control-label col-md-2" for="apa">Apellidos:</label>
+                    <div class="form-group col-md-5">
+                        <input id="apa" type="text" class="form-control" placeholder="Apellido paterno" value="{{ $autor->apellido_p }}">
                     </div>
 
-                    <label class="form-control-label col-md-2" for="collection">Colección:</label>
-                    <div class="form-group col-md-4">
-                        <select name="" id="collection" class="form-control">
-                            <option value="0" disabled selected>- Seleccione una colección -</option>
-                            @foreach($coleccion as $a)
-                                <option value="{{$a->id}}">{{$a->nombre}}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group col-md-5">
+                        <input id="apm" class="form-control" type="text" placeholder="Apellido materno" value="{{ $autor->nombre }}">
                     </div>
                 </div>
+              <div style="margin-top:45px;">&nbsp;</div>
+                {{--<div class="form-group">
+                    <div class="col-md-12">
+                    <div class="form-check text-center">
+                        <input class="form-check-input" type="checkbox" value="" id="face" >
+                        <label class="form-check-label" for="face" style="margin: -5px 10px 0 5px;">
+                            Facebook
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="twitter" >
+                        <label class="form-check-label" for="twitter" style="margin: -5px 10px 0 5px;">
+                            Twitter
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="insta" >
+                        <label class="form-check-label" for="insta" style="margin: -5px 10px 0 5px;">
+                            Instagram
+                        </label>
+                    </div>
+                    </div>
+                </div>--}}
+
+                <div style="margin-top:45px;">&nbsp;</div>
                 <div class="form-group">
-                    <label class="form-control-label col-md-2" for="precio">Precio:</label>
-                            <div class="form-group col-md-4">
-                                <input id="precio" type="number" class="form-control" placeholder="$xx.xx">
-                            </div>
-                            <label class="form-control-label col-md-2" for="url">URL:</label>
-                            <div class="form-group col-md-4">
-                                <input id="url" type="text" class="form-control" placeholder="URL para la compra del libro">
-                            </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="autor">Autor:</label>
-                    <div class="form-group col-md-4">
-                        <select name="" id="autor" class="form-control">
-                            <option class="" value="" disabled selected>- Seleccione un autor -</option>
-                            @foreach($autor as $a)
-                                <option value="{{$a->id}}">{{$a->nombre}}{{$a->apellido_p}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <label class="form-control-label col-md-2" for="rol">Rol:</label>
-                    <div class="form-group col-md-4">
-                        <input id="rol" type="text" class="form-control" placeholder="Ej. Autor">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md" for="face_in">Facebook: </label>
+                            <input id="face_in" type="text" class="form-control" placeholder="Facebook" value="{{ $autor->facebook }}" style="">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md" for="twitter_in">Twitter: </label>
+                            <input id="twitter_in" type="text" class="form-control" placeholder="Twitter" value="{{ $autor->twitter }}" style="">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md" for="insta_in">Instragram: </label>
+                            <input id="insta_in" type="text" class="form-control" placeholder="Instagram" value="{{ $autor->instagram }}" style="">
+                        </div>
                     </div>
                 </div>
+
             </div>
             <div class="row col-md-3 text-center">
-                <button id="addbtn" onclick="triggerFile()"  class="add-img">AGREGAR IMAGEN</button>
+                <button id="addbtn" onclick="triggerFile()"  class="add-img">CAMBIAR IMAGEN</button>
 
                 <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
                 <div class="col-md-12">
-                <img id="preview-img" src="" alt="" style="display: none;">
+                <img id="preview-img" src="{{ URL::to('/') }}/images/fotos_autores/{{ $autor->imagen }}" alt="" style="width: 200px">
                 </div>
-                <div id="temp" class="img-temp col-md-12">
-                    <div>585 x 830</div>
+                {{--<div id="temp" class="img-temp col-md-12">
+                    <div>500 x 500</div>
+                </div>--}}
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <br><br><br>
+                    <label class="form-control-label col-md-2" for="semblanza">Breve descripción:</label>
+                    <div class="form-group text-center">
+                        <div class="form-group col-md-12 text-center">
+                            <textarea class="form-control" id="summary-ckeditor2">{!! $autor->breve_desc !!}</textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12">
@@ -90,15 +91,15 @@
                 <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
                 <div class="form-group text-center">
                     <div class="form-group col-md-12 text-center">
-                        <textarea class="form-control" id="summary-ckeditor"></textarea>
+                        <textarea class="form-control" id="summary-ckeditor">{!! $autor->semblanza !!}</textarea>
                     </div>
                 </div>
             </div>
-            <hr>
+
             <div class="col-md-12 text-center">
-                <button id="save-book" type="button" onclick="enviarFoto()">Guardar libro</button>
+                <button id="save-book" onclick="enviarFoto()">Guardar autor</button>
             </div>
-        </form>
+        </div>
     </div>
 
 @endsection
@@ -107,7 +108,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        $("#book").on("submit",function(event){event.preventDefault()})
         var ckEditorID;
         ckEditorID = 'summary-ckeditor';
         CKEDITOR.config.forcePasteAsPlainText = true;
@@ -120,6 +120,18 @@
                         },
                         {
                             items : [ 'Link','Unlink' ]
+                        }
+                    ]
+            })
+        var ckEditorID2;
+        ckEditorID2 = 'summary-ckeditor2';
+        CKEDITOR.config.forcePasteAsPlainText = true;
+        CKEDITOR.replace( ckEditorID2,
+            {
+                toolbar :
+                    [
+                        {
+                            items : [ 'Bold','Italic','Underline','Strike' ]
                         }
                     ]
             })
@@ -205,64 +217,112 @@
         };
     </script>
     <script>
+        $(document).ready(function() {
+            if ($("#face_in").val()=="not_"){
+                $("#face_in").val("")
+            }
+            if ($("#twitter_in").val()=="not_"){
+                $("#twitter_in").val("")
+            }
+            if ($("#insta_in").val()=="not_"){
+                $("#insta_in").val("")
+            }
+        });
         //enviar foto al servidor
-        function enviarFoto() {
+        function enviarFoto(){
             var nombre = $("#nombre").val();
-            var subtitulo = $("#subtitulo").val();
-            var tamano = $("#tamano").val();
-            var fecha = $("#fecha").val();
-            var isbn = $("#isbn").val();
-            var collection = $("#collection option:selected").val();
-            var precio = $("#precio").val();
-            var url = $("#url").val();
-            var autor = $("#autor option:selected").val();
-            var rol = $("#rol").val();
+            var apa  = $("#apa").val();
+            var apm = $("#apm").val();
+            var face_in = $("#face_in").val();
+            var insta_in = $("#insta_in").val();
+            var twitter_in = $("#twitter_in").val();
             var my_editor = "summary-ckeditor";
+            var my_editor2 = "summary-ckeditor2";
             var descripcion = CKEDITOR.instances[my_editor].getData();
+            var semblanza = CKEDITOR.instances[my_editor2].getData();
+            var id = $("#id_autor").val();
+            if (face_in==""){
+                face_in="not_";
+            }
+            if (twitter_in==""){
+                twitter_in="not_";
+            }
+            if (insta_in==""){
+                insta_in="not_";
+            }
 
-            var myFormData = new FormData();
-            var foto = $("#fileUp");
+            if(nombre=="") {
+                $("#nombre").addClass('must_');
+                $("#apa").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal ( "Debes llenar todos los campos" ,  "" ,  "error" );
+            }else if(apa=="") {
+                $("#apa").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal ( "Debes llenar todos los campos" ,  "" ,  "error" );
+            }else if(face_in=="") {
+                $("#face_in").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#apa").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal("Debes llenar todos los campos", "", "error");
+            }else if(twitter_in=="") {
+                $("#twitter_in").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#apa").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#insta_in").removeClass('must_');
+                swal("Debes llenar todos los campos", "", "error");
+            }else if(insta_in=="") {
+                $("#insta_in").addClass('must_');
+                $("#nombre").removeClass('must_');
+                $("#apa").removeClass('must_');
+                $("#face_in").removeClass('must_');
+                $("#twitter_in").removeClass('must_');
+                swal("Debes llenar todos los campos", "", "error");
+            } else if(descripcion==""){
+                swal ( "El autor debe de tener una semblanza obligatoriamente" ,  "" ,  "error" );//inverso
+            }else if(semblanza==""){
+                swal ( "El autor debe de tener una corta descripción" ,  "" ,  "error" );
+            }
+                else {
+                    $("#nombre").removeClass('must_');
+                    $("#apa").removeClass('must_');
+                    $("#face_in").removeClass('must_');
+                    $("#twitter_in").removeClass('must_');
+                    $("#insta_in").removeClass('must_');
 
-            if(nombre == ""){
-                swal("Debes llenar el campo nombre", "", "error");
-            }else if(fecha == ""){
-                swal("Debes llenar el campo fecha", "", "error");
-            }else if(precio == ""){
-                swal("Debes llenar el campo precio", "", "error");
-            }else if(collection == 0 || autor == 0){
-                swal("Debes de seleccionar un autor/colección", "", "error");
-            }else if(descripcion == ""){
-                swal("El libro debe de tener una semblanza", "", "error");
-            }else if($("#fileUp").get(0).files.length === 0){
-                swal("Debes de seleccionar una imagen", "", "error");
-            }else{
-
-
+                var myFormData = new FormData();
+                var foto = $("#fileUp");
                 myFormData.append('file', foto[0]['files'][0]);
+                myFormData.append('id', id);
+                myFormData.append('nombre', nombre);
+                myFormData.append('apa', apa);
+                myFormData.append('apm', apm);
+                myFormData.append('face_in', face_in);
+                myFormData.append('twitter_in', twitter_in);
+                myFormData.append('insta_in', insta_in);
 
-                myFormData.append('nombre',nombre);
-                myFormData.append('subtitulo',subtitulo);
-                myFormData.append('tamano',tamano);
-                myFormData.append('fecha',fecha);
-                myFormData.append('isbn',isbn);
-                myFormData.append('collection',collection);
-                myFormData.append('precio',precio);
-                myFormData.append('url',url);
-                myFormData.append('autor',autor);
-                myFormData.append('rol',rol);
-                myFormData.append('des',descripcion);
+                myFormData.append('des', descripcion);
+                myFormData.append('sem', semblanza);
 
 
-                var url = '{{route('guardar.libro')}}';
+                var url = '{{route('editar.autor')}}';
                 swal({
-                    title: "¿Agregar libro?",
+                    title: "¿Editar autor?",
                     text: "Verifique que los datos esten correctamente antes de guardar los datos",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                     .then((willDelete) => {
-                    if (willDelete) {
+                    if(willDelete) {
                         $.ajax({
                             url: url,
                             data: myFormData,
@@ -274,12 +334,12 @@
                             processData: false, // NEEDED, DON'T OMIT THIS
                             success: function (response, file) {
                                 console.log(response);
-                                swal("El libro fue agregado correctamente", " ",{
+                                swal("El autor fue editado correctamente", " ",{
                                     icon: "success"
                                 }).then((value) => {
-                                    $("#book_form").submit();
+                                // window.location.reload();
                             });
-
+                                /*window.location.reload();*/
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 console.log(textStatus + ': ' + errorThrown);
@@ -287,8 +347,6 @@
                         });
                     }
                 });
-
-
             }
         }
         function readURL(input) {

@@ -4,7 +4,7 @@
     <div class="container-fluid" >
         <div class="row" style="width: 80%;margin: auto;">
             <h1 class="h1 text-center">Slider</h1>
-            <h3>Las imagenes deben de ser en formato .jpg</h3>
+            <h3 class="h3 text-center">Las imagenes deben de ser en formato .jpg</h3>
             <hr>
             @foreach($pagina as $item)
                 <div id="id{{$item->id}}" class="col-md-4" style="margin: 5px 0 5px 0;">
@@ -77,48 +77,35 @@
         </div>
         <br><br><br><br>
         <div class="text-center"><button onclick="" class="btn btn-info">Añadir taller</button>
-           {{-- <form action="" enctype="multipart/form-data" id="upload_form" role="form" method="POST">
-                <input id="tallerUp" name="subirSlider"  multiple="multiple"  onchange="readURL(this);" accept="image/jpg,image/jpeg" type="file" style="display: none">
-                <div class="col-md-12 text-center" style="margin: auto;">
-                    <figure id="img-taller"  class="figure">
-                        <img class="img-fluid" src="" alt="imagen"/>
-                        <figcaption class="figure-caption">
-                            <button id="subir_imagen" type="button" onclick="enviarFoto()" class="btn btn-success"><i class="fas fa-upload"></i></button>
-                            <button id="borrar" type="button" onclick="borrarfoto()" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                        </figcaption>
-                    </figure>
-
-                </div>
-            </form>--}}
+            <br><br><br>
         </div>
     </div>
-    <br><br><br><br><br>
-
-
-
-
-{{--Modales para edición de talleres--}}
-    <!-- Modal -->
-    <div id="editarTaller" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Talleres</h4>
+    <div class="container">
+        <h1 class="h1 text-center">Agregar PDF's</h1>
+        <hr>
+        <div class="row text-center" >
+            <div class="col-md-12 text-center">
+                <div class="col-md-6" style="left: 25%;">
+                    <button id="savePdf" class="btn btn-success btn-block" type="button" onclick="guardarFotoPDF()" style="display: none;">Guardar cambios</button>
+                    <img  id="imgRef" class="img-fluid" width="100%" src="{{ URL::to('/') }}/images/img_ref.jpg">
                 </div>
-                <div class="modal-body">
-
+                <div class="col-md-12" style="margin: auto;">
+                    <button class="btn btn-info" onclick="pdfChange()">Cambiar PDF</button>
+                    <button class="btn btn-danger" onclick="imgChange()">Cambiar Imagen</button>
+                    <input type="file" id="changeImg" onchange="readURLimg(this)" style="display: none">
+                    <input type="file" id="changePdf" onchange="readURLpdf(this)" style="display: none">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                <div class="col-md-12" style="margin: auto;padding: 6px;">
+                    <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
+                        <button class="btn btn-success">Ver PDF</button>
+                    </a>
                 </div>
             </div>
 
         </div>
     </div>
+    <br><br><br><br><br>
+
 
 @endsection
 
@@ -144,30 +131,90 @@
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script>
+        function imgChange() {
+            $('#changeImg').trigger('click');
+        }
+        function pdfChange() {
+            $('#changePdf').trigger('click');
+        }
+        function readURLimg(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#imgRef").attr("src", e.target.result);
+                    $("#savePdf").show();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function readURLpdf(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#savePdf").show();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function guardarFotoPDF() {
+            var myFormData = new FormData();
+            var foto = $("#changeImg");
+            var pdf = $("#changePdf");
+            console.log(foto.val().length);
+            console.log(pdf.val().length);
+            if(pdf.val().length != 0){ myFormData.append('pdf', pdf[0]['files'][0]); }else{ myFormData.append('pdf', 1); }
+            if(foto.val().length != 0){ myFormData.append('file', foto[0]['files'][0]); }else{ myFormData.append('file', 1); }
+            var url = '{{route('new.pdf.up')}}';
+            swal({
+                title: "¿Modificar imagen/PDF?",
+                text: "Las imagenes se actualizarán en la página principal",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: url,
+                        data: myFormData,
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                        processData: false, // NEEDED, DON'T OMIT THIS
+                        success: function (response, file) {
+                            if (response == 0){
+                                swal("No se modificaron cambios", "No agrego PDF ni imagen",{
+                                    icon: "warning"
+                                });
+                            }else {
+                                window.location.reload();
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus + ': ' + errorThrown);
+                        }
+                    });
+                }
+            });
+
+        }
         //enviar foto al servidor
         function enviarFoto() {
             var myFormData = new FormData();
            var foto = $("#fileUp");
-            /*console.log(foto);
-            console.log(foto[0]);
-            console.log(foto[0]['files']);
-            console.log(foto[0]['files'][0]);
-            console.log(foto['files']);*/
-
             myFormData.append('file', foto[0]['files'][0]);
             myFormData.append('nombre', 'daniel');
-            //  console.log(myFormData.get('file'));
-
             var object = {};
             myFormData.forEach(function(value, key){
                 object[key] = value;
             });
             var file = JSON.stringify(object);
-
             var url = '{{route('new.slide.up')}}';
             swal({
                 title: "¿Añadir nuevo slider?",
-                text: "Las imagenes se actualizaran automaticamente en la siguiente posición",
+                text: "Las imagenes se actualizarán automaticamente en la siguiente posición",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -215,6 +262,9 @@
 
         function triggerFile() {
             $('#fileUp').trigger('click');
+        }
+        function triggerFilePdf() {
+            $('#addImgPDF').trigger('click');
         }
         function eliminar(id) {
             swal({
@@ -369,29 +419,15 @@
     </script>
     <script>
         function cambiar(a) {
-
             var url = window.location + "/slider";
             var data = {id: a};
             axios.post(url,data)
                 .then(function (response) {
                     console.log(response['data']);
                 }).catch(function (error) {console.log(error);});
-            /* $.ajax({
-                 url: url,
-                 data: data,
-                 headers:{
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 },
-                 type: 'post',
-                 datatype:'json',
-                 success: function (data) {
-                    console.log(data)
-                 },
-                 error: function(jqXHR, textStatus, errorThrown) {
-                     console.log(textStatus + ': ' + errorThrown);
-                 }
-             })*/
         }
+
+
     </script>
 @endsection
 

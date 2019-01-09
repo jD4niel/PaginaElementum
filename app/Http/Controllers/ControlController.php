@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Autor;
 use App\Collection;
+use App\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -48,6 +49,32 @@ class ControlController extends Controller
                 return $mime."no agarro";
                 abort(500);
             }
+        }catch (\Exception $e){
+            return $e . "mal";
+        }
+    }
+    public function uploadPDF(Request $request){
+        try{
+            $data = $request;
+            $file = $data["file"];
+            $pdf = $data["pdf"];
+            if ($pdf != 1){
+                $destinationPathPDF = public_path() . '/descarga.pdf';
+                copy($pdf, $destinationPathPDF);
+            }else{
+                return "pdf";
+            }
+            if ($file != 1){
+                $mime = $file->getMimeType();
+                if (($mime == 'image/jpeg' || $mime == 'image/jpg' )) {
+                    $destinationPath = public_path() . '/images/img_ref.jpg';
+                    copy($file, $destinationPath);
+                    return $data;
+                }
+            }else {
+                return "img";
+            }
+            return 0;
         }catch (\Exception $e){
             return $e . "mal";
         }
@@ -121,7 +148,7 @@ class ControlController extends Controller
                 'sede'=>$request->sede,
                 'persona'=>$request->imparte,
                 'informes'=>$request->informes
-             ]);
+            ]);
        if (($request->hasFile('file'))) {
             $destinationPath = public_path() . '/images/talleres/';
             $destinationPath1 = $destinationPath . $request->imagen_nombre;
@@ -210,7 +237,8 @@ class ControlController extends Controller
     }
     public function control(){
         $autor = Autor::all();
-        return view('blog.elements-control',compact('autor'));
+        $libro = Libro::all();
+        return view('blog.elements-control',compact('autor','libro'));
     }
     public function borrarAutor($id){
         $autor = DB::table('autors')->where('id', $id)->delete();
