@@ -18,19 +18,19 @@
                 </div>
             </div>
         </div> -->
-            <a href="{{route('users')}}" class="a-free col-md-3">
+            <a href="#" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #3d7fcb;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Escritores</h2>
                         <h4 class="card-subtitle    mb-2 " style="color:#fff;">control</h4>
-                        <i class="far fa-edit card-fa"></i>
+                        <i class="fas fa-users-cog card-fa"></i>
                         <div class="variable-card text-right">
                             &nbsp;
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="{{route('users')}}" class="a-free col-md-3">
+            <a href="#" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #cb304f;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Entradas</h2>
@@ -54,12 +54,12 @@
                     </div>
                 </div>
             </a>
-            <a href="{{route('entrada')}}" class="a-free col-md-3">
+            <a href="#" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #a736bb;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Crear Entrada</h2>
-                        <h4 class="card-subtitle    mb-2 " style="color:#fff;">blog</h4>
-                        <i class="fas fa-align-left card-fa"></i>
+                        <h4 class="card-subtitle mb-2" style="color:#fff;">blog</h4>
+                        <i class="fas fa-sticky-note card-fa"></i>
                         <div class="variable-card text-right">
                             &nbsp;
                         </div>
@@ -85,19 +85,19 @@
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Agregar libro</h2>
                         <h4 class="card-subtitle mb-2 " style="color:#fff;">&nbsp;</h4>
-                        <i class="fas fa-align-left card-fa"></i>
+                        <i class="fas fa-book-open card-fa"></i>
                         <div class="variable-card text-right">
                             &nbsp;
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="{{route('subirpdf')}}" class="a-free col-md-3">
+            <a href="{{route('crear.autor')}}" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #bb2d5e;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Nuevo autor</h2>
                         <h4 class="card-subtitle mb-2 " style="color:#fff;">&nbsp;</h4>
-                        <i class="fas fa-align-left card-fa"></i>
+                        <i class="fas fa-user-plus card-fa"></i>
                         <div class="variable-card text-right">
                             &nbsp;
                         </div>
@@ -109,7 +109,7 @@
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Control de</h2>
                         <h4 class="card-subtitle mb-2 " style="color:#fff;">Elementos</h4>
-                        <i class="fas fa-align-left card-fa"></i>
+                        <i class="fas fa-edit card-fa"></i>
                         <div class="variable-card text-right">
                             &nbsp;
                         </div>

@@ -77,6 +77,7 @@ Route::post('/crear/autor/data', 'ControlController@AgregarAutor')->name('guarda
 Route::post('/editar/libro/', 'LibroController@update')->name('editar.libro')->middleware('auth');
 Route::post('/editar/autor/', 'AutorController@update')->name('editar.autor')->middleware('auth');
 Route::post('/control/autor/borrar/{id}', 'AutorController@destroy')->name('borra.autor')->middleware('auth');
+Route::post('/control/libro/borrar/{id}', 'LibroController@destroy')->name('borra.libro')->middleware('auth');
 Route::get('/control/autor/{id}', 'AutorController@edit')->name('modifica.autor')->middleware('auth');
 Route::get('/control/libro/{id}', 'LibroController@libroInd')->name('modifica.libro')->middleware('auth');
 

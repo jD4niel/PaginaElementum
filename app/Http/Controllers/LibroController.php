@@ -112,9 +112,10 @@ class LibroController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Libro $libro)
+    public function destroy($id)
     {
-        //
+        $slider = DB::table('libros')->where('id', $id)->delete();
+        return response()->json($slider);
     }
     public function descarga(){
         return response()->download(public_path('descarga.pdf'));

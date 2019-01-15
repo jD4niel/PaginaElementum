@@ -4,7 +4,7 @@
     <div class="container-fluid" >
         <div class="row" style="width: 80%;margin: auto;">
             <h1 class="h1 text-center">Slider</h1>
-            <h3 class="h3 text-center">Las imagenes deben de ser en formato .jpg</h3>
+            <h3 class="h3 text-center">Las imágenes deben de ser en formato .jpg</h3>
             <hr>
             @foreach($pagina as $item)
                 <div id="id{{$item->id}}" class="col-md-4" style="margin: 5px 0 5px 0;">
