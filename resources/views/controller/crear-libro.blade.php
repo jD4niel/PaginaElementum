@@ -29,7 +29,12 @@
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="fecha">Fecha:</label>
                     <div class="form-group col-md-10">
-                        <input id="fecha" type="text" class="form-control" placeholder="Ej. mes/año, 04/2019">
+                        <div class="input-group date" data-provide="datepicker">
+                            <input type="text" class="form-control" id="data-date">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -205,12 +210,17 @@
         };
     </script>
     <script>
+        //Llama al formato de fecha
+        $(document).ready(function() {
+            $('#js-date').datepicker();
+        });
+
         //enviar foto al servidor
         function enviarFoto() {
             var nombre = $("#nombre").val();
             var subtitulo = $("#subtitulo").val();
             var tamano = $("#tamano").val();
-            var fecha = $("#fecha").val();
+            var fecha = $("#data-date").val();
             var isbn = $("#isbn").val();
             var collection = $("#collection option:selected").val();
             var precio = $("#precio").val();
