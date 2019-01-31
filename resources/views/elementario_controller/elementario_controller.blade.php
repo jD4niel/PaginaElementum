@@ -3,16 +3,34 @@
 @section('content')
     <div class="container text-center">
         <div id="programming-schedule" class="row col-sm-12 text-center" style="border: 2px solid #d2d2d2; border-radius: 10px;padding: 15px 15px 40px 15px;">
-            <div class="row" style="width: 50%; margin:auto">
+            <div class="row" style="width: 80%; margin:auto">
                 <h3 class="h3">Rango</h3>
                 <hr>
-                <div class="input-group date" style="margin:auto">
+                <div class="input-group date" style="margin:auto;">
                     <div class="col-md-5">
-                        <input type="text" class="form-control  " id="init_range" placeholder="Fecha de inicio">
+                        <div class="input-group">
+                            <input id="text_init_date" type="text" class="form-control fontsize20">
+                            <span class="input-group-btn">
+                            <button id="btn_init" class="btn btn-primary" type="button">
+                                <i class="fas fa-calendar-check"></i>&nbsp;
+                                Inicio
+                            </button>
+                            </span>
+                        </div>
+                        <input type="hidden" id="init_range" style="display: none;">
                     </div>
                     <div class="col-md-2"><h3>-</h3></div>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" id="end_range" placeholder="Fecha de finalización">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                            <button id="btn_end" class="btn btn-primary" type="button">
+                                <i class="fas fa-calendar-check"></i>&nbsp;
+                                Final
+                            </button>
+                            </span>
+                            <input id="text_end_date" type="text" class="form-control fontsize20">
+                        </div>
+                        <input type="hidden" id="end_range" style="display: none;">
                     </div>
                 </div>
                 <br>
@@ -33,6 +51,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="{{asset('js/dateformat.js')}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script>
         Dropzone.options.myDropzone = {
@@ -116,18 +135,30 @@
     <script>
         $(document).ready(function() {
             //Inicializar el datepicker
-            $('#init_range').datepicker({
+            $('#btn_init').datepicker({
                 minViewMode: 1,
                 format: 'mm/dd/yyyy',
                 autoclose:true,
                 language: 'es'
-            });
-            $('#end_range').datepicker({
+            })
+                .on('changeDate', function(ev){
+                    $('#btn_init').datepicker('hide');
+                    $('#init_range').val(ev.date.format("mm/dd/yyyy"));
+                    $('#text_init_date').val(ev.date.format("mmmm, yyyy"));
+                });
+            $('#btn_end').datepicker({
                 minViewMode: 1,
                 format: 'mm/dd/yyyy',
                 autoclose:true,
                 language: 'es'
-            });
+            })
+                .on('changeDate', function(ev){
+                    $('#btn_end').datepicker('hide');
+                    $('#end_range').val(ev.date.format("mm/dd/yyyy"));
+                    $('#text_end_date').val(ev.date.format("mmmm, yyyy"));
+                });
+
+
         });
         function range() {
             // Se declara la variable meses que contiene una lista con los nombres de cada mes

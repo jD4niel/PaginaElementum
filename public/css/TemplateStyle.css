@@ -231,3 +231,6 @@ body{
 .add_btn_txt:hover{
     background-color: #fffa63;
 }
+.fontsize20{
+    font-size: 17px !important;
+}
