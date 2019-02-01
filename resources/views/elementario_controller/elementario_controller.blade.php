@@ -171,21 +171,20 @@
             // Se recorre el rango de inicio al final donde se guardan las posiciones de los meses
             var d = date_in;
             while (d <= date_out) {
-                console.log(d.getMonth(), date_in,"__",date_out)
-                rango.push(new Date(d).getMonth());
+                rango.push(new Date(d));
                 d.setMonth(d.getMonth() + 1)
             }
             // Se guarda en rango_meses el nombre de los meses a partir de rango
             console.log(rango)
-            rango.forEach(function (e) {
-                rango_meses.push(meses[e])
-            });
             $("#months").html('');
             var id_mes = 1;
-            rango_meses.forEach(function (mes) {
+            var anio = '';
+            console.log("rango en: ---", rango.length)
+            rango.forEach(function (date) {
+                if (rango.length > 12){anio = date.format("yyyy")}
                 $("#months").append('' +
                     '<div class="col-md-6">\n' +
-                    '    <h2 class="month_name" style="display: inline">'+mes+'</h2><button class="add_btn_txt" onclick="addFields('+id_mes+')">+</button>\n' +
+                    '    <h2 class="month_name" style="display: inline">'+date.format("mmmm")+' '+anio+'</h2><button class="add_btn_txt" onclick="addFields('+id_mes+')">+</button>\n' +
                     '    <div id="'+id_mes+'mes" class="content_month">' +
                     '<br>' +
                     '</div>\n' +
