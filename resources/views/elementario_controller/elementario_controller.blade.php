@@ -43,7 +43,26 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalMonth" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="summary-ckeditor"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
 
+        </div>
+    </div>
 @endsection
 
 @section('script_section')
@@ -133,6 +152,23 @@
         };
     </script>
     <script>
+        var ckEditorID;
+        ckEditorID = 'summary-ckeditor';
+        CKEDITOR.config.forcePasteAsPlainText = true;
+        CKEDITOR.replace( ckEditorID,
+            {
+                toolbar :
+                    [
+                        {
+                            items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ]
+                        },
+                        {
+                            items : [ 'Link','Unlink' ]
+                        }
+                    ]
+            })
+    </script>
+    <script>
         $(document).ready(function() {
             //Inicializar el datepicker
             $('#btn_init').datepicker({
@@ -157,8 +193,6 @@
                     $('#end_range').val(ev.date.format("mm/dd/yyyy"));
                     $('#text_end_date').val(ev.date.format("mmmm, yyyy"));
                 });
-
-
         });
         function range() {
             // Se declara la variable meses que contiene una lista con los nombres de cada mes
@@ -168,35 +202,41 @@
             var date_out = new Date($("#end_range").val());
             var rango = [];
             var rango_meses = [];
-            // Se recorre el rango de inicio al final donde se guardan las posiciones de los meses
             var d = date_in;
+            var id_mes = 1;
+            var anio = '';
+            // Se recorre el rango de inicio al final donde se guardan las posiciones de los meses
             while (d <= date_out) {
                 rango.push(new Date(d));
+                rango_meses.push(new Date(d).getMonth());
                 d.setMonth(d.getMonth() + 1)
             }
             // Se guarda en rango_meses el nombre de los meses a partir de rango
-            console.log(rango)
             $("#months").html('');
-            var id_mes = 1;
-            var anio = '';
-            console.log("rango en: ---", rango.length)
-            rango.forEach(function (date) {
-                if (rango.length > 12){anio = date.format("yyyy")}
-                $("#months").append('' +
-                    '<div class="col-md-6">\n' +
-                    '    <h2 class="month_name" style="display: inline">'+date.format("mmmm")+' '+anio+'</h2><button class="add_btn_txt" onclick="addFields('+id_mes+')">+</button>\n' +
-                    '    <div id="'+id_mes+'mes" class="content_month">' +
-                    '<br>' +
-                    '</div>\n' +
-                    '</div>')
-                id_mes++;
-            })
+            if(rango.length < 12){
+                rango.forEach(function (date) {
+                    if (hasDuplicates(rango_meses)){anio = date.format("yyyy")}
+                    $("#months").append('' +
+                        '<div class="col-md-6">' +
+                        '   <button type="button" style="margin: 10px;" class="btn btn-info btn-lg" data-title="'+date.format("mmmm")+' '+anio+'" data-toggle="modal" data-target="#modalMonth">'+date.format("mmmm")+' '+anio+'</button>' +
+                        '</div>' +
+                        '');
+                    id_mes++;
+                })
+            }else{
+                swal ( "No puedes elegir un rango de fecha mayor a 1 año" ,  "" ,  "error" );
+            }
         }
-        function addFields(id_mes) {
-            $("#"+id_mes+"mes").append('' +
-                '<textarea id="'+id_mes+'area"></textarea><br>' +
-                '')
+        //Si hay elementos duplicados
+        function hasDuplicates(array) {
+            return (new Set(array)).size !== array.length;
         }
+        $('#modalMonth').on('show.bs.modal', function (event) {
+            var button	= $(event.relatedTarget); // Button that triggered the modal
+            var modal	= $(this);
+            var title = button.data('title');
+            modal.find('.modal-title').text(title);
+        });
     </script>
 @endsection
 
