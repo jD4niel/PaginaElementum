@@ -1,25 +1,19 @@
 @extends('template')
 @section('autores')
-    <div id="container360"></div>
-    <div style="position: absolute; top: 120px;left: 20px; background-color: #367EB6;padding: 15px;color: white; font-size: 3vh;filter: opacity(.9);">
-        <div class="">Superficie: 36m<sup>2</sup></div>
-        <div>Capacidad: 1100 Libros</div>
+    
+    <div class="container">
+        <div class="row">
+            <div style="height: 100px;"></div>
+            <div id="programming_section">
+                <div style="background-color: #fff;margin-left: 25px;display:inline-block;margin-bottom: -10px;vertical-align: bottom;">
+                    <h2 style="margin-bottom: -10px;">&nbsp;Proximamento Diciembre - Diciembre&nbsp;</h2>
+                </div>
+                <div id="programming_container" style="height: 500px;widows: 700px;">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+        </div>
     </div>
-    <script type="text/javascript" src="https://cdn.rawgit.com/thiagopnts/kaleidoscope/master/dist/kaleidoscope.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            var viewer = new Kaleidoscope.Image({
-                source: '{{asset('library2.png')}}',
-                containerId: '#container360',
-                height: window.innerHeight,
-                width: window.innerWidth,
-            });
-            viewer.render();
-            window.onresize = function() {
-                viewer.setSize({height: window.innerHeight, width: window.innerWidth});
-            };
-        })();
-    </script>
 @endsection
 @section('script_collection')
     <script>

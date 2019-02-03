@@ -53,10 +53,15 @@
                     <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" id="idMonth">
+                    <div class="form-group text-right">
+                        <label class="form-check-label" for="view_">Visualizar:</label>
+                        <input id="view_" class="form-check-input" type="checkbox">
+                    </div>
                     <textarea class="form-control" id="summary-ckeditor"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="dataMonth()">Guardar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -106,7 +111,6 @@
 
                 this.on("addedfile", function (file) {
 
-                    //console.log(file['name']);
                     $('#imagen_nombre').val(file['name']);
                     var removeButton = Dropzone.createElement("<button class='btn btn-xs btn-danger'><i class='fa fa-trash'></i></button>");
 
@@ -213,12 +217,12 @@
             }
             // Se guarda en rango_meses el nombre de los meses a partir de rango
             $("#months").html('');
-            if(rango.length < 12){
+            if(rango.length <= 12){
                 rango.forEach(function (date) {
                     if (hasDuplicates(rango_meses)){anio = date.format("yyyy")}
                     $("#months").append('' +
                         '<div class="col-md-6">' +
-                        '   <button type="button" style="margin: 10px;" class="btn btn-info btn-lg" data-title="'+date.format("mmmm")+' '+anio+'" data-toggle="modal" data-target="#modalMonth">'+date.format("mmmm")+' '+anio+'</button>' +
+                        '   <button type="button" style="margin: 10px;" class="btn btn-info btn-lg" data-id="'+date.getMonth()+'" data-title="'+date.format("mmmm")+' '+anio+'" data-toggle="modal" data-target="#modalMonth">'+date.format("mmmm")+' '+anio+'</button>' +
                         '</div>' +
                         '');
                     id_mes++;
@@ -231,11 +235,51 @@
         function hasDuplicates(array) {
             return (new Set(array)).size !== array.length;
         }
+        function dataMonth() {
+            var title = $('.modal-title').text();
+            var id = $('#idMonth').val();
+            var text = CKEDITOR.instances["summary-ckeditor"].getData();
+            var view_chk = 0;
+            if ($('#view_').is(":checked")){view_chk = 1}
+            
+
+            alert(view_chk);
+
+            //Enviar meses al controlador
+             swal({
+                title: "¿Guardar cambios?",
+                text: "Los cambios se actualizarán en el inicio de Elementario",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                if (willDelete) {
+                   var url = window.location + '/mes/';
+                   var data = {id_m:id,title:title,text:text,view_chk:view_chk} 
+                   console.log(data);
+                   // fetch ajax JavaScript
+                   fetch(url, {
+                      method: 'POST', // or 'PUT'
+                      body: JSON.stringify(data), // data can be `string` or {object}!
+                      headers:{
+                        'Content-Type': 'application/json',
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                      }
+                      }).then(res => res.json())
+                    .catch(error => console.error('Error:', error))
+                    .then(response => console.log('Success:', response));
+
+                }
+            });
+        }
         $('#modalMonth').on('show.bs.modal', function (event) {
-            var button	= $(event.relatedTarget); // Button that triggered the modal
-            var modal	= $(this);
+            var button  = $(event.relatedTarget); 
+            var modal   = $(this);
             var title = button.data('title');
+            var id = button.data('id');
             modal.find('.modal-title').text(title);
+            modal.find('#idMonth').val(id);
         });
     </script>
 @endsection

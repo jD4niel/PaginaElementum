@@ -79,7 +79,8 @@ Route::get('/control/libro/{id}', 'LibroController@libroInd')->name('modifica.li
 
 
 //Elementario
-Route::get('/elementario/controlador', 'ElementarioController@index')->name('elementario.index')->middleware('auth');
+Route::get('/elementario/controlador', 'ElementarioController@indexController')->name('elementario.index.controller')->middleware('auth');
+Route::post('/elementario/controlador/mes/', 'ElementarioController@updateMonth')->name('elementario.update.month')->middleware('auth');
 
 
 
