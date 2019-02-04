@@ -8,5 +8,4 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'es-mx';
 	// config.uiColor = '#AADC6E';
     config.removeButtons = 'NewPage,ImageButton,Flash,Font,Form,Button,TextField,Checkbox,Radio,Textarea,Select,HiddenField,Subscript,Superscript,CreateDiv,Anchor,Smiley,About,TextColor,BGColor';
-    config.height = '50em';
 };

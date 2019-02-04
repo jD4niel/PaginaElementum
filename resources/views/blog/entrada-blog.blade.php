@@ -31,7 +31,7 @@
             <div class="col-md-12 align-self-center" style="margin-top: 80px" >
                 <div class="row">
                     <div class="col-md-3">
-                        <img style="filter: drop-shadow(-1px 3px 2px #4e4e4eb5);border-radius: 10%;" class="img-responsive rounded-circle" src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="">
+                        <img style="filter: drop-shadow(-1px 3px 2px #4e4e4eb5);border-radius: 10%;" class="img-fluid rounded-circle" src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="">
                     </div>
                     <div class="col-md-9">
                         <h3>{{$autor->nombre}}{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h3>

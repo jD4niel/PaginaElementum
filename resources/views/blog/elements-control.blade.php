@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <div class="container">
     <div class="row">
         <h1 class="text-center b1">Autores</h1>
@@ -76,7 +75,6 @@
 @endsection
 
 @section('script_section')
-    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script>
 
         $.noConflict();
