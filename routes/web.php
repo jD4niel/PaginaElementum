@@ -22,16 +22,10 @@ Route::get('/elementario','LibroController@elementario')->name('elementario.elem
 Route::get('/blog','EntradasController@blog')->name('blog.elementum');
 Route::get('/blog/entrada/{id}','EntradasController@entrada')->name('blog.entrada.elementum');
 
-
-
 Route::get('/info','PDFController@info')->name('info');
-
-
 Route::get('/colecciones/{id}','LibroController@detalle')->name('detalle.libros');
-
 Route::get('/autores','LibroController@autors')->name('autores.libros');
 Route::get('/autores/{id}','LibroController@autors_details')->name('autores.detalle');
-
 Route::get('/ir','LibroController@ir')->name('det.libros');
 /*Módulo de blog*/
 Auth::routes();
@@ -53,8 +47,8 @@ Route::post('/crear/entrada/post', 'EntradasController@crearEntradaFinal')->name
 Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up')->middleware('auth');
 //Route::post('/crear/final','EntradasController@crearEntradaFinal')->name('entrada-final')->middleware('auth');
 
+//Subir PDFs
 Route::get('/info/subir',function (){return view('controller.subirpdf');})->name('subirpdf')->middleware('auth');
-
 Route::post('/info/pdf','PDFController@uploadPDF')->name('pdf.up')->middleware('auth');
 
 
@@ -86,6 +80,13 @@ Route::get('/control/libro/{id}', 'LibroController@libroInd')->name('modifica.li
 
 Route::post('/upload_image','CkeditorController@uploadImage')->name('upload.ck');
 
+
+
+
+
+//Elementario
+Route::get('/elementario/controlador', 'ElementarioController@indexController')->name('elementario.index.controller')->middleware('auth');
+Route::post('/elementario/controlador/mes/', 'ElementarioController@updateMonth')->name('elementario.update.month')->middleware('auth');
 
 
 

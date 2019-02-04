@@ -136,7 +136,7 @@
 
             url: "{{ route('pdf.up') }}",
             headers: {
-                'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value 
             },
             autoProcessQueue: false,
             uploadMultiple: false,

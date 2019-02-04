@@ -220,3 +220,17 @@ body{
 .must_{
     border: solid #ed4850 1px;
 }
+.add_btn_txt{
+    background-color: #ffee46;
+    border-radius: 7px;
+    width: 20px;
+    text-align: center;
+    margin-left: 5px;
+    font-weight: bold;
+}
+.add_btn_txt:hover{
+    background-color: #fffa63;
+}
+.fontsize20{
+    font-size: 17px !important;
+}
