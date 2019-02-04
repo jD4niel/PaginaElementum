@@ -17,11 +17,6 @@ blockquote p {
     display: inline;
 }
 
-img {
-    width: 100%;
-    height: auto;
-    margin: 10px;
-}
 
 .etiqueta {
     background-color: #00394c; /* Green */
