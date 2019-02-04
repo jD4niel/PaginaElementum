@@ -7,6 +7,7 @@
     </div>
     <div class="row">
         <table id="entradas_id" class="table-responsive">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
@@ -15,17 +16,16 @@
                 <th>Acciones</th>
             </tr>
             </thead>
-
             <tbody>
             @foreach($entradas as $item)
                 <tr id="id{{$item->id}}">
                     <td>{{$item->id}}</td>
-                    <td>{{$item->entry_name}}</td>
+                    <td>{{$item->nombre}}</td>
                     <td>{{$item->created_at}}</td>
                     <td>{{$item->updated_at}}</td>
                     <td>
                         <button onclick="borrar({{$item->id}})" class="btn btn-danger">Borrar</button>
-                        <button onclick="modificar('{{$item->id}}' class="btn btn-success"  data-toggle="modal" data-target="#ModificarEntrada">Modificar</button>
+                        <button class="btn btn-success">Modificar</button>
                     </td>
                 </tr>
 
@@ -38,8 +38,9 @@
 @endsection
 
 @section('script_section')
+    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script>
-        $.noConflict();
+        // $.noConflict();
         jQuery( document ).ready(function( $ ) {
             $('#entradas_id').DataTable();
         } );

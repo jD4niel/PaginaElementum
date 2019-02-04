@@ -39,6 +39,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/entradas', 'EntradasController@index')->name('entradas')->middleware('auth');
 
 
+
 //Usuario CRUD
 Route::get('/usuarios', 'UserController@index')->name('users');
 Route::post('/usuario/borrar/{id}', 'UserController@destroy')->name('user.delete')->middleware('auth','admin');
@@ -47,8 +48,10 @@ Route::get('/usuario/crear', 'UserController@createView')->name('user.crear')->m
 
 //Post
 Route::get('/crear/entrada', 'EntradasController@go')->name('entrada')->middleware('auth');
-Route::post('/crear/entrada/post', 'EntradasController@store')->name('crear.entrada')->middleware('auth');
+Route::get('/crear/entrada', 'AutorController@index')->name('autor-entradas')->middleware('auth');
+Route::post('/crear/entrada/post', 'EntradasController@crearEntradaFinal')->name('crear.entrada')->middleware('auth');
 Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up')->middleware('auth');
+//Route::post('/crear/final','EntradasController@crearEntradaFinal')->name('entrada-final')->middleware('auth');
 
 Route::get('/info/subir',function (){return view('controller.subirpdf');})->name('subirpdf')->middleware('auth');
 
@@ -80,6 +83,9 @@ Route::post('/control/autor/borrar/{id}', 'AutorController@destroy')->name('borr
 Route::post('/control/libro/borrar/{id}', 'LibroController@destroy')->name('borra.libro')->middleware('auth');
 Route::get('/control/autor/{id}', 'AutorController@edit')->name('modifica.autor')->middleware('auth');
 Route::get('/control/libro/{id}', 'LibroController@libroInd')->name('modifica.libro')->middleware('auth');
+
+Route::post('/upload_image','CkeditorController@uploadImage')->name('upload.ck');
+
 
 
 

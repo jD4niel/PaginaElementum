@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </a>
-            <a href="#" class="a-free col-md-3">
+            <a href="{{route('entradas')}}" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #cb304f;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Entradas</h2>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </a>
-            <a href="#" class="a-free col-md-3">
+            <a href="{{route('autor-entradas')}}" class="a-free col-md-3">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #a736bb;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Crear Entrada</h2>

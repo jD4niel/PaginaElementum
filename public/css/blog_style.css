@@ -1,0 +1,57 @@
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+blockquote p {
+    display: inline;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    margin: 10px;
+}
+
+.etiqueta {
+    background-color: #00394c; /* Green */
+    border: none;
+    color: white;
+    padding: .4em 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1em;
+    border-radius: 10%;
+}
+
+.hr-tags {
+    margin: -10px;
+    border: 0;
+    height: 1px;
+    background: #00394c;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.17) 86%, #00394c 14%);
+}
+
+.shine {
+    height: 10px;
+    width: 60%;
+    background-image: radial-gradient(
+            farthest-side at 50% -50%,
+            hsla(0, 0%, 0%, 0.3),
+            hsla(0, 0%, 0%, 0));
+    position: relative;
+}
+
+
+

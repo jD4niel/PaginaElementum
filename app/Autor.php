@@ -20,4 +20,8 @@ class Autor extends Model
     public function libro(){
         return $this->hasMany(Libro::class);
     }
+    public function entrada()
+    {
+        return $this->hasMany('App\Entradas');
+    }
 }
