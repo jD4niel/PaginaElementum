@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Autor;
 use App\Blog;
 use App\Entradas;
 use App\User;
@@ -33,7 +34,7 @@ class EntradasController extends Controller
         Date::setLocale('es');
         $entrada=Entradas::findOrFail($id);
         $fecha=$entrada->created_at->format('d M');
-        $autor = User::find($entrada->user_id);
+        $autor = Autor::find($entrada->user_id);
         return view('blog.entrada-blog',compact('entrada','fecha','autor'));
     }
 
@@ -79,9 +80,33 @@ class EntradasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function crearEntradaFinal(Request $request)
     {
-        //
+        try{
+            if($request->hasFile('file')){
+                $mime = $request->file->getMimeType();
+                if (($mime == 'image/jpeg') || ($mime == 'image/jpg' ) || ($mime == 'image/png') || ($mime == 'image/PNG')) {
+                    $destinationPath = public_path() . '/images/entradas';
+                    $fileName = $request->file->getClientOriginalName();
+                    if (!File::exists($destinationPath)) {
+                        File::makeDirectory($destinationPath, 0755, true);
+                    }
+                    $finalPath = $destinationPath . '/' . $fileName;
+                    copy($request->file, $finalPath);
+                }
+                $entrada = new Entradas();
+                $entrada->intro = $request['intro'];
+                $entrada->imagen = $fileName;
+                $entrada->nombre = $request['nombre'];
+                $entrada->texto = $request['texto'];
+                $entrada->user_id = $request['user_id'];
+                $entrada->etiquetas = $request['etiquetas'];
+                $entrada->save();
+                return $entrada;
+            }
+        }catch (\Exception $e){
+            return abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -97,7 +122,8 @@ class EntradasController extends Controller
         $entrada->imagen=$request['imagen'];
         $entrada->nombre=$request['titulo'];
         $entrada->texto=$request['texto'];
-        $entrada->user_id=Auth::id();
+        $entrada->user_id=$request['autor'];
+        $entrada->etiquetas=$request['etiquetas'];
         $entrada->save();
         return response()->json($entrada);
     }

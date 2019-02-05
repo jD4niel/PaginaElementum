@@ -17,12 +17,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <!-- Styles -->
         <link rel="stylesheet" href="{{asset('css/template.css')}}">
+        <link rel="stylesheet" href="{{asset('css/blog_style.css')}}">
+
         <script src="{{asset('js/wow.js')}}"></script>
         <script src="{{ URL::to('/') }}/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
         <script>
             new WOW().init();
         </script>
+
     </head>
+
     <body>
     <section class="navigation">
         <div class="nav-container">

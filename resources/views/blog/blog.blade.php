@@ -2,13 +2,15 @@
 
 @section('home')
 <div class="container">
-    <div class="row">
-        mas recientes
+    <div id="mas_recientes" class="row">
+    <h1>Más recientes elementum...</h1>
     </div>
     <div class="row">
         banner
     </div>
     <div id="nuestros_colaboradores" class="row">
+
+
         <h1>Nuestros colaboradores</h1>
         <hr>
 

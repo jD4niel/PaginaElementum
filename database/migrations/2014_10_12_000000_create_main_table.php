@@ -84,9 +84,10 @@ class CreateMainTable extends Migration
             $table->string('nombre');
             $table->longText('texto');
             $table->unsignedInteger('user_id');
+            $table->string('etiquetas');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('autors')->onUpdate('cascade')->onDelete('cascade');
 
         });
 
