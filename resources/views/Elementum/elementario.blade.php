@@ -1,19 +1,42 @@
 @extends('template')
 @section('autores')
     
-    <div class="container">
-        <div class="row">
-            <div style="height: 100px;"></div>
-            <div id="programming_section">
-                <div style="background-color: #fff;margin-left: 25px;display:inline-block;margin-bottom: -10px;vertical-align: bottom;">
-                    <h2 style="margin-bottom: -10px;">&nbsp;Proximamento Diciembre - Diciembre&nbsp;</h2>
+    <div class="container-fluid" style="background-color: #E8E8E8FF">
+        <div class="row col-md-10" style="margin: 0 auto;">
+            <div style="height: 50px;">&nbsp;</div>
+            <div id="programming_section" class="col-md-12" style="margin:auto;">
+                <div style="background-color: #E8E8E8FF;margin-left: 25px;display:inline-block;margin-bottom: -10px;vertical-align: bottom;">
+                    <h1 style="margin-bottom: -10px; color: #002F3AFF">&nbsp;{{ $title[0]->name }}&nbsp;</h1>
                 </div>
-                <div id="programming_container" style="height: 500px;widows: 700px;">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <div id="programming_container" style="height: auto;width: 100%">
+                    <div class="row">
+                        @foreach($month_range as  $indexKey => $item)
+                            @if( count($month_range) > 1)
+                            <div class="col-md-5" style="margin: 10px 0;">
+                                <h5 style="color: #002F3AFF"><i class="fas fa-star"></i>&nbsp;<b>{{ $item->year }}:</b></h5>
+                                <div class="col-md-10" style="margin-left: 30px;">
+                                    {!! $item-> text !!}
+                                </div>
+                            </div>
+                                @if($indexKey%2==0 && $item->view_month == 1)
+                                <div class="col-md-2"><div class="col-md-6"style="border-right:dotted 3px #1B4647F6;height: 100%;">&nbsp;</div></div>
+                                @endif()
+                            
+                        @else
+                            <div class="col-md-12" style="margin: 10px 0;">
+                                <div class="col-md-10" style="margin-left: 30px;">
+                                    {!! $item-> text !!}
+                                </div>
+                            </div>
+                        @endif()
+                       @endforeach()
+                    </div>
                 </div>
             </div>
         </div>
+        <div style="height: 100px;"></div>
     </div>
+
 @endsection
 @section('script_collection')
     <script>

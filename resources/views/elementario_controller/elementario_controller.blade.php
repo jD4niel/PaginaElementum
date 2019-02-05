@@ -3,8 +3,12 @@
 @section('content')
     <div class="container text-center">
         <div id="programming-schedule" class="row col-sm-12 text-center" style="border: 2px solid #d2d2d2; border-radius: 10px;padding: 15px 15px 40px 15px;">
+            <button id="btn_save_changes" onclick="saveMonths()">Guardar cambios</button>
             <div class="row" style="width: 80%; margin:auto">
-                <h3 class="h3">Rango</h3>
+                <div class="form-group text-center col-md-12">
+                    <input id="section_title" class="form-control text-center" type="text" placeholder="Titulo de la sección" value="{{ $title[0]->name }}" style="font-size: 25px;margin:auto;width: 80%;">
+                </div>
+                <div style="height: 50px;"></div>
                 <hr>
                 <div class="input-group date" style="margin:auto;">
                     <div class="col-md-5">
@@ -38,7 +42,16 @@
             </div>
             <div class="row">
                 <div id="months">
-
+                    @foreach($range as $item)
+                        @if($item->year != Null)
+                         <div class="col-md-6"> 
+                           <button id="{{$item->id}}_btn" type="button" style="margin: 10px;" class="btn btn-danger btn-lg" data-id="{{ $item->month }}" data-title="{{ $item->year }}" data-toggle="modal" data-target="#modalMonth">{{ $item->year }}</button> 
+                        </div>
+                        <textarea id="{{$item->id}}_month_text" style="display: none">
+                            {!! $item-> text !!}
+                        </textarea>
+                        @endif()
+                    @endforeach()
                 </div>
             </div>
         </div>
@@ -54,10 +67,6 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="idMonth">
-                    <div class="form-group text-right">
-                        <label class="form-check-label" for="view_">Visualizar:</label>
-                        <input id="view_" class="form-check-input" type="checkbox">
-                    </div>
                     <textarea class="form-control" id="summary-ckeditor"></textarea>
                 </div>
                 <div class="modal-footer">
@@ -173,6 +182,7 @@
             })
     </script>
     <script>
+        var month_obj = []
         $(document).ready(function() {
             //Inicializar el datepicker
             $('#btn_init').datepicker({
@@ -199,7 +209,7 @@
                 });
         });
         function range() {
-            // Se declara la variable meses que contiene una lista con los nombres de cada mes
+            // Se declara la variable meses que contiene una lista con los nombresaveMonthss de cada mes
             var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
             // Se obtienen las fechas de los input y se convierten a tipo Date
             var date_in = new Date($("#init_range").val());
@@ -209,22 +219,24 @@
             var d = date_in;
             var id_mes = 1;
             var anio = '';
+
+            $('#section_title').val('Programación '+ date_in.format('mmmm') + ' - ' + date_out.format('mmmm'))
             // Se recorre el rango de inicio al final donde se guardan las posiciones de los meses
             while (d <= date_out) {
                 rango.push(new Date(d));
-                rango_meses.push(new Date(d).getMonth());
+                rango_meses.push(new Date(d).getYear());
                 d.setMonth(d.getMonth() + 1)
             }
             // Se guarda en rango_meses el nombre de los meses a partir de rango
             $("#months").html('');
             if(rango.length <= 12){
                 rango.forEach(function (date) {
-                    if (hasDuplicates(rango_meses)){anio = date.format("yyyy")}
+                    if (!AllTheSame(rango_meses)){anio = date.format("yyyy");}
                     $("#months").append('' +
                         '<div class="col-md-6">' +
-                        '   <button type="button" style="margin: 10px;" class="btn btn-info btn-lg" data-id="'+date.getMonth()+'" data-title="'+date.format("mmmm")+' '+anio+'" data-toggle="modal" data-target="#modalMonth">'+date.format("mmmm")+' '+anio+'</button>' +
+                        '   <button id="'+parseInt(parseInt(date.getMonth())+1)+'_btn" type="button" style="margin: 10px;" class="btn btn-danger btn-lg" data-id="'+date.getMonth()+'" data-title="'+date.format("mmmm")+' '+anio+'" data-toggle="modal" data-target="#modalMonth">'+date.format("mmmm")+' '+anio+'</button>' +
                         '</div>' +
-                        '');
+                        '<textarea id="'+parseInt(parseInt(date.getMonth())+1)+'_month_text" style="display: none"></textarea>');
                     id_mes++;
                 })
             }else{
@@ -232,45 +244,63 @@
             }
         }
         //Si hay elementos duplicados
-        function hasDuplicates(array) {
-            return (new Set(array)).size !== array.length;
+        function AllTheSame(array) {
+            var first = array[0];
+            return array.every(function(element) {
+                return element === first;
+            });
         }
         function dataMonth() {
             var title = $('.modal-title').text();
             var id = $('#idMonth').val();
+            
             var text = CKEDITOR.instances["summary-ckeditor"].getData();
             var view_chk = 0;
-            if ($('#view_').is(":checked")){view_chk = 1}
             
+            $('#'+parseInt(parseInt(id)+1)+'_month_text').val(text);
 
-            alert(view_chk);
+            month_obj.push(parseInt(id))
+        }
+        function saveMonths(){
+            var section_title = $('#section_title').val()
+            var json_month = {'meses':{},'nombres':{}}
+            var meses = month_obj.sort((a, b) => a - b)
+            if (section_title == ''){section_title = 'Programación'}
+
+            meses.forEach(function(item){
+                json_month.meses[item] =  $('#'+parseInt(parseInt(item)+1)+'_month_text').val();
+                json_month.nombres[item] =  $('#'+parseInt(parseInt(item)+1)+'_btn').data('title');
+            });
 
             //Enviar meses al controlador
-             swal({
-                title: "¿Guardar cambios?",
-                text: "Los cambios se actualizarán en el inicio de Elementario",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
+            swal({
+            title: "¿Guardar cambios?",
+            text: "Los cambios se actualizarán en el inicio de Elementario",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
             })
-                .then((willDelete) => {
-                if (willDelete) {
-                   var url = window.location + '/mes/';
-                   var data = {id_m:id,title:title,text:text,view_chk:view_chk} 
-                   console.log(data);
-                   // fetch ajax JavaScript
-                   fetch(url, {
-                      method: 'POST', // or 'PUT'
-                      body: JSON.stringify(data), // data can be `string` or {object}!
-                      headers:{
-                        'Content-Type': 'application/json',
-                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-                      }
-                      }).then(res => res.json())
-                    .catch(error => console.error('Error:', error))
-                    .then(response => console.log('Success:', response));
+            .then((willDelete) => {
+            if (willDelete) {
+               var url = window.location + '/mes/';
+               //var data = {id_m:id,title:title,text:text,view_chk:view_chk,section_title:section_title} 
+               // fetch ajax JavaScript
+               fetch(url, {
+                  method: 'POST', // or 'PUT'
+                  body: JSON.stringify([json_month,section_title]), // data can be `string` or {object}!
+                  headers:{
+                    'Content-Type': 'application/json',
+                    'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                  }
+                  }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                     swal("Elementos agregados correctamente", " ",{
+                                    icon: "success"
+                        });
+                });
 
-                }
+            }
             });
         }
         $('#modalMonth').on('show.bs.modal', function (event) {
@@ -278,8 +308,13 @@
             var modal   = $(this);
             var title = button.data('title');
             var id = button.data('id');
+            var texto = $('#'+parseInt(parseInt(id)+1)+'_month_text').val();
+            button.removeClass('btn-danger');
+            button.addClass('btn-success');
             modal.find('.modal-title').text(title);
             modal.find('#idMonth').val(id);
+            CKEDITOR.instances["summary-ckeditor"].setData(texto);
+
         });
     </script>
 @endsection

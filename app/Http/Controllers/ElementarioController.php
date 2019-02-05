@@ -19,7 +19,9 @@ class ElementarioController extends Controller
 
     public function indexController()
     {
-        return view('elementario_controller.elementario_controller');
+        $range = DB::table('month_range')->get();
+        $title = DB::table('programming_section')->where('id','=',1)->get();
+        return view('elementario_controller.elementario_controller',compact('range','title'));
     }
 
     /**
@@ -27,16 +29,34 @@ class ElementarioController extends Controller
     */
     public function updateMonth(Request $request)
     {
-        $id_month = 1 + (int)$request->id_m;
-        $range = DB::table('month_range')
-        ->where('id','=',$id_month)
+        $ps = DB::table('programming_section')
+        ->where('id','=',1)
         ->update([
-            'month'=>$request->id_m,
-            'text'=>$request->text,
-            'year'=>$request->title,
-            'view_month'=>$request->view_chk,
+            'name'=>$request[1],
         ]);
-        return response()->json($range);
+        for ($i=0; $i < 12; ++$i) {
+            if(isset($request[0]['meses'][$i])){
+                $range = DB::table('month_range')
+                ->where('id','=',1+(int)$i)
+                ->update([
+                    'month'=>$i,
+                    'text'=>$request[0]['meses'][$i],
+                    'year'=>$request[0]['nombres'][$i],
+                    'view_month'=>1,
+                ]);
+             }else{
+                $range = DB::table('month_range')
+                ->where('id','=',1+(int)$i)
+                ->update([
+                    'month'=>$i,
+                    'text'=>null,
+                    'year'=>null,
+                    'view_month'=>0,
+                ]);
+             }
+        }
+        return response()->json($ps);
+
     }
     /**
      * Show the form for creating a new resource.

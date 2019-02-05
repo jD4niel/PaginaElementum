@@ -234,3 +234,15 @@ body{
 .fontsize20{
     font-size: 17px !important;
 }
+#btn_save_changes{
+    border: none;
+    background-color: #005994FF;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 15px;
+    float: right;
+}
+#btn_save_changes:hover{
+    background-color: #0051FFFF;
+}
