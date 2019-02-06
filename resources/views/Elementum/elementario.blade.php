@@ -27,7 +27,7 @@
                                 <div class="col-md-10" style="margin-left: 30px;">
                                     {!! $item-> text !!}
                                 </div>
-                            </div>
+                                </div>
                         @endif()
                        @endforeach()
                     </div>

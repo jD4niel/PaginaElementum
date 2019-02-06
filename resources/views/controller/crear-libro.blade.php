@@ -29,10 +29,10 @@
                 <div class="form-group">
                     <label class="form-control-label col-md-2" for="fecha">Fecha:</label>
                     <div class="form-group col-md-10">
-                        <div class="input-group date" data-provide="datepicker">
-                            <input type="text" class="form-control" id="data-date">
+                        <div class="input-group date">
+                            <input type="text" class="form-control" id="date_book">
                             <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-th"></span>
+                                <span class="fas fa-calendar-week"></span>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="row col-md-3 text-center">
-                <button id="addbtn" onclick="triggerFile()"  class="add-img">AGREGAR IMAGEN</button>
+                <button id="addbtn" type="button" onclick="triggerFile()"  class="add-img">AGREGAR IMAGEN</button>
 
                 <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
                 <div class="col-md-12">
@@ -111,6 +111,9 @@
 @section('script_section')
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="{{asset('js/dateformat.js')}}"></script>
     <script>
         $("#book").on("submit",function(event){event.preventDefault()})
         var ckEditorID;
@@ -212,7 +215,12 @@
     <script>
         //Llama al formato de fecha
         $(document).ready(function() {
-            $('#js-date').datepicker();
+            $('#date_book').datepicker({
+                minViewMode: 1,
+                format: 'yyyy-mm-dd',
+                autoclose:true,
+                language: 'es'
+            })            
         });
 
         //enviar foto al servidor
@@ -220,7 +228,7 @@
             var nombre = $("#nombre").val();
             var subtitulo = $("#subtitulo").val();
             var tamano = $("#tamano").val();
-            var fecha = $("#data-date").val();
+            var fecha = $("#date_book").val();
             var isbn = $("#isbn").val();
             var collection = $("#collection option:selected").val();
             var precio = $("#precio").val();
@@ -369,20 +377,8 @@
             dictInvalidFileType: "No se puede subir este tipo de archivo, solo imagenes jpg/jpeg",
             dictFileTooBig: "El archivo es muy pesado",
             acceptedFiles: "image/jpg,image/jpeg",
-            /* sending: function(file, xhr, formData) {
-                 //  formData.append("id", 1);
-             },*/
             init: function () {
 
-                /* var submitButton = document.querySelector("#submit")
-                 myDropzone = this; // closure
-
-                 submitButton.addEventListener("click", function() {
-                     myDropzone.processQueue(); // Tell Dropzone to process all queued files.
-                 });*/
-
-                // You might want to show the submit button only when
-                // files are dropped here:
                 var wrapperThis = this;
 
                 this.on("addedfile", function (file) {
@@ -446,21 +442,6 @@
                 .then(function (response) {
                     console.log(response['data']);
                 }).catch(function (error) {console.log(error);});
-            /* $.ajax({
-                 url: url,
-                 data: data,
-                 headers:{
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 },
-                 type: 'post',
-                 datatype:'json',
-                 success: function (data) {
-                    console.log(data)
-                 },
-                 error: function(jqXHR, textStatus, errorThrown) {
-                     console.log(textStatus + ': ' + errorThrown);
-                 }
-             })*/
         }
     </script>
 @endsection
