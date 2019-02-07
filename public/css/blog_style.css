@@ -17,6 +17,9 @@ blockquote p {
     display: inline;
 }
 
+p{
+    text-align: left;
+}
 
 .etiqueta {
     background-color: #00394c; /* Green */

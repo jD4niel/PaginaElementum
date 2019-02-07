@@ -15,17 +15,16 @@
             <div class="panel-body">
                 <form method="post" id="form-entrada" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Título">
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Título" required>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" id="intro" name="intro" placeholder="Introducción" rows="5"></textarea>
+                        <textarea class="form-control" id="intro" name="intro" placeholder="Introducción" rows="5" required></textarea>
                     </div>
-
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <select name="user_id" id="user_id" class="form-control">
-                                    <option value="0">Seleccione un Autor</option>
+                                <select name="user_id" id="user_id" class="form-control" required>
+                                    <option value="" disabled selected>Seleccione un Autor</option>
                                     @foreach($autores as $item)
                                         <option value="{{$item->id}}">{{$item->nombre.' '.$item->apellido_p.' '.$item->apellido_m}}</option>
                                     @endforeach
@@ -34,18 +33,18 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <input class="form-control" id="file" name="file" type="file" placeholder="Portada/Miniatura" accept="image/*">
+                                <input class="form-control" id="file" name="file" type="file" placeholder="Portada/Miniatura" accept="image/*" required>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <input name="etiquetas" id="etiquetas" class="form-control bootstrap-tagsinput"  type="text" value="" data-role="tagsinput" placeholder="Etiquetas">
+                                <input name="etiquetas" id="etiquetas" class="form-control bootstrap-tagsinput"  type="text" value="" data-role="tagsinput" placeholder="Etiquetas" required>
                             </div>
                         </div>
                     </div>
                     <div class="row" style="padding: 15px">
                         <div class="form-group">
-                            <textarea id="texto" name="texto"></textarea>
+                            <textarea id="texto" name="texto" required></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -96,7 +95,9 @@
                 processData: false,
                 success:function(data)
                 {
-                    console.log('bien');
+                    alert("Entrada creada satisfactoriamente");
+                    var url = "/entradas";
+                    $(location).attr('href',url);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(textStatus + ': ' + errorThrown);

@@ -24,8 +24,9 @@
                     <td>{{$item->created_at}}</td>
                     <td>{{$item->updated_at}}</td>
                     <td>
-                        <button onclick="borrar({{$item->id}})" class="btn btn-danger">Borrar</button>
-                        <button class="btn btn-success">Modificar</button>
+                        <a class="btn btn-success" href="/blog/entrada/{{$item->id}}">Ver</a>
+                        <button onclick="borrar({{$item->id}})" class="btn btn-danger" disabled>Borrar</button>
+                        <button class="btn btn-success" disabled>Modificar</button>
                     </td>
                 </tr>
 
