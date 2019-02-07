@@ -337,7 +337,7 @@
                             processData: false, // NEEDED, DON'T OMIT THIS
                             success: function (response, file) {
                                 console.log(response);
-                                swal("El autor fue agregado correctamente", " ",{
+                                        swal("El autor fue agregado correctamente", " ",{
                                     icon: "success"
                                 }).then((value) => {
                                  window.location.reload();
@@ -497,21 +497,6 @@
                 .then(function (response) {
                     console.log(response['data']);
                 }).catch(function (error) {console.log(error);});
-            /* $.ajax({
-                 url: url,
-                 data: data,
-                 headers:{
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 },
-                 type: 'post',
-                 datatype:'json',
-                 success: function (data) {
-                    console.log(data)
-                 },
-                 error: function(jqXHR, textStatus, errorThrown) {
-                     console.log(textStatus + ': ' + errorThrown);
-                 }
-             })*/
         }
     </script>
 @endsection

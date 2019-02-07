@@ -15,7 +15,7 @@ Route::get('/', 'LibroController@index')->name('index');
 Route::get('/descarga_manual','LibroController@descarga')->name('libros.manual');
 Route::get('/colecciones','LibroController@colecciones')->name('libros.colecciones');
 Route::get('/colecciones/buscar','LibroController@buscar')->name('buscar.libros');
-Route::get('/colecciones/libros','LibroController@ver')->name('ver.libros');
+Route::get('/colecciones/libroInds','LibroController@ver')->name('ver.libros');
 Route::get('/contacto','LibroController@contacto')->name('contacto.elementum');
 Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
 Route::get('/elementario','LibroController@elementario')->name('elementario.elementum');

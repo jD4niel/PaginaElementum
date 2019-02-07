@@ -28,9 +28,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label col-md-2" for="fecha">Fecha:</label>
+                    <label class="form-control-label col-md-2" for="date_book">Fecha:</label>
                     <div class="form-group col-md-10">
-                        <input id="fecha" type="text" class="form-control" placeholder="Ej. mes/año, 04/2019" value="{{ $libro->fecha }}">
+                         <input type="text" class="form-control" id="date_book" value="{{ $libro->fecha }}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -107,6 +107,9 @@
 @section('script_section')
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="{{asset('js/dateformat.js')}}"></script>
     <script>
         $("#book").on("submit",function(event){event.preventDefault()})
         var ckEditorID;
@@ -209,6 +212,12 @@
         $(document).ready(function () {
             $("#autor").val('{{ $libro->autor_id }}');
             $("#collection").val('{{ $libro->collection_id }}');
+            $('#date_book').datepicker({
+                minViewMode: 1,
+                format: 'yyyy-mm-dd',
+                autoclose:true,
+                language: 'es'
+            })   
         });
         //enviar foto al servidor
         function enviarFoto() {
@@ -216,7 +225,7 @@
             var nombre = $("#nombre").val();
             var subtitulo = $("#subtitulo").val();
             var tamano = $("#tamano").val();
-            var fecha = $("#fecha").val();
+            var fecha = $("#date_book").val();
             var isbn = $("#isbn").val();
             var collection = $("#collection option:selected").val();
             var precio = $("#precio").val();
