@@ -86,7 +86,7 @@ nav ul li a:not(.links):visited:hover {
 nav ul li a:not(:only-child):after,
 nav ul li a:not(.links):visited:not(:only-child):after {
     padding-left: 4px;
-    content: ' ▾';
+    content: ' ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¾';
 }
 nav ul li ul li {
     min-width: 190px;
@@ -675,4 +675,117 @@ footer{
     border: 2px solid #003F5DFF; 
     border-radius: 12px;
     padding: 45px;
+}
+/*Ajusta la imagen en el div circular*/
+.section_element{
+    border: none;
+    border-radius: 50%;
+    background-color: green;
+    overflow: hidden;
+    height: 43vh;
+    width: 43vh !important;
+    text-align: center;
+    margin: 10px auto !important;
+}
+.section_element .el-cont{
+    overflow: hidden;
+    animation: 1s ease-in-out !important;
+}
+.img-element{
+    object-fit: cover;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    position: absolute;
+}
+.btn-cont{
+    height: auto;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 40%;
+}
+.btn_element{
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 1.5em;
+    padding: 3px 25px;
+}
+.btn_element:hover{
+    background: rgba(255,0,0,0.7);
+    cursor: pointer;
+}
+.section_element .el-cont .img-element{
+    animation: 1s ease-in-out !important;
+}
+.section_element:hover .el-cont .img-element{
+    filter: blur(1px);
+}
+.title_section{
+    margin: auto;
+    text-align:center;
+    width: 100%;
+}
+.title_section h2{
+    color: #1d3b4f !important;
+}
+.title_section hr{
+    width: 100%;
+}
+.hr-sec{
+    border: solid 1px rgba(0,0,50,0.7) !important;;
+    margin-top: -5px;
+    width: 10% !important;;
+}
+.see-more{
+    float: right;
+}
+.see-more a{
+    color: #1d3b4f;
+    font-size: 3vh;
+}
+.ind-section{
+    overflow: hidden;
+    background-color: #f2f4f7 !important;;
+    margin: 12px 0;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 9px 0px rgba(10,11,11,0.2);
+}
+.ind-section div{
+    padding: 12px;
+}
+.ind-section div h2{
+    color: #1d3b4f;
+    font-weight: bold !important;
+    margin-top: 5px;
+}
+.ind-section p{
+    margin-left: 10px;
+    font-weight: normal;
+}
+.ind-section img{
+    width: 100%;
+    height: auto;
+    /*border-radius: 5px 5px 0 0;9*/
+    transition-duration: 200ms;
+}
+.ind-section .img-box{
+    width: 100% !important;
+    overflow: hidden;
+    padding: 0;
+}
+.ind-section:hover{
+    cursor: pointer;
+}
+.ind-section:hover img{
+    filter: brightness(1.2);
+    transform: scale(1.05);
+}
+#sections-elementario{
+    margin-top: 100px;
+    margin-bottom: 100px;
 }

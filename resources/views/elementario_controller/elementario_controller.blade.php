@@ -3,7 +3,7 @@
 @section('content')
     <div class="container text-center">
         <div id="programming-schedule" class="row col-sm-12 text-center" style="border: 2px solid #d2d2d2; border-radius: 10px;padding: 15px 15px 40px 15px;">
-            <button id="btn_save_changes" onclick="saveMonths()">Guardar cambios</button>
+            <button class="btn_save_changes" onclick="saveMonths()">Guardar cambios</button>
             <div class="row" style="width: 80%; margin:auto">
                 <div class="form-group text-center col-md-12">
                     <input id="section_title" class="form-control text-center" type="text" placeholder="Titulo de la sección" value="{{ $title[0]->name }}" style="font-size: 25px;margin:auto;width: 80%;">
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal programming section -->
     <div class="modal fade" id="modalMonth" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -77,6 +77,40 @@
 
         </div>
     </div>
+
+
+
+
+    <div class="container">
+        <h2>Secciones</h2>
+        <button class="btn_save_changes" onclick="saveSections()">Guardar cambios</button>
+        <div id="sections_" class="row text-center" style="margin: 100px 0;">
+            <input id="id-input-sec" type="hidden" value="{{ $section_obj[count($section_obj)-1]->id }}">    
+            @foreach($section_obj as $item)
+            <div class="col-md-4">
+                <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{$item->id}}')" onmouseleave="btn_disapear('{{$item->id}}')" class="section_element col-md-12">
+                    <div class="el-cont">
+                        <img id="img-element_{{ $item->id }}" src="{{asset('images/people.jpg')}}" alt="" class="img-element"/>
+                    </div>
+                    <div class="btn-cont">
+                        <input class="btn_element" type="text" value="{{ $item->name }}">
+                        <button class="change-img-sections" onclick="triggerFile()">Cambiar imagen</button>
+                        <input type="file" onchange="readURL(this, '{{$item->id}}')" id="fileUp" style="display: none;">
+                    </div>
+                </div>
+            </div>
+            @endforeach()
+           
+        </div>
+        <div class="add-more">
+            <button class="add-more-btn" onclick="addMoreSection()">Agregar más</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 @endsection
 
 @section('script_section')
@@ -316,6 +350,54 @@
             CKEDITOR.instances["summary-ckeditor"].setData(texto);
 
         });
+
+
+
+
+
+        //Funciones de la seccion 'Secciones'
+
+        function btn_appear(e){$('#section_element'+e+' .btn-cont .change-img-sections').show();}
+        function btn_disapear(e){$('#section_element'+e+' .btn-cont .change-img-sections').hide();}
+        // Ejecutar el input file para subir imagenes
+        function triggerFile() {
+            $('#fileUp').trigger('click');
+        }
+        // Lee el input con la imagen
+        function readURL(input,id) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Si la imagen carga haz esto:
+                    $("#img-element_"+id).attr("src", e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        // Agregar mas secciones
+        function addMoreSection(){
+            var id = $("#id-input-sec").val();
+            $("#sections_").append(''+
+                '<div class="col-md-4">'+    
+                    '<div id="section_element'+id+'" onmouseenter="btn_appear("'+id+'")" onmouseleave="btn_disapear("'+id+'")" class="section_element col-md-12">'+
+                        '<div class="el-cont">'+
+                            '<img id="img-element_'+id+'" src="" alt="" class="img-element"/>'+
+                        '</div>'+
+                        '<div class="btn-cont">'+
+                            '<input class="btn_element" type="text" value="Nombre ('+id+')">'+
+                            '<button class="change-img-sections" onclick="triggerFile()">Cambiar imagen</button>'+
+                            '<input type="file" onchange="readURL(this, "'+id+'")" id="fileUp" style="display: none;">'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+'');
+            $("#id-input-sec").val(parseInt(id)+1);
+        }
+
+        // Guarda las secciones
+        function saveSections() {
+        }
     </script>
 @endsection
 
