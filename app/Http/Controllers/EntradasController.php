@@ -164,7 +164,7 @@ use Illuminate\Support\Facades\DB;
      */
     public function update(Request $request)
     {
-//        try{
+        try{
             if($request->hasFile('file')){
                 $mime = $request->file->getMimeType();
                 if (($mime == 'image/jpeg') || ($mime == 'image/jpg' ) || ($mime == 'image/png') || ($mime == 'image/PNG')) {
@@ -184,7 +184,7 @@ use Illuminate\Support\Facades\DB;
                         'user_id' => $request['user_id'],
                         'etiquetas' => $request['etiquetas'],
                     ]);
-                    return $entrada;
+                    return response()->json($entrada);
                 }
             } else {
                 $fileName = $request['imagen'];
@@ -197,11 +197,11 @@ use Illuminate\Support\Facades\DB;
                     'user_id' => $request['user_id'],
                     'etiquetas' => $request['etiquetas'],
                 ]);
-                return $entrada;
+                return response()->json($entrada);
             }
-//        }catch (\Exception $e){
-//            return abort(403, 'Unauthorized action.');
-//        }
+        }catch (\Exception $e){
+            return abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -210,8 +210,9 @@ use Illuminate\Support\Facades\DB;
      * @param  \App\Entradas  $entradas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Entradas $entradas)
+    public function destroy($id)
     {
-        //
+        Entradas::destroy($id);
+        return redirect()->route('entradas')->with('status', '¡Entrada eliminada con éxito!');
     }
 }
