@@ -83,19 +83,20 @@
 
     <div class="container">
         <h2>Secciones</h2>
-        <button class="btn_save_changes" onclick="saveSections()">Guardar cambios</button>
+        <!-- <button class="btn_save_changes" onclick="saveSections()">Guardar cambios</button> -->
         <div id="sections_" class="row text-center" style="margin: 100px 0;">
             <input id="id-input-sec" type="hidden" value="{{ $section_obj[count($section_obj)-1]->id }}">    
             @foreach($section_obj as $item)
             <div class="col-md-4">
-                <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{$item->id}}')" onmouseleave="btn_disapear('{{$item->id}}')" class="section_element col-md-12">
+                <a href="{{route('elementario.individual.section',$item->id) }}" target="_blank"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
+                <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" class="section_element col-md-12">
                     <div class="el-cont">
-                        <img id="img-element_{{ $item->id }}" src="{{asset('images/people.jpg')}}" alt="" class="img-element"/>
+                        <img id="img-element_{{ $item->id }}" src="{{asset('images/secciones/headers')}}/{{$item->img}}" alt="" class="img-element"/>
                     </div>
                     <div class="btn-cont">
-                        <input class="btn_element" type="text" value="{{ $item->name }}">
-                        <button class="change-img-sections" onclick="triggerFile()">Cambiar imagen</button>
-                        <input type="file" onchange="readURL(this, '{{$item->id}}')" id="fileUp" style="display: none;">
+                        <input id="text_section{{ $item->id }}" class="btn_element" type="text" value="{{ $item->name }}">
+                        <button id="btn-change-img{{ $item->id }}" class="change-img-sections" onclick="triggerFile('{{ $item->id }}')">Cambiar imagen</button>
+                        <input type="file" onchange="readURL(this, '{{$item->id}}')" id="fileUp{{ $item->id }}" style="display: none;">
                     </div>
                 </div>
             </div>
@@ -104,6 +105,7 @@
         </div>
         <div class="add-more">
             <button class="add-more-btn" onclick="addMoreSection()">Agregar más</button>
+            <button id="save-sections" class="add-more-btn" onclick="saveSections()" style="display: none;">Guardar</button>
         </div>
     </div>
     <br>
@@ -217,6 +219,7 @@
     </script>
     <script>
         var month_obj = []
+        var section_obj = []
         $(document).ready(function() {
             //Inicializar el datepicker
             $('#btn_init').datepicker({
@@ -308,33 +311,33 @@
 
             //Enviar meses al controlador
             swal({
-            title: "¿Guardar cambios?",
-            text: "Los cambios se actualizarán en el inicio de Elementario",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-               var url = window.location + '/mes/';
-               //var data = {id_m:id,title:title,text:text,view_chk:view_chk,section_title:section_title} 
-               // fetch ajax JavaScript
-               fetch(url, {
-                  method: 'POST', // or 'PUT'
-                  body: JSON.stringify([json_month,section_title]), // data can be `string` or {object}!
-                  headers:{
-                    'Content-Type': 'application/json',
-                    'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-                  }
-                  }).then(res => res.json())
-                .catch(error => console.error('Error:', error))
-                .then(response => {
-                     swal("Elementos agregados correctamente", " ",{
-                                    icon: "success"
-                        });
-                });
+                title: "¿Guardar cambios?",
+                text: "Los cambios se actualizarán en el inicio de Elementario",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                   var url = window.location + '/mes/';
+                   //var data = {id_m:id,title:title,text:text,view_chk:view_chk,section_title:section_title} 
+                   // fetch ajax JavaScript
+                   fetch(url, {
+                      method: 'POST', // or 'PUT'
+                      body: JSON.stringify([json_month,section_title]), // data can be `string` or {object}!
+                      headers:{
+                        'Content-Type': 'application/json',
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                      }
+                      }).then(res => res.json())
+                    .catch(error => console.error('Error:', error))
+                    .then(response => {
+                         swal("Elementos agregados correctamente", " ",{
+                                        icon: "success"
+                            });
+                    });
 
-            }
+                }
             });
         }
         $('#modalMonth').on('show.bs.modal', function (event) {
@@ -351,18 +354,12 @@
 
         });
 
-
-
-
-
         //Funciones de la seccion 'Secciones'
 
-        function btn_appear(e){$('#section_element'+e+' .btn-cont .change-img-sections').show();}
-        function btn_disapear(e){$('#section_element'+e+' .btn-cont .change-img-sections').hide();}
+        function btn_appear(e){$('#btn-change-img'+e).show();}
+        function btn_disapear(e){$('#btn-change-img'+e).hide();}
         // Ejecutar el input file para subir imagenes
-        function triggerFile() {
-            $('#fileUp').trigger('click');
-        }
+        function triggerFile(id) {$('#fileUp'+id).trigger('click');}
         // Lee el input con la imagen
         function readURL(input,id) {
             if (input.files && input.files[0]) {
@@ -379,25 +376,66 @@
         // Agregar mas secciones
         function addMoreSection(){
             var id = $("#id-input-sec").val();
+            id = parseInt(id) + 1;
             $("#sections_").append(''+
                 '<div class="col-md-4">'+    
-                    '<div id="section_element'+id+'" onmouseenter="btn_appear("'+id+'")" onmouseleave="btn_disapear("'+id+'")" class="section_element col-md-12">'+
+                    '<div id="section_element'+id+'" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')" class="section_element col-md-12">'+
                         '<div class="el-cont">'+
                             '<img id="img-element_'+id+'" src="" alt="" class="img-element"/>'+
                         '</div>'+
                         '<div class="btn-cont">'+
-                            '<input class="btn_element" type="text" value="Nombre ('+id+')">'+
-                            '<button class="change-img-sections" onclick="triggerFile()">Cambiar imagen</button>'+
-                            '<input type="file" onchange="readURL(this, "'+id+'")" id="fileUp" style="display: none;">'+
+                            '<input id="text_section'+id+'" class="btn_element" type="text"">'+
+                            '<button id="btn-change-img'+id+'" class="change-img-sections" onclick="triggerFile('+id+')">Cambiar imagen</button>'+
+                            '<input type="file" onchange="readURL(this, '+id+')" id="fileUp'+id+'" style="display: none;">'+
                         '</div>'+
                     '</div>'+
                 '</div>'+'');
-            $("#id-input-sec").val(parseInt(id)+1);
+            $("#id-input-sec").val(id);
+            $(this).hide();
+            $('#save-sections').show();
+            $
         }
-
         // Guarda las secciones
         function saveSections() {
-        }
+            var myFormData = new FormData();
+            var last_id = $('#id-input-sec').val();
+            var nombre = $('#text_section'+last_id).val();
+            alert(nombre)
+            var foto = $("#fileUp"+last_id);
+            myFormData.append('file', foto[0]['files'][0]);
+            myFormData.append('nombre', nombre);
+            //Enviar meses al controlador
+            swal({
+                title: "¿Guardar secciones?",
+                text: "Los cambios se actualizarán en el inicio de Elementario",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                   var url = window.location + '/seccion/';
+                   fetch(url, {
+                      method: 'POST', 
+                      body: myFormData, 
+                      mode: 'cors',
+                      headers:{
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                      }
+                      }).then(res => res.json())
+                    .then(response => {
+                          console.log(response);
+                            swal("El autor fue agregado correctamente", " ",{
+                                    icon: "success"
+                                }).then((value) => {
+                                 //window.location.reload();
+                                 console.log(response+"hosjanjkasdn")
+                            });
+                    });
+
+                }
+            });
+        }  
     </script>
 @endsection
 

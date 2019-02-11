@@ -260,7 +260,7 @@ body{
 .section_element{
     border: none;
     border-radius: 50%;
-    background-color: green;
+    background-color: #373e3e;;
     overflow: hidden;
     height: 43vh;
     width: 43vh !important;
@@ -370,6 +370,28 @@ body{
 #sections-elementario{
     margin-top: 100px;
     margin-bottom: 100px;
+}
+.edit_section{
+    background-color: #ed0;
+    border-radius: 50%;
+    width: 5em;
+    height: 5em;
+    position: absolute;
+    left: 55%;
+    top:-1em;
+    z-index: 1000;
+    box-shadow: 3px 3px 4px 0px rgba(10,11,11,0.2);
+}
+.edit_section:hover{
+    color: #3985a9;
+    box-shadow: 3px 3px 4px 0px rgba(31, 138, 213, 0.71);
+    cursor: pointer;
+}
+.edit_section i{
+    font-size: 5vh;
+    position: absolute;
+    left: 30%;
+    top:20%;
 }
 /*end*/
 
