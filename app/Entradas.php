@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entradas extends Model
 {
     //
-    protected $fillable=['texto'];
+    protected $fillable=['texto', 'user_id'];
 
     public function autor()
     {

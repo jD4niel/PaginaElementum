@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
+use App\Entradas;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -14,7 +15,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $entradas = Entradas::all();
+        return view('blog.blog', compact('entradas'));
     }
 
     /**
