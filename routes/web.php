@@ -90,7 +90,7 @@ Route::post('/upload_image','CkeditorController@uploadImage')->name('upload.ck')
 Route::get('/elementario/controlador', 'ElementarioController@indexController')->name('elementario.index.controller')->middleware('auth');
 Route::post('/elementario/controlador/mes/', 'ElementarioController@updateMonth')->name('elementario.update.month')->middleware('auth');
 Route::post('/elementario/controlador/seccion/', 'ElementarioController@updateSection')->name('elementario.update.section')->middleware('auth');
-Route::post('/elementario/controlador/seccion/{{ $item->id }}', 'ElementarioController@individualSection')->name('elementario.individual.section')->middleware('auth');
+Route::get('/elementario/controlador/seccion/{id}', 'ElementarioController@individualSection')->name('elementario.individual.section')->middleware('auth');
 
 
 

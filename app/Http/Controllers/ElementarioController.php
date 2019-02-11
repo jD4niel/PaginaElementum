@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Entradas;
 
 class ElementarioController extends Controller
 {
@@ -63,30 +64,41 @@ class ElementarioController extends Controller
     * Actualizar la lista de secciones 
     */
     public function updateSection(Request $request){
-         if (($request->hasFile('file'))) {
+        if (($request->hasFile('file'))) {
             $section = DB::table('section_obj')
                 ->insertGetId([
                     'name'=>$request->nombre,
-                    'img'=>$request->file('file')->getClientOriginalName()
+                    'img'=>$request->file('file')->getClientOriginalName(),
                 ]);
             $destinationPath = public_path() . '/images/secciones/headers/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
-                return response()->json($request);
         }else {
             $section = DB::table('section_obj')
                 ->insertGetId([
                     'name'=>$request->nombre,
                 ]);
-            return response()->json(0);
         }
+/*        $entradas = DB::table('entradas')
+            ->insertGetId([
+                'nombre'=>"Entrada de seccion: ".$request->nombre,
+            ]);*/
+        $section_entradas = DB::table('entrada_sections')
+            ->insertGetId([
+                'section_obj_id'=>$section,
+            ]);
     }
     /**
      Editor de secciones individuales
      */
     public function individualSection($id)
     {
-        
+        $entradas=DB::table('entradas')
+            ->join('entrada_sections', 'entradas.id', '=', 'entrada_sections.entradas_id')
+            ->join('section_obj', 'section_obj.id', '=', 'entrada_sections.section_obj_id')
+            ->where('entrada_sections.entradas_id', '=', $id)
+            ->get();
+        return view('elementario_controller.section_entrada',compact('entradas'));
     }
 
     /**

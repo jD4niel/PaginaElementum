@@ -88,7 +88,7 @@
             <input id="id-input-sec" type="hidden" value="{{ $section_obj[count($section_obj)-1]->id }}">    
             @foreach($section_obj as $item)
             <div class="col-md-4">
-                <a href="/elementario/controlador/seccion/{{ $item->id }}" target="_blank"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
+                <a href="{{route('elementario.individual.section',$item->id) }}" target="_blank"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
                 <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" class="section_element col-md-12">
                     <div class="el-cont">
                         <img id="img-element_{{ $item->id }}" src="{{asset('images/secciones/headers')}}/{{$item->img}}" alt="" class="img-element"/>
@@ -422,7 +422,7 @@
                       headers:{
                         'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
                       }
-                      })
+                      }).then(res => res.json())
                     .then(response => {
                           console.log(response);
                             swal("El autor fue agregado correctamente", " ",{
