@@ -28,7 +28,8 @@ class LibroController extends Controller
     public function elementario(){
         $month_range = DB::table('month_range')->where('view_month','=',1)->get();
         $title = DB::table('programming_section')->where('id','=',1)->get();
-        return view('Elementum.elementario',compact('month_range','title'));
+        $section_obj = DB::table('section_obj')->get();
+        return view('Elementum.elementario',compact('month_range','title','section_obj'));
     }
     public function libroInd($id){
         $coleccion = Collection::all();

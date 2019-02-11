@@ -36,7 +36,125 @@
         </div>
         <div style="height: 100px;"></div>
     </div>
+    
 
+    <div class="container">
+        <div class="row text-center" style="margin: 100px 0;">
+            <div class="col-md-4">    
+                <div class="section_element col-md-12">
+                    <div class="el-cont">
+                        <img src="{{asset('images/people.jpg')}}" alt="" class="img-element"/>
+                    </div>
+                    <div class="btn-cont">
+                        <button class="btn_element">Galería</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">    
+                <div class="section_element col-md-12">
+                    <div class="el-cont">
+                        <img src="{{asset('images/people.jpg')}}" alt="" class="img-element"/>
+                    </div>
+                    <div class="btn-cont">
+                        <button class="btn_element">Galería</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">    
+                <div class="section_element col-md-12">
+                    <div class="el-cont">
+                        <img src="{{asset('images/people.jpg')}}" alt="" class="img-element"/>
+                    </div>
+                    <div class="btn-cont">
+                        <button class="btn_element">Galería</button>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+
+    <div class="container" id="sections-elementario">
+        <div class="row">
+            <div class="title_section">
+                <h2 class="col-md-12">Actividades programadas</h2>
+                <hr class="hr-sec" />
+                <hr>
+            </div>
+            <div id="section_uno" class="row">
+                <div class="col-md-4">
+                    <div class="ind-section">
+                        <div class="img-box">
+                            <img  src="{{asset('images/people.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                        <div id="texto_" class="text-section">
+                            <h2>Titulos talleres</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nemo neque minus quod, cum mollitia aliquid deserunt accusamus in animi! Alias, temporibus impedit rerum. Nostrum alias repudiandae nisi ad animi?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ind-section">
+                        <div class="img-box">
+                            <img  src="{{asset('images/people.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                        <div id="texto_" class="text-section">
+                            <h2>Titulos talleres</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nemo neque minus quod, cum mollitia aliquid deserunt accusamus in animi! Alias, temporibus impedit rerum. Nostrum alias repudiandae nisi ad animi?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ind-section">
+                        <div class="img-box">
+                            <img  src="{{asset('images/people.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                        <div id="texto_" class="text-section">
+                            <h2>Titulos talleres</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nemo neque minus quod, cum mollitia aliquid deserunt accusamus in animi! Alias, temporibus impedit rerum. Nostrum alias repudiandae nisi ad animi?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ind-section">
+                        <div class="img-box">
+                            <img  src="{{asset('images/people.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                        <div id="texto_" class="text-section">
+                            <h2>Titulos talleres</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nemo neque minus quod, cum mollitia aliquid deserunt accusamus in animi! Alias, temporibus impedit rerum. Nostrum alias repudiandae nisi ad animi?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ind-section">
+                        <div class="img-box">
+                            <img  src="{{asset('images/people.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                        <div id="texto_" class="text-section">
+                            <h2>Titulos talleres</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nemo neque minus quod, cum mollitia aliquid deserunt accusamus in animi! Alias, temporibus impedit rerum. Nostrum alias repudiandae nisi ad animi?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="see-more">
+            <a href="#">Ver más ></a>
+        </div>
+    </div>
 @endsection
 @section('script_collection')
     <script>

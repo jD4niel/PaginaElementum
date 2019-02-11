@@ -21,7 +21,8 @@ class ElementarioController extends Controller
     {
         $range = DB::table('month_range')->get();
         $title = DB::table('programming_section')->where('id','=',1)->get();
-        return view('elementario_controller.elementario_controller',compact('range','title'));
+        $section_obj = DB::table('section_obj')->get();
+        return view('elementario_controller.elementario_controller',compact('range','title','section_obj'));
     }
 
     /**
