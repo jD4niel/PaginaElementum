@@ -25,8 +25,8 @@
                     <td>{{$item->updated_at}}</td>
                     <td>
                         <a class="btn btn-success" href="/blog/entrada/{{$item->id}}">Ver</a>
+                        <a  href="{{ route('edit.post', $item->id) }}" class="btn btn-success">Modificar</a>
                         <button onclick="borrar({{$item->id}})" class="btn btn-danger" disabled>Borrar</button>
-                        <button class="btn btn-success" disabled>Modificar</button>
                     </td>
                 </tr>
 

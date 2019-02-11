@@ -2,8 +2,22 @@
 
 @section('home')
 <div class="container">
-    <div id="mas_recientes" class="row">
     <h1>Más recientes elementum...</h1>
+    <div id="mas_recientes" class="row">
+
+        <br>
+        @foreach($entradas as $item)
+        <div class="col-md-4" style="padding-top: 10px ">
+            <div class="card">
+                <div class="contenedor2"><img class="card-img-top img-thumbnail img-fluid crop" src="{{asset("images/entradas/")}}/{{$item->imagen}}" alt="Card image"></div>
+                <div class="card-body">
+                    <h4 class="card-title">{{substr($item->nombre, 0, 16)}}</h4>
+                    <p class="card-text">{{substr($item->intro, 0, 20)}}</p>
+                    <a href="/blog/entrada/{{$item->id}}" class="btn btn-primary">Ver más...</a>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
     <div class="row">
         banner

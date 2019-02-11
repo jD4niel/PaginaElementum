@@ -146,9 +146,13 @@ use Illuminate\Support\Facades\DB;
      * @param  \App\Entradas  $entradas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Entradas $entradas)
+    public function edit($id)
     {
-        //
+        $entrada = Entradas::findOrFail($id);
+        $autor = Autor::findOrFail($entrada->user_id);
+        $autores = Autor::all();
+
+        return view('blog.edit-post', compact('entrada', 'autores', 'autor'));
     }
 
     /**
@@ -158,9 +162,46 @@ use Illuminate\Support\Facades\DB;
      * @param  \App\Entradas  $entradas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Entradas $entradas)
+    public function update(Request $request)
     {
-        //
+//        try{
+            if($request->hasFile('file')){
+                $mime = $request->file->getMimeType();
+                if (($mime == 'image/jpeg') || ($mime == 'image/jpg' ) || ($mime == 'image/png') || ($mime == 'image/PNG')) {
+                    $destinationPath = public_path() . '/images/entradas';
+                    $fileName = $request->file->getClientOriginalName();
+                    if (!File::exists($destinationPath)) {
+                        File::makeDirectory($destinationPath, 0755, true);
+                    }
+                    $finalPath = $destinationPath . '/' . $fileName;
+                    copy($request->file, $finalPath);
+
+                    $entrada = Entradas::where('id',$request->id)->update([
+                        'intro' => $request['intro'],
+                        'imagen' => $fileName,
+                        'nombre' => $request['nombre'],
+                        'texto' => $request['texto'],
+                        'user_id' => $request['user_id'],
+                        'etiquetas' => $request['etiquetas'],
+                    ]);
+                    return $entrada;
+                }
+            } else {
+                $fileName = $request['imagen'];
+
+                $entrada = Entradas::where('id',$request->id)->update([
+                    'intro' => $request['intro'],
+                    'imagen' => $fileName,
+                    'nombre' => $request['nombre'],
+                    'texto' => $request['texto'],
+                    'user_id' => $request['user_id'],
+                    'etiquetas' => $request['etiquetas'],
+                ]);
+                return $entrada;
+            }
+//        }catch (\Exception $e){
+//            return abort(403, 'Unauthorized action.');
+//        }
     }
 
     /**

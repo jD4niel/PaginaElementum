@@ -19,7 +19,7 @@ Route::get('/colecciones/libroInds','LibroController@ver')->name('ver.libros');
 Route::get('/contacto','LibroController@contacto')->name('contacto.elementum');
 Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
 Route::get('/elementario','LibroController@elementario')->name('elementario.elementum');
-Route::get('/blog','EntradasController@blog')->name('blog.elementum');
+Route::get('/blog','BlogController@index')->name('blog.elementum');
 Route::get('/blog/entrada/{id}','EntradasController@entrada')->name('blog.entrada.elementum');
 
 Route::get('/info','PDFController@info')->name('info');
@@ -64,6 +64,8 @@ Route::post('/editar/taller/editar', 'ControlController@EditarTallerSend')->name
 Route::post('/agregar/taller/nuevo', 'ControlController@AgregarTallerSend')->name('new.taller.send')->middleware('auth');
 Route::delete('/editar/taller/borrar/{id}', 'ControlController@destroyTaller')->name('taller.delete')->middleware('auth');
 Route::post('/editar/pdf','ControlController@uploadPDF')->name('new.pdf.up')->middleware('auth');
+Route::get('/editar/entrada/{id}', 'EntradasController@edit')->name('edit.post')->middleware('auth');
+Route::post('/actualizar/entrada/', 'EntradasController@update')->name('update.post')->middleware('auth');
 
 
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');
