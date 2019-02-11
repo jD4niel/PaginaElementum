@@ -60,13 +60,33 @@ class ElementarioController extends Controller
 
     }
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+    * Actualizar la lista de secciones 
+    */
+    public function updateSection(Request $request){
+         if (($request->hasFile('file'))) {
+            $section = DB::table('section_obj')
+                ->insertGetId([
+                    'name'=>$request->nombre,
+                    'img'=>$request->file('file')->getClientOriginalName()
+                ]);
+            $destinationPath = public_path() . '/images/secciones/headers/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+                return response()->json($request);
+        }else {
+            $section = DB::table('section_obj')
+                ->insertGetId([
+                    'name'=>$request->nombre,
+                ]);
+            return response()->json(0);
+        }
+    }
+    /**
+     Editor de secciones individuales
      */
-    public function create()
+    public function individualSection($id)
     {
-        //
+        
     }
 
     /**
