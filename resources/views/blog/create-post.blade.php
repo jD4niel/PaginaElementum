@@ -39,6 +39,7 @@
 <div class="container" style="background-color: white">
     <div class="row" style="background-color: rgb(0,0,0,0) !important;">
         @if(!empty($seccion_id))
+        <input id="section_val_id" type="hidden" value="{{ $seccion_id }}">
         <div class="container-section" >
             <h3> Sección {{ $section_obj->name }} </h3>
         </div>
@@ -128,9 +129,12 @@
 
         $('#form-entrada').on('submit', function(event){
             alert("init")
+            var seccion_id = 0
+            if($('#section_val_id').val()){seccion_id = $('#section_val_id').val();}
             event.preventDefault();
             var formData = new FormData(this);
             formData.set('texto',CKEDITOR.instances['texto'].getData());
+            formData.set('seccion_id',seccion_id);
             Swal.fire({
                 title: "¿Guardar entrada?",
                 type: "warning",

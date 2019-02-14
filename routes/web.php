@@ -42,7 +42,7 @@ Route::get('/usuario/crear', 'UserController@createView')->name('user.crear')->m
 
 //Post
 Route::get('/crear/entrada', 'EntradasController@go')->name('entrada')->middleware('auth');
-Route::get('/autor/entrada', 'AutorController@index')->name('autor-entradas')->middleware('auth');
+Route::get('/crear/entrada', 'AutorController@index')->name('autor-entradas')->middleware('auth');
 Route::post('/crear/entrada/post', 'EntradasController@crearEntradaFinal')->name('crear.entrada')->middleware('auth');
 Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up')->middleware('auth');
 //Route::post('/crear/final','EntradasController@crearEntradaFinal')->name('entrada-final')->middleware('auth');

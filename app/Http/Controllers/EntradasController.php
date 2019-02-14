@@ -102,6 +102,18 @@ class EntradasController extends Controller
                 $entrada->user_id = $request['user_id'];
                 $entrada->etiquetas = $request['etiquetas'];
                 $entrada->save();
+
+                if ($request['seccion_id']!=0) {
+                    try{
+                        $entrada_sections = DB::table('entrada_sections')
+                          ->insertGetId([
+                            'section_obj_id'=>$request['seccion_id'],
+                            'entradas_id'=>$entrada->id,
+                        ]);
+                    }catch (\Exception $e){
+                        return abort(403, 'Unauthorized action.');
+                    }
+                }
                 return $entrada;
             }
         }catch (\Exception $e){
