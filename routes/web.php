@@ -42,7 +42,7 @@ Route::get('/usuario/crear', 'UserController@createView')->name('user.crear')->m
 
 //Post
 Route::get('/crear/entrada', 'EntradasController@go')->name('entrada')->middleware('auth');
-Route::get('/crear/entrada', 'AutorController@index')->name('autor-entradas')->middleware('auth');
+Route::get('/autor/entrada', 'AutorController@index')->name('autor-entradas')->middleware('auth');
 Route::post('/crear/entrada/post', 'EntradasController@crearEntradaFinal')->name('crear.entrada')->middleware('auth');
 Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.up')->middleware('auth');
 //Route::post('/crear/final','EntradasController@crearEntradaFinal')->name('entrada-final')->middleware('auth');
@@ -91,8 +91,8 @@ Route::get('/elementario/controlador', 'ElementarioController@indexController')-
 Route::post('/elementario/controlador/mes/', 'ElementarioController@updateMonth')->name('elementario.update.month')->middleware('auth');
 Route::post('/elementario/controlador/seccion/', 'ElementarioController@updateSection')->name('elementario.update.section')->middleware('auth');
 Route::get('/elementario/controlador/seccion/{id}', 'ElementarioController@individualSection')->name('elementario.individual.section')->middleware('auth');
+Route::post('/elementario/controlador/borrar/seccion/{id}', 'ElementarioController@destroy')->name('section.delete')->middleware('auth');
 
 
-
-
-
+//Entradas para Elementario
+Route::get('/elementario/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');

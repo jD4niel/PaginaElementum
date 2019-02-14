@@ -7,7 +7,12 @@
 
 @section('content')
 <div class="container" style="background-color: white">
-    <div class="row">
+    <div class="row" style="background-color: rgb(0,0,0,0) !important;">
+        @if(!empty($seccion_id))
+        <div class="container-section" >
+            <h3> Sección {{ $section_obj->name }} </h3>
+        </div>
+        @endif
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1 class="h1 text-center">Nueva entrada</h1>
@@ -76,6 +81,7 @@
         });
 
         $('#form-entrada').on('submit', function(event){
+            alert("init")
             event.preventDefault();
             var formData = new FormData(this);
             formData.set('texto',CKEDITOR.instances['texto'].getData());

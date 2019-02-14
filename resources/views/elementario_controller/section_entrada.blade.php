@@ -3,9 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h1>Mis entradas</h1>
+        <h1>Secciones</h1>
     </div>
-    <div class="row">
+    <div class="row btn-entry-container">
+        <a href="{{ route('section.entry', $seccion_id) }}" target="_blank"><button class="btn-entry">CREAR ENTRADA</button></a>
+    </div>
+    <br><br><hr>
+    <div class="row entry-style">
         <table id="entradas_id" class="table-responsive">
             <thead>
             <tr>
@@ -43,6 +47,7 @@
         // $.noConflict();
         jQuery( document ).ready(function( $ ) {
             $('#entradas_id').DataTable();
+            console.log({{ $entradas }})
         } );
     </script>
 @endsection
