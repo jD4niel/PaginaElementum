@@ -66,6 +66,7 @@ Route::delete('/editar/taller/borrar/{id}', 'ControlController@destroyTaller')->
 Route::post('/editar/pdf','ControlController@uploadPDF')->name('new.pdf.up')->middleware('auth');
 Route::get('/editar/entrada/{id}', 'EntradasController@edit')->name('edit.post')->middleware('auth');
 Route::post('/actualizar/entrada/', 'EntradasController@update')->name('update.post')->middleware('auth');
+Route::get('/borrar/entrada/{id}', 'EntradasController@destroy')->name('delete.post')->middleware('auth');
 
 
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');

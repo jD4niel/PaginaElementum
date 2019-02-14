@@ -1,3 +1,12 @@
+
+a {
+    color: #000;
+}
+
+a:hover{
+    text-decoration-line: none;
+}
+
 blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
