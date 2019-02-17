@@ -80,10 +80,6 @@ class ElementarioController extends Controller
                     'name'=>$request->nombre,
                 ]);
         }
-/*        $entradas = DB::table('entradas')
-            ->insertGetId([
-                'nombre'=>"Entrada de seccion: ".$request->nombre,
-            ]);*/
         $section_entradas = DB::table('entrada_sections')
             ->insertGetId([
                 'section_obj_id'=>$section,
@@ -95,9 +91,10 @@ class ElementarioController extends Controller
     public function individualSection($id)
     {
         $seccion_id = $id;
-        $entradas=DB::table('entradas')
-            ->join('entrada_sections', 'entradas.id', '=', 'entrada_sections.entradas_id')
+        $entradas=DB::table('entrada_sections')
+            ->join('entradas', 'entradas.id', '=', 'entrada_sections.entradas_id')
             ->join('section_obj', 'section_obj.id', '=', 'entrada_sections.section_obj_id')
+            ->where('section_obj.id','=',$seccion_id)
             ->get();
         return view('elementario_controller.section_entrada',compact('entradas','seccion_id'));
     }
@@ -112,25 +109,45 @@ class ElementarioController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Edita la sección
+     
      */
-    public function store(Request $request)
+    public function editSection(Request $request)
     {
-        //
+        
+        if (($request->hasFile('file'))) {
+            $section = DB::table('section_obj')
+                ->where('id','=',$request->id)
+                ->update([
+                    'name'=>$request->nombre,
+                    'img'=>$request->file('file')->getClientOriginalName(),
+                ]);
+            $destinationPath = public_path() . '/images/secciones/headers/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+        }else {
+            $section = DB::table('section_obj')
+                ->where('id','=',$request->id)
+                ->update([
+                    'name'=>$request->nombre,
+                ]);
+            
+        }
+        return $section;
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Section tab
      */
-    public function show($id)
+    public function section($id)
     {
-        //
+     $section_obj = DB::table('section_obj')->where('id','=',$id)->get();
+     $entrada_sections = DB::table('entrada_sections')
+         ->join('section_obj', 'section_obj.id', '=', 'entrada_sections.section_obj_id')
+         ->join('entradas', 'entradas.id', '=', 'entrada_sections.entradas_id')
+         ->where('section_obj.id','=',$id)
+         ->paginate(9);
+        return view('Elementum.elementario_section',compact('entrada_sections','section_obj'));
     }
 
     /**

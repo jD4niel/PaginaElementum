@@ -4,7 +4,14 @@
     <div class="container text-center">
         <div class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
             <div class="form-group text-center">
-                <h1>AGREGAR NUEVO AUTOR </h1>
+                <h1 id="title_form">AGREGAR NUEVO AUTOR </h1>
+                <div class="select-type">
+                    <label for="select_">Tipo: </label>
+                    <select name="select_type" onchange="typeUser()" id="select_">
+                        <option value="1" selected>Autor</option>
+                        <option value="2">Elementum</option>
+                    </select>
+                </div>
             </div>
             <hr>
             <div class="col-md-9">
@@ -24,8 +31,34 @@
                         <input id="apm" class="form-control" type="text" placeholder="Apellido materno">
                     </div>
                 </div>
-              <div style="margin-top:45px;">&nbsp;</div>
+                <div id="user_data_login" class="form-group" style="display: none;">
+                    <label class="form-control-label col-md-2" for="apa">Cuenta:</label>
+                    <div class="form-group col-md-5">
+                        <input id="mail" type="text" class="form-control" placeholder="Nombre de usuario o email">
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <input id="password" class="form-control" type="text" placeholder="Contraseña">
+                    </div>
+                </div>
                 <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <div id="puesto_container" style="display: none;">
+                        <label for="" class="form-control-label col-md-2">Puesto: </label>
+                        <div class="form-group col-md-5">
+                            <input id="puesto" type="text" class="form-control" placeholder="Ej. Diseñador gráfico">
+                        </div>
+                    </div>
+
+                    <label class="form-control-label col-md-2" for="apa">Es escritor de blog:</label>
+                    <div class="form-group col-md-1">
+                        <input id="is_blog_writer" type="checkbox" class="form-control">
+                    </div>
+                </div>
+              <div style="margin-top:45px;">&nbsp;</div>
+                <div id="social_media_links" class="form-group">
                     <div class="col-md-12">
                     <div class="form-check text-center">
                         <input class="form-check-input" type="checkbox" value="" id="face">
@@ -80,7 +113,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div id="semblanza_id" class="col-md-12">
                 <hr>
                 <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
                 <div class="form-group text-center">
@@ -91,7 +124,8 @@
             </div>
 
             <div class="col-md-12 text-center">
-                <button id="save-book" onclick="enviarFoto()">Guardar autor</button>
+                <button id="save_book" class="save-book" onclick="enviarFoto(1)">Guardar autor</button>
+                <button id="save_user" class="save-book" style="display: none;" onclick="enviarFoto(2)">Guardar usuario</button>
             </div>
         </div>
     </div>
@@ -241,7 +275,7 @@
             });
         });
         //enviar foto al servidor
-        function enviarFoto() {
+        function enviarFoto(num) {
             var nombre = $("#nombre").val();
             var apa  = $("#apa").val();
             var apm = $("#apm").val();
@@ -317,8 +351,10 @@
 
 
                 var url = '{{route('guardar.autor')}}';
+                var swal_text = 'autor';
+                if(num == 2){ url = ''; swal_text = 'usuario'}
                 swal({
-                    title: "¿Agregar autor?",
+                    title: "¿Agregar "+swal_text+"?",
                     text: "Verifique que los datos esten correctamente antes de guardar los datos",
                     icon: "warning",
                     buttons: true,
@@ -337,7 +373,7 @@
                             processData: false, // NEEDED, DON'T OMIT THIS
                             success: function (response, file) {
                                 console.log(response);
-                                        swal("El autor fue agregado correctamente", " ",{
+                                        swal("El "+swal_text+" fue agregado correctamente", " ",{
                                     icon: "success"
                                 }).then((value) => {
                                  window.location.reload();
@@ -497,6 +533,26 @@
                 .then(function (response) {
                     console.log(response['data']);
                 }).catch(function (error) {console.log(error);});
+        }
+        function typeUser() {
+            var sel_val = $('#select_').val();
+            if(sel_val == 2){
+                $('#title_form').html('NUEVO INTEGRANTE EN ELEMENTUM')
+                $('#semblanza_id').hide();
+                $('#social_media_links').hide();
+                $('#puesto_container').show();
+                $('#save_user').show();
+                $('#save_book').hide();
+                $('#user_data_login').show();
+            }else{
+                $('#title_form').html('AGREGAR NUEVO AUTOR')
+                $('#semblanza_id').show();
+                $('#social_media_links').show();
+                $('#puesto_container').hide();
+                $('#save_user').hide();
+                $('#save_book').show();
+                $('#user_data_login').hide();
+            }
         }
     </script>
 @endsection

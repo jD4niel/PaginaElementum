@@ -206,14 +206,14 @@ body{
     margin: 90px auto 0 auto;
     color: #b6b6b6;
 }
-#save-book{
+.save-book{
     text-align: center;
     background-color: #0ea632;border: none; padding: 10px; border-radius: 10px;color: #f9f6ff;font-size: 20px;
     width: 50%;
     margin:0 auto 0 auto;
     transition: all 100ms ease-in-out;
 }
-#save-book:hover{
+.save-book:hover{
     background-color: #24be43;
     font-size: 21px;
 }
@@ -421,6 +421,34 @@ body{
     left: 30%;
     top:20%;
 }
+.edit_individual_section{
+    display: none;
+    background-color: #154fff;
+    border-radius: 50%;
+    color: #fff;
+    width: 3em;
+    height: 3em;
+    position: absolute;
+    left: 73%;
+    top:8em;
+    z-index: 1000;
+    box-shadow: 3px 3px 4px 0px rgba(10,11,11,0.2);
+    transition-duration: 100ms;
+}
+.edit_individual_section:hover{
+    width: 3.3em;
+    height: 3.3em;
+    top:7.4em;
+    color: #fff;
+    box-shadow: 3px 3px 4px 0px rgba(0, 98, 246, 0.71);
+    cursor: pointer;
+}
+.edit_individual_section i{
+    font-size: 3.3vh;
+    position: absolute;
+    left: 27%;
+    top:20%;
+}
 .btn-entry{
     font-size: 2.5vh;
     background: blue;
@@ -464,6 +492,13 @@ body{
     font-size: 12px;
     font-weight:bold;
 }
+.select-type{
+    float: right;
+    position: absolute;
+    top: 105px;
+    right: 110px;
+}
+
 /*end*/
 
 

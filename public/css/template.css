@@ -715,8 +715,9 @@ footer{
     padding: 3px 25px;
 }
 .btn_element:hover{
-    background: rgba(255,0,0,0.7);
+    background: rgba(11, 110, 122, 0.7);
     cursor: pointer;
+    border-color: #32c2ac;
 }
 .section_element .el-cont .img-element{
     animation: 1s ease-in-out !important;
@@ -788,4 +789,7 @@ footer{
 #sections-elementario{
     margin-top: 100px;
     margin-bottom: 100px;
+}
+.page-link{
+    height: 35px !important;;
 }

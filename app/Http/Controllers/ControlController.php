@@ -225,6 +225,29 @@ class ControlController extends Controller
         }else {
             return 0;
         }
+    }   
+    public function AgregarUsuario(Request $request){
+        $libros = DB::table('users')
+            ->insertGetId([
+                'name'=>$request->nombre,
+                'last_name'=>$request->apa,
+                'second_last_name'=>$request->apm,
+                'email'=>$request->des,
+                'password'=>$request->face_in,
+                'role_id'=>$request->twitter_in,
+                'is_blog_writer'=>$request->insta_in,
+                'puesto'=>$request->insta_in,
+                'text'=>$request->sem,
+                'imagen'=>$request->file('file')->getClientOriginalName()
+            ]);
+        if (($request->hasFile('file'))) {
+            $destinationPath = public_path() . '/images/fotos_autores/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+                return $request;
+        }else {
+            return 0;
+        }
     }
 
     public function createBook(){

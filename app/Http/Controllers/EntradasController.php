@@ -34,7 +34,7 @@ class EntradasController extends Controller
         Date::setLocale('es');
         $entrada=Entradas::findOrFail($id);
         $fecha=$entrada->created_at->format('d M');
-        $autor = Autor::find($entrada->user_id);
+        $autor = Autor::find($entrada->user_id); 
         return view('blog.entrada-blog',compact('entrada','fecha','autor'));
     }
 

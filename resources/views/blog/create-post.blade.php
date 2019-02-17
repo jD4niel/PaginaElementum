@@ -128,7 +128,6 @@
         });
 
         $('#form-entrada').on('submit', function(event){
-            alert("init")
             var seccion_id = 0
             if($('#section_val_id').val()){seccion_id = $('#section_val_id').val();}
             event.preventDefault();

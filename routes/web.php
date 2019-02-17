@@ -74,6 +74,7 @@ Route::get('/crear/autor', 'ControlController@createAutor')->name('crear.autor')
 Route::get('/control/', 'ControlController@control')->name('control.gral')->middleware('auth');
 Route::post('/crear/libro/data', 'ControlController@AgregarLibro')->name('guardar.libro')->middleware('auth');
 Route::post('/crear/autor/data', 'ControlController@AgregarAutor')->name('guardar.autor')->middleware('auth');
+Route::post('/crear/usuario/data', 'ControlController@AgregarUsuario')->name('guardar.usuario')->middleware('auth');
 Route::post('/editar/libro/', 'LibroController@update')->name('editar.libro')->middleware('auth');
 Route::post('/editar/autor/', 'AutorController@update')->name('editar.autor')->middleware('auth');
 Route::post('/control/autor/borrar/{id}', 'AutorController@destroy')->name('borra.autor')->middleware('auth');
@@ -93,7 +94,9 @@ Route::post('/elementario/controlador/mes/', 'ElementarioController@updateMonth'
 Route::post('/elementario/controlador/seccion/', 'ElementarioController@updateSection')->name('elementario.update.section')->middleware('auth');
 Route::get('/elementario/controlador/seccion/{id}', 'ElementarioController@individualSection')->name('elementario.individual.section')->middleware('auth');
 Route::post('/elementario/controlador/borrar/seccion/{id}', 'ElementarioController@destroy')->name('section.delete')->middleware('auth');
+Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioController@editSection')->name('section.edit')->middleware('auth');
 
 
 //Entradas para Elementario
 Route::get('/elementario/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');
+Route::get('/elementario/seccion/{id}', 'ElementarioController@section')->name('section.tab')->middleware('auth');
