@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group col-md-5">
-                        <input id="password" class="form-control" type="text" placeholder="Contraseña">
+                        <input id="password" class="form-control" type="password" placeholder="Contraseña">
                     </div>
                 </div>
                 <div class="form-group">
@@ -49,6 +49,16 @@
                         <label for="" class="form-control-label col-md-2">Puesto: </label>
                         <div class="form-group col-md-5">
                             <input id="puesto" type="text" class="form-control" placeholder="Ej. Diseñador gráfico">
+                        </div>
+                    </div>
+                    <div id="rol_container" style="display: none;">
+                        <label for="" class="form-control-label col-md-2">Rol: </label>
+                        <div class="form-group col-md-5">
+                            <select name="" id="role_type" class="form-control">
+                                <option value="1">Escritor</option>
+                                <option value="2">Editor</option>
+                                <option value="3">Administrador</option>
+                            </select>
                         </div>
                     </div>
 
@@ -286,6 +296,14 @@
             var my_editor2 = "summary-ckeditor2";
             var descripcion = CKEDITOR.instances[my_editor].getData();
             var semblanza = CKEDITOR.instances[my_editor2].getData();
+            var email = $('#mail').val();
+            var pass = $('#password').val();
+            var puesto = $('#puesto').val();
+            var rol = $('#role_type').val();
+            var is_blog_writter = 0;
+            if ($('#is_blog_writer').is(":checked")){
+                is_blog_writer = 1;
+            }
 
             if(nombre=="") {
                 $("#nombre").addClass('must_');
@@ -301,33 +319,6 @@
                 $("#twitter_in").removeClass('must_');
                 $("#insta_in").removeClass('must_');
                 swal ( "Debes llenar todos los campos" ,  "" ,  "error" );
-            }else if(face_in=="") {
-                $("#face_in").addClass('must_');
-                $("#nombre").removeClass('must_');
-                $("#apa").removeClass('must_');
-                $("#twitter_in").removeClass('must_');
-                $("#insta_in").removeClass('must_');
-                swal("Debes llenar todos los campos", "", "error");
-            }else if(twitter_in=="") {
-                $("#twitter_in").addClass('must_');
-                $("#nombre").removeClass('must_');
-                $("#apa").removeClass('must_');
-                $("#face_in").removeClass('must_');
-                $("#insta_in").removeClass('must_');
-                swal("Debes llenar todos los campos", "", "error");
-            }else if(insta_in=="") {
-                $("#insta_in").addClass('must_');
-                $("#nombre").removeClass('must_');
-                $("#apa").removeClass('must_');
-                $("#face_in").removeClass('must_');
-                $("#twitter_in").removeClass('must_');
-                swal("Debes llenar todos los campos", "", "error");
-            }else if($("#fileUp").get(0).files.length === 0){
-                swal ( "Debes seleccionar una imagen para el autor" ,  "" ,  "error" );
-            } else if(descripcion==""){
-                swal ( "El autor debe de tener una semblanza obligatoriamente" ,  "" ,  "error" );//inverso
-            }else if(semblanza==""){
-                swal ( "El autor debe de tener una corta descripción" ,  "" ,  "error" );
             }
                 else {
                     $("#nombre").removeClass('must_');
@@ -345,14 +336,22 @@
                 myFormData.append('face_in', face_in);
                 myFormData.append('twitter_in', twitter_in);
                 myFormData.append('insta_in', insta_in);
-
                 myFormData.append('des', descripcion);
                 myFormData.append('sem', semblanza);
+                myFormData.append('blog_writer', is_blog_writer);
 
 
                 var url = '{{route('guardar.autor')}}';
                 var swal_text = 'autor';
-                if(num == 2){ url = ''; swal_text = 'usuario'}
+                if(num == 2){ 
+                    url = '{{route('guardar.usuario')}}'; 
+                    swal_text = 'usuario'
+                    myFormData.append('puesto', puesto);
+                    myFormData.append('email', email);
+                    myFormData.append('password', pass);
+                    myFormData.append('role_id', rol);
+
+                }
                 swal({
                     title: "¿Agregar "+swal_text+"?",
                     text: "Verifique que los datos esten correctamente antes de guardar los datos",
@@ -541,6 +540,7 @@
                 $('#semblanza_id').hide();
                 $('#social_media_links').hide();
                 $('#puesto_container').show();
+                $('#rol_container').show();
                 $('#save_user').show();
                 $('#save_book').hide();
                 $('#user_data_login').show();
@@ -552,6 +552,7 @@
                 $('#save_user').hide();
                 $('#save_book').show();
                 $('#user_data_login').hide();
+                $('#rol_container').hide();
             }
         }
     </script>

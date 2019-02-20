@@ -7,6 +7,7 @@ use App\Collection;
 use App\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 
 class ControlController extends Controller
@@ -211,6 +212,7 @@ class ControlController extends Controller
                 'apellido_p'=>$request->apa,
                 'apellido_m'=>$request->apm,
                 'breve_desc'=>$request->des,
+                'is_blog_writer'=>$request->blog_writer,
                 'facebook'=>$request->face_in,
                 'twitter'=>$request->twitter_in,
                 'instagram'=>$request->insta_in,
@@ -232,16 +234,16 @@ class ControlController extends Controller
                 'name'=>$request->nombre,
                 'last_name'=>$request->apa,
                 'second_last_name'=>$request->apm,
-                'email'=>$request->des,
-                'password'=>$request->face_in,
-                'role_id'=>$request->twitter_in,
-                'is_blog_writer'=>$request->insta_in,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password),
+                'role_id'=>$request->role_id,
+                'is_blog_writer'=>$request->blog_writer,
                 'puesto'=>$request->insta_in,
                 'text'=>$request->sem,
                 'imagen'=>$request->file('file')->getClientOriginalName()
             ]);
         if (($request->hasFile('file'))) {
-            $destinationPath = public_path() . '/images/fotos_autores/';
+            $destinationPath = public_path() . '/images/fotos_usuarios/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
                 return $request;

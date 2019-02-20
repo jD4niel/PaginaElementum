@@ -1,4 +1,3 @@
-
 .links{
 }
 .personal_el{
@@ -350,6 +349,7 @@ footer{
     margin-right: -30px;
     width: 335px;
 }
+/* Modales
 .modal .modal-content:not(.normal-content){
     background-color: rgba(19, 148, 144, 0.81);
     color: white;
@@ -360,6 +360,7 @@ footer{
 .modal-content button:hover:not(.btn-content){
     color: #ffce0d;
 }
+*/
 .hide{
     display: none;
 }
@@ -792,4 +793,82 @@ footer{
 }
 .page-link{
     height: 35px !important;;
+}
+.personal-element{
+    text-align: center;
+    font-size: 3vw;
+    margin: 1vh auto;
+}
+.personal-element span{
+    padding: 10px;
+}
+.personal-element span:hover{
+    cursor: pointer;
+}
+/*effect-underline*/
+.effect-underline:after {
+    content: '';
+  position: absolute;
+  left: 30%;
+  display: inline-block;
+  height: 1em;
+  width: 40%;
+  border-bottom: 2px solid rgba(19, 148, 144, 1);
+  margin-top: 10px;
+  opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale(0,1);
+    transform: scale(0,1);
+}
+
+.effect-underline:hover:after {
+  opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.img-bx{
+    border: 2px solid black;
+    overflow: hidden;
+    width:auto;
+    height:200px;
+    background-color:#FFFFFFFF;
+    border:none;
+    margin: auto !important;
+    padding: 0 !important;
+    vertical-align: middle;
+    transition-duration: 300ms;
+    
+    
+}
+.img-bx:hover{
+    filter: brightness(120%);
+    height: 220px;
+}
+.img-bx .users-img-elementum{
+    height: 100%;
+    object-fit: cover;
+    border:none;
+    margin: auto;
+    
+}
+.modal-text-elementum{
+    margin: auto;
+}
+.cont-img{
+    padding: 25px;
+}
+.cont-img div:not(.img-bx):not(.puesto-txt){
+    background-color: #e6f3f1;
+    padding: 10px;
+    text-align: center;
+    margin: auto auto;
+    vertical-align: middle;
+    box-shadow: 5px 5px 5px 0px rgba(10,11,11,0.6);
+}
+.puesto-txt{
+    font-size: 3vw;
+}
+.modal-text{
+    width: 95%;
 }
