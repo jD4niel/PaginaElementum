@@ -29,7 +29,12 @@ class LibroController extends Controller
         $month_range = DB::table('month_range')->where('view_month','=',1)->get();
         $title = DB::table('programming_section')->where('id','=',1)->get();
         $section_obj = DB::table('section_obj')->get();
-        return view('Elementum.elementario',compact('month_range','title','section_obj'));
+        $entrada_sections = DB::table('entrada_sections')
+             ->join('section_obj', 'section_obj.id', '=', 'entrada_sections.section_obj_id')
+             ->join('entradas', 'entradas.id', '=', 'entrada_sections.entradas_id')
+             ->take(7)
+             ->get();
+        return view('Elementum.elementario',compact('month_range','title','section_obj','entrada_sections'));
     }
     public function libroInd($id){
         $coleccion = Collection::all();
@@ -159,7 +164,8 @@ class LibroController extends Controller
         return view('Elementum.contacto');
     }
     public function nosotros(){
-        return view('Elementum.nosotros');
+        $users = DB::table('users')->get();
+        return view('Elementum.nosotros',compact('users'));
     }
 
 }

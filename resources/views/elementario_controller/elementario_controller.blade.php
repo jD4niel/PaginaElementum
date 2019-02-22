@@ -88,13 +88,16 @@
             <input id="id-input-sec" type="hidden" value="{{ $section_obj[count($section_obj)-1]->id }}">    
             @foreach($section_obj as $item)
             <div class="col-md-4">
-                <a href="{{route('elementario.individual.section',$item->id) }}" target="_blank"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
+                <a href="{{route('elementario.individual.section',$item->id) }}" target="_blank" title="Editar entradas de esta sección"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
+                <div class="delete_section" title="Eliminar sección" onclick="delete_section({{$item->id}})"><i class="far fa-trash-alt"></i></div>
+                <div id="eis_{{$item->id}}" class="edit_individual_section" title="Guardar cambios" onclick="edit_section({{$item->id}})"><i class="fas fa-check"></i></div>
                 <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" class="section_element col-md-12">
                     <div class="el-cont">
                         <img id="img-element_{{ $item->id }}" src="{{asset('images/secciones/headers')}}/{{$item->img}}" alt="" class="img-element"/>
                     </div>
                     <div class="btn-cont">
-                        <input id="text_section{{ $item->id }}" class="btn_element" type="text" value="{{ $item->name }}">
+                        <input id="text_section{{ $item->id }}" onchange="onchangeinput({{$item->id}})" class="btn_element" type="text" value="{{ $item->name }}">
+                         <!-- <input id="color{{ $item->id}}" oninput="changeColor(input)" type="color" value="" /> -->
                         <button id="btn-change-img{{ $item->id }}" class="change-img-sections" onclick="triggerFile('{{ $item->id }}')">Cambiar imagen</button>
                         <input type="file" onchange="readURL(this, '{{$item->id}}')" id="fileUp{{ $item->id }}" style="display: none;">
                     </div>
@@ -104,7 +107,7 @@
            
         </div>
         <div class="add-more">
-            <button class="add-more-btn" onclick="addMoreSection()">Agregar más</button>
+            <button class="add-more-btn" onclick="addMoreSection(this)">Agregar más</button>
             <button id="save-sections" class="add-more-btn" onclick="saveSections()" style="display: none;">Guardar</button>
         </div>
     </div>
@@ -218,6 +221,7 @@
             })
     </script>
     <script>
+        //Funciones de la seccion 'Meses'
         var month_obj = []
         var section_obj = []
         $(document).ready(function() {
@@ -368,13 +372,14 @@
                 reader.onload = function(e) {
                     // Si la imagen carga haz esto:
                     $("#img-element_"+id).attr("src", e.target.result);
+                    onchangeinput(id);
                 };
 
                 reader.readAsDataURL(input.files[0]);
             }
         }
         // Agregar mas secciones
-        function addMoreSection(){
+        function addMoreSection(e){
             var id = $("#id-input-sec").val();
             id = parseInt(id) + 1;
             $("#sections_").append(''+
@@ -391,16 +396,20 @@
                     '</div>'+
                 '</div>'+'');
             $("#id-input-sec").val(id);
-            $(this).hide();
+            $(e).hide();
             $('#save-sections').show();
             $
+        }
+        // Al editar un input se dispara esta funcion
+        function onchangeinput(id) {
+            $('#eis_'+id).show(300,"linear")
+            //$('#eis_'+id).animate({width: "55px",height:"55px"},100,"swing");
         }
         // Guarda las secciones
         function saveSections() {
             var myFormData = new FormData();
             var last_id = $('#id-input-sec').val();
             var nombre = $('#text_section'+last_id).val();
-            alert(nombre)
             var foto = $("#fileUp"+last_id);
             myFormData.append('file', foto[0]['files'][0]);
             myFormData.append('nombre', nombre);
@@ -435,7 +444,76 @@
 
                 }
             });
-        }  
+        }
+        // Borra las secciones  
+        function delete_section(id){
+            swal({
+                title: "¿Eliminar sección?",
+                text: "Una vez eliminada, se eliminará las entradas pertenecientes a ella",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                if (willDelete) {
+                    var url = window.location + '/borrar/seccion/'+id;
+                    fetch(url, {
+                      method: 'POST', 
+                      body: JSON.stringify({id:id}), 
+                      mode: 'cors',
+                      dataType: 'json',
+                      headers:{
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                      }
+                      }).then(res => res)
+                    .then(response => {
+                            console.log(response);
+                            swal("Eliminada correctamente", " ",{
+                                    icon: "success"
+                                }).then((value) => {
+                                 window.location.reload();
+                            });
+                    });
+                }
+            });
+        }        
+        // Edita las secciones  
+        function edit_section(id){
+            var myFormData = new FormData();
+            var nombre = $('#text_section'+id).val();
+            var foto = $("#fileUp"+id);
+            myFormData.append('file', foto[0]['files'][0]);
+            myFormData.append('nombre', nombre);
+            myFormData.append('id', id);
+            swal({
+                title: "¿Editar esta sección?",
+                text: "Los cambios se verán reflejados en la pestaña de Elementario",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                if (willDelete) {
+                    var url = window.location + '/editar/seccion/'+id;
+                    fetch(url, {
+                      method: 'POST', 
+                      body: myFormData, 
+                      mode: 'cors',
+                      headers:{
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                      }
+                      }).then(res => res)
+                    .then(response => {
+                            console.log(response);
+                            swal("Editada correctamente", " ",{
+                                    icon: "success"
+                                }).then((value) => {
+                                 window.location.reload();
+                            });
+                    });
+                }
+            });
+        }
     </script>
 @endsection
 

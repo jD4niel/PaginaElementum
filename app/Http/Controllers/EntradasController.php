@@ -34,7 +34,7 @@ class EntradasController extends Controller
         Date::setLocale('es');
         $entrada=Entradas::findOrFail($id);
         $fecha=$entrada->created_at->format('d M');
-        $autor = Autor::find($entrada->user_id);
+        $autor = Autor::find($entrada->user_id); 
         return view('blog.entrada-blog',compact('entrada','fecha','autor'));
     }
 
@@ -105,6 +105,18 @@ class EntradasController extends Controller
                 $entrada->clasificacion_id = $request['clasificacion_id'];
                 $entrada->autor_externo = $request['autor_externo'];
                 $entrada->save();
+
+                if ($request['seccion_id']!=0) {
+                    try{
+                        $entrada_sections = DB::table('entrada_sections')
+                          ->insertGetId([
+                            'section_obj_id'=>$request['seccion_id'],
+                            'entradas_id'=>$entrada->id,
+                        ]);
+                    }catch (\Exception $e){
+                        return abort(403, 'Unauthorized action.');
+                    }
+                }
                 return $entrada;
             }
         }catch (\Exception $e){

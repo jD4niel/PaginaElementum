@@ -32,6 +32,7 @@
             right: 0;
             opacity: 0;
         }
+
         .custom-select {
             webkit-appearance: none;
             -moz-appearance: none;
@@ -44,7 +45,13 @@
 
 @section('content')
     <div class="container" style="background-color: white">
-        <div class="row">
+        <div class="row" style="background-color: rgb(0,0,0,0) !important;">
+            @if(!empty($seccion_id))
+                <input id="section_val_id" type="hidden" value="{{ $seccion_id }}">
+                <div class="container-section">
+                    <h3> Sección {{ $section_obj->name }} </h3>
+                </div>
+            @endif
             <form method="post" id="form-entrada" enctype="multipart/form-data">
                 <div class="panel panel-default">
                     <div class="row">
