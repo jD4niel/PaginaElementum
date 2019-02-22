@@ -101,6 +101,9 @@ class EntradasController extends Controller
                 $entrada->texto = $request['texto'];
                 $entrada->user_id = $request['user_id'];
                 $entrada->etiquetas = $request['etiquetas'];
+                $entrada->visitas = 0;
+                $entrada->clasificacion_id = $request['clasificacion_id'];
+                $entrada->autor_externo = $request['autor_externo'];
                 $entrada->save();
                 return $entrada;
             }
@@ -108,6 +111,7 @@ class EntradasController extends Controller
             return abort(403, 'Unauthorized action.');
         }
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -183,6 +187,8 @@ use Illuminate\Support\Facades\DB;
                         'texto' => $request['texto'],
                         'user_id' => $request['user_id'],
                         'etiquetas' => $request['etiquetas'],
+                        'clasificación_id' => $request['clasificacion_id'],
+                        'autor_externo' => $request['autor_externo']
                     ]);
                     return response()->json($entrada);
                 }
@@ -196,6 +202,8 @@ use Illuminate\Support\Facades\DB;
                     'texto' => $request['texto'],
                     'user_id' => $request['user_id'],
                     'etiquetas' => $request['etiquetas'],
+                    'clasificacion_id' => $request['clasificacion_id'],
+                    'autor_externo' => $request['autor_externo']
                 ]);
                 return response()->json($entrada);
             }
