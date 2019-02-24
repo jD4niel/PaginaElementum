@@ -135,7 +135,7 @@ p {
 }
 
 
-ol {
+.ol-blog {
     list-style: none;
     counter-reset: my-awesome-counter;
     display: flex;
@@ -144,13 +144,13 @@ ol {
     padding: 0;
 }
 
-ol li {
+.ol-blog .li-blog {
     counter-increment: my-awesome-counter;
     display: flex;
     margin-top: 1rem;
 }
 
-ol li::before {
+.ol-blog .li-blog::before {
     content: "0" counter(my-awesome-counter);
     font-weight: bold;
     font-size: 3rem;

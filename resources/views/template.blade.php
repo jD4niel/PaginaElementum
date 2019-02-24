@@ -53,7 +53,7 @@
                         <a href="{{route('contacto.elementum')}}">Contacto</a>
                     </li>
                     <li id="blogid" style="border-right: 1px solid white;">
-                        <a href="#!">Blog</a>
+                        <a href="{{ route('blog.elementum') }}">Blog</a>
                     </li>
                     <li id="iconos" class="" style="padding-top: 15px; padding-left: 15px; padding-bottom: 24px; border-bottom: 1px solid white;">
                         <i onclick="openInNewTab('https://www.facebook.com/edielementum')"class="fab social_icons fa-facebook-f link"></i>

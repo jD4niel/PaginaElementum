@@ -34,7 +34,6 @@ Route::get('/ir','LibroController@ir')->name('det.libros');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/entradas', 'EntradasController@index')->name('entradas')->middleware('auth');
-Route::get('/admin-banners', 'BlogController@createBanner')->name('admin.banner')->middleware('auth');
 Route::post('/crear/banner', 'BlogController@upBanner')->name('up.banner')->middleware('auth');
 Route::get('/admin-portada', 'BlogController@adminPortada')->name('admin.portada')->middleware('auth');
 Route::post('/posiciones/portada', 'BlogController@portadaPos')->name('pos.portada')->middleware('auth');
@@ -108,3 +107,6 @@ Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioControll
 //Entradas para Elementario
 Route::get('/elementario/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');
 Route::get('/elementario/seccion/{id}', 'ElementarioController@section')->name('section.tab')->middleware('auth');
+
+
+Route::view('/política-de-privacidad', 'Elementum.politica')->name('politica');

@@ -31,11 +31,21 @@ class EntradasController extends Controller
         return view('blog.create-post');
     }
     public function entrada($id){
-        Date::setLocale('es');
-        $entrada=Entradas::findOrFail($id);
-        $fecha=$entrada->created_at->format('d M');
-        $autor = Autor::find($entrada->user_id); 
-        return view('blog.entrada-blog',compact('entrada','fecha','autor'));
+        $entrada = Entradas::findOrFail($id);
+
+        $autor = Autor::findOrFail($entrada->user_id);
+        $entrada['fecha'] = $entrada->created_at->format('d M');
+        $entrada['autor'] = $autor->nombre.' '.$autor->apellido_p;
+
+
+        $ep = Entradas::orderBy('visitas', 'DESC')->take(4)->get();
+        foreach ($ep as $item){
+            $autor_e = Autor::findOrFail($item->user_id);
+            $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
+            $item['fecha'] = $item->created_at->format('d M');
+        }
+
+        return view ('blog.entrada-blog', compact('entrada','ep', 'autor'));
     }
 
     public function blog(){

@@ -11,7 +11,7 @@
                     <h1 style="padding-top: 20px" class="display-4">Nuestros Colaboradores</h1>
                     @break
                     @case('leido-en-elementario')
-                    <h1 style="padding-top: 20px" class="display-4">Leído en Elementrioo</h1>
+                    <h1 style="padding-top: 20px" class="display-4">Leído en Elementario</h1>
                     @break
                 @endswitch
             </div>

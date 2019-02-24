@@ -135,17 +135,20 @@ class BlogController extends Controller
 
         }
 
-
-
-
-
-
-
-
     }
 
     public function adminPortada(){
-        return view('blog.admin-portada-blog');
+        $banner = Banner::orderBy('id','DESC')->first();
+        // Dias restantes del banner
+        $fecha = Carbon::now()->subHour(6);
+        $fechaFinal = Carbon::parse($banner->fecha_final);
+        $dias_restantes = $fechaFinal->diffInDays($fecha);
+
+        //Posiciones de portada
+
+        $portada = DB::table('portada_blogs')->first();
+
+        return view('blog.admin-portada-blog', compact('banner', 'dias_restantes', 'portada'));
     }
 
     public function portadaPos(Request $request)
@@ -154,12 +157,6 @@ class BlogController extends Controller
             ->where('id', 1)
             ->update($request->all());
         return $posiciones;
-    }
-
-    public function createBanner()
-    {
-        $banners = Banner::all();
-        return view('blog.up-banner', compact('banners'));
     }
 
     public function upBanner(Request $request)
@@ -195,10 +192,20 @@ class BlogController extends Controller
         $entrada = Entradas::findOrFail($id);
         $entrada->visitas = $entrada->visitas + 1;
         $entrada->save();
-        $fecha=$entrada->created_at->format('d M');
-        $autor = Autor::find($entrada->user_id);
 
-        return view ('blog.entrada-blog', compact('entrada','fecha', 'autor'));
+        $autor = Autor::findOrFail($entrada->user_id);
+        $entrada['fecha'] = $entrada->created_at->format('d M');
+        $entrada['autor'] = $autor->nombre.' '.$autor->apellido_p;
+
+
+        $ep = Entradas::orderBy('visitas', 'DESC')->take(4)->get();
+        foreach ($ep as $item){
+            $autor_e = Autor::findOrFail($item->user_id);
+            $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
+            $item['fecha'] = $item->created_at->format('d M');
+        }
+
+        return view ('blog.entrada-blog', compact('entrada','ep', 'autor'));
     }
 
 

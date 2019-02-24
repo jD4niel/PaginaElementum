@@ -57,7 +57,7 @@
                     @endforeach
                 </div>
             </div>
-            <div align="right"><a href="#">Ver más <span class="dropdown-toggle"></span></a></div>
+            <div align="right"><a href="{{ route('blog.secciones','entradas') }}">Ver más <span class="dropdown-toggle"></span></a></div>
             <hr style="    background: #00394c;">
         </div>
 
@@ -67,10 +67,10 @@
                 <div class="col-md-12">
                     @if($banner->estado == 1)
                         <img src="{{asset("images/banners")}}/{{$banner->imagen}}" alt="Banner Publicitario"
-                             class="img-fluid shadow">
+                             class="img-fluid shadow" style="min-width: 100%">
                     @else
                         <img src="{{asset("images/banners/banner.jpg")}}" alt="Banner Publicitario"
-                             class="img-fluid shadow">
+                             class="img-fluid shadow" style="min-width: 100%">
                     @endif
                 </div>
             </div>
@@ -82,7 +82,7 @@
                 <div class="col-md-8">
                     <div class="row" style="margin-bottom: -20px">
                         <div class="col-md-10"><h3>Nuestros Colaboradores</h3></div>
-                        <div class="col-md-2"><a href="#">Ver más <span class="dropdown-toggle"></span></a></div>
+                        <div class="col-md-2"><a href="{{ route('blog.secciones','nuestros-colaboradores') }}">Ver más <span class="dropdown-toggle"></span></a></div>
                     </div>
                     <hr>
                     @foreach($uea as $item)
@@ -116,9 +116,9 @@
                 <div class="col-md-4">
                     <h4>Populares en elementum</h4>
                     <hr>
-                    <ol>
+                    <ol class="ol-blog">
                         @foreach($ep as $item)
-                            <li>
+                            <li class="li-blog">
                                 <div>
                                     <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h4 class="serif bold"
                                                                                                   style="color:#1d3b4f;">{{$item->nombre}}</h4>
@@ -146,7 +146,7 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-10"><h3>Leído en Elementario</h3></div>
-                        <div class="col-md-2"><a href="#">Ver más <span class="dropdown-toggle"></span></a></div>
+                        <div class="col-md-2"><a href="{{ route('blog.secciones','leido-en-elementario') }}">Ver más <span class="dropdown-toggle"></span></a></div>
                     </div>
                     <hr>
                     @foreach($le as $item)
