@@ -1,9 +1,14 @@
+h1 {
+    color: #243952;
 
+}
 a {
-    color: #000;
+    color: #243952;
+    height: 100%;
 }
 
-a:hover{
+a:hover {
+    color: #000;
     text-decoration-line: none;
 }
 
@@ -12,8 +17,9 @@ blockquote {
     border-left: 10px solid #ccc;
     margin: 1.5em 10px;
     padding: 0.5em 10px;
-    quotes: "\201C""\201D""\2018""\2019";
+    quotes: "\201C" "\201D" "\2018" "\2019";
 }
+
 blockquote:before {
     color: #ccc;
     content: open-quote;
@@ -22,11 +28,12 @@ blockquote:before {
     margin-right: 0.25em;
     vertical-align: -0.4em;
 }
+
 blockquote p {
     display: inline;
 }
 
-p{
+p {
     text-align: left;
 }
 
@@ -37,8 +44,9 @@ p{
     margin: 10px;
     position: relative;
 }
+
 .contenedor2 > .crop {
-    position:absolute;
+    position: absolute;
     left: -100%;
     right: -100%;
     top: -100%;
@@ -46,6 +54,27 @@ p{
     margin: auto;
     min-height: 100%;
     min-width: 100%;
+}
+
+.center-cropped {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    height: 100%;
+    width: 220px;
+}
+
+.new-cropped {
+    object-fit: cover; /* Do not scale the image */
+    object-position: bottom; /* Center the image within the element */
+    height: 350px;
+    width: 100%;
+}
+
+.last-cropped {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    height: 50%;
+    width: 100%;
 }
 
 
@@ -69,6 +98,13 @@ p{
     background: linear-gradient(to right, rgba(0, 0, 0, 0.17) 86%, #00394c 14%);
 }
 
+.hr-more {
+    border: 0;
+    height: 1px;
+    background: #00394c;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.17) 93%, #00394c 7%);
+}
+
 .shine {
     height: 10px;
     width: 60%;
@@ -79,5 +115,60 @@ p{
     position: relative;
 }
 
+.txt-overflow {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    max-height:400px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    content: "";
+    position:relative;
+}
+.txt-overflow::before {
+    content:'';
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background:linear-gradient(transparent 150px, white);
+}
 
 
+.ol-blog {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.ol-blog .li-blog {
+    counter-increment: my-awesome-counter;
+    display: flex;
+    margin-top: 1rem;
+}
+
+.ol-blog .li-blog::before {
+    content: "0" counter(my-awesome-counter);
+    font-weight: bold;
+    font-size: 3rem;
+    margin-right: 2.5rem;
+    line-height: 1;
+    color: rgba(38, 69, 99, 0.25);
+}
+
+.img-container {
+    width: 100%;
+    height: 200px;
+}
+
+.child-img {
+    position: relative;
+    margin: 0 auto;
+    background-size: cover;
+    max-width: 768px;
+    width: 100%;
+    height: 100%;
+}

@@ -31,11 +31,21 @@ class EntradasController extends Controller
         return view('blog.create-post');
     }
     public function entrada($id){
-        Date::setLocale('es');
-        $entrada=Entradas::findOrFail($id);
-        $fecha=$entrada->created_at->format('d M');
-        $autor = Autor::find($entrada->user_id); 
-        return view('blog.entrada-blog',compact('entrada','fecha','autor'));
+        $entrada = Entradas::findOrFail($id);
+
+        $autor = Autor::findOrFail($entrada->user_id);
+        $entrada['fecha'] = $entrada->created_at->format('d M');
+        $entrada['autor'] = $autor->nombre.' '.$autor->apellido_p;
+
+
+        $ep = Entradas::orderBy('visitas', 'DESC')->take(4)->get();
+        foreach ($ep as $item){
+            $autor_e = Autor::findOrFail($item->user_id);
+            $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
+            $item['fecha'] = $item->created_at->format('d M');
+        }
+
+        return view ('blog.entrada-blog', compact('entrada','ep', 'autor'));
     }
 
     public function blog(){
@@ -101,6 +111,9 @@ class EntradasController extends Controller
                 $entrada->texto = $request['texto'];
                 $entrada->user_id = $request['user_id'];
                 $entrada->etiquetas = $request['etiquetas'];
+                $entrada->visitas = 0;
+                $entrada->clasificacion_id = $request['clasificacion_id'];
+                $entrada->autor_externo = $request['autor_externo'];
                 $entrada->save();
 
                 if ($request['seccion_id']!=0) {
@@ -120,6 +133,7 @@ class EntradasController extends Controller
             return abort(403, 'Unauthorized action.');
         }
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -195,6 +209,8 @@ use Illuminate\Support\Facades\DB;
                         'texto' => $request['texto'],
                         'user_id' => $request['user_id'],
                         'etiquetas' => $request['etiquetas'],
+                        'clasificación_id' => $request['clasificacion_id'],
+                        'autor_externo' => $request['autor_externo']
                     ]);
                     return response()->json($entrada);
                 }
@@ -208,6 +224,8 @@ use Illuminate\Support\Facades\DB;
                     'texto' => $request['texto'],
                     'user_id' => $request['user_id'],
                     'etiquetas' => $request['etiquetas'],
+                    'clasificacion_id' => $request['clasificacion_id'],
+                    'autor_externo' => $request['autor_externo']
                 ]);
                 return response()->json($entrada);
             }

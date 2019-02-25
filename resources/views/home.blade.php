@@ -116,6 +116,18 @@
                     </div>
                 </div>
             </a>
+            <a href="{{route('admin.portada')}}" class="a-free col-md-3">
+                <div class="card" style="width: 26rem; margin:10px;background-color: #a3abbb;">
+                    <div class="card-body">
+                        <h2 class="card-title" style="z-index: 50;">Admin portada</h2>
+                        <h4 class="card-subtitle mb-2" style="color:#fff;">blog</h4>
+                        <i class="fas fa-th-large card-fa"></i>
+                        <div class="variable-card text-right">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </a>
 
     </div>
 </div>

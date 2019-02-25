@@ -20,7 +20,10 @@ Route::get('/contacto','LibroController@contacto')->name('contacto.elementum');
 Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
 Route::get('/elementario','LibroController@elementario')->name('elementario.elementum');
 Route::get('/blog','BlogController@index')->name('blog.elementum');
-Route::get('/blog/entrada/{id}','EntradasController@entrada')->name('blog.entrada.elementum');
+Route::get('/control/entrada/{id}','EntradasController@entrada')->name('control.entrada.elementum');
+Route::get('/blog/entrada/{id}','BlogController@show')->name('blog.entrada.elementum');
+Route::get('/blog/{tipo}','BlogController@indexPorSeccion')->name('blog.secciones');
+
 
 Route::get('/info','PDFController@info')->name('info');
 Route::get('/colecciones/{id}','LibroController@detalle')->name('detalle.libros');
@@ -31,6 +34,10 @@ Route::get('/ir','LibroController@ir')->name('det.libros');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/entradas', 'EntradasController@index')->name('entradas')->middleware('auth');
+Route::post('/crear/banner', 'BlogController@upBanner')->name('up.banner')->middleware('auth');
+Route::get('/admin-portada', 'BlogController@adminPortada')->name('admin.portada')->middleware('auth');
+Route::post('/posiciones/portada', 'BlogController@portadaPos')->name('pos.portada')->middleware('auth');
+
 
 
 
@@ -87,9 +94,6 @@ Route::get('/control/libro/{id}', 'LibroController@libroInd')->name('modifica.li
 Route::post('/upload_image','CkeditorController@uploadImage')->name('upload.ck');
 
 
-
-
-
 //Elementario
 Route::get('/elementario/controlador', 'ElementarioController@indexController')->name('elementario.index.controller')->middleware('auth');
 Route::post('/elementario/controlador/mes/', 'ElementarioController@updateMonth')->name('elementario.update.month')->middleware('auth');
@@ -103,3 +107,5 @@ Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioControll
 //Entradas para Elementario
 Route::get('/elementario/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');
 Route::get('/elementario/seccion/{id}', 'ElementarioController@section')->name('section.tab');
+
+Route::view('/política-de-privacidad', 'Elementum.politica')->name('politica');
