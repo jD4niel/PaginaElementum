@@ -89,8 +89,8 @@
             @foreach($section_obj as $item)
             <div class="col-md-4">
                 <a href="{{route('elementario.individual.section',$item->id) }}" target="_blank" title="Editar entradas de esta sección"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
-                <div class="delete_section" title="Eliminar sección" onclick="delete_section({{$item->id}})"><i class="far fa-trash-alt"></i></div>
-                <div id="eis_{{$item->id}}" class="edit_individual_section" title="Guardar cambios" onclick="edit_section({{$item->id}})"><i class="fas fa-check"></i></div>
+                <div class="delete_section" title="Eliminar sección" onclick="delete_section({{$item->id}},'seccion','Eliminar sección','Una vez eliminada, se eliminará las entradas pertenecientes a ella')"><i class="far fa-trash-alt"></i></div>
+                <div id="eis_{{$item->id}}" class="edit_individual_section" title="Guardar cambios" onclick="edit_section({{$item->id}},'seccion','¿Editar esta sección?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
                 <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" class="section_element col-md-12">
                     <div class="el-cont">
                         <img id="img-element_{{ $item->id }}" src="{{asset('images/secciones/headers')}}/{{$item->img}}" alt="" class="img-element"/>
@@ -360,13 +360,11 @@
 
         //Funciones de la seccion 'Secciones'
 
-        function btn_appear(e){$('#btn-change-img'+e).show();}
-        function btn_disapear(e){$('#btn-change-img'+e).hide();}
         // Ejecutar el input file para subir imagenes
         function triggerFile(id) {$('#fileUp'+id).trigger('click');}
         // Lee el input con la imagen
         function readURL(input,id) {
-            if (input.files && input.files[0]) {
+            if (input.files && input.files[0]){
                 var reader = new FileReader();
 
                 reader.onload = function(e) {
@@ -400,120 +398,7 @@
             $('#save-sections').show();
             $
         }
-        // Al editar un input se dispara esta funcion
-        function onchangeinput(id) {
-            $('#eis_'+id).show(300,"linear")
-            //$('#eis_'+id).animate({width: "55px",height:"55px"},100,"swing");
-        }
-        // Guarda las secciones
-        function saveSections() {
-            var myFormData = new FormData();
-            var last_id = $('#id-input-sec').val();
-            var nombre = $('#text_section'+last_id).val();
-            var foto = $("#fileUp"+last_id);
-            myFormData.append('file', foto[0]['files'][0]);
-            myFormData.append('nombre', nombre);
-            //Enviar meses al controlador
-            swal({
-                title: "¿Guardar secciones?",
-                text: "Los cambios se actualizarán en el inicio de Elementario",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                })
-                .then((willDelete) => {
-                if (willDelete) {
-                   var url = window.location + '/seccion/';
-                   fetch(url, {
-                      method: 'POST', 
-                      body: myFormData, 
-                      mode: 'cors',
-                      headers:{
-                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-                      }
-                      }).then(res => res.json())
-                    .then(response => {
-                          console.log(response);
-                            swal("El autor fue agregado correctamente", " ",{
-                                    icon: "success"
-                                }).then((value) => {
-                                 //window.location.reload();
-                                 console.log(response+"hosjanjkasdn")
-                            });
-                    });
-
-                }
-            });
-        }
-        // Borra las secciones  
-        function delete_section(id){
-            swal({
-                title: "¿Eliminar sección?",
-                text: "Una vez eliminada, se eliminará las entradas pertenecientes a ella",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                if (willDelete) {
-                    var url = window.location + '/borrar/seccion/'+id;
-                    fetch(url, {
-                      method: 'POST', 
-                      body: JSON.stringify({id:id}), 
-                      mode: 'cors',
-                      dataType: 'json',
-                      headers:{
-                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-                      }
-                      }).then(res => res)
-                    .then(response => {
-                            console.log(response);
-                            swal("Eliminada correctamente", " ",{
-                                    icon: "success"
-                                }).then((value) => {
-                                 window.location.reload();
-                            });
-                    });
-                }
-            });
-        }        
-        // Edita las secciones  
-        function edit_section(id){
-            var myFormData = new FormData();
-            var nombre = $('#text_section'+id).val();
-            var foto = $("#fileUp"+id);
-            myFormData.append('file', foto[0]['files'][0]);
-            myFormData.append('nombre', nombre);
-            myFormData.append('id', id);
-            swal({
-                title: "¿Editar esta sección?",
-                text: "Los cambios se verán reflejados en la pestaña de Elementario",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                if (willDelete) {
-                    var url = window.location + '/editar/seccion/'+id;
-                    fetch(url, {
-                      method: 'POST', 
-                      body: myFormData, 
-                      mode: 'cors',
-                      headers:{
-                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-                      }
-                      }).then(res => res)
-                    .then(response => {
-                            console.log(response);
-                            swal("Editada correctamente", " ",{
-                                    icon: "success"
-                                }).then((value) => {
-                                 window.location.reload();
-                            });
-                    });
-                }
-            });
-        }
     </script>
+    <script src="{{asset('js/edit_elements.js')}}"></script>
 @endsection
 

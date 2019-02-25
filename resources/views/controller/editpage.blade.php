@@ -41,6 +41,36 @@
         </div>
     </div>
     <br>
+    <div class="container" style="margin: 150px auto;">
+        <div class="row">
+            <h1 class="h1 text-center">Servicios</h1>
+            <hr>
+        </div>
+        <div id="service-card-container" class="row">
+            
+            @foreach($servicios as $item)
+            <div class="col-md-3">
+            <button id="btn-change-img{{ $item->id }}" class="change-img-sections for-service" onclick="triggerFileService('{{ $item->id }}')" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')">Cambiar imagen</button>
+            <div id="eis_{{$item->id}}" class="edit_individual_section for-service-edit" title="Guardar cambios" onclick="edit_section({{$item->id}},'seccion','¿Editar esta sección?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
+            <div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section({{$item->id}},'servicio','Eliminar servicio','Una vez eliminado, no se puede revertir el cambio')"><i class="far fa-trash-alt"></i></div>
+                <div class="service-card" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')">
+                    <img id="img-element-service{{$item->id}}" src="{{ asset('images/servicios') }}/{{ $item->image }}" class="img-fluid" style="width:100%">
+                    <input id="service_name{{$item->id}}" type="text" onchange="onchangeinput({{$item->id}})" class="service-name" value="{{ $item->name}}">
+                    <input type="file" onchange="readURLservice(this, '{{$item->id}}')" id="fileUpService{{ $item->id }}" style="display: none;">
+                </div>
+            </div>
+            @endforeach()
+
+        
+            <br>
+            <br>
+            <br>
+        </div>
+        <div class="row" style="text-align: center">
+            <button id="AddServiceBtn" class="btn-hover color-1" onclick="AddService()"><i class="fas fa-plus"></i> Agregar servicio</button>
+            <button id="SaveServiceBtn" class="btn-hover color-2 hide" onclick="saveService({{count($servicios)}})"><i class="fas fa-plus"></i> Guardar</button>
+        </div>
+    </div>
     <div class="container-fluid" style="background-color: white">
         <div class="row" style="width: 80%;margin: auto;">
             <h1 class="h1 text-center">Talleres</h1>
@@ -416,6 +446,7 @@
                 });
             }
         };
+
     </script>
     <script>
         function cambiar(a) {
@@ -426,8 +457,25 @@
                     console.log(response['data']);
                 }).catch(function (error) {console.log(error);});
         }
-
+        // JS servicios
+        function AddService() {
+            $('#AddServiceBtn').hide()
+            $('#SaveServiceBtn').removeClass('hide')   
+            var id = parseInt({{count($servicios)}})+1
+            $('#service-card-container').append(''+
+                '<div class="col-md-3">'+
+                '<button id="btn-change-img'+id+'" class="change-img-sections for-service" onclick="triggerFileService('+id+')" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">Cambiar imagen</button>'+
+                '<div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section()"><i class="far fa-trash-alt"></i></div>'+
+                    '<div class="service-card" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
+                       ' <div id="noimg'+id+'" class="img-from-fa"><i class="far fa-image"></i></div><img id="img-element-service'+id+'" class="img-fluid" style="width:100%">'+
+                        '<input id="service_name'+id+'" type="text" class="service-name" value="">'+
+                        '<button id="btn-change-img" class="change-img-sections" onclick="triggerFileService('+id+')">Cambiar imagen</button>'+
+                        '<input type="file" onchange="readURLservice(this,'+id+')" id="fileUpService'+id+'" style="display: none;">'+
+                    '</div></div>');
+        }
 
     </script>
+
+    <script src="{{asset('js/edit_elements.js')}}"></script>
 @endsection
 
