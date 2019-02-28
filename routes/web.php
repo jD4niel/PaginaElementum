@@ -76,6 +76,7 @@ Route::post('/actualizar/entrada/', 'EntradasController@update')->name('update.p
 Route::get('/borrar/entrada/{id}', 'EntradasController@destroy')->name('delete.post')->middleware('auth');
 Route::post('/editar/servicio/nuevo','ControlController@uploadNewService')->name('new.service')->middleware('auth');
 Route::post('/editar/servicio/{id}','ControlController@editService')->name('edit.service')->middleware('auth');
+Route::post('/editar/borrar/servicio/{id}','ControlController@deleteService')->name('delete.service')->middleware('auth');
 
 
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');

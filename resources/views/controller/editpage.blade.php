@@ -51,13 +51,22 @@
             @foreach($servicios as $item)
             <div class="col-md-3">
             <button id="btn-change-img{{ $item->id }}" class="change-img-sections for-service" onclick="triggerFileService('{{ $item->id }}')" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')">Cambiar imagen</button>
-            <div id="eis_{{$item->id}}" class="edit_individual_section for-service-edit" title="Guardar cambios" onclick="edit_section({{$item->id}},'seccion','¿Editar esta sección?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
+            
+
+
+            <div id="eis_{{$item->id}}" class="edit_individual_section for-service-edit" title="Guardar cambios" onclick="edit_section({{$item->id}},'servicio','¿Editar este servicio?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
             <div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section({{$item->id}},'servicio','Eliminar servicio','Una vez eliminado, no se puede revertir el cambio')"><i class="far fa-trash-alt"></i></div>
-                <div class="service-card" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')">
+                
+
+                <div class="service-card" data-toggle="modal" data-target="#serviceModal" data-title="{{ $item->name }}" data-id="{{ $item->id }}" data-text="{!! $item->text !!}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" onclick="onchangeinput({{$item->id}})">
                     <img id="img-element-service{{$item->id}}" src="{{ asset('images/servicios') }}/{{ $item->image }}" class="img-fluid" style="width:100%">
                     <input id="service_name{{$item->id}}" type="text" onchange="onchangeinput({{$item->id}})" class="service-name" value="{{ $item->name}}">
                     <input type="file" onchange="readURLservice(this, '{{$item->id}}')" id="fileUpService{{ $item->id }}" style="display: none;">
+
+                    <textarea class="form-control" id="text{{ $item->id }}" style="display: none"></textarea>
+                
                 </div>
+
             </div>
             @endforeach()
 
@@ -135,6 +144,29 @@
         </div>
     </div>
     <br><br><br><br><br>
+
+
+<!-- Modal -->
+<div id="serviceModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>.
+      <div class="modal-body">
+         <textarea class="form-control" id="summary-ckeditor"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button id="saveModalInfo" type="button" class="btn btn-info" btn-id="" onclick="getTextFromModal()" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 @endsection
@@ -466,14 +498,14 @@
                 '<div class="col-md-3">'+
                 '<button id="btn-change-img'+id+'" class="change-img-sections for-service" onclick="triggerFileService('+id+')" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">Cambiar imagen</button>'+
                 '<div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section()"><i class="far fa-trash-alt"></i></div>'+
-                    '<div class="service-card" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
+                    '<div class="service-card" data-toggle="modal" data-target="#serviceModal" data-title="{{ $item->name }}" data-id="{{ $item->id }}" data-text="{!! $item->text !!}" onmouseenter="btn_appear('{{ $item->id }}')" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
                        ' <div id="noimg'+id+'" class="img-from-fa"><i class="far fa-image"></i></div><img id="img-element-service'+id+'" class="img-fluid" style="width:100%">'+
                         '<input id="service_name'+id+'" type="text" class="service-name" value="">'+
                         '<button id="btn-change-img" class="change-img-sections" onclick="triggerFileService('+id+')">Cambiar imagen</button>'+
                         '<input type="file" onchange="readURLservice(this,'+id+')" id="fileUpService'+id+'" style="display: none;">'+
                     '</div></div>');
         }
-
+        
     </script>
 
     <script src="{{asset('js/edit_elements.js')}}"></script>

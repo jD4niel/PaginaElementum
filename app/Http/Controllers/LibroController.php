@@ -23,7 +23,8 @@ class LibroController extends Controller
         $slider = DB::table('slider')->get();
         $first =DB::table('slider')->min('id');
         $talleres = DB::table('talleres')->get();
-        return view('Elementum.home',compact('libros','slider','first','talleres'));
+        $servicios = DB::table('servicios')->get();
+        return view('Elementum.home',compact('libros','slider','first','talleres','servicios'));
     }
     public function elementario(){
         $month_range = DB::table('month_range')->where('view_month','=',1)->get();

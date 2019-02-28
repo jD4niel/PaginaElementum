@@ -344,6 +344,7 @@
                 }
             });
         }
+        // mostrar modal y editar
         $('#modalMonth').on('show.bs.modal', function (event) {
             var button  = $(event.relatedTarget); 
             var modal   = $(this);
