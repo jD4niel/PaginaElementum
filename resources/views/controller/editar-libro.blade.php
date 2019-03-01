@@ -97,7 +97,7 @@
             </div>
             <hr>
             <div class="col-md-12 text-center">
-                <button id="save-book" type="button" onclick="enviarFoto()">Guardar libro</button>
+                <button class="btn-hover color-5" type="button" onclick="enviarFoto()">Guardar cambios</button> 
             </div>
         </form>
     </div>

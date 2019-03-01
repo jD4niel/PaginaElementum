@@ -498,7 +498,7 @@
                 '<div class="col-md-3">'+
                 '<button id="btn-change-img'+id+'" class="change-img-sections for-service" onclick="triggerFileService('+id+')" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">Cambiar imagen</button>'+
                 '<div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section()"><i class="far fa-trash-alt"></i></div>'+
-                    '<div class="service-card" data-toggle="modal" data-target="#serviceModal" data-title="{{ $item->name }}" data-id="{{ $item->id }}" data-text="{!! $item->text !!}" onmouseenter="btn_appear('{{ $item->id }}')" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
+                    '<div class="service-card" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
                        ' <div id="noimg'+id+'" class="img-from-fa"><i class="far fa-image"></i></div><img id="img-element-service'+id+'" class="img-fluid" style="width:100%">'+
                         '<input id="service_name'+id+'" type="text" class="service-name" value="">'+
                         '<button id="btn-change-img" class="change-img-sections" onclick="triggerFileService('+id+')">Cambiar imagen</button>'+
