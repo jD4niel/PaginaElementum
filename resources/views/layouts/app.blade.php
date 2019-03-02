@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="{{ URL::to('css/bootstrap-tagsinput.css') }}">
     <link rel="stylesheet" href="{{ URL::to('Datatables/datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/front-end.css') }}">
 
 
     @yield('style')
@@ -113,7 +114,54 @@
             </div>
         </div>
     </nav>
-    @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div id="template-nav">
+                <div>
+                    
+                    <div id="user-img">
+                        @if(Auth::user()->imagen)
+                            <img src="{{ asset('images/fotos_usuarios') }}/{{ Auth::user()->imagen}}" alt="">
+                        @else
+                            <img src="{{ asset('images/user.png') }}" alt="">
+                        @endif
+                    </div>
+                    <div class="name-usr">{{ Auth::user()->name }}</div>
+                </div>
+                <div>
+                    <ul class="ul-principal">
+                        <li class="li-item"><div><i class="fas fa-file-alt"></i>&nbsp;Blog</div>
+                            <ul class="ul-submenu">
+                                <li class="li-item">Crear entrada</li>
+                                <li class="li-item">Entradas</li>
+                                <li class="li-item">Agregar nuevo escritor</li>
+                            </ul>
+                        </li>
+                        <li class="li-item"><div><i class="fas fa-users"></i>&nbsp;Autores</div>
+                            <ul class="ul-submenu">
+                                <li class="li-item">Autores</li>
+                                <li class="li-item">Agregar autor</li>
+                            </ul>
+                        </li>
+                        <li class="li-item"><div><i class="fas fa-book"></i>&nbsp;Libros</div>
+                            <ul class="ul-submenu">
+                                <li class="li-item">Agregar libro</li>
+                                <li class="li-item">Ver libros</li>
+                            </ul>
+                        </li>
+                        <li class="li-item"><div><i class="fas fa-cog"></i>&nbsp;Control de la página</div></li>
+
+
+                        <li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Elementario</div></li>
+                        <li class="li-item"><div><i class="fab fa-elementor"></i>&nbsp;Control de elementos</div></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="template-content" class="col-md-10">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 </div>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -127,5 +175,13 @@
     <script src="{{ URL::to('/') }}/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script src="{{ URL::to('Datatables/datatables.min.js') }}"></script>
     @yield('script_section')
+    <script>
+        $('.li-item div').on('click', function(){
+            a = event.target
+            console.log(this)
+            console.log(this.nextElementSibling)
+            $(this.nextElementSibling).slideToggle(150)
+        });
+    </script>
 </body>
 </html>
