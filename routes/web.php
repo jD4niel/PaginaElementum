@@ -82,7 +82,7 @@ Route::post('/editar/borrar/servicio/{id}','ControlController@deleteService')->n
 
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');
 Route::get('/crear/autor', 'ControlController@createAutor')->name('crear.autor')->middleware('auth');
-Route::get('/control/', 'ControlController@control')->name('control.gral')->middleware('auth');
+Route::get('/control', 'ControlController@control')->name('control.gral')->middleware('auth');
 Route::post('/crear/libro/data', 'ControlController@AgregarLibro')->name('guardar.libro')->middleware('auth');
 Route::post('/crear/autor/data', 'ControlController@AgregarAutor')->name('guardar.autor')->middleware('auth');
 Route::post('/crear/usuario/data', 'ControlController@AgregarUsuario')->name('guardar.usuario')->middleware('auth');

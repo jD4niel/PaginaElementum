@@ -97,12 +97,101 @@
   color: #fff;
   text-decoration: none; /* no underline */
 }
+#cambiarIMG{
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(223, 20, 107);
+  padding: 3px 2vw;
+  font-size: 3vh;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+}
+#cambiarIMG:hover{
+  background: rgba(193, 0, 77,1);
+}
+#cambiarPDF{
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(66, 184, 221);
+  padding: 3px 2vw;
+  font-size: 3vh;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+}
+#cambiarPDF:hover{
+  background: rgb(56, 144, 221);
+}
 
-
-
-
-
-
+#elementum-loading-div{
+  text-align: center;
+  background: rgba(0,0,0,0);
+  top: 55%;
+  width: 100%;
+  position: absolute;
+  color: #65b6c4;
+}
+.buttons-inside button{
+  margin: auto 5px;
+  text-align: center;
+}
+.buttons-inside .del-btn{
+  color: #fff;
+  background-color: #f63232;
+  height: 100%;
+  padding: 4px;
+  transition-timing-function: ease-in-out;
+  transition-duration: 50ms;
+}
+.buttons-inside .del-btn:hover{
+  background-color: #c82d2d;
+}
+.buttons-inside .ed-btn{
+  color: #fff;
+  background-color: #2797f3;
+  height: 100%;
+  padding: 4px;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+}
+.buttons-inside .ed-btn:hover{
+  background-color: #1874b2;
+}
+.see_btn{
+  border: solid 2px #2ba72b;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #000;
+}
+.see_btn:hover{
+  background-color: #2caa48;
+  border: solid 2px #fff;
+  color: #fff;
+}
+.edit_btn{
+  border: solid 2px #2b81a7;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #000;
+}
+.edit_btn:hover{
+  background-color: #1a68db;
+  color: #fff;
+  border: solid 2px #fff;
+}
+.del_btn{
+  border: solid 2px #e44747;
+  border-radius: 5px;
+  padding: 3px 10px;
+  color: #000;
+}
+.del_btn:hover{
+  background-color: #ce353d;
+  color: #fff;
+  border: solid 2px #fff;
+  
+}
 
 
 

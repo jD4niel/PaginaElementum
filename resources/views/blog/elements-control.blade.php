@@ -17,8 +17,8 @@
                 <option id="ver-libros" value="2">Libros</option>
             </select>
         </label>
-        <a href="{{route('crear.autor')}}"><button  class="btn-add-new b1" style="float: right;">Agregar nuevo autor</button></a>
-        <a href="{{route('crear.libro')}}"><button class="btn-add-new b2" style="float: right;display: none;">Agregar nuevo libro</button></a>
+        <a href="{{route('crear.autor')}}"><button  class="btn-hover color-3 b1" style="float: right;">Agregar nuevo autor</button></a>
+        <a href="{{route('crear.libro')}}"><button class="btn-hover color-3 b2" style="float: right;display: none;">Agregar nuevo libro</button></a>
     </div>
     <hr>
     <div class="row" id="t1">
@@ -37,9 +37,9 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->nombre}}</td>
                     <td>{{$item->apellido_p}}&nbsp;{{$item->apellido_m}}</td>
-                    <td class="text-center">
-                        <button onclick="eliminar({{$item->id}},1)" class="btn btn-danger col-md-4"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
-                        <button onclick="modificar({{$item->id}})" class="btn btn-success col-md-4"  data-toggle="modal" data-target="#ModificarEntrada"><i class="fas fa-plus"></i>&nbsp;Modificar</button>
+                    <td class="text-center buttons-inside">
+                        <button onclick="eliminar({{$item->id}},1)" class="del-btn col-md-4"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
+                        <a href="{{ route('modifica.autor',$item->id) }}" target="_blank"><button onclick="modificar({{$item->id}})" class="ed-btn col-md-4"  data-toggle="modal" data-target="#ModificarEntrada"><i class="fas fa-plus"></i>&nbsp;Modificar</button></a>
                     </td>
                 </tr>
             @endforeach
@@ -62,9 +62,9 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->nombre}}&nbsp;{{$item->subtitulo}}</td>
                     <td>{{$item->fecha}}</td>
-                    <td class="text-center">
-                        <button onclick="eliminar({{$item->id}},2)" class="btn btn-danger col-md-4"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
-                        <button onclick="modificarLibro({{$item->id}})" class="btn btn-success col-md-4"  data-toggle="modal" data-target="#ModificarEntrada"><i class="fas fa-plus"></i>&nbsp;Modificar</button>
+                    <td class="text-center buttons-inside">
+                        <button onclick="eliminar({{$item->id}},2)" class="del-btn col-md-4"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
+                        <a href="{{ route('modifica.libro',$item->id) }}" target="_blank"><button class="ed-btn col-md-4"  data-toggle="modal" data-target="#ModificarEntrada"><i class="fas fa-plus"></i>&nbsp;Modificar</button></a>
                     </td>
                 </tr>
             @endforeach
@@ -134,14 +134,6 @@
 
                 }
             });
-        }
-        function modificar(id) {
-            var currentLocation = window.location;
-            window.location.href = currentLocation + '/autor/'+id;
-        }
-        function modificarLibro(id) {
-            var currentLocation = window.location;
-            window.location.href = currentLocation + '/libro/'+id;
         }
     </script>
 @endsection

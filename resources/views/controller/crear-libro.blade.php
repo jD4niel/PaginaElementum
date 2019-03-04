@@ -101,7 +101,7 @@
             </div>
             <hr>
             <div class="col-md-12 text-center">
-                <button id="save-book" type="button" onclick="enviarFoto()">Guardar libro</button>
+                <button id="save-book" class="btn-hover color-2" type="button" onclick="enviarFoto()"><i class="far fa-bookmark"></i>&nbsp;Guardar libro</button>
             </div>
         </form>
     </div>
