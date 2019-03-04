@@ -116,50 +116,54 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
+            @if(Auth::user())
             <div id="template-nav">
                 <div>
                     
                     <div id="user-img">
-                        @if(Auth::user()->imagen)
-                            <img src="{{ asset('images/fotos_usuarios') }}/{{ Auth::user()->imagen}}" alt="">
-                        @else
-                            <img src="{{ asset('images/user.png') }}" alt="">
-                        @endif
+                            @if(Auth::user()->imagen)
+                                <img src="{{ asset('images/fotos_usuarios') }}/{{ Auth::user()->imagen}}" alt="">
+                            @else
+                                <img src="{{ asset('images/user.png') }}" alt="">
+                            @endif
                     </div>
                     <div class="name-usr">{{ Auth::user()->name }}</div>
                 </div>
                 <div>
                     <ul class="ul-principal">
-                        <li class="li-item"><div><i class="fas fa-file-alt"></i>&nbsp;Blog</div>
+                        <li class="li-item"><div><i class="fas fa-file-alt"></i>&nbsp;Blog</div></a>
                             <ul class="ul-submenu">
-                                <li class="li-item">Crear entrada</li>
-                                <li class="li-item">Entradas</li>
-                                <li class="li-item">Agregar nuevo escritor</li>
+                                <a href="{{route('admin.portada')}}" class="no-style" target="_blank"><li class="li-item">Administrador</li></a>
+                                <a href="{{route('autor-entradas')}}" class="no-style" target="_blank"><li class="li-item">Crear entrada</li></a>
+                                <a href="{{route('entradas')}}" class="no-style" target="_blank"><li class="li-item">Entradas</li></a>
                             </ul>
                         </li>
                         <li class="li-item"><div><i class="fas fa-users"></i>&nbsp;Autores</div>
                             <ul class="ul-submenu">
-                                <li class="li-item">Autores</li>
-                                <li class="li-item">Agregar autor</li>
+                                <a href="{{route('control.gral')}}/#autores" class="no-style" target="_blank"><li class="li-item">Autores</li></a>
+                                <a href="{{route('crear.autor')}}" class="no-style" target="_blank"><li class="li-item">Agregar nuevo autor</li></a>
                             </ul>
                         </li>
                         <li class="li-item"><div><i class="fas fa-book"></i>&nbsp;Libros</div>
                             <ul class="ul-submenu">
-                                <li class="li-item">Agregar libro</li>
-                                <li class="li-item">Ver libros</li>
+                                <a href="{{route('crear.libro')}}" class="no-style" target="_blank"><li class="li-item">Agregar libro</li></a>
+                                <a href="{{route('control.gral')}}/#ver-libros" class="no-style" target="_blank"><li class="li-item">Ver libros</li></a>
                             </ul>
                         </li>
-                        <li class="li-item"><div><i class="fas fa-cog"></i>&nbsp;Control de la página</div></li>
+                        <a href="{{route('editarpagina')}}" class="no-style" target="_blank"><li class="li-item"><div><i class="fas fa-cog"></i>&nbsp;Control de la página</div></li></a>
 
 
-                        <li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Elementario</div></li>
-                        <li class="li-item"><div><i class="fab fa-elementor"></i>&nbsp;Control de elementos</div></li>
+                        <a href="{{route('elementario.index.controller')}}" class="no-style" target="_blank"><li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Elementario</div></li></a>
+                        <a href="{{route('control.gral')}}" class="no-style" target="_blank"><li class="li-item"><div><i class="fab fa-elementor"></i>&nbsp;Control de elementos</div></li></a>
                     </ul>
                 </div>
             </div>
             <div id="template-content" class="col-md-10">
                 @yield('content')
             </div>
+            @else
+                @yield('content')
+            @endif
         </div>
     </div>
 </div>

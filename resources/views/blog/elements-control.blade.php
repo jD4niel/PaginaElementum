@@ -14,7 +14,7 @@
             </span>
             <select name="" id="sel">
                 <option value="1">Autores</option>
-                <option value="2">Libros</option>
+                <option id="ver-libros" value="2">Libros</option>
             </select>
         </label>
         <a href="{{route('crear.autor')}}"><button  class="btn-add-new b1" style="float: right;">Agregar nuevo autor</button></a>
@@ -81,15 +81,21 @@
         jQuery( document ).ready(function( $ ) {
             $('#tabla1').DataTable();
             $('#tabla2').DataTable();
+            if(String(window.location).includes('ver-libros')){
+                $('#sel').val(2);
+                change_select()
+            }
         } );
         $("#sel").on('change',function () {
             var val = $("#sel").val();
+            change_select()
+        });
+        function change_select(){
             $("#t1").toggle();
             $(".b1").toggle();
             $("#t2").toggle();
             $(".b2").toggle();
-
-        });
+        }
         function eliminar(id, el) {
             path = "";
             if(el == 1)

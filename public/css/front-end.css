@@ -60,6 +60,13 @@
   color: white;
   padding-left: 1vw;
 }
+.ul-submenu li:hover{
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding-left: 1.2vw;
+  color: yellow;
+}
 #user-img{
   background-color: #fff;
   width: 150px;
@@ -86,7 +93,10 @@
 .container .navbar-brand {
     margin-left: -65px !important;
 }
-
+.no-style{
+  color: #fff;
+  text-decoration: none; /* no underline */
+}
 
 
 
