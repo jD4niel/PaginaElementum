@@ -294,7 +294,7 @@ body{
     font-size: 2em;
     padding: 3px 25px;
     text-align: center;
-    width: 65%;
+    width: 100%;
 }
 .btn_element:hover{
     cursor: auto;

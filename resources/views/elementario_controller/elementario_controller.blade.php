@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <br>
-                <button class="btn btn-success" onclick="range()">Generar rango de fechas</button>
+                <button class="btn-hover color-8" onclick="range()"><i class="fas fa-calendar-alt"></i>&nbsp;Generar rango</button>
             </div>
             <div class="row">
                 <div id="months">

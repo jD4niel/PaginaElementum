@@ -1,7 +1,10 @@
-@extends('layouts.app')
+|@extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid" >
+<script>
+        //$('#template-content > *:not(.loader)').hide();
+</script>
+    <div class="container-fluid">
         <div class="row" style="width: 80%;margin: auto;">
             <h1 class="h1 text-center">Slider</h1>
             <h3 class="h3 text-center">Las imágenes deben de ser en formato .jpg</h3>
@@ -19,7 +22,7 @@
                 </div>
             @endforeach
             <div class="col-md-12" style="margin-top: 35px;">
-                <div class="text-center"><button onclick="triggerFile()" class="btn btn-success">Agregar más</button>
+                <div class="text-center"><button onclick="triggerFile()" class="btn-hover color-4"><i class="fas fa-plus"></i>&nbsp;Agregar más</button>
                     <form action="" enctype="multipart/form-data" id="upload_form" role="form" method="POST">
                         <input id="fileUp" name="subirSlider"  multiple="multiple"  onchange="readURL(this);" accept="image/jpg,image/jpeg" type="file" style="display: none">
 
@@ -106,8 +109,8 @@
 
                 <div class="overlay">
                     <div class="contenedor-btn-taller">
-                        <a href="{{route('edit.taller',$item->id)}}"><button class="btn btn-success centrar-obj">Editar taller</button></a>
-                    <button class="btn btn-danger centrar-obj" onclick="eliminarTaller({{$item->id}})">Eliminar</button>
+                        <a href="{{route('edit.taller',$item->id)}}"><button class="btn-hover color-6 centrar-obj"><i class="fas fa-edit"></i>&nbsp;Editar taller</button></a>
+                    <button class="btn-hover color-11 centrar-obj" onclick="eliminarTaller({{$item->id}})"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
                     </div>
                 </div>
             </div>
@@ -115,7 +118,7 @@
             @endforeach
         </div>
         <br><br><br><br>
-        <div class="text-center"><button onclick="" class="btn btn-info">Añadir taller</button>
+        <div class="text-center"><button onclick="openInNewTab('{{route('new.taller')}}')" class="btn-hover color-3"><i class="fas fa-plus"></i>&nbsp;Añadir taller</button>
             <br><br><br>
         </div>
     </div>
@@ -124,19 +127,19 @@
         <hr>
         <div class="row text-center" >
             <div class="col-md-12 text-center">
+                <div class="col-md-12" style="margin: auto;">
+                    <button id="cambiarPDF" onclick="pdfChange()" title="Cambiar PDF"><i class="far fa-file-pdf"></i>&nbsp;</button>
+                    <button id="cambiarIMG" onclick="imgChange()" title="Cambiar Imagen"><i class="fas fa-images"></i>&nbsp;</button>
+                    <input type="file" id="changeImg" onchange="readURLimg(this)" style="display: none">
+                    <input type="file" id="changePdf" onchange="readURLpdf(this)" style="display: none">
+                </div>
                 <div class="col-md-6" style="left: 25%;">
                     <button id="savePdf" class="btn btn-success btn-block" type="button" onclick="guardarFotoPDF()" style="display: none;">Guardar cambios</button>
                     <img  id="imgRef" class="img-fluid" width="100%" src="{{ URL::to('/') }}/images/img_ref.jpg">
                 </div>
-                <div class="col-md-12" style="margin: auto;">
-                    <button class="btn btn-info" onclick="pdfChange()">Cambiar PDF</button>
-                    <button class="btn btn-danger" onclick="imgChange()">Cambiar Imagen</button>
-                    <input type="file" id="changeImg" onchange="readURLimg(this)" style="display: none">
-                    <input type="file" id="changePdf" onchange="readURLpdf(this)" style="display: none">
-                </div>
                 <div class="col-md-12" style="margin: auto;padding: 6px;">
                     <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
-                        <button class="btn btn-success">Ver PDF</button>
+                        <button class="btn-hover color-5">Ver PDF <i class="far fa-file-pdf"></i></button>
                     </a>
                 </div>
             </div>
@@ -167,7 +170,6 @@
 
   </div>
 </div>
-
 
 @endsection
 
@@ -505,6 +507,8 @@
                         '<input type="file" onchange="readURLservice(this,'+id+')" id="fileUpService'+id+'" style="display: none;">'+
                     '</div></div>');
         }
+        
+        
         
     </script>
 

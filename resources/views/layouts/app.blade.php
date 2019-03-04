@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="{{ URL::to('css/bootstrap-tagsinput.css') }}">
     <link rel="stylesheet" href="{{ URL::to('Datatables/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/front-end.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/loader.css') }}">
 
 
     @yield('style')
@@ -58,7 +59,7 @@
 
 </head>
 <body>
-<div id="app">
+<div id="app" style="display: none;">
     <nav class="navbar navbar-default navbar-static-top"  id="navheader">
         <div class="container">
             <div class="navbar-header">
@@ -140,7 +141,7 @@
                         </li>
                         <li class="li-item"><div><i class="fas fa-users"></i>&nbsp;Autores</div>
                             <ul class="ul-submenu">
-                                <a href="{{route('control.gral')}}/#autores" class="no-style" target="_blank"><li class="li-item">Autores</li></a>
+                                <a href="{{route('control.gral')}}" class="no-style" target="_blank"><li class="li-item">Autores</li></a>
                                 <a href="{{route('crear.autor')}}" class="no-style" target="_blank"><li class="li-item">Agregar nuevo autor</li></a>
                             </ul>
                         </li>
@@ -161,12 +162,22 @@
             <div id="template-content" class="col-md-10">
                 @yield('content')
             </div>
+           
             @else
                 @yield('content')
             @endif
         </div>
     </div>
 </div>
+ <div class="loader">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+  <div class="bar4"></div>
+  <div class="bar5"></div>
+  <div class="bar6"></div>
+</div>
+<div id="elementum-loading-div">&nbsp;Elementum&nbsp;</div>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -180,12 +191,21 @@
     <script src="{{ URL::to('Datatables/datatables.min.js') }}"></script>
     @yield('script_section')
     <script>
+        $(document).ready(function(){
+            $('.loader').hide();
+            $('#elementum-loading-div').hide();
+            $('#app').show();
+        });
         $('.li-item div').on('click', function(){
             a = event.target
             console.log(this)
             console.log(this.nextElementSibling)
             $(this.nextElementSibling).slideToggle(150)
         });
+        function openInNewTab(url) {
+          var win = window.open(url, '_blank');
+          win.focus();
+        }
     </script>
 </body>
 </html>
