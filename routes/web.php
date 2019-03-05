@@ -24,6 +24,8 @@ Route::get('/blog','BlogController@index')->name('blog.elementum');
 Route::get('/control/entrada/{id}','EntradasController@entrada')->name('control.entrada.elementum');
 Route::get('/blog/entrada/{id}','BlogController@show')->name('blog.entrada.elementum');
 Route::get('/blog/{tipo}','BlogController@indexPorSeccion')->name('blog.secciones');
+Route::post('/blog/busqueda', 'BlogController@search')->name('blog.search');
+Route::get('/blog/entradas/{etiquetas}', 'BlogController@searchTag')->name('blog.search.tag');
 
 
 Route::get('/info','PDFController@info')->name('info');
@@ -110,4 +112,4 @@ Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioControll
 Route::get('/elementario/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');
 Route::get('/elementario/seccion/{id}', 'ElementarioController@section')->name('section.tab');
 
-Route::view('/política-de-privacidad', 'Elementum.politica')->name('politica');
+Route::view('/aviso-de-privacidad', 'Elementum.politica')->name('politica');

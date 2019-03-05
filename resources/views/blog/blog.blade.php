@@ -3,12 +3,27 @@
 
 
     <div class="container" id="todo">
+        <div class="row" style="padding-top: 15px; margin: 0 10px 0 0">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <form action="{{route('blog.search')}}" method="post" id="form-search">
+                    {{csrf_field()}}
+                    <div class="input-group input-group-sm mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar" name="busqueda">
+                        <input type="text" class="form-control" placeholder="Buscar" name="tipo" hidden value="nombre">
+                        <div class="input-group-append">
+                            <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div id="p1"></div>
         <div id="p2"></div>
         <div id="p3"></div>
         <div id="p4"></div>
         <div id="entradas_recientes">
-            <div class="row" style="padding-top: 50px">
+            <div class="row" style="padding-top: 10px">
                 <div class="col-xs-12 col-lg-6 col-md-12" style="min-height: 540px">
                     <a href="{{ route('blog.entrada.elementum',$ue->id) }}"><img
                                 src="{{asset("images/entradas")}}/hola.jpeg" alt="Banner Publicitario" class="img-fluid"
@@ -57,7 +72,8 @@
                     @endforeach
                 </div>
             </div>
-            <div align="right"><a href="{{ route('blog.secciones','entradas') }}">Ver más <span class="dropdown-toggle"></span></a></div>
+            <div align="right"><a href="{{ route('blog.secciones','entradas') }}">Ver más <span
+                            class="dropdown-toggle"></span></a></div>
             <hr style="    background: #00394c;">
         </div>
 
@@ -82,7 +98,8 @@
                 <div class="col-md-8">
                     <div class="row" style="margin-bottom: -20px">
                         <div class="col-md-10"><h3>Nuestros Colaboradores</h3></div>
-                        <div class="col-md-2"><a href="{{ route('blog.secciones','nuestros-colaboradores') }}">Ver más <span class="dropdown-toggle"></span></a></div>
+                        <div class="col-md-2"><a href="{{ route('blog.secciones','nuestros-colaboradores') }}">Ver más
+                                <span class="dropdown-toggle"></span></a></div>
                     </div>
                     <hr>
                     @foreach($uea as $item)
@@ -146,7 +163,8 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-10"><h3>Leído en Elementario</h3></div>
-                        <div class="col-md-2"><a href="{{ route('blog.secciones','leido-en-elementario') }}">Ver más <span class="dropdown-toggle"></span></a></div>
+                        <div class="col-md-2"><a href="{{ route('blog.secciones','leido-en-elementario') }}">Ver más
+                                <span class="dropdown-toggle"></span></a></div>
                     </div>
                     <hr>
                     @foreach($le as $item)

@@ -208,5 +208,30 @@ class BlogController extends Controller
         return view ('blog.entrada-blog', compact('entrada','ep', 'autor'));
     }
 
+    public function search(Request $request){
+
+        $busqueda = Entradas::where($request->tipo,'like', '%' . $request->busqueda . '%')->get();
+        foreach ($busqueda as $item){
+            $autor_e = Autor::findOrFail($item->user_id);
+            $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
+            $item['fecha'] = $item->created_at->format('d M');
+        }
+        return view('blog.search', compact('busqueda'));
+//        return $busqueda;
+    }
+    public function searchTag($etiqueta){
+
+        $busqueda = Entradas::where('etiquetas','like', '%' . $etiqueta. '%')->get();
+        foreach ($busqueda as $item){
+            $autor_e = Autor::findOrFail($item->user_id);
+            $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
+            $item['fecha'] = $item->created_at->format('d M');
+        }
+        return view('blog.search', compact('busqueda'));
+//        return $busqueda;
+    }
+
+
+
 
 }

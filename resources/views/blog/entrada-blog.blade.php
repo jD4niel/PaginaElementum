@@ -144,6 +144,7 @@
 
 @section('script_collection')
     <script>
+        var tags = [];
         $('.navigation').css({'background-color': 'rgba(255, 255, 255, 1)'}, {'color': '#1d3b4f'});
         $(document).ready(function () {
             $('.navigation').css({'background-color': 'rgba(255, 255, 255, 1)'}, {'color': '#1d3b4f'});
@@ -165,8 +166,9 @@
             var etiquetas = '{{$entrada->etiquetas}}';
             etiquetas = etiquetas.split(',');
             $.each(etiquetas, function (index, value) {
-                $('#etiquetas').append('<span style="color: #fff;">ee</span><span class="etiqueta" style="background-color: #00394C; color: white">' + value + '</span>');
-                console.log(value);
+                $('#etiquetas').append('<span style="color: #fff;">ee</span><span class="etiqueta" style="background-color: #00394C"><a href="/blog/entradas/' + value + '" style="color: white; cursor:pointer;">' + value + '</a></span>');
+                tags = value;
+                console.log(tags);
             });
 
         });
@@ -191,6 +193,9 @@
                 return false;
             }
         });
+        // $(document).on('click', '#tag-value', function (event) {
+        //    console.log($('#tag-value').data('tag'));
+        // });
     </script>
     <script>(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
