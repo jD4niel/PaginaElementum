@@ -50,6 +50,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="{{ URL::to('css/bootstrap-tagsinput.css') }}">
     <link rel="stylesheet" href="{{ URL::to('Datatables/datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/front-end.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/loader.css') }}">
 
 
     @yield('style')
@@ -57,7 +59,7 @@
 
 </head>
 <body>
-<div id="app">
+<div id="app" style="display: none;">
     <nav class="navbar navbar-default navbar-static-top"  id="navheader">
         <div class="container">
             <div class="navbar-header">
@@ -113,8 +115,69 @@
             </div>
         </div>
     </nav>
-    @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            @if(Auth::user())
+            <div id="template-nav">
+                <div>
+                    
+                    <div id="user-img">
+                            @if(Auth::user()->imagen)
+                                <img src="{{ asset('images/fotos_usuarios') }}/{{ Auth::user()->imagen}}" alt="">
+                            @else
+                                <img src="{{ asset('images/user.png') }}" alt="">
+                            @endif
+                    </div>
+                    <div class="name-usr">{{ Auth::user()->name }}</div>
+                </div>
+                <div>
+                    <ul class="ul-principal">
+                        <li class="li-item"><div><i class="fas fa-file-alt"></i>&nbsp;Blog</div></a>
+                            <ul class="ul-submenu">
+                                <a href="{{route('admin.portada')}}" class="no-style" target="_blank"><li class="li-item">Administrador</li></a>
+                                <a href="{{route('autor-entradas')}}" class="no-style" target="_blank"><li class="li-item">Crear entrada</li></a>
+                                <a href="{{route('entradas')}}" class="no-style" target="_blank"><li class="li-item">Entradas</li></a>
+                            </ul>
+                        </li>
+                        <li class="li-item"><div><i class="fas fa-users"></i>&nbsp;Autores</div>
+                            <ul class="ul-submenu">
+                                <a href="{{route('control.gral')}}" class="no-style" target="_blank"><li class="li-item">Autores</li></a>
+                                <a href="{{route('crear.autor')}}" class="no-style" target="_blank"><li class="li-item">Agregar nuevo autor</li></a>
+                            </ul>
+                        </li>
+                        <li class="li-item"><div><i class="fas fa-book"></i>&nbsp;Libros</div>
+                            <ul class="ul-submenu">
+                                <a href="{{route('crear.libro')}}" class="no-style" target="_blank"><li class="li-item">Agregar libro</li></a>
+                                <a href="{{route('control.gral')}}/#ver-libros" class="no-style" target="_blank"><li class="li-item">Ver libros</li></a>
+                            </ul>
+                        </li>
+                        <a href="{{route('editarpagina')}}" class="no-style" target="_blank"><li class="li-item"><div><i class="fas fa-cog"></i>&nbsp;Control de la página</div></li></a>
+
+
+                        <a href="{{route('elementario.index.controller')}}" class="no-style" target="_blank"><li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Elementario</div></li></a>
+                        <a href="{{route('control.gral')}}" class="no-style" target="_blank"><li class="li-item"><div><i class="fab fa-elementor"></i>&nbsp;Control de elementos</div></li></a>
+                    </ul>
+                </div>
+            </div>
+            <div id="template-content" class="col-md-10">
+                @yield('content')
+            </div>
+           
+            @else
+                @yield('content')
+            @endif
+        </div>
+    </div>
 </div>
+ <div class="loader">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+  <div class="bar4"></div>
+  <div class="bar5"></div>
+  <div class="bar6"></div>
+</div>
+<div id="elementum-loading-div">&nbsp;Elementum&nbsp;</div>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -127,5 +190,22 @@
     <script src="{{ URL::to('/') }}/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script src="{{ URL::to('Datatables/datatables.min.js') }}"></script>
     @yield('script_section')
+    <script>
+        $(document).ready(function(){
+            $('.loader').hide();
+            $('#elementum-loading-div').hide();
+            $('#app').show();
+        });
+        $('.li-item div').on('click', function(){
+            a = event.target
+            console.log(this)
+            console.log(this.nextElementSibling)
+            $(this.nextElementSibling).slideToggle(150)
+        });
+        function openInNewTab(url) {
+          var win = window.open(url, '_blank');
+          win.focus();
+        }
+    </script>
 </body>
 </html>

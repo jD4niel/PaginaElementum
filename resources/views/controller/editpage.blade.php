@@ -1,7 +1,10 @@
-@extends('layouts.app')
+|@extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid" >
+<script>
+        //$('#template-content > *:not(.loader)').hide();
+</script>
+    <div class="container-fluid">
         <div class="row" style="width: 80%;margin: auto;">
             <h1 class="h1 text-center">Slider</h1>
             <h3 class="h3 text-center">Las imágenes deben de ser en formato .jpg</h3>
@@ -19,7 +22,7 @@
                 </div>
             @endforeach
             <div class="col-md-12" style="margin-top: 35px;">
-                <div class="text-center"><button onclick="triggerFile()" class="btn btn-success">Agregar más</button>
+                <div class="text-center"><button onclick="triggerFile()" class="btn-hover color-4"><i class="fas fa-plus"></i>&nbsp;Agregar más</button>
                     <form action="" enctype="multipart/form-data" id="upload_form" role="form" method="POST">
                         <input id="fileUp" name="subirSlider"  multiple="multiple"  onchange="readURL(this);" accept="image/jpg,image/jpeg" type="file" style="display: none">
 
@@ -41,6 +44,45 @@
         </div>
     </div>
     <br>
+    <div class="container" style="margin: 150px auto;">
+        <div class="row">
+            <h1 class="h1 text-center">Servicios</h1>
+            <hr>
+        </div>
+        <div id="service-card-container" class="row">
+            
+            @foreach($servicios as $item)
+            <div class="col-md-3">
+            <button id="btn-change-img{{ $item->id }}" class="change-img-sections for-service" onclick="triggerFileService('{{ $item->id }}')" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')">Cambiar imagen</button>
+            
+
+
+            <div id="eis_{{$item->id}}" class="edit_individual_section for-service-edit" title="Guardar cambios" onclick="edit_section({{$item->id}},'servicio','¿Editar este servicio?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
+            <div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section({{$item->id}},'servicio','Eliminar servicio','Una vez eliminado, no se puede revertir el cambio')"><i class="far fa-trash-alt"></i></div>
+                
+
+                <div class="service-card" data-toggle="modal" data-target="#serviceModal" data-title="{{ $item->name }}" data-id="{{ $item->id }}" data-text="{!! $item->text !!}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" onclick="onchangeinput({{$item->id}})">
+                    <img id="img-element-service{{$item->id}}" src="{{ asset('images/servicios') }}/{{ $item->image }}" class="img-fluid" style="width:100%">
+                    <input id="service_name{{$item->id}}" type="text" onchange="onchangeinput({{$item->id}})" class="service-name" value="{{ $item->name}}">
+                    <input type="file" onchange="readURLservice(this, '{{$item->id}}')" id="fileUpService{{ $item->id }}" style="display: none;">
+
+                    <textarea class="form-control" id="text{{ $item->id }}" style="display: none"></textarea>
+                
+                </div>
+
+            </div>
+            @endforeach()
+
+        
+            <br>
+            <br>
+            <br>
+        </div>
+        <div class="row" style="text-align: center">
+            <button id="AddServiceBtn" class="btn-hover color-1" onclick="AddService()"><i class="fas fa-plus"></i> Agregar servicio</button>
+            <button id="SaveServiceBtn" class="btn-hover color-2 hide" onclick="saveService({{count($servicios)}})"><i class="fas fa-plus"></i> Guardar</button>
+        </div>
+    </div>
     <div class="container-fluid" style="background-color: white">
         <div class="row" style="width: 80%;margin: auto;">
             <h1 class="h1 text-center">Talleres</h1>
@@ -67,8 +109,8 @@
 
                 <div class="overlay">
                     <div class="contenedor-btn-taller">
-                        <a href="{{route('edit.taller',$item->id)}}"><button class="btn btn-success centrar-obj">Editar taller</button></a>
-                    <button class="btn btn-danger centrar-obj" onclick="eliminarTaller({{$item->id}})">Eliminar</button>
+                        <a href="{{route('edit.taller',$item->id)}}"><button class="btn-hover color-6 centrar-obj"><i class="fas fa-edit"></i>&nbsp;Editar taller</button></a>
+                    <button class="btn-hover color-11 centrar-obj" onclick="eliminarTaller({{$item->id}})"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
                     </div>
                 </div>
             </div>
@@ -76,7 +118,7 @@
             @endforeach
         </div>
         <br><br><br><br>
-        <div class="text-center"><button onclick="" class="btn btn-info">Añadir taller</button>
+        <div class="text-center"><button onclick="openInNewTab('{{route('new.taller')}}')" class="btn-hover color-3"><i class="fas fa-plus"></i>&nbsp;Añadir taller</button>
             <br><br><br>
         </div>
     </div>
@@ -85,19 +127,19 @@
         <hr>
         <div class="row text-center" >
             <div class="col-md-12 text-center">
+                <div class="col-md-12" style="margin: auto;">
+                    <button id="cambiarPDF" onclick="pdfChange()" title="Cambiar PDF"><i class="far fa-file-pdf"></i>&nbsp;</button>
+                    <button id="cambiarIMG" onclick="imgChange()" title="Cambiar Imagen"><i class="fas fa-images"></i>&nbsp;</button>
+                    <input type="file" id="changeImg" onchange="readURLimg(this)" style="display: none">
+                    <input type="file" id="changePdf" onchange="readURLpdf(this)" style="display: none">
+                </div>
                 <div class="col-md-6" style="left: 25%;">
                     <button id="savePdf" class="btn btn-success btn-block" type="button" onclick="guardarFotoPDF()" style="display: none;">Guardar cambios</button>
                     <img  id="imgRef" class="img-fluid" width="100%" src="{{ URL::to('/') }}/images/img_ref.jpg">
                 </div>
-                <div class="col-md-12" style="margin: auto;">
-                    <button class="btn btn-info" onclick="pdfChange()">Cambiar PDF</button>
-                    <button class="btn btn-danger" onclick="imgChange()">Cambiar Imagen</button>
-                    <input type="file" id="changeImg" onchange="readURLimg(this)" style="display: none">
-                    <input type="file" id="changePdf" onchange="readURLpdf(this)" style="display: none">
-                </div>
                 <div class="col-md-12" style="margin: auto;padding: 6px;">
                     <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
-                        <button class="btn btn-success">Ver PDF</button>
+                        <button class="btn-hover color-5">Ver PDF <i class="far fa-file-pdf"></i></button>
                     </a>
                 </div>
             </div>
@@ -106,6 +148,28 @@
     </div>
     <br><br><br><br><br>
 
+
+<!-- Modal -->
+<div id="serviceModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>.
+      <div class="modal-body">
+         <textarea class="form-control" id="summary-ckeditor"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button id="saveModalInfo" type="button" class="btn btn-info" btn-id="" onclick="getTextFromModal()" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 @endsection
 
@@ -416,6 +480,7 @@
                 });
             }
         };
+
     </script>
     <script>
         function cambiar(a) {
@@ -426,8 +491,27 @@
                     console.log(response['data']);
                 }).catch(function (error) {console.log(error);});
         }
-
-
+        // JS servicios
+        function AddService() {
+            $('#AddServiceBtn').hide()
+            $('#SaveServiceBtn').removeClass('hide')   
+            var id = parseInt({{count($servicios)}})+1
+            $('#service-card-container').append(''+
+                '<div class="col-md-3">'+
+                '<button id="btn-change-img'+id+'" class="change-img-sections for-service" onclick="triggerFileService('+id+')" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">Cambiar imagen</button>'+
+                '<div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section()"><i class="far fa-trash-alt"></i></div>'+
+                    '<div class="service-card" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
+                       ' <div id="noimg'+id+'" class="img-from-fa"><i class="far fa-image"></i></div><img id="img-element-service'+id+'" class="img-fluid" style="width:100%">'+
+                        '<input id="service_name'+id+'" type="text" class="service-name" value="">'+
+                        '<button id="btn-change-img" class="change-img-sections" onclick="triggerFileService('+id+')">Cambiar imagen</button>'+
+                        '<input type="file" onchange="readURLservice(this,'+id+')" id="fileUpService'+id+'" style="display: none;">'+
+                    '</div></div>');
+        }
+        
+        
+        
     </script>
+
+    <script src="{{asset('js/edit_elements.js')}}"></script>
 @endsection
 

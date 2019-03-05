@@ -57,7 +57,7 @@
             <br>
             <hr>
             <div class="form-group-row text-center">
-                <input type="submit" value="Registrar usuario" class="btn-registry">
+                <input type="submit" value="Registrar usuario" class="btn-hover color-4">
             </div>
         </form>
     </div>

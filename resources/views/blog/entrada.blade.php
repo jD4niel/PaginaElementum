@@ -5,7 +5,7 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1>Mis entradas</h1>
+                <h1 >Mis entradas</h1>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -27,9 +27,9 @@
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
                                 <td>
-                                    <a class="btn btn-success" href="/blog/entrada/{{$item->id}}">Ver</a>
-                                    <a href="{{ route('edit.post', $item->id) }}" class="btn btn-warning">Modificar</a>
-                                    <button id="borrar-entrada" type="button" class="btn btn-danger" onclick="borrar('{{ route('delete.post', $item->id) }}')">Borrar</button>
+                                    <a class="see_btn" href="/blog/entrada/{{$item->id}}">Ver</a>
+                                    <a href="{{ route('edit.post', $item->id) }}" class="edit_btn">Modificar</a>
+                                    <button id="borrar-entrada" type="button" class="del_btn" onclick="borrar('{{ route('delete.post', $item->id) }}')">Borrar</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -37,8 +37,8 @@
                     </table>
                 </div>
             </div>
-            <div class="panel-footer">
-                <a href="{{ route('autor-entradas') }}" class="btn btn-info btn-block">Nueva Entrada</a>
+            <div class="panel-footer text-center">
+                <a href="{{ route('autor-entradas') }}"><button class="btn-hover color-3">Nueva Entrada</button></a>
             </div>
         </div>
     </div>

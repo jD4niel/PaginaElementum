@@ -23,7 +23,8 @@ class LibroController extends Controller
         $slider = DB::table('slider')->get();
         $first =DB::table('slider')->min('id');
         $talleres = DB::table('talleres')->get();
-        return view('Elementum.home',compact('libros','slider','first','talleres'));
+        $servicios = DB::table('servicios')->get();
+        return view('Elementum.home',compact('libros','slider','first','talleres','servicios'));
     }
     public function elementario(){
         $month_range = DB::table('month_range')->where('view_month','=',1)->get();
@@ -129,7 +130,7 @@ class LibroController extends Controller
         return response()->download(public_path('descarga.pdf'));
     }
     public function colecciones(){
-        $libros= Libro::orderBy('id', 'desc')->get();
+        $libros= Libro::orderBy('fecha', 'desc')->get();
         //dd($libros->imagen);
         return view('Elementum.collection',compact('libros'));
     }
@@ -138,9 +139,14 @@ class LibroController extends Controller
         $libros= Libro::where('nombre','like','%'.$data->nombre.'%')->get();
         return response()->json($libros);
     }
+    public function buscarAutores(Request $request){
+        $data = $request;
+        $libros= Autor::where('nombre','like','%'.$data->nombre.'%')->get();
+        return response()->json($libros);
+    }
     public function ver(Request $request){
         $data = $request;
-        $libros= Libro::where('collection_id',$data->coleccion)->get();
+        $libros= Libro::where('collection_id',$data->coleccion)->orderBy('fecha', 'desc')->get();
         return  response()->json($libros);
     }
     public function detalle($id){

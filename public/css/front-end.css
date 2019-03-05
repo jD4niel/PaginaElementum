@@ -1,0 +1,212 @@
+/* Styles for left navbar Elementum */
+#template-content .container{
+  width: 100% !important;
+}
+#template-nav{
+  background: rgba(62,212,122,1);
+  background: -moz-linear-gradient(-45deg, rgba(62,212,122,1) 0%, rgba(19,107,117,1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(62,212,122,1)), color-stop(100%, rgba(19,107,117,1)));
+  background: -webkit-linear-gradient(-45deg, rgba(62,212,122,1) 0%, rgba(19,107,117,1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(62,212,122,1) 0%, rgba(19,107,117,1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(62,212,122,1) 0%, rgba(19,107,117,1) 100%);
+  background: linear-gradient(135deg, rgba(62,212,122,1) 0%, rgba(19,107,117,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3ed47a', endColorstr='#136b75', GradientType=1 );
+  height: 100vh;
+  float: left;
+  position: sticky;
+  top: 0;
+  width: 16.6%
+}
+.ul-principal{
+  width: 90%;
+  float: right
+}
+.li-item div{
+ padding: 5px;
+ width:100%;
+ color: white;
+  transition: 100ms;
+}
+.li-item div:hover{
+  cursor: pointer;
+  background-color: rgba(82, 63, 63, 0.13);
+  padding: 5px 5px 5px 10px;
+}
+.li-item:hover .fa-file-alt{
+  color: #e6ff96;
+}
+.li-item:hover .fa-users{
+  color: #ffb1c9;
+}
+.li-item:hover .fa-book{
+  color: #8BFF93;
+}
+.li-item:hover .fa-cog{
+  color: #72B6FF;
+}
+.li-item:hover .fa-edit{
+  color: #FFA55C;
+}
+.li-item:hover .fa-elementor{
+  color: #FF6E70;
+}
+
+.ul-submenu{
+  width: 100%;
+  display: none;
+}
+.ul-submenu li{
+  background-color: rgba(0, 0, 0, 0.08);
+  color: white;
+  padding-left: 1vw;
+}
+.ul-submenu li:hover{
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding-left: 1.2vw;
+  color: yellow;
+}
+#user-img{
+  background-color: #fff;
+  width: 150px;
+  height: 150px;
+  margin: 10px auto;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 50%;
+  
+}
+#user-img img{
+  width: 100%;
+  display: flex;
+}
+.name-usr{
+  text-align: center;
+  color: white;
+  font-size: 2vw;
+  margin: -5px auto 15px auto;
+  border-bottom: solid 1px;
+  padding: 0;
+  width: 50%;
+}
+.container .navbar-brand {
+    margin-left: -65px !important;
+}
+.no-style{
+  color: #fff;
+  text-decoration: none; /* no underline */
+}
+#cambiarIMG{
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(223, 20, 107);
+  padding: 3px 2vw;
+  font-size: 3vh;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+}
+#cambiarIMG:hover{
+  background: rgba(193, 0, 77,1);
+}
+#cambiarPDF{
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(66, 184, 221);
+  padding: 3px 2vw;
+  font-size: 3vh;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+}
+#cambiarPDF:hover{
+  background: rgb(56, 144, 221);
+}
+
+#elementum-loading-div{
+  text-align: center;
+  background: rgba(0,0,0,0);
+  top: 55%;
+  width: 100%;
+  position: absolute;
+  color: #65b6c4;
+}
+.buttons-inside button{
+  margin: auto 5px;
+  text-align: center;
+}
+.buttons-inside .del-btn{
+  color: #fff;
+  background-color: #f63232;
+  height: 100%;
+  padding: 4px;
+  transition-timing-function: ease-in-out;
+  transition-duration: 50ms;
+}
+.buttons-inside .del-btn:hover{
+  background-color: #c82d2d;
+}
+.buttons-inside .ed-btn{
+  color: #fff;
+  background-color: #2797f3;
+  height: 100%;
+  padding: 4px;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+}
+.buttons-inside .ed-btn:hover{
+  background-color: #1874b2;
+}
+.see_btn{
+  border: solid 2px #2ba72b;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #000;
+}
+.see_btn:hover{
+  background-color: #2caa48;
+  border: solid 2px #fff;
+  color: #fff;
+}
+.edit_btn{
+  border: solid 2px #2b81a7;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #000;
+}
+.edit_btn:hover{
+  background-color: #1a68db;
+  color: #fff;
+  border: solid 2px #fff;
+}
+.del_btn{
+  border: solid 2px #e44747;
+  border-radius: 5px;
+  padding: 3px 10px;
+  color: #000;
+}
+.del_btn:hover{
+  background-color: #ce353d;
+  color: #fff;
+  border: solid 2px #fff;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

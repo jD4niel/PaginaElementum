@@ -37,7 +37,7 @@
                 <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
                     <img height="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="">
                     <hr>
-                    <a href="{{route("detalle.libros",$item->id)}}"  class="btnDetalle">Ver detalle</a>
+                    <a href="{{route('detalle.libros',$item->id)}}" class="btnDetalle">Ver detalle</a>
                 </div>
                      </div>
                 @endforeach
@@ -53,39 +53,17 @@
         <br>
         <br>
         <h1 class="h1 text-center">SERVICIOS</h1>
-        <div class="row align-content-center text-center" style="width: 80%; margin: auto;">
+        <div class="row align-content-center text-center" style="width: 80%; margin: auto;text-align: center;">
+                @foreach($servicios as $item)
                 <div class="col-md-4 iconoservicios">
                         <figure>
-                            <img src="{{ URL::to('/') }}/images/iconos/iconogestion.png" alt="gestion de contenidos" data-backdrop="false" data-toggle="modal" data-target="#gestionContenidos">
-                            <figcaption> Gestión de <br> contenidos</figcaption>
+                            <img src="{{asset('images/servicios')}}/{{ $item->image }}" alt="{{ $item->name }}" data-backdrop="false" data-toggle="modal" data-target="#servicios_modal" data-title="{{ $item->name }}" data-id="{{ $item->id }}" data-text="{!! $item->text !!}" >
+                            <figcaption>{{ $item->name }}</figcaption>
                         </figure>
                 </div>
-                <div class="col-md-4 iconoservicios">
-                    <figure>
-                    <img src="{{ URL::to('/') }}/images/iconos/iconodisenoeditorial.png" alt="diseño editorial" data-backdrop="false" data-toggle="modal" data-target="#DiseñoEditorial">
-                    <figcaption>Diseño editorial <br> e ilustración</figcaption>
-                    </figure>
-                </div>
-                <div class="col-md-4 iconoservicios">
-                    <figure>
-                        <img src="{{ URL::to('/') }}/images/iconos/iconoasesoria.png" alt="derechos de autor" data-backdrop="false" data-toggle="modal" data-target="#AsesoriaDerechos">
-                        <figcaption>Asesoría en <br> derechos de autor</figcaption>
-                    </figure>
-                </div>
-                <div class="col-md-6 iconoservicios">
-                    <figure>
-                        <img src="{{ URL::to('/') }}/images/iconos/iconocursos.png" alt="cursos y talleres" data-backdrop="false" data-toggle="modal" data-target="#CursosTalleres">
-                        <figcaption>Cursos y talleres</figcaption>
-                    </figure>
-                </div>
-                <div class="col-md-6 iconoservicios">
-                    <figure>
-                        <img src="{{ URL::to('/') }}/images/iconos/iconoservicios.png" alt="servicio promocion cultural" data-backdrop="false" data-toggle="modal" data-target="#ServicioPromocion">
-                        <figcaption>Servicios de promoción <br>cultural editorial</figcaption>
-                    </figure>
-                </div>
+                @endforeach()
 
-            </div>
+        </div>
     </div>
     <div class="separador"></div>
     <div class="container">
@@ -137,110 +115,26 @@
         </div>
     </div>
 
-    <!--modals -- >
+  <!-- Modal -->
+<div id="servicios_modal" class="modal fade" role="dialog" style="backdrop: true !important">
+  <div class="modal-dialog">
 
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="gestionContenidos" role="dialog">
-        <div class="modal-dialog">
-             <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Gestión de contenidos</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>La transformación de cultura, imaginación, conocimientos y cosmovisión en textos pertinentes y funcionales se
-                       logra a través de la gestión de contenidos. Elementum tiene las habilidades y la capacidad instalada para redactar
-                       y corregir textos, de acuerdo con las necesidades de documentos de diversa naturaleza.
-                    </p>
-                </div>
-                {{--<div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>--}}
-            </div>
-
-        </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-p"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="DiseñoEditorial" role="dialog">
-        <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Diseño editorial e ilustración</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>   El diseño editorial, que incluye portadas e interiores, parte de un análisis del discurso textual para
-                          crear un discurso gráfico que logre armonía entre la palabra escrita y la imagen, en beneficio del mensaje.
-                          El trabajo de ilustración, lejos de ser accesorio, es la síntesis plástica del discurso, que también puede
-                          dotar de matices icónicos al libro. </p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="AsesoriaDerechos" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Asesoría en derechos de autor</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>
-                    Cada creación es un bien patrimonial para su creador. La reivindicación de ese derecho,
-                     así como del derecho moral de ser reconocido como autor, parte del conocimiento de sus alcances
-                     y límites legales, y se concreta en el registro de las obras ante las autoridades competentes.
-                     Elementum brinda asesoría básica en esta materia.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="CursosTalleres" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Cursos y talleres</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Lectores y autores potenciales interesados en acercarse a los oficios del libro
-                      encuentran en los talleres de Elementum una alternativa pedagógica para concretar,
-                      parcial o totalmente, sus propias publicaciones. Asimismo, Elementum brinda
-                      capacitaciones en redacción dirigidas a públicos con diversos niveles de dominio de la palabra escrita.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="ServicioPromocion" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Promoción cultural</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>El colosal reto de despertar interés hacia los productos editoriales en un país que no se caracteriza por sus arraigados hábitos de lectura es afrontado por Elementum a través de diversas actividades de promoción y difusión, como presentaciones editoriales aderezadas con exhibiciones cinematográficas, debates, conversatorios y recitales, entre otras, que buscan romper esquemas tradicionales y crear públicos lectores.</p>
-            </div>
-
-        </div>
-    </div>
-    </div>
+  </div>
+</div>
 
 @endsection
 
@@ -326,5 +220,14 @@
        function reveal(a){
          $('.text-card-'+a).slideToggle();
         }
+        //Editar modal 
+        $('#servicios_modal').on('show.bs.modal', function (event) {
+            var button  = $(event.relatedTarget); 
+            var modal   = $(this);
+            var title = button.data('title');
+            var texto =button.data('text');
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-p').html(texto);
+        });
     </script>
 @endsection

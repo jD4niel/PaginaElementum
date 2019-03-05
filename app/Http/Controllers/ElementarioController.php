@@ -184,4 +184,9 @@ class ElementarioController extends Controller
         $section_obj = DB::table('section_obj')->where('id', $id)->delete();
         return response()->json($section_obj);
     }
+     public function destroyService($id)
+     {
+        $servicios = DB::table('servicios')->where('id', $id)->delete();
+        return response()->json($servicios);
+     }
 }

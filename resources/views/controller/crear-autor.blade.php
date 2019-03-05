@@ -134,8 +134,8 @@
             </div>
 
             <div class="col-md-12 text-center">
-                <button id="save_book" class="save-book" onclick="enviarFoto(1)">Guardar autor</button>
-                <button id="save_user" class="save-book" style="display: none;" onclick="enviarFoto(2)">Guardar usuario</button>
+                <button id="save_book" class="btn-hover color-10" onclick="enviarFoto(1)">Guardar autor</button>
+                <button id="save_user" class="btn-hover color-1" style="display: none;" onclick="enviarFoto(2)">Guardar usuario</button>
             </div>
         </div>
     </div>

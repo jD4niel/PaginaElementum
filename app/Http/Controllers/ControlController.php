@@ -21,8 +21,9 @@ class ControlController extends Controller
     {
         $pagina = DB::table('slider')->get();
         $taller = DB::table('talleres')->get();
+        $servicios = DB::table('servicios')->get();
         $talleres=$taller;
-        return view('controller.editpage',compact('pagina','talleres'));
+        return view('controller.editpage',compact('pagina','talleres','servicios'));
     }
     public function slider(Request $request){
         $data=$request;
@@ -93,31 +94,58 @@ class ControlController extends Controller
         }else {
             return 0;
         }
-     /*   try{
-
-            $data = $request;
-            $file = $data["file"];
-            $filename_img = $file->getClientOriginalName();
-            $mime = $file->getMimeType();
-            if (($mime == 'image/jpeg' || $mime == 'image/jpg' )) {
-
-                $destinationPath = public_path() . '/images/slider';
-                $filename_img = "foto".$data->id.".jpg";
-                if (!File::exists($destinationPath)) {
-                    File::makeDirectory($destinationPath, 0755, true);
-                }
-                $destinationPath1 = $destinationPath . '/' . $filename_img;
-                DB::table('pdf')->insertGetId(['nombre'=>$filename_img]);
-                copy($file, $destinationPath1);
-                return $data;
-            } else {
-                return $mime."no agarro";
-                abort(500);
-            }
-        }catch (\Exception $e){
-            //DB::rollBack();
-            return $e . "mal";
-        }*/
+    }
+    public function uploadNewService(Request $request){
+        $id =DB::table('talleres')->max('id');
+       if (($request->hasFile('file'))) {
+        $servicio = DB::table('servicios')
+            ->insertGetId([
+                'name'=>$request->name,
+                'text'=>$request->text,
+                'image'=>$request->file('file')->getClientOriginalName()
+             ]);
+            $destinationPath = public_path() . '/images/servicios/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+            return $request;
+        }else {
+            $servicio = DB::table('servicios')
+                ->insertGetId([
+                    'name'=>$request->name,
+                    'text'=>$request->text,
+                 ]);
+            return 0;
+        }
+    }
+    public function editService($id, Request $request)
+    {
+        if (($request->hasFile('file'))) {
+            $servicios = DB::table('servicios')->where('id','=', $id)
+            ->update([
+                'name'=>$request->name,
+                'text'=>$request->text,
+                'image'=>$request->file('file')->getClientOriginalName()
+            ]);
+            $destinationPath = public_path() . '/images/servicios/';
+            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            copy($request->file('file'), $destinationPath1);
+            return $request;
+        }else {
+            $servicios = DB::table('servicios')->where('id','=', $id)
+            ->update([
+                'name'=>$request->name,
+                'text'=>$request->text,
+            ]);
+            return 0;
+        }
+    }
+    /*
+    ***Borrar servicio
+    */
+    public function deleteService($id)
+    {
+        $servicios = DB::table('servicios')->where('id', $id)->delete();
+        return response()->json($servicios);
     }
 
     public function taller(){

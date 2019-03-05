@@ -45,7 +45,7 @@
           <div class="personal-element col-md-6">
             <div>
               <span class="effect-underline" data-toggle="modal" data-id="{{ $item->id }}" data-text="{!! $item->text !!}" data-nombre="{{ $item->name }} {{ $item->last_name }}" data-puesto="{{ $item->puesto }}" data-imagen="{{ asset('images/fotos_usuarios') }}/{{ $item->imagen }}" data-target="#personalModal">
-                {{ $item->name }}{{ $item->last_name }}
+                {{ $item->name }}&nbsp;{{ $item->last_name }}
               </span>
             </div>
           </div>
