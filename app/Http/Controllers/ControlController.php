@@ -56,30 +56,20 @@ class ControlController extends Controller
         }
     }
     public function uploadPDF(Request $request){
-        try{
-            $data = $request;
-            $file = $data["file"];
-            $pdf = $data["pdf"];
-            if ($pdf != 1){
-                $destinationPathPDF = public_path() . '/descarga.pdf';
-                copy($pdf, $destinationPathPDF);
-            }else{
-                return "pdf";
-            }
-            if ($file != 1){
-                $mime = $file->getMimeType();
-                if (($mime == 'image/jpeg' || $mime == 'image/jpg' )) {
-                    $destinationPath = public_path() . '/images/img_ref.jpg';
-                    copy($file, $destinationPath);
-                    return $data;
-                }
-            }else {
-                return "img";
-            }
-            return 0;
-        }catch (\Exception $e){
-            return $e . "mal";
-        }
+       $foto = $request->file('file');
+       $pdf = $request->file('pdf');
+       // Si el request tiene una imagen la guarda como
+       if ($request['foto'] != 'nothing') {
+            $destinationPath = public_path() . '/images';
+            $destinationPath1 = $destinationPath . '/img_ref.jpg';
+            copy($request->file('file'), $destinationPath1);
+       }
+       if ($request['pdf']!= 'nothing') {
+            $destinationPath = public_path();
+            $destinationPath1 = $destinationPath . '/descarga.pdf';
+            copy($request->file('file'), $destinationPath1);
+       }
+       return "functiona";
     }
     public function uploadNewImage(Request $request){
         $id =DB::table('slider')->max('id');
@@ -167,7 +157,6 @@ class ControlController extends Controller
         return response()->json($taller);
     }
     public function EditarTallerSend(Request $request){
-        $id =DB::table('talleres')->max('id');
         $taller = DB::table('talleres')
             ->where('id','=',$request->id)
             ->update([
@@ -178,17 +167,24 @@ class ControlController extends Controller
                 'persona'=>$request->imparte,
                 'informes'=>$request->informes
             ]);
+       $id =DB::table('talleres')->max('id');
        if (($request->hasFile('file'))) {
             $destinationPath = public_path() . '/images/talleres/';
             $destinationPath1 = $destinationPath . $request->imagen_nombre;
             copy($request->file('file'), $destinationPath1);
+            if (isset($taller)) {
+                DB::table('talleres')
+                    ->where('id','=',$id)
+                    ->update([
+                        'imagen'=>$request->file('file')->getClientOriginalName()
+                    ]);
+            }
             return $request;
         }else {
             return 0;
         }
     }
     public function AgregarTallerSend(Request $request){
-        $id =DB::table('talleres')->max('id');
         $taller = DB::table('talleres')
             ->insertGetId([
                 'titulo'=>$request->titulo,
@@ -196,15 +192,21 @@ class ControlController extends Controller
                 'duracion'=>$request->duracion,
                 'sede'=>$request->sede,
                 'persona'=>$request->imparte,
-                'imagen'=>$request->file('file')->getClientOriginalName()
              ]);
+       $id =DB::table('talleres')->max('id');
        if (($request->hasFile('file'))) {
             $destinationPath = public_path() . '/images/talleres/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
-            return $request;
+            $new_taller = DB::table('talleres')
+                ->where('id','=',$id)
+                ->update([
+                    'imagen'=>$request->file('file')->getClientOriginalName()
+                ]);
+            return $new_taller;
+            
         }else {
-            return 0;
+            return $taller;
         }
     }
 

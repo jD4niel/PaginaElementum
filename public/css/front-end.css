@@ -192,7 +192,16 @@
   border: solid 2px #fff;
   
 }
-
+#namePDF{
+  font-size: 3vh;
+  bottom: 10px;
+  left: 25px;
+  padding: 5px 20px;
+  border: solid 2px #307e5c;
+  background-color: #fff;
+  margin: 0 auto;
+  text-align: center;
+}
 
 
 

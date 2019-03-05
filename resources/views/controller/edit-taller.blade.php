@@ -181,9 +181,9 @@
             myFormData.append('imagen_nombre', imagen_nombre);
             myFormData.append('id', id);
             myFormData.append('sede', sede);
-            var url = '{{route('new.taller.send')}}';
+            var url = '{{route('edit.taller.send')}}';
             swal({
-                title: "¿Agregar taller?",
+                title: "¿Guardar taller?",
                 text: "Este taller aparecerá en la página principal de Elementum",
                 icon: "warning",
                 buttons: true,
@@ -202,7 +202,11 @@
                         processData: false, // NEEDED, DON'T OMIT THIS
                         success: function (response, file) {
                             console.log(response);
-                            /*window.location.reload();*/
+                            swal("El taller fue editado correctamente", " ",{
+                                        icon: "success"
+                                    }).then((value) => {
+                                     window.location.reload();
+                                });
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log(textStatus + ': ' + errorThrown);
