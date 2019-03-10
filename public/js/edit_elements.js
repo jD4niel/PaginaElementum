@@ -34,18 +34,20 @@ function delete_section(id,path,title,mes){
 // Edita las secciones  
 function edit_section(id,path,title,mes){
     var myFormData = new FormData();
-    myFormData.append('id', id);
-    var foto = $("#fileUpService"+id);
-    var text = $('#text'+id).val();
     myFormData.append('text',text);
-    myFormData.append('file', foto[0]['files'][0]);
     if(path == 'servicio'){
       var name = $('#service_name'+id).val();
-      myFormData.append('name', name);
+      var text = $('#text'+id).val();
+      var foto = $("#fileUpService"+id);
+      myFormData.append('id', id);
     }else{
-      var nombre = $('#text_section'+id).val();
-      myFormData.append('nombre', nombre);
+      var name = $('#text_section'+id).val();
+      var foto = $("#fileUp"+id);
     }
+      myFormData.append('name', name);
+      if(foto[0]!=null){
+        myFormData.append('file', foto[0]['files'][0]);
+      }
     swal({
         title: title,
         text: mes,
@@ -57,19 +59,21 @@ function edit_section(id,path,title,mes){
         if (willDelete) {
             var url = window.location +'/'+path+'/'+id;
             fetch(url, {
-              method: 'POST', 
               body: myFormData, 
               mode: 'cors',
               headers:{
                 'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-              }
+              },
+              contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+              processData: false,
+              method: 'post', 
               }).then(res => res)
             .then(response => {
                     console.log(response);
                     swal("Edición realizada", " ",{
                             icon: "success"
                         }).then((value) => {
-                        //window.location.reload();
+                        window.location.reload();
                     });
             });
         }
@@ -118,7 +122,9 @@ function saveService(id) {
           var myFormData = new FormData();
           var text = $('#text'+id).val();
           myFormData.append('text',text);
-          myFormData.append('file', foto[0]['files'][0]);
+          if(foto[0]!=null){
+            myFormData.append('file', foto[0]['files'][0]);
+          }
           myFormData.append('name', name);
           var object = {};
           myFormData.forEach(function(value, key){
@@ -168,3 +174,45 @@ $('#serviceModal').on('show.bs.modal', function (event) {
 
 
 });
+
+        function saveSections() {
+            var myFormData = new FormData();
+            var last_id = $('#id-input-sec').val();
+            var nombre = $('#text_section'+last_id).val();
+            alert(nombre)
+            var foto = $("#fileUp"+last_id);
+            if(foto[0]!=null){
+              myFormData.append('file', foto[0]['files'][0]);
+            }
+            myFormData.append('name', nombre);
+            //Enviar meses al controlador
+            swal({
+                title: "¿Guardar secciones?",
+                text: "Los cambios se actualizarán en el inicio de Elementario",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                   var url = window.location + '/seccion/';
+                   fetch(url, {
+                      method: 'POST', 
+                      body: myFormData, 
+                      mode: 'cors',
+                      headers:{
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                      }
+                      })
+                    .then(response => {
+                          console.log(response);
+                            swal("El autor fue agregado correctamente", " ",{
+                                    icon: "success"
+                                }).then((value) => {
+                                 //window.location.reload();
+                                 console.log(response+"hosjanjkasdn")
+                            });
+                    });
+                }
+            });
+        }  

@@ -68,7 +68,7 @@ class ElementarioController extends Controller
         if (($request->hasFile('file'))) {
             $section = DB::table('section_obj')
                 ->insertGetId([
-                    'name'=>$request->nombre,
+                    'name'=>$request->name,
                     'img'=>$request->file('file')->getClientOriginalName(),
                 ]);
             $destinationPath = public_path() . '/images/secciones/headers/';
@@ -77,7 +77,7 @@ class ElementarioController extends Controller
         }else {
             $section = DB::table('section_obj')
                 ->insertGetId([
-                    'name'=>$request->nombre,
+                    'name'=>$request->name,
                 ]);
         }
         $section_entradas = DB::table('entrada_sections')
@@ -119,7 +119,7 @@ class ElementarioController extends Controller
             $section = DB::table('section_obj')
                 ->where('id','=',$request->id)
                 ->update([
-                    'name'=>$request->nombre,
+                    'name'=>$request->name,
                     'img'=>$request->file('file')->getClientOriginalName(),
                 ]);
             $destinationPath = public_path() . '/images/secciones/headers/';
@@ -129,7 +129,7 @@ class ElementarioController extends Controller
             $section = DB::table('section_obj')
                 ->where('id','=',$request->id)
                 ->update([
-                    'name'=>$request->nombre,
+                    'name'=>$request->name,
                 ]);
             
         }

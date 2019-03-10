@@ -388,7 +388,7 @@
                                  });
                             }
                         });
-                    }Nuestros planes incluyen mensajes de texto ilimitados y datos, desde $ 9,99 por mes sin contratos. Incluso tenemos una version gratuita de wifi solamente disponible para bajar en su aparato existente.
+                    }
                 });
             }
         }

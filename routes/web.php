@@ -60,8 +60,14 @@ Route::post('/alumno/subirfoto','EntradasController@uploadImg')->name('imagenes.
 //Subir PDFs
 Route::get('/info/subir',function (){return view('controller.subirpdf');})->name('subirpdf')->middleware('auth');
 Route::post('/info/pdf','PDFController@uploadPDF')->name('pdf.up')->middleware('auth');
-
-
+//Editar pestañas Elementum
+Route::get('/editar/pestañas', 'ControlController@editPageTabs')->name('editarPestañasPagina')->middleware('auth');
+Route::post('/editar/subir/imagen', 'TabsController@uploadTabImage')->name('uploadTabImage')->middleware('auth');
+Route::get('/editar/nosotros', 'TabsController@nosotrosTab')->name('nosotrosTab')->middleware('auth');
+Route::get('/editar/autores', 'TabsController@autoresTab')->name('autoresTab')->middleware('auth');
+Route::get('/editar/contacto', 'TabsController@contactoTab')->name('contactoTab')->middleware('auth');
+Route::get('/editar/colecciones', 'TabsController@coleccionesTab')->name('coleccionesTab')->middleware('auth');
+//Editar portada elementum
 Route::get('/editar', 'ControlController@index')->name('editarpagina')->middleware('auth');
 Route::post('/editar/slider', 'ControlController@slider')->name('editar.slider')->middleware('auth');
 Route::post('/editar/slider/imagen','ControlController@uploadImage')->name('slide.up')->middleware('auth');
@@ -81,7 +87,7 @@ Route::post('/editar/servicio/nuevo','ControlController@uploadNewService')->name
 Route::post('/editar/servicio/{id}','ControlController@editService')->name('edit.service')->middleware('auth');
 Route::post('/editar/borrar/servicio/{id}','ControlController@deleteService')->name('delete.service')->middleware('auth');
 
-
+//Editar Libros y autores
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');
 Route::get('/crear/autor', 'ControlController@createAutor')->name('crear.autor')->middleware('auth');
 Route::get('/control', 'ControlController@control')->name('control.gral')->middleware('auth');

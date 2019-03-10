@@ -151,7 +151,12 @@
                                 <a href="{{route('control.gral')}}/#ver-libros" class="no-style"><li class="li-item">Ver libros</li></a>
                             </ul>
                         </li>
-                        <a href="{{route('editarpagina')}}" class="no-style"><li class="li-item"><div><i class="fas fa-cog"></i>&nbsp;Control de la página</div></li></a>
+                        <li class="li-item"><div><i class="fas fa-cog"></i>&nbsp;Control de la página</div>
+                            <ul class="ul-submenu">
+                                <a href="{{route('editarpagina')}}" class="no-style"><li class="li-item">Portada de Elementum</li></a>
+                                <a href="{{route('editarPestañasPagina')}}" class="no-style"><li class="li-item">Control de pestañas</li></a>
+                            </ul>
+                        </li>
 
 
                         <a href="{{route('elementario.index.controller')}}" class="no-style"><li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Elementario</div></li></a>
@@ -197,7 +202,6 @@
             $('#app').show();
         });
         $('.li-item div').on('click', function(){
-            a = event.target
             console.log(this)
             console.log(this.nextElementSibling)
             $(this.nextElementSibling).slideToggle(150)

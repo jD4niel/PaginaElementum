@@ -299,4 +299,12 @@ class ControlController extends Controller
         $autor = DB::table('autors')->where('id', $id)->delete();
         return response()->json("borrado");
     }
+    public function editPageTabs(){
+        $autores = DB::table('tabs_images')->where('tab_name','=','autores')->first();
+        $contacto = DB::table('tabs_images')->where('tab_name','=','contacto')->first();
+        $nosotros = DB::table('tabs_images')->where('tab_name','=','nosotros')->first();
+        $colecciones = DB::table('tabs_images')->where('tab_name','=','colecciones')->first();
+        //dd($nosotros->image);
+        return view('controller.edit_tabs',compact('autores','contacto','nosotros','colecciones'));
+    }
 }
