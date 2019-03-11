@@ -56,9 +56,9 @@
                         <a href="{{ route('blog.elementum') }}">Blog</a>
                     </li>
                     <li id="iconos" class="" style="padding-top: 15px; padding-left: 15px; padding-bottom: 24px; border-bottom: 1px solid white;">
-                        <i onclick="openInNewTab('https://www.facebook.com/edielementum')"class="fab social_icons fa-facebook-f link"></i>
-                        <i onclick="openInNewTab('https://twitter.com/edi_elementum')" class="fab social_icons fa-twitter link"></i>
-                        <i onclick="openInNewTab('https://www.instagram.com/edi_elementum/')" class="fab fa-instagram social_icons link"></i>
+                        <i onclick="openInNewTab('{{ $elementum->facebook }}')"class="fab social_icons fa-facebook-f link"></i>
+                        <i onclick="openInNewTab('{{ $elementum->twitter }}')" class="fab social_icons fa-twitter link"></i>
+                        <i onclick="openInNewTab('{{ $elementum->insta }}')" class="fab fa-instagram social_icons link"></i>
                     </li>
                 </ul>
             </nav>
@@ -71,18 +71,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    Editorial Elementum S.A. de C.V. <br>
-                    Jardín Colón No. 8, Col. Centro <br>
-                    Pachuca, Hgo. <br>
+                    {!!  nl2br(e($elementum->direccion)) !!}
+                    <br>
                     <hr style="background-color: white; width: 250px; float:left;">
                 </div>
                 <div class="col-md-6 align-content-right" style="align-content: right; text-align: right;">
-                    <a id="fb_link" target="_blank" href="https://www.facebook.com/edielementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link"></i></a>
-                    <a id="tw_link" target="_blank" href="https://twitter.com/edi_elementum"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link"></i></a>
-                    <a id="insta_link" target="_blank" href="https://www.instagram.com/edi_elementum/"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link"></i></a>
+                    <a id="fb_link" target="_blank" href="{{ $elementum->facebook }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link"></i></a>
+                    <a id="tw_link" target="_blank" href="{{ $elementum->twitter }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link"></i></a>
+                    <a id="insta_link" target="_blank" href="{{ $elementum->insta }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link"></i></a>
                     <br>
                     Teléfono <br>
-                    (771) 71 5 05 67 <br>
+                    {{ $elementum->telefono }} <br>
                     <hr style="background-color: white; width: 200px; float: right;">
                 </div>
             </div>

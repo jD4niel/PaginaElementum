@@ -141,13 +141,14 @@ class ElementarioController extends Controller
      */
     public function section($id)
     {
-     $section_obj = DB::table('section_obj')->where('id','=',$id)->get();
-     $entrada_sections = DB::table('entrada_sections')
-         ->join('section_obj', 'section_obj.id', '=', 'entrada_sections.section_obj_id')
-         ->join('entradas', 'entradas.id', '=', 'entrada_sections.entradas_id')
-         ->where('section_obj.id','=',$id)
-         ->paginate(9);
-        return view('Elementum.elementario_section',compact('entrada_sections','section_obj'));
+        $section_obj = DB::table('section_obj')->where('id','=',$id)->get();
+        $entrada_sections = DB::table('entrada_sections')
+             ->join('section_obj', 'section_obj.id', '=', 'entrada_sections.section_obj_id')
+             ->join('entradas', 'entradas.id', '=', 'entrada_sections.entradas_id')
+             ->where('section_obj.id','=',$id)
+             ->paginate(9);
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.elementario_section',compact('entrada_sections','section_obj','entradas'));
     }
 
     /**

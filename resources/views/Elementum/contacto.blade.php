@@ -9,12 +9,12 @@
                 <br>
                 <div class="font-contacto-color data-location">
                     Teléfono <br>
-                    (771) 715 05 67
+                    {{ $elementum->telefono }} <br>
                 </div>
                 <br>
-                <div class="font-contacto-color data-location">Editorial Elementum S.A. de C.V.</div>
-                <div class="font-contacto-color data-location">Jardín Colón No. 8, col. Centro</div>
-                <div class="font-contacto-color data-location">Pachuca,Hgo.</div>
+                <div class="font-contacto-color">
+                  {!!  nl2br(e($elementum->direccion)) !!}
+                </div>
                 <br><br>
                 <h3 class="font-contacto-color">Solicita información</h3>
 
@@ -37,12 +37,12 @@
                             width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
                 <div style="margin-top: 30px">
-                    <i style="font-size: 15px; color: #27375b; padding-top:6px;height: 30px; width: 30px;"
-                       class="fab fa-facebook-f social_icons"></i>
-                    <i style="font-size: 15px; color: #27375b; padding-top:6px;height: 30px; width: 30px;"
-                       class="fab fa-twitter social_icons"></i>
-                    <i style="font-size: 15px; color: #27375b   ; padding-top:6px;height: 30px; width: 30px;"
-                       class="fab fa-instagram social_icons"></i>
+                    <a href="{{ $elementum->facebook }}" target="_blank"><i style="font-size: 15px; color: #27375b; padding-top:6px;height: 30px; width: 30px;"
+                       class="fab fa-facebook-f social_icons"></i></a>
+                    <a href="{{ $elementum->twitter }}" target="_blank"><i style="font-size: 15px; color: #27375b; padding-top:6px;height: 30px; width: 30px;"
+                       class="fab fa-twitter social_icons"></i></a>
+                    <a href="{{ $elementum->insta }}" target="_blank"><i style="font-size: 15px; color: #27375b   ; padding-top:6px;height: 30px; width: 30px;"
+                       class="fab fa-instagram social_icons"></i></a>
                 </div>
                 <br>
                 <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">

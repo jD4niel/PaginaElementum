@@ -157,11 +157,17 @@
                                 <a href="{{route('editarpagina')}}" class="no-style"><li class="li-item">Portada de Elementum</li></a>
                                 <a href="{{route('editarPestañasPagina')}}" class="no-style"><li class="li-item">Control de pestañas</li></a>
                             </ul>
-                        </li>
 
 
                         <a href="{{route('elementario.index.controller')}}" class="no-style"><li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Elementario</div></li></a>
                         <a href="{{route('control.gral')}}" class="no-style"><li class="li-item"><div><i class="fab fa-elementor"></i>&nbsp;Control de elementos</div></li></a>
+                        </li>
+                        <li class="li-item"><div><i class="fas fa-book-reader"></i>&nbsp;Elementum</div>
+                            <ul class="ul-submenu">
+                                <a href="{{route('elementum.info')}}" class="no-style"><li class="li-item">Información</li></a>
+                                <a href="{{route('editarPestañasPagina')}}" class="no-style"><li class="li-item">Integrantes</li></a>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

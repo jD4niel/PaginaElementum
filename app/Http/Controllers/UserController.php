@@ -15,7 +15,8 @@ class UserController extends Controller
     public function index()
     {
         $users=User::all();
-        return view('blog.user',compact('users'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('blog.user',compact('users','elementum'));
     }
 
     /**
@@ -85,6 +86,7 @@ class UserController extends Controller
         return response()->json($user);
     }
     public function createView(){
-        return view('blog.create-user');
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('blog.create-user','elementum');
     }
 }

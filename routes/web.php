@@ -116,6 +116,10 @@ Route::get('/elementario/controlador/seccion/{id}', 'ElementarioController@indiv
 Route::post('/elementario/controlador/borrar/seccion/{id}', 'ElementarioController@destroy')->name('section.delete')->middleware('auth');
 Route::post('/elementario/controlador/borrar/servicio/{id}', 'ElementarioController@destroyService')->name('service.delete')->middleware('auth');
 Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioController@editSection')->name('section.edit')->middleware('auth');
+//Elementum
+Route::get('/elementum/info', 'ElementumController@info')->name('elementum.info')->middleware('auth');
+Route::post('/elementum/info/save', 'ElementumController@infoSave')->name('elementum.info.save')->middleware('auth');
+Route::get('/elementum/footer', 'ElementumController@footer')->name('elementum.footer')->middleware('auth');
 
 
 //Entradas para Elementario

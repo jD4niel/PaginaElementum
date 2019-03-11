@@ -24,7 +24,8 @@ class LibroController extends Controller
         $first =DB::table('slider')->min('id');
         $talleres = DB::table('talleres')->get();
         $servicios = DB::table('servicios')->get();
-        return view('Elementum.home',compact('libros','slider','first','talleres','servicios'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.home',compact('libros','slider','first','talleres','servicios','elementum'));
     }
     public function elementario(){
         $month_range = DB::table('month_range')->where('view_month','=',1)->get();
@@ -35,7 +36,8 @@ class LibroController extends Controller
              ->join('entradas', 'entradas.id', '=', 'entrada_sections.entradas_id')
              ->take(7)
              ->get();
-        return view('Elementum.elementario',compact('month_range','title','section_obj','entrada_sections'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.elementario',compact('month_range','title','section_obj','entrada_sections','elementum'));
     }
     public function libroInd($id){
         $coleccion = Collection::all();
@@ -131,8 +133,9 @@ class LibroController extends Controller
     }
     public function colecciones(){
         $libros= Libro::orderBy('fecha', 'desc')->get();
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
         //dd($libros->imagen);
-        return view('Elementum.collection',compact('libros'));
+        return view('Elementum.collection',compact('libros','elementum'));
     }
     public function buscar(Request $request){
         $data = $request;
@@ -152,27 +155,34 @@ class LibroController extends Controller
     public function detalle($id){
         $libros= Libro::find($id);
         $recomendados = Libro::where('collection_id',$libros->collection_id)->where('id','!=',$id)->get();
-        return view('libro',compact('libros','recomendados'));
+
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('libro',compact('libros','recomendados','elementum'));
     }
     public function ir(){
-        return view('libro');
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('libro','elementum');
     }
     public function autors(){
         $autors = Autor::all();
-        return view('Elementum.autors',compact('autors'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.autors',compact('autors','elementum'));
     }
     public function autors_details($id){
         $autor=Autor::findOrFail($id);
         $libros=Libro::where('autor_id','=',$id)->get();
-        return view('Elementum.autor_detalle',compact('autor','libros'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.autor_detalle',compact('autor','libros','elementum'));
     }
     public function contacto(){
-        return view('Elementum.contacto');
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.contacto',compact('elementum'));
     }
     public function nosotros(){ 
         $users = DB::table('users')->get();
         $nosotros = DB::table('tabs_images')->where('tab_name','=','nosotros')->first();
-        return view('Elementum.nosotros',compact('users','nosotros'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.nosotros',compact('users','nosotros','elementum'));
     }
 
 }

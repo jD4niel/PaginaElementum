@@ -68,6 +68,7 @@ class TabsController extends Controller
         $users = DB::table('users')->get();
         $tab_name = DB::table('tabs_images')->where('tab_name','=',$name)->first();
         $text = $request->text;
-        return view('Elementum.preview',compact('users','tab_name','text'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.preview',compact('users','tab_name','text','elementum'));
     }
 }

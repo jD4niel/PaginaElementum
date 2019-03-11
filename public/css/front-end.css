@@ -288,4 +288,10 @@
   position: absolute;
   z-index: 1000;
 }
-
+/*Información Elementum*/
+#elementum-info{
+  padding: 35px 30px;
+  border:solid 4px #C0C8C6FF;
+  box-shadow: 3px 3px 5px 0px rgba(10,11,11,0.2);
+  background-color: #fff;
+}
