@@ -15,7 +15,12 @@ class TabsController extends Controller
         $nosotros = DB::table('tabs_images')->where('tab_name','=','nosotros')->first();
         return view('tabs_controller.nosotros_tab',compact('nosotros'));
     }
-    
+    public function saveUsTab(Request $request)
+    {
+        $tabs = DB::table('tabs_images')->where('tab_name','=',$request->tab_name)
+            ->update(['text_content'=>$request->text]);
+        return response()->json($tabs); 
+    }
     public function autoresTab()
     {
         $autores = DB::table('tabs_images')->where('tab_name','=','autores')->first();
@@ -58,5 +63,11 @@ class TabsController extends Controller
             return $e . "mal";
         }
     }
-    
+    public function preview($name,Request $request)
+    {
+        $users = DB::table('users')->get();
+        $tab_name = DB::table('tabs_images')->where('tab_name','=',$name)->first();
+        $text = $request->text;
+        return view('Elementum.preview',compact('users','tab_name','text'));
+    }
 }

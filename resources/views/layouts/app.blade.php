@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="{{ URL::to('Datatables/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/front-end.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/loader.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/ckeditor_custom_styles.css') }}">
 
 
     @yield('style')

@@ -1,10 +1,10 @@
 @extends('template')
 @section('home')
-    <img  class="img-responsive" width="100%" height="535px" src="{{ URL::to('/') }}/images/tabs_banners/{{$nosotros->image}}" alt="">
+    <img  class="img-responsive" width="100%" height="535px" src="{{ URL::to('/') }}/images/tabs_banners/{{$tab_name->image}}" alt="">
     <div class="separador"></div>
-
+    <div id="preview_btn"></div>
     <div id="text_container" class="container">
-        {!!$nosotros->text_content!!}
+        {!!$text!!}
     </div>
 
     <div class="separador"></div><br>

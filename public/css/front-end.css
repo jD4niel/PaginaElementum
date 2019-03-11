@@ -256,11 +256,11 @@
 }
 .tab-banner-image div{
   width: 98%;
-  height: 100%;
+  height: auto;
   display: absolute;
   font-size: 5em;
   position: absolute;
-  top: 0;
+  top: 25%;
   color: wheat;
 }
 .tab-banner-image span{

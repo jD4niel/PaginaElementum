@@ -64,9 +64,13 @@ Route::post('/info/pdf','PDFController@uploadPDF')->name('pdf.up')->middleware('
 Route::get('/editar/pestañas', 'ControlController@editPageTabs')->name('editarPestañasPagina')->middleware('auth');
 Route::post('/editar/subir/imagen', 'TabsController@uploadTabImage')->name('uploadTabImage')->middleware('auth');
 Route::get('/editar/nosotros', 'TabsController@nosotrosTab')->name('nosotrosTab')->middleware('auth');
+Route::post('/editar/nosotros/save', 'TabsController@saveUsTab')->name('saveUsTab')->middleware('auth');
 Route::get('/editar/autores', 'TabsController@autoresTab')->name('autoresTab')->middleware('auth');
 Route::get('/editar/contacto', 'TabsController@contactoTab')->name('contactoTab')->middleware('auth');
 Route::get('/editar/colecciones', 'TabsController@coleccionesTab')->name('coleccionesTab')->middleware('auth');
+//Vista previa edición
+Route::post('/editar/{name}/preview', 'TabsController@preview')->name('preview')->middleware('auth');
+
 //Editar portada elementum
 Route::get('/editar', 'ControlController@index')->name('editarpagina')->middleware('auth');
 Route::post('/editar/slider', 'ControlController@slider')->name('editar.slider')->middleware('auth');

@@ -169,9 +169,10 @@ class LibroController extends Controller
     public function contacto(){
         return view('Elementum.contacto');
     }
-    public function nosotros(){
+    public function nosotros(){ 
         $users = DB::table('users')->get();
-        return view('Elementum.nosotros',compact('users'));
+        $nosotros = DB::table('tabs_images')->where('tab_name','=','nosotros')->first();
+        return view('Elementum.nosotros',compact('users','nosotros'));
     }
 
 }
