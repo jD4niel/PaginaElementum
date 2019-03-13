@@ -1,4 +1,4 @@
-    @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 
@@ -21,11 +21,15 @@
         <a href="{{route('crear.libro')}}"><button class="btn-hover color-3 b2" style="float: right;display: none;">Agregar nuevo libro</button></a>
     </div>
     <hr>
+    <button class="btn btn-success" onclick="check_remaining_checkboxes()" style="position: sticky;top:0;z-index: 10;left: 80%;margin-bottom: 25px;">Seleccionar restantes</button>
+    <button class="btn btn-danger" onclick="save_new_order()" style="position: sticky;top:0;z-index: 10;left: 95%;margin-bottom: 25px;">Guardar</button>
+    <br>
     <div class="row" id="t1">
         <table id="tabla1" class="table">
             <thead>
             <tr>
                 <th>Id</th>
+                <th>Ordenar</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Acciones</th>
@@ -35,6 +39,7 @@
             @foreach($autor as $item)
                 <tr id="id1{{$item->id}}">
                     <td>{{$item->id}}</td>
+                    <td><input id="checkbox{{$item->id}}" class="checkbox_class" data-id="{{$item->id}}" onclick="order_checkbox({{$item->id}})" type="checkbox">&nbsp;<span id="orderChk{{$item->id}}"></span></td>
                     <td>{{$item->nombre}}</td>
                     <td>{{$item->apellido_p}}&nbsp;{{$item->apellido_m}}</td>
                     <td class="text-center buttons-inside">
@@ -45,6 +50,7 @@
             @endforeach
             </tbody>
         </table>
+        <div style="margin: 5em 0;"></div>
     </div>
     <div class="row" id="t2" style="display: none;">
         <table id="tabla2" class="table" >
@@ -136,5 +142,6 @@
             });
         }
     </script>
+    <script src="{{asset('js/ordenamiento.js')}}"></script>
 @endsection
 

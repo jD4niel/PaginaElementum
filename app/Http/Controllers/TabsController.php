@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\BD;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Auth;
 
 class TabsController extends Controller
 {
@@ -37,6 +39,37 @@ class TabsController extends Controller
     {
         $colecciones = DB::table('tabs_images')->where('tab_name','=','colecciones')->first();
         return view('tabs_controller.colecciones_tab',compact('colecciones'));
+    }    
+    public function integrantesTab()
+    {
+        $users = DB::table('users')->get();
+        return view('tabs_controller.integrantes',compact('users'));
+    }
+
+    public function editUser($id)
+    {
+        $usuario = DB::table('users')->where('id','=',$id)->first();
+        return view('tabs_controller.editar-usuario', compact('usuario'));
+    }
+    public function deleteUser($id)
+    {
+        $users = DB::table('users')->where('id', $id)->delete();
+        return response()->json($users);
+    }
+
+    public function changeUserImage(Request $request)
+    {
+        if (($request->hasFile('file'))) {
+            $file = $request["file"];
+            $filename_img = $file->getClientOriginalName();
+            DB::table('users')->where('id','=',Auth::id())->update(['imagen'=>$filename_img]);
+            $destinationPath = public_path() . '/images/fotos_usuarios';
+            $destinationPath1 = $destinationPath . '/' . $filename_img;
+            copy($file, $destinationPath1);
+            return $filename_img;
+        }else{
+            return "Error en subir imagen";
+        }
     }
 
     public function uploadTabImage(Request $request){
@@ -70,5 +103,13 @@ class TabsController extends Controller
         $text = $request->text;
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
         return view('Elementum.preview',compact('users','tab_name','text','elementum'));
+    }
+
+    public function orderAutorSave(Request $request)
+    {
+        for ($i=0; $i < count(DB::table('autores')->get()) ; $i++) { 
+            DB::table('autors')->where('id','=',$i+1)->update(['order_num'=>$request[$i]]);
+        }
+        return $request;
     }
 }

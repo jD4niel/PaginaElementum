@@ -68,6 +68,10 @@ Route::post('/editar/nosotros/save', 'TabsController@saveUsTab')->name('saveUsTa
 Route::get('/editar/autores', 'TabsController@autoresTab')->name('autoresTab')->middleware('auth');
 Route::get('/editar/contacto', 'TabsController@contactoTab')->name('contactoTab')->middleware('auth');
 Route::get('/editar/colecciones', 'TabsController@coleccionesTab')->name('coleccionesTab')->middleware('auth');
+Route::get('/integrantes', 'TabsController@integrantesTab')->name('integrantesTab')->middleware('auth');
+Route::get('/integrantes/editar/{id}', 'TabsController@editUser')->name('modifica.usuario')->middleware('auth');
+Route::post('/integrantes/borrar/{id}', 'TabsController@deleteUser')->name('elimina.usuario')->middleware('auth');
+Route::post('/home/userimg', 'TabsController@changeUserImage')->name('imagen.usuario')->middleware('auth');
 //Vista previa edición
 Route::post('/editar/{name}/preview', 'TabsController@preview')->name('preview')->middleware('auth');
 
@@ -94,6 +98,7 @@ Route::post('/editar/borrar/servicio/{id}','ControlController@deleteService')->n
 //Editar Libros y autores
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');
 Route::get('/crear/autor', 'ControlController@createAutor')->name('crear.autor')->middleware('auth');
+Route::post('/control/order/save', 'TabsController@orderAutorSave')->name('change_autor_order_save')->middleware('auth');
 Route::get('/control', 'ControlController@control')->name('control.gral')->middleware('auth');
 Route::post('/crear/libro/data', 'ControlController@AgregarLibro')->name('guardar.libro')->middleware('auth');
 Route::post('/crear/autor/data', 'ControlController@AgregarAutor')->name('guardar.autor')->middleware('auth');

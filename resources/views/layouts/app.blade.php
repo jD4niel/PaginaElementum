@@ -76,6 +76,7 @@
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     <img  class="img-responsive" id="el_logo"  src="{{ URL::to('/') }}/images/logocolor.png" alt="Editorial Elementum logo">
+
                 </a>
             </div>
 
@@ -122,13 +123,21 @@
             <div id="template-nav">
                 <div>
                     
-                    <div id="user-img">
+                    <div id="user-img" title="Cambia la imagen del usuario actual">
                             @if(Auth::user()->imagen)
-                                <img src="{{ asset('images/fotos_usuarios') }}/{{ Auth::user()->imagen}}" alt="">
+                                <img class="img-change generic_image" onclick="trigger_user_image()" src="{{ asset('images/fotos_usuarios') }}/{{ Auth::user()->imagen}}" alt="">
                             @else
-                                <img src="{{ asset('images/user.png') }}" alt="">
+                                <img onclick="trigger_user_image()" class="img-change generic_image" src="{{ asset('images/user.png') }}" alt="">
+                                <span onclick="trigger_user_image()" class="img-change-container">
+                                    <i class="fas fa-edit"></i>
+                                </span>
                             @endif
                     </div>
+                    <div id="show_usr_container">
+                        <button id="show_button_usr" onclick="uploadUserImage()">Guardar</button>
+                    </div>
+                    <input name="change_usr_img" type="file" id="change_usr_img" onchange="readUserFile(this)" hidden style="display: none">        
+
                     <div class="name-usr">{{ Auth::user()->name }}</div>
                 </div>
                 <div>
@@ -165,7 +174,8 @@
                         <li class="li-item"><div><i class="fas fa-book-reader"></i>&nbsp;Elementum</div>
                             <ul class="ul-submenu">
                                 <a href="{{route('elementum.info')}}" class="no-style"><li class="li-item">Información</li></a>
-                                <a href="{{route('editarPestañasPagina')}}" class="no-style"><li class="li-item">Integrantes</li></a>
+                                <a href="{{route('editarPestañasPagina')}}" class="no-style"><li class="li-item">Pestañas</li></a>
+                                <a href="{{route('integrantesTab')}}" class="no-style"><li class="li-item">Integrantes</li></a>
                             </ul>
                         </li>
                     </ul>
@@ -216,6 +226,61 @@
         function openInNewTab(url) {
           var win = window.open(url, '_blank');
           win.focus();
+        }
+        function trigger_user_image(input_id,val) {
+            $('#change_usr_img').trigger('click');
+        }
+        function readUserFile(input) {
+            if (input.files && input.files[0]){
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Si la imagen carga haz esto:
+                   $('.generic_image').attr("src", e.target.result);
+                   $('.tab-banner-image span').hide();
+                   $('#show_button_usr').show();
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function uploadUserImage(){
+            var foto = $('#change_usr_img');
+            var myFormData = new FormData();
+            if(foto[0]!=null){
+                myFormData.append('file', foto[0]['files'][0]);
+            }
+            var url = window.location + '/userimg'
+            swal({
+              title: "¿Agregar imagen?",
+              text: "Los cambios se verán reflejados automaticamente en la portada",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+              .then((willDelete) => {
+              if (willDelete) {
+                  $.ajax({
+                      url: url,
+                      data: myFormData,
+                      type: 'post',
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      },
+                      contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                      processData: false, // NEEDED, DON'T OMIT THIS
+                      success: function (response, file) {
+                          console.log(response);
+                          window.location.reload();
+                      },
+                      error: function (jqXHR, textStatus, errorThrown) {
+                          alert('Error en el servidor! /n Intente con otro formato de imagen')
+                          console.log(errorThrown)
+                          console.log(textStatus)
+                      }
+                  });
+              } 
+            });
         }
     </script>
 </body>

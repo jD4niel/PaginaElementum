@@ -75,11 +75,19 @@
   overflow: hidden;
   object-fit: cover;
   border-radius: 50%;
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
   
 }
 #user-img img{
-  width: 100%;
+  height: 100%;;
+  bottom: 0;
+  text-align: center;
+  margin: auto auto;
   display: flex;
+}
+#user-img:hover{
+  border: solid 6px #66daa9;
 }
 .name-usr{
   text-align: center;
@@ -295,3 +303,74 @@
   box-shadow: 3px 3px 5px 0px rgba(10,11,11,0.2);
   background-color: #fff;
 }
+.img-change-container{
+  position: absolute;
+  top: 0%;
+  left: 60%;
+  font-size: 2em;
+  padding: 15px;
+  border-radius: 50%;
+}
+.img-change-container:hover{
+  color: orange;
+  cursor: pointer;
+}
+.img-change-container i{
+  vertical-align: middle;
+  margin: 0 auto;
+}
+.img-change{
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
+}
+.img-change:hover {
+  cursor: pointer;
+  transform: scale(102%)
+}
+#show_usr_container{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25px;
+}
+#show_button_usr{
+  color: white;
+  background: #1dae76;
+  border: solid 2px #c9bc75;
+  padding: 5px 30px;
+  font-size: 3vh;
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
+  display: none;
+}
+#show_button_usr:hover{
+  cursor: pointer;
+  border: solid 4px lightblue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
