@@ -167,7 +167,8 @@ class LibroController extends Controller
         return view('Elementum.autor_detalle',compact('autor','libros'));
     }
     public function contacto(){
-        return view('Elementum.contacto');
+        $politicaSimplificada = DB::table('politica')->where('id', 2)->get();
+        return view('Elementum.contacto', compact('politicaSimplificada'));
     }
     public function nosotros(){
         $users = DB::table('users')->get();

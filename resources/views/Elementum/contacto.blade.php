@@ -67,29 +67,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Editorial Elementum Sociedad Anónima de Capital Variable, es el responsable del tratamiento de los
-                    datos personales que nos proporcione. <br><br>
-
-                    Los datos personales que recabemos de usted, los utilizamos para las siguientes finalidades: a)
-                    Registrar su solicitud de información sobre servicios editoriales y b) Dar contestación lo más
-                    pronto posible y por diversos medios de comunicación a la solicitud planteada. <br><br>
-
-                    De Manera adicional, utilizaremos su información personal para las siguientes finalidades que nos
-                    permiten y facilitan brindarle una mejor atención: a) Servir como un puente de comunicación estable
-                    entre la editorial Elementum y el solicitante o posible cliente. <br><br>
-
-                    En caso de que no desee que sus datos personales sean tratados para las finalidades adicionales
-                    usted puede manifestarlo a través de un correo electrónico a la siguiente dirección:
-                    editorialelementum@gmail.com
-                    <br><br>
-
-                    Se informa que no se realizarán ningún tipo de transferencias que requieran su consentimiento, salvo
-                    aquellas que sean necesarias para atender requerimientos de información de una autoridad competente,
-                    debidamente fundados y motivados. <br><br>
-
-
-                    Para mayor información acerca del tratamiento y de los derechos que pueda hacer valer, usted puede
-                    acceder al aviso de privacidad integral haciendo click <a href="/aviso-de-privacidad">aquí</a>.
+                    {!! $politicaSimplificada[0]->content !!}
                 </div>
             </div>
         </div>

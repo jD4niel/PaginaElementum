@@ -112,4 +112,8 @@ Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioControll
 Route::get('/elementario/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');
 Route::get('/elementario/seccion/{id}', 'ElementarioController@section')->name('section.tab');
 
-Route::view('/aviso-de-privacidad', 'Elementum.politica')->name('politica');
+
+
+//Aviso de Privacidad
+Route::get('/aviso-de-privacidad', 'ControlController@politicaCompleta')->name('politica');
+Route::post('/politica/editar/{id}', 'ControlController@editarPolitica')->name('politica.edit')->middleware('auth');
