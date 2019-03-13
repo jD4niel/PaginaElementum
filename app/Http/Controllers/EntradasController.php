@@ -24,14 +24,16 @@ class EntradasController extends Controller
     public function index()
     {
         $entradas=Entradas::all();
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
 
-        return view('blog.entrada',compact('entradas'));
+        return view('blog.entrada',compact('entradas','entradas'));
     }
     public function go(){
         return view('blog.create-post');
     }
     public function entrada($id){
         $entrada = Entradas::findOrFail($id);
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
 
         $autor = Autor::findOrFail($entrada->user_id);
         $entrada['fecha'] = $entrada->created_at->format('d M');
@@ -50,7 +52,8 @@ class EntradasController extends Controller
 
     public function blog(){
         $entrada= Entradas::all();
-        return view('blog.blog');
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('blog.blog',compact('entradas'));
     }
 
     public function uploadImg(Request $request){
@@ -177,8 +180,9 @@ use Illuminate\Support\Facades\DB;
         $entrada = Entradas::findOrFail($id);
         $autor = Autor::findOrFail($entrada->user_id);
         $autores = Autor::all();
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
 
-        return view('blog.edit-post', compact('entrada', 'autores', 'autor'));
+        return view('blog.edit-post', compact('entrada', 'autores', 'autor','entradas'));
     }
 
     /**

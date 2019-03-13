@@ -136,6 +136,7 @@
                 <div class="col-md-6" style="left: 25%;">
                     <button id="savePdf" class="btn btn-success btn-block" type="button" onclick="guardarFotoPDF()" style="display: none;">Guardar cambios</button>
                     <img  id="imgRef" class="img-fluid" width="100%" src="{{ URL::to('/') }}/images/img_ref.jpg">
+                    <div id="namePDF" style="display: none;"></div>
                 </div>
                 <div class="col-md-12" style="margin: auto;padding: 6px;">
                     <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
@@ -248,6 +249,8 @@
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $("#savePdf").show();
+                    $("#namePDF").html(input.files[0].name);
+                    $("#namePDF").show();
                 };
                 reader.readAsDataURL(input.files[0]);
             }
@@ -256,10 +259,9 @@
             var myFormData = new FormData();
             var foto = $("#changeImg");
             var pdf = $("#changePdf");
-            console.log(foto.val().length);
-            console.log(pdf.val().length);
-            if(pdf.val().length != 0){ myFormData.append('pdf', pdf[0]['files'][0]); }else{ myFormData.append('pdf', 1); }
-            if(foto.val().length != 0){ myFormData.append('file', foto[0]['files'][0]); }else{ myFormData.append('file', 1); }
+            alert(foto.val().length)
+            if(pdf.val().length != 0){ myFormData.append('pdf', pdf[0]['files'][0]); }else{ myFormData.append('pdf', 'nothing'); }
+            if(foto.val().length != 0){ myFormData.append('file', foto[0]['files'][0]); }else{ myFormData.append('file', 'nothing'); }
             var url = '{{route('new.pdf.up')}}';
             swal({
                 title: "¿Modificar imagen/PDF?",
@@ -285,7 +287,12 @@
                                     icon: "warning"
                                 });
                             }else {
-                                window.location.reload();
+                                console.log(response)
+                                swal("PDF/Imagen agregados correctamente", " ",{
+                                        icon: "success"
+                                    }).then((value) => {
+                                     window.location.reload();
+                                });
                             }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {

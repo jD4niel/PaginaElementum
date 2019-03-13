@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('home',compact('elementum'));
     }
 }

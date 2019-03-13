@@ -162,7 +162,6 @@
     <script>
         //enviar foto al servidor
         function enviarFoto() {
-            alert("hola")
             var id = $('#id_taller').val();
             var sede = $('#sede').val();
             var titulo = $('#titulo-taller').val();
@@ -200,9 +199,12 @@
                         contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
                         processData: false, // NEEDED, DON'T OMIT THIS
                         success: function (response, file) {
-                            console.log(response);
-                            console.log("jajaja");
-                            /*window.location.reload();*/
+                             swal("El taller fue agregado correctamente", " ",{
+                                        icon: "success"
+                                    }).then((value) => {
+                                     //window.location.reload();
+                                     console.log(response)
+                                });
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log(textStatus + ': ' + errorThrown);

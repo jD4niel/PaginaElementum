@@ -21,7 +21,7 @@
 
 
 
-            <a href="#" class="a-free col-md-3" target="_blank">
+            <a href="{{route('control.gral')}}" class="a-free col-md-3" target="_blank">
                 <div class="card" style="width: 26rem; margin:10px;background-color: #3d7fcb;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Escritores</h2>

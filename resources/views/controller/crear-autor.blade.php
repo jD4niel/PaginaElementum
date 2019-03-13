@@ -372,15 +372,20 @@
                             processData: false, // NEEDED, DON'T OMIT THIS
                             success: function (response, file) {
                                 console.log(response);
-                                        swal("El "+swal_text+" fue agregado correctamente", " ",{
-                                    icon: "success"
-                                }).then((value) => {
-                                 window.location.reload();
-                            });
+                                swal("El "+swal_text+" fue agregado correctamente", " ",{
+                                        icon: "success"
+                                    }).then((value) => {
+                                     window.location.reload();
+                                });
                                 /*window.location.reload();*/
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 console.log(textStatus + ': ' + errorThrown);
+                                swal("Error al subir autor", "Verifique los campos",{
+                                        icon: "warning"
+                                    }).then((value) => {
+                                     //window.location.reload();
+                                 });
                             }
                         });
                     }
