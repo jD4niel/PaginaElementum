@@ -149,6 +149,27 @@
     </div>
     <br><br><br><br><br>
 
+<div class="container text-center">
+    <h2>Aviso de Privacidad</h2>
+    <button type="button" class="btn-hover color-2" data-toggle="collapse" data-target="#politica">Editar Aviso de Privacidad</button>
+    <div id="politica" class="collapse">
+        <form action="{{route('politica.edit',$politicaSimplificada[0]->id)}}" id="formPolitica" method="post">
+            {{ csrf_field() }}
+            <h3>Editar: {{$politicaSimplificada[0]->name}}</h3>
+            <textarea name="simplificada" id="simplificada">{{$politicaSimplificada[0]->content}}</textarea> <br><br>
+            <button type="submit" class="btn-hover color-1">Editar aviso simplificado</button>
+        </form>
+        <form action="{{route('politica.edit',$politicaCompleta[0]->id)}}" method="post">
+            {{ csrf_field() }}
+            <br><br>
+            <h3>Editar: {{$politicaCompleta[0]->name}}</h3>
+            <textarea name="completa" id="completa">{{$politicaCompleta[0]->content}}</textarea>
+            <button type="submit" class="btn-hover color-1">Editar aviso completo</button>
+        </form>
+        
+    </div>
+</div>
+
 
 <!-- Modal -->
 <div id="serviceModal" class="modal fade" role="dialog">
@@ -172,12 +193,23 @@
   </div>
 </div>
 
+</div>
+
 @endsection
 
 @section('script_section')
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+        CKEDITOR.replace('simplificada', {
+            height: 500
+        });
+        CKEDITOR.replace('completa', {
+            height: 500
+        });
+
+
+
         var ckEditorID;
         ckEditorID = 'summary-ckeditor';
         CKEDITOR.config.forcePasteAsPlainText = true;

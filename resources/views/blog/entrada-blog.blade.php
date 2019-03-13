@@ -26,7 +26,8 @@
                         <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor}}</b>,
                             {{$entrada->fecha}} &middot; No. de Visita: {{$entrada->visitas}}</div>
                     @else
-                        <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor_externo}}</b>, {{$entrada->fecha}} &middot;
+                        <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor_externo}}</b>,
+                            {{$entrada->fecha}} &middot;
                             No. de Visita: {{$entrada->visitas}}</div>
                     @endif
                     <br><br>
@@ -39,8 +40,11 @@
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
                 </span><br>
-                    <span style="font-size: 1.5em">Likes <input type="text" id="likes" size="2" value="200"
-                                                                style="background: transparent; border: none;"></span>
+                    <div class="fb-like" data-href="http://localhost:8000/blog/entrada/{{$entrada->id}}"
+                         data-layout="box_count" data-action="like" data-size="small" data-show-faces="true"
+                         data-share="false"></div>
+                    {{--<span style="font-size: 1.5em">Likes <input type="text" id="likes" size="2" value="200"--}}
+                                                                {{--style="background: transparent; border: none;"></span>--}}
                 </div>
                 <hr class="shine">
                 @if($autor->id != 999)
@@ -107,9 +111,11 @@
                 <div class="d-none">{{$contador = 1}}</div>
 
                 <div class="row">
-                @foreach($ep as $item)
+                    @foreach($ep as $item)
                         <div class="col-md-3" align="">
-                            <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img src="{{asset("images/entradas/")}}/{{$item->imagen}}" class="img-fluid center-cropped" style="width: 100%; height: 160px"></a>
+                            <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
+                                        src="{{asset("images/entradas/")}}/{{$item->imagen}}"
+                                        class="img-fluid center-cropped" style="width: 100%; height: 160px"></a>
                             <div class="row" style="padding-top: 10px">
                                 <div class="col-md-2">
                                     <span style="content: '0' counter(my-awesome-counter); font-weight: bold; font-size: 2.3em; line-height: 1; color: rgba(38, 69, 99, 0.25);"> 0{{$contador++}}</span>
@@ -117,16 +123,17 @@
                                 </div>
                                 <div class="col-md-10">
                                     <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h3 class="serif bold"
-                                                                                                  style="color:#1d3b4f" align="">{{$item->nombre}}</h3>
+                                                                                                  style="color:#1d3b4f"
+                                                                                                  align="">{{$item->nombre}}</h3>
                                     </a>
                                     @if($item->user_id != 999)
                                         <p style="font-size:.8em;">Escrito por <a
                                                     href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
-                                                    </b></a> <br>{{$item->fecha}}
+                                                </b></a> <br>{{$item->fecha}}
                                         </p>
                                     @else
                                         <p style="font-size:.8em;">Escrito por <b>{{$item->autor_externo}}
-                                                </b> <br>{{$item->fecha}}</p>
+                                            </b> <br>{{$item->fecha}}</p>
                                     @endif
                                 </div>
                             </div>

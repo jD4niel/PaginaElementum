@@ -83,7 +83,20 @@ class BlogController extends Controller
             $item['fecha'] = $item->created_at->format('d M');
         }
 
-        return view('blog.blog', compact('ue', 'pe', 'uea', 'ep', 'le', 'portada', 'banner'));
+        //------- Nube de Etiquetas -------//
+        $entradas = Entradas::all();
+        $etiquetas = $entradas->pluck('etiquetas');
+        $nube = [];
+        foreach ($etiquetas as $etiqueta){
+            $etiqueta = explode(",",$etiqueta);
+            foreach ($etiqueta as $item){
+                if(!in_array($item, $nube)){
+                    array_push($nube, $item);
+                }
+            }
+        }
+
+        return view('blog.blog', compact('ue', 'pe', 'uea', 'ep', 'le', 'portada', 'banner', 'nube'));
     }
 
     public function indexPorSeccion($tipo){

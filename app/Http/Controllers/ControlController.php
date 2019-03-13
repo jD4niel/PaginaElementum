@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
-
 class ControlController extends Controller
 {
     /**
@@ -31,13 +30,11 @@ class ControlController extends Controller
     }
     public function uploadImage(Request $request){
         try{
-
             $data = $request;
             $file = $data["file"];
             $filename_img = $file->getClientOriginalName();
             $mime = $file->getMimeType();
             if (($mime == 'image/jpeg' || $mime == 'image/jpg' )) {
-
                 $destinationPath = public_path() . '/images/slider';
                 $filename_img = "foto".$data->id.".jpg";
                 if (!File::exists($destinationPath)) {
@@ -56,24 +53,23 @@ class ControlController extends Controller
         }
     }
     public function uploadPDF(Request $request){
-       $foto = $request->file('file');
-       $pdf = $request->file('pdf');
-       // Si el request tiene una imagen la guarda como
-       if ($request['foto'] != 'nothing') {
+        $foto = $request->file('file');
+        $pdf = $request->file('pdf');
+        // Si el request tiene una imagen la guarda como
+        if ($request['foto'] != 'nothing') {
             $destinationPath = public_path() . '/images';
             $destinationPath1 = $destinationPath . '/img_ref.jpg';
             copy($request->file('file'), $destinationPath1);
-       }
-       if ($request['pdf']!= 'nothing') {
+        }
+        if ($request['pdf']!= 'nothing') {
             $destinationPath = public_path();
             $destinationPath1 = $destinationPath . '/descarga.pdf';
             copy($request->file('file'), $destinationPath1);
-       }
-       return "functiona";
+        }
+        return "functiona";
     }
     public function uploadNewImage(Request $request){
         $id =DB::table('slider')->max('id');
-
         if (($request->hasFile('file'))) {
             $new_id = $id+1;
             DB::table('slider')->insertGetId(['nombre'=>'foto'.$new_id.'.jpg']);
@@ -87,13 +83,13 @@ class ControlController extends Controller
     }
     public function uploadNewService(Request $request){
         $id =DB::table('talleres')->max('id');
-       if (($request->hasFile('file'))) {
-        $servicio = DB::table('servicios')
-            ->insertGetId([
-                'name'=>$request->name,
-                'text'=>$request->text,
-                'image'=>$request->file('file')->getClientOriginalName()
-             ]);
+        if (($request->hasFile('file'))) {
+            $servicio = DB::table('servicios')
+                ->insertGetId([
+                    'name'=>$request->name,
+                    'text'=>$request->text,
+                    'image'=>$request->file('file')->getClientOriginalName()
+                ]);
             $destinationPath = public_path() . '/images/servicios/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
@@ -103,7 +99,7 @@ class ControlController extends Controller
                 ->insertGetId([
                     'name'=>$request->name,
                     'text'=>$request->text,
-                 ]);
+                ]);
             return 0;
         }
     }
@@ -111,21 +107,21 @@ class ControlController extends Controller
     {
         if (($request->hasFile('file'))) {
             $servicios = DB::table('servicios')->where('id','=', $id)
-            ->update([
-                'name'=>$request->name,
-                'text'=>$request->text,
-                'image'=>$request->file('file')->getClientOriginalName()
-            ]);
+                ->update([
+                    'name'=>$request->name,
+                    'text'=>$request->text,
+                    'image'=>$request->file('file')->getClientOriginalName()
+                ]);
             $destinationPath = public_path() . '/images/servicios/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
             return $request;
         }else {
             $servicios = DB::table('servicios')->where('id','=', $id)
-            ->update([
-                'name'=>$request->name,
-                'text'=>$request->text,
-            ]);
+                ->update([
+                    'name'=>$request->name,
+                    'text'=>$request->text,
+                ]);
             return 0;
         }
     }
@@ -137,7 +133,6 @@ class ControlController extends Controller
         $servicios = DB::table('servicios')->where('id', $id)->delete();
         return response()->json($servicios);
     }
-
     public function taller(){
         return view('controller.crear-taller');
     }
@@ -146,7 +141,6 @@ class ControlController extends Controller
         $item=$taller[0];
         return view('controller.edit-taller', compact('item'));
     }
-
     public function destroy($id)
     {
         $slider = DB::table('slider')->where('id', $id)->delete();
@@ -167,8 +161,8 @@ class ControlController extends Controller
                 'persona'=>$request->imparte,
                 'informes'=>$request->informes
             ]);
-       $id =DB::table('talleres')->max('id');
-       if (($request->hasFile('file'))) {
+        $id =DB::table('talleres')->max('id');
+        if (($request->hasFile('file'))) {
             $destinationPath = public_path() . '/images/talleres/';
             $destinationPath1 = $destinationPath . $request->imagen_nombre;
             copy($request->file('file'), $destinationPath1);
@@ -192,9 +186,9 @@ class ControlController extends Controller
                 'duracion'=>$request->duracion,
                 'sede'=>$request->sede,
                 'persona'=>$request->imparte,
-             ]);
-       $id =DB::table('talleres')->max('id');
-       if (($request->hasFile('file'))) {
+            ]);
+        $id =DB::table('talleres')->max('id');
+        if (($request->hasFile('file'))) {
             $destinationPath = public_path() . '/images/talleres/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
@@ -204,12 +198,11 @@ class ControlController extends Controller
                     'imagen'=>$request->file('file')->getClientOriginalName()
                 ]);
             return $new_taller;
-            
+
         }else {
             return $taller;
         }
     }
-
     public function AgregarLibro(Request $request){
         $libros = DB::table('libros')
             ->insertGetId([
@@ -230,7 +223,7 @@ class ControlController extends Controller
             $destinationPath = public_path() . '/images/libros/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
-                return $request;
+            return $request;
         }else {
             return 0;
         }
@@ -253,11 +246,11 @@ class ControlController extends Controller
             $destinationPath = public_path() . '/images/fotos_autores/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
-                return $request;
+            return $request;
         }else {
             return 0;
         }
-    }   
+    }
     public function AgregarUsuario(Request $request){
         $libros = DB::table('users')
             ->insertGetId([
@@ -276,12 +269,11 @@ class ControlController extends Controller
             $destinationPath = public_path() . '/images/fotos_usuarios/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
             copy($request->file('file'), $destinationPath1);
-                return $request;
+            return $request;
         }else {
             return 0;
         }
     }
-
     public function createBook(){
         $coleccion = Collection::all();
         $autor = Autor::all();
@@ -306,5 +298,27 @@ class ControlController extends Controller
         $colecciones = DB::table('tabs_images')->where('tab_name','=','colecciones')->first();
         //dd($nosotros->image);
         return view('controller.edit_tabs',compact('autores','contacto','nosotros','colecciones'));
+    }
+    public function politicaCompleta(){
+        $politicaCompleta = DB::table('politica')->where('id', 1)->get();
+        return view('Elementum.politica', compact('politicaCompleta'));
+    }
+
+    public function editarPolitica($id, Request $request)
+    {
+        if ($id == 1) {
+            $politica = DB::table('politica')->where('id', $id);
+            $politica->update([
+                'content' => $request['completa']
+            ]);
+            return redirect()->to('/editar');
+        }
+        if ($id == 2) {
+            $politica = DB::table('politica')->where('id', $id);
+            $politica->update([
+                'content' => $request['simplificada']
+            ]);
+            return redirect()->to('/editar');
+        }
     }
 }
