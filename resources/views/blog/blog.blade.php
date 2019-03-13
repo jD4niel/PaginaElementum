@@ -25,7 +25,7 @@
             <div class="row" style="padding-top: 10px">
                 <div class="col-xs-12 col-lg-6 col-md-12" style="min-height: 540px">
                     <a href="{{ route('blog.entrada.elementum',$ue->id) }}"><img
-                                src="{{asset("images/entradas")}}/{{$ue->imagen}}" alt="" class="img-fluid"
+                                src="{{asset("images/entradas")}}/{{$ue->imagen}}" alt="" class="main-cropped"
                                 style="padding-bottom: 10px;"></a>
                     <a href="{{ route('blog.entrada.elementum',$ue->id) }}"><h1 class="serif"
                                                                                 style="color:#1d3b4f;">{{$ue->nombre}}</h1>
@@ -130,28 +130,47 @@
                     @endforeach
                 </div>
                 <div class="col-md-4">
-                    <h4>Populares en elementum</h4>
-                    <hr>
-                    <ol class="ol-blog">
-                        @foreach($ep as $item)
-                            <li class="li-blog">
-                                <div>
-                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h4 class="serif bold"
-                                                                                                  style="color:#1d3b4f;">{{$item->nombre}}</h4>
-                                    </a>
-                                    @if($item->user_id != 999)
-                                        <p style="font-size:.8em;">Escrito por <a
-                                                    href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
-                                                    ,</b></a> {{$item->fecha}}
-                                        </p>
-                                    @else
-                                        <p style="font-size:.8em;">Escrito por <b>{{$item->autor_externo}}
-                                                ,</b> {{$item->fecha}}</p>
-                                    @endif
-                                </div>
-                            </li>
-                        @endforeach
-                    </ol>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Populares en elementum</h4>
+                            <hr>
+                            <ol class="ol-blog">
+                                @foreach($ep as $item)
+                                    <li class="li-blog">
+                                        <div>
+                                            <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h4
+                                                        class="serif bold"
+                                                        style="color:#1d3b4f;">{{$item->nombre}}</h4>
+                                            </a>
+                                            @if($item->user_id != 999)
+                                                <p style="font-size:.8em;">Escrito por <a
+                                                            href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
+                                                            ,</b></a> {{$item->fecha}}
+                                                </p>
+                                            @else
+                                                <p style="font-size:.8em;">Escrito por <b>{{$item->autor_externo}}
+                                                        ,</b> {{$item->fecha}}</p>
+                                            @endif
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row mt-4git">
+                        <div class="col-md-12">
+                            <h4>Nube de Etiquetas</h4>
+                            <hr>
+                            @for($i = 0; $i < count($nube) && $i < 20; $i++)
+                                    <span class="etiqueta my-2"
+                                          style="background-color: #00394C;">
+                                        <a
+                                                href="/blog/entradas/{{$nube[$i]}}"
+                                                style="color: white; cursor:pointer;">{{$nube[$i]}}</a>
+                                    </span>
+                            @endfor
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

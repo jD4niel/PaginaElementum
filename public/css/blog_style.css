@@ -70,6 +70,13 @@ p {
     width: 100%;
 }
 
+.main-cropped {
+    object-fit: cover; /* Do not scale the image */
+    object-position: bottom; /* Center the image within the element */
+    height: 300px;
+    width: 100%;
+}
+
 .last-cropped {
     object-fit: cover; /* Do not scale the image */
     object-position: center; /* Center the image within the element */
@@ -79,15 +86,15 @@ p {
 
 
 .etiqueta {
-    background-color: #00394c; /* Green */
+    background-color: #00394c;
     border: none;
     color: white;
-    padding: .4em 1em;
+    padding: .2rem 1rem .2rem 1rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 1.1em;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 
 .hr-tags {
