@@ -1,7 +1,6 @@
 @extends('template')
 @section('home')
 
-
     <div class="container" id="todo">
         <div class="row" style="padding-top: 15px; margin: 0 10px 0 0">
             <div class="col-md-9"></div>
@@ -26,7 +25,7 @@
             <div class="row" style="padding-top: 10px">
                 <div class="col-xs-12 col-lg-6 col-md-12" style="min-height: 540px">
                     <a href="{{ route('blog.entrada.elementum',$ue->id) }}"><img
-                                src="{{asset("images/entradas")}}/hola.jpeg" alt="Banner Publicitario" class="img-fluid"
+                                src="{{asset("images/entradas")}}/{{$ue->imagen}}" alt="" class="img-fluid"
                                 style="padding-bottom: 10px;"></a>
                     <a href="{{ route('blog.entrada.elementum',$ue->id) }}"><h1 class="serif"
                                                                                 style="color:#1d3b4f;">{{$ue->nombre}}</h1>
@@ -41,7 +40,7 @@
                 </div>
                 <div class="col-xs-12 col-lg-6 col-md-12">
                     @foreach($pe as $item)
-                        <div class="row" style="min-height: 180px">
+                        <div class="row" style="min-height: 179px; max-height: 180px">
                             <div class="col-md-4">
                                 <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
                                             src="{{asset("images/entradas")}}/{{$item->imagen}}"
@@ -65,7 +64,7 @@
                                     @endif
                                 </div>
                                 <div class="row">
-                                    <p style="font-size: .8em">{{substr($item->intro,0,195)}} . . .</p>
+                                    <p style="font-size: .8em">{{substr($item->intro,0,150)}} . . .</p>
                                 </div>
                             </div>
                         </div>
@@ -104,11 +103,11 @@
                     <hr>
                     @foreach($uea as $item)
                         @if($item != null)
-                            <div class="row" style="min-height: 180px">
+                            <div class="row" style="min-height: 179px; max-height: 180px">
                                 <div class="col-md-4">
                                     <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
                                                 src="{{asset("images/entradas")}}/{{$item->imagen}}"
-                                                alt="Banner Publicitario"
+                                                alt=""
                                                 class="img-fluid center-cropped " style="padding-bottom: 10px;"></a>
                                 </div>
                                 <div class="col-md-8 ">
@@ -123,7 +122,7 @@
                                                     ,</b></a> {{$item->fecha}}</p>
                                     </div>
                                     <div class="row ">
-                                        <p>{{substr($item->intro,0,250)}}</p>
+                                        <p>{{substr($item->intro,0,150)}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +167,7 @@
                     </div>
                     <hr>
                     @foreach($le as $item)
-                        <div class="row" style="min-height: 180px">
+                        <div class="row" style="min-height: 179px; max-height: 180px">
                             <div class="col-md-4">
                                 <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
                                             src="{{asset("images/entradas")}}/{{$item->imagen}}" alt=""
@@ -192,7 +191,7 @@
                                     @endif
                                 </div>
                                 <div class="row">
-                                    <p>{{substr($item->intro,0,250)}}</p>
+                                    <p>{{substr($item->intro,0,150)}}</p>
                                 </div>
                             </div>
                         </div>
