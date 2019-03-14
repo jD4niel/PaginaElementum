@@ -28,7 +28,7 @@
         <table id="tabla1" class="table">
             <thead>
             <tr>
-                <th>Id</th>
+                <th>Orden</th>
                 <th>Ordenar</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
@@ -38,7 +38,7 @@
             <tbody>
             @foreach($autor as $item)
                 <tr id="id1{{$item->id}}">
-                    <td>{{$item->id}}</td>
+                    <td>{{$item->order_num}}</td>
                     <td><input id="checkbox{{$item->id}}" class="checkbox_class" data-id="{{$item->id}}" onclick="order_checkbox({{$item->id}})" type="checkbox">&nbsp;<span id="orderChk{{$item->id}}"></span></td>
                     <td>{{$item->nombre}}</td>
                     <td>{{$item->apellido_p}}&nbsp;{{$item->apellido_m}}</td>

@@ -25,25 +25,15 @@
                         <input id="apm" class="form-control" type="text" placeholder="Apellido materno" value="{{ $autor->nombre }}">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label col-md-2 text-left" for="is_blog_writter">Es escritor del blog:</label>
+                    <div class="form-group col-md-5 float-left text-left left">
+                        <input id="is_blog_writter" type="checkbox" class="float-left text-left">
+                    </div>
+                </div>
               <div style="margin-top:45px;">&nbsp;</div>
-                {{--<div class="form-group">
-                    <div class="col-md-12">
-                    <div class="form-check text-center">
-                        <input class="form-check-input" type="checkbox" value="" id="face" >
-                        <label class="form-check-label" for="face" style="margin: -5px 10px 0 5px;">
-                            Facebook
-                        </label>
-                        <input class="form-check-input" type="checkbox" value="" id="twitter" >
-                        <label class="form-check-label" for="twitter" style="margin: -5px 10px 0 5px;">
-                            Twitter
-                        </label>
-                        <input class="form-check-input" type="checkbox" value="" id="insta" >
-                        <label class="form-check-label" for="insta" style="margin: -5px 10px 0 5px;">
-                            Instagram
-                        </label>
-                    </div>
-                    </div>
-                </div>--}}
+
 
                 <div style="margin-top:45px;">&nbsp;</div>
                 <div class="form-group">
@@ -97,7 +87,7 @@
             </div>
 
             <div class="col-md-12 text-center">
-                <button id="save-book" onclick="enviarFoto()">Guardar autor</button>
+                <button id="save-book" class="btn-hover color-9" onclick="enviarFoto()">Guardar autor</button>
             </div>
         </div>
     </div>
@@ -226,6 +216,9 @@
             }
             if ($("#insta_in").val()=="not_"){
                 $("#insta_in").val("")
+            }
+            if({{$autor->is_blog_writer}} == 1){
+                $('#is_blog_writter').prop('checked', true);
             }
         });
         //enviar foto al servidor

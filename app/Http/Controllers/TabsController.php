@@ -107,9 +107,13 @@ class TabsController extends Controller
 
     public function orderAutorSave(Request $request)
     {
-        for ($i=0; $i < count(DB::table('autores')->get()) ; $i++) { 
-            DB::table('autors')->where('id','=',$i+1)->update(['order_num'=>$request[$i]]);
+        $autors =  DB::table('autors')->get();
+        for ($i=0; $i < count($autors); $i++) {
+            if (isset($request->ids[$i])) {
+                DB::table('autors')->where('id','=',$i+1)->update(['order_num'=>$request->ids[$i]]);
+             }
         }
-        return $request;
+        
+        return response()->json($request->ids);
     }
 }

@@ -18,17 +18,20 @@ function order_checkbox(id) {
 			document.getElementById('orderChk'+row_id).innerHTML = container_ids.indexOf(row_id)+1;
 		}
 	}
-	console.log(container_ids);
+	//console.log(container_ids);
 }
 function check_remaining_checkboxes(){
   var inputs = document.querySelectorAll('.checkbox_class');
+  //alert(inputs.length)
   for(var i = 0; i < inputs.length; i++) {
   	if(inputs[i].checked == false){
   		id = inputs[i].getAttribute('data-id');
   		order_checkbox(id);
-  		container_ids.push(parseInt(id));
     	inputs[i].checked = true;
+		container_ids.push(parseInt(id));
+		document.getElementById('orderChk'+id).innerHTML = container_ids.indexOf(parseInt(id))+1;
   	}
+	console.log(container_ids);
   }
 }
 
@@ -51,25 +54,28 @@ function save_new_order(){
     })
         .then((willDelete) => {
         if (willDelete) {
-            var url = url_send;
-            fetch(url, {
-              method: 'POST', 
-              body: JSON.stringify({ids:container_ids}), 
-              mode: 'cors',
+            $.ajax({
+              url: url_send,
+              data: {'ids':container_ids},
+              type: 'put',
               dataType: 'json',
-              headers:{
-                'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              success: function (response, file) {
+				console.log(response);
+				swal("Ordenamiento de autores", "realizado correctamente ",{
+				    icon: "success"
+				}).then((value) => {
+					//window.location.reload();
+				});
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                  alert('Error en el servidor! /n Intente con otro formato de imagen')
+                  console.log(errorThrown)
+                  console.log(textStatus)
               }
-              }).then(res => {console.log(res)})
-            .then(response => {
-                    console.log(response);
-                    swal("Ordenamiento de autores", "realizado correctamente ",{
-                            icon: "success"
-                        }).then((value) => {
-                        	console.log(response)
-                        //window.location.reload();
-                    });
-            });
+          });
         }
     });
 }
