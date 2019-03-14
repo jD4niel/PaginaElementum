@@ -96,7 +96,9 @@ class BlogController extends Controller
             }
         }
 
-        return view('blog.blog', compact('ue', 'pe', 'uea', 'ep', 'le', 'portada', 'banner', 'nube'));
+        
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('blog.blog', compact('elementum','ue', 'pe', 'uea', 'ep', 'le', 'portada', 'banner', 'nube'));
     }
 
     public function indexPorSeccion($tipo){
@@ -109,7 +111,9 @@ class BlogController extends Controller
                     $item['autor'] = $autor->nombre.' '.$autor->apellido_p;
                     $item['fecha'] = $item->created_at->format('d M');
                 }
-                return view('blog.index-secciones', compact('entradas', 'tipo'));
+                
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+                return view('blog.index-secciones', compact('elementum','entradas', 'tipo'));
                 break;
 
             case "nuestros-colaboradores":
@@ -133,7 +137,9 @@ class BlogController extends Controller
                 if(count($entradas) > 2){
                     $entradas = array_slice($entradas, 0, 4);
                 }
-                return view('blog.index-secciones', compact('entradas', 'tipo'));
+                
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+                return view('blog.index-secciones', compact('elementum','entradas', 'tipo'));
                 break;
 
             case "leido-en-elementario":
@@ -143,7 +149,9 @@ class BlogController extends Controller
                     $item['autor'] = $autor->nombre.' '.$autor->apellido_p;
                     $item['fecha'] = $item->created_at->format('d M');
                 }
-                return view('blog.index-secciones', compact('entradas', 'tipo'));
+                
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+                return view('blog.index-secciones', compact('elementum','entradas', 'tipo'));
                 break;
 
         }
@@ -161,7 +169,9 @@ class BlogController extends Controller
 
         $portada = DB::table('portada_blogs')->first();
 
-        return view('blog.admin-portada-blog', compact('banner', 'dias_restantes', 'portada'));
+        
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('blog.admin-portada-blog', compact('elementum','banner', 'dias_restantes', 'portada'));
     }
 
     public function portadaPos(Request $request)
@@ -218,7 +228,9 @@ class BlogController extends Controller
             $item['fecha'] = $item->created_at->format('d M');
         }
 
-        return view ('blog.entrada-blog', compact('entrada','ep', 'autor'));
+        
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view ('blog.entrada-blog', compact('elementum','entrada','ep', 'autor'));
     }
 
     public function search(Request $request){
@@ -229,7 +241,9 @@ class BlogController extends Controller
             $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
             $item['fecha'] = $item->created_at->format('d M');
         }
-        return view('blog.search', compact('busqueda'));
+        
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('blog.search', compact('elementum','busqueda'));
 //        return $busqueda;
     }
     public function searchTag($etiqueta){
@@ -240,7 +254,9 @@ class BlogController extends Controller
             $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
             $item['fecha'] = $item->created_at->format('d M');
         }
-        return view('blog.search', compact('busqueda'));
+        
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('blog.search', compact('elementum','busqueda'));
 //        return $busqueda;
     }
 

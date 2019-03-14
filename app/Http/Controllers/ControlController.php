@@ -22,7 +22,9 @@ class ControlController extends Controller
         $taller = DB::table('talleres')->get();
         $servicios = DB::table('servicios')->get();
         $talleres=$taller;
-        return view('controller.editpage',compact('pagina','talleres','servicios'));
+        $politicaSimplificada = DB::table('politica')->where('id', 2)->get();
+        $politicaCompleta = DB::table('politica')->where('id', 1)->get();
+        return view('controller.editpage',compact('pagina','talleres','servicios','politicaSimplificada','politicaCompleta'));
     }
     public function slider(Request $request){
         $data=$request;
@@ -301,7 +303,8 @@ class ControlController extends Controller
     }
     public function politicaCompleta(){
         $politicaCompleta = DB::table('politica')->where('id', 1)->get();
-        return view('Elementum.politica', compact('politicaCompleta'));
+        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        return view('Elementum.politica', compact('politicaCompleta','elementum'));
     }
 
     public function editarPolitica($id, Request $request)
