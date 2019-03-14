@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="form-group col-md-5">
-                        <input id="apm" class="form-control" type="text" placeholder="Apellido materno" value="{{ $autor->nombre }}">
+                        <input id="apm" class="form-control" type="text" placeholder="Apellido materno" value="{{ $autor->apellido_m }}">
                     </div>
                 </div>
 
@@ -231,6 +231,10 @@
             var twitter_in = $("#twitter_in").val();
             var my_editor = "summary-ckeditor";
             var my_editor2 = "summary-ckeditor2";
+            var is_blog_writer = 0;
+            if ($('#is_blog_writter').is(':checked')) {
+                is_blog_writer = 1;
+            }
             var descripcion = CKEDITOR.instances[my_editor].getData();
             var semblanza = CKEDITOR.instances[my_editor2].getData();
             var id = $("#id_autor").val();
@@ -301,6 +305,7 @@
                 myFormData.append('face_in', face_in);
                 myFormData.append('twitter_in', twitter_in);
                 myFormData.append('insta_in', insta_in);
+                myFormData.append('is_blog_writer', is_blog_writer);
 
                 myFormData.append('des', descripcion);
                 myFormData.append('sem', semblanza);
@@ -330,7 +335,7 @@
                                 swal("El autor fue editado correctamente", " ",{
                                     icon: "success"
                                 }).then((value) => {
-                                // window.location.reload();
+                                 window.location.reload();
                             });
                                 /*window.location.reload();*/
                             },

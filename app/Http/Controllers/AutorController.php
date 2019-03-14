@@ -72,26 +72,34 @@ class AutorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
-        $taller = DB::table('autors')
-            ->where('id','=',$request->id)
-            ->update([
-                'nombre'=>$request->nombre,
-                'apellido_p'=>$request->apa,
-                'apellido_m'=>$request->apm,
-                'breve_desc'=>$request->des,
-                'facebook'=>$request->face_in,
-                'twitter'=>$request->twitter_in,
-                'instagram'=>$request->insta_in,
-                'semblanza'=>$request->sem
-            ]);
-        if (($request->hasFile('file'))) {
-            $destinationPath = public_path() . '/images/fotos_autores/';
-            $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
-            copy($request->file('file'), $destinationPath1);
-            return $request;
-        }else {
-            return $taller;
+    {   
+        try{
+            $taller = DB::table('autors')
+                ->where('id','=',$request->id)
+                ->update([
+                    'nombre'=>$request->nombre,
+                    'apellido_p'=>$request->apa,
+                    'apellido_m'=>$request->apm,
+                    'breve_desc'=>$request->des,
+                    'is_blog_writer'=>$request->is_blog_writer,
+                    'facebook'=>$request->face_in,
+                    'twitter'=>$request->twitter_in,
+                    'instagram'=>$request->insta_in,
+                    'semblanza'=>$request->sem,
+                ]);
+                if (($request->hasFile('file'))) {
+                    $destinationPath = public_path() . '/images/fotos_autores/';
+                    $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+                    copy($request->file('file'), $destinationPath1);
+                    if ($taller>0) {
+                        DB::table('autors')->where('id','=',$request->id)->update(['imagen'=>$request->file('file')->getClientOriginalName()]);
+                    }
+                    return $request;
+                }else {
+                    return "funciona \n\n".$taller;
+                }
+        }catch (Exception $e) {
+            return "error".$e;   
         }
     }
 
