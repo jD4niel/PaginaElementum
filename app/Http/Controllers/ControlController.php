@@ -230,6 +230,7 @@ class ControlController extends Controller
             return 0;
         }
     }
+    //Agregar autor --- NO UTILIZADA CAMBIADA -> INTEGRANTESCONTROLLER
     public function AgregarAutor(Request $request){
         $libros = DB::table('autors')
             ->insertGetId([
@@ -253,6 +254,7 @@ class ControlController extends Controller
             return 0;
         }
     }
+    // NO se utiliza utiliza -> IntegrantesController
     public function AgregarUsuario(Request $request){
         $libros = DB::table('users')
             ->insertGetId([

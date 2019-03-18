@@ -2,152 +2,157 @@
 
 @section('content')
     <div class="container text-center">
-        <div class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
-            <div class="form-group text-center">
-                <h1 id="title_form">AGREGAR NUEVO AUTOR </h1>
-                <div class="select-type">
-                    <label for="select_">Tipo: </label>
-                    <select name="select_type" onchange="typeUser()" id="select_">
-                        <option value="1" selected>Autor</option>
-                        <option value="2">Elementum</option>
-                    </select>
-                </div>
-            </div>
-            <hr>
-            <div class="col-md-9">
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
-                    <div class="form-group col-md-10">
-                        <input id="nombre" type="text" class="form-control">
+        <form action="{{route('save.autor')}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                <div class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
+                <div class="form-group text-center">
+                    <h1 id="title_form">AGREGAR NUEVO AUTOR </h1>
+                    <div class="select-type">
+                        <label for="select_">Tipo: </label>
+                        <select name="select_type" onchange="typeUser()" id="select_">
+                            <option value="1" selected>Autor</option>
+                            <option value="2">Elementum</option>
+                        </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="apa">Apellidos:</label>
-                    <div class="form-group col-md-5">
-                        <input id="apa" type="text" class="form-control" placeholder="Apellido paterno">
-                    </div>
+                <hr>
 
-                    <div class="form-group col-md-5">
-                        <input id="apm" class="form-control" type="text" placeholder="Apellido materno">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
+                        <div class="form-group col-md-10">
+                            <input id="nombre" type="text" name="name" class="form-control" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div id="puesto_container" style="display: none;">
-                        <label for="" class="form-control-label col-md-2">Puesto: </label>
+                    <div class="form-group">
+                        <label class="form-control-label col-md-2" for="apa">Apellidos:</label>
                         <div class="form-group col-md-5">
-                            <input id="puesto" type="text" class="form-control" placeholder="Ej. Diseñador gráfico">
+                            <input id="apa" type="text" class="form-control" name="last_name" placeholder="Apellido paterno" required>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <input id="apm" class="form-control" type="text" name="second_last_name" placeholder="Apellido materno">
                         </div>
                     </div>
-                    <div id="rol_container" style="display: none;">
-                        <label for="rol_type" class="form-control-label col-md-1">Rol: </label>
-                        <div class="form-group col-md-4">
-                            <select name="" id="role_type" class="form-control">
-                                <option value="1">Escritor</option>
-                                <option value="2">Editor</option>
-                                <option value="3">Administrador</option>
-                            </select>
+                    <div class="form-group">
+                        <div id="puesto_container" style="display: none;">
+                            <label for="" class="form-control-label col-md-2">Puesto: </label>
+                            <div class="form-group col-md-5">
+                                <input id="puesto" type="text" name="puesto" class="form-control" placeholder="Ej. Diseñador gráfico">
+                            </div>
+                        </div>
+                        <div id="rol_container" style="display: none;">
+                            <label for="rol_type" class="form-control-label col-md-1" name="rol">Rol: </label>
+                            <div class="form-group col-md-4">
+                                <select name="role_id" id="role_type" class="form-control">
+                                    <option value="1">Escritor</option>
+                                    <option value="2">Editor</option>
+                                    <option value="3">Administrador</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="user_data_login" class="form-group" style="display: none;">
-                    <label class="form-control-label col-md-2" for="mail">Cuenta:</label>
-                    <div class="form-group col-md-10">
-                        <input id="mail" type="text" class="form-control" placeholder="Nombre de usuario o email">
+                    <div id="user_data_login" class="form-group" style="display: none;">
+                        <label class="form-control-label col-md-2" for="mail">Cuenta:</label>
+                        <div class="form-group col-md-10">
+                            <input id="mail" type="text" class="form-control" name="email" placeholder="Nombre de usuario o email">
+                        </div>
+
+                    </div>
+                    <div id="pass-group" class="form-group" style="display: none;">
+                        <label for="password" class="form-control-label col-md-2">Contraseña:</label>
+                        <div class="form-group col-md-5">
+                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input id="password" class="form-control" type="password" placeholder="Confirmar contraseña">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr>
+                        &nbsp;
+                        <hr class="hr">
+                        <label class="form-control-label col-md-3 checkbox-label" for="is_blog_writer">Es escritor de blog:</label>
+                        <div class="form-group col-md-3">
+                            <input id="is_blog_writer" type="checkbox" name="is_blog_writer" class="form-control checkbox-style">
+                        </div>
+                        <label style="display: none;" id="label_show_us"  class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en pestaña <i>nosotros:</i></label>
+                        <div class="form-group col-md-3">
+                            <input style="display: none;" id="show_in_us_tab" type="checkbox" name="show_in_us_tab" class="form-control checkbox-style">
+                        </div>
+                    </div>
+                    <div id="social_media_links" class="form-group">
+                        <div class="col-md-12">
+                        <div class="form-check text-center">
+                            <input class="form-check-input" type="checkbox" value="" name="face" id="face">
+                            <label class="form-check-label" for="face" style="margin: -5px 10px 0 5px;">
+                                Facebook
+                            </label>
+                            <input class="form-check-input" type="checkbox" value="" name="twitter" id="twitter">
+                            <label class="form-check-label" for="twitter" style="margin: -5px 10px 0 5px;">
+                                Twitter
+                            </label>
+                            <input class="form-check-input" type="checkbox" value="" name="insta" id="insta">
+                            <label class="form-check-label" for="insta" style="margin: -5px 10px 0 5px;">
+                                Instagram
+                            </label>
+                        </div>
+                        </div>
                     </div>
 
+                    <div style="margin-top:45px;">&nbsp;</div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input id="face_in" type="text" class="form-control" placeholder="Facebook" name="face_txt" value="not_" style="display: none;">
+                            </div>
+                            <div class="form-group">
+                                <input id="twitter_in" type="text" class="form-control" placeholder="Twitter" name="twitter_txt" value="not_" style="display: none;">
+                            </div>
+                            <div class="form-group">
+                                <input id="insta_in" type="text" class="form-control" placeholder="Instagram" name="insta_txt" value="not_" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-3 text-center">
+                    <button id="addbtn" onclick="triggerFile()" type="button"  class="add-img">AGREGAR IMAGEN</button>
+
+                    <input type="file" onchange="readURL(this)" id="fileUp" name="file" style="display: none;">
+                    <div class="col-md-12">
+                    <img id="preview-img" src="" alt="" style="display: none;">
+                    </div>
+                    <div id="temp" class="img-temp col-md-12">
+                        <div>500 x 500</div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="form-control-label col-md-2">Contraseña:</label>
-                    <div class="form-group col-md-5">
-                        <input id="password" class="form-control" type="password" placeholder="Contraseña">
-                    </div>
-                    <div class="form-group col-md-5">
-                        <input id="password" class="form-control" type="password" placeholder="Confirmar contraseña">
+                    <div class="col-md-12">
+                        <label class="form-control-label col-md-2" for="semblanza">Breve descripción:</label>
+                        <div class="form-group text-center">
+                            <div class="form-group col-md-12 text-center">
+                                <textarea class="form-control" name="description" id="summary-ckeditor2"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="semblanza_id" class="col-md-12">
                     <hr>
-                    &nbsp;
-                    <hr class="hr">
-                    <label class="form-control-label col-md-3 checkbox-label" for="is_blog_writer">Es escritor de blog:</label>
-                    <div class="form-group col-md-3">
-                        <input id="is_blog_writer" type="checkbox" class="form-control checkbox-style">
-                    </div>
-                    <label class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en pestaña <i>nosotros:</i></label>
-                    <div class="form-group col-md-3">
-                        <input id="show_in_us_tab" type="checkbox" class="form-control checkbox-style">
-                    </div>
-                </div>
-                <div id="social_media_links" class="form-group">
-                    <div class="col-md-12">
-                    <div class="form-check text-center">
-                        <input class="form-check-input" type="checkbox" value="" id="face">
-                        <label class="form-check-label" for="face" style="margin: -5px 10px 0 5px;">
-                            Facebook
-                        </label>
-                        <input class="form-check-input" type="checkbox" value="" id="twitter">
-                        <label class="form-check-label" for="twitter" style="margin: -5px 10px 0 5px;">
-                            Twitter
-                        </label>
-                        <input class="form-check-input" type="checkbox" value="" id="insta">
-                        <label class="form-check-label" for="insta" style="margin: -5px 10px 0 5px;">
-                            Instagram
-                        </label>
-                    </div>
-                    </div>
-                </div>
-
-                <div style="margin-top:45px;">&nbsp;</div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input id="face_in" type="text" class="form-control" placeholder="Facebook" value="not_" style="display: none;">
-                        </div>
-                        <div class="form-group">
-                            <input id="twitter_in" type="text" class="form-control" placeholder="Twitter" value="not_" style="display: none;">
-                        </div>
-                        <div class="form-group">
-                            <input id="insta_in" type="text" class="form-control" placeholder="Instagram" value="not_" style="display: none;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row col-md-3 text-center">
-                <button id="addbtn" onclick="triggerFile()"  class="add-img">AGREGAR IMAGEN</button>
-
-                <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
-                <div class="col-md-12">
-                <img id="preview-img" src="" alt="" style="display: none;">
-                </div>
-                <div id="temp" class="img-temp col-md-12">
-                    <div>500 x 500</div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label class="form-control-label col-md-2" for="semblanza">Breve descripción:</label>
+                    <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
                     <div class="form-group text-center">
                         <div class="form-group col-md-12 text-center">
-                            <textarea class="form-control" id="summary-ckeditor2"></textarea>
+                            <textarea class="form-control" name="long_description" id="summary-ckeditor"></textarea>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="semblanza_id" class="col-md-12">
-                <hr>
-                <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
-                <div class="form-group text-center">
-                    <div class="form-group col-md-12 text-center">
-                        <textarea class="form-control" id="summary-ckeditor"></textarea>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-12 text-center">
-                <button id="save_book" class="btn-hover color-10" onclick="enviarFoto(1)">Guardar autor</button>
-                <button id="save_user" class="btn-hover color-1" style="display: none;" onclick="enviarFoto(2)">Guardar usuario</button>
+                <div class="col-md-12 text-center">
+                    <button id="save_book" type="submit" class="btn-hover color-10" onclick="enviarFot(1)">Guardar autor</button>
+                    <button id="save_user" type="submit" class="btn-hover color-1" style="display: none;" onclick="enviarFot(2)">Guardar usuario</button>
+                </div>
+
             </div>
-        </div>
+        </form>
     </div>
 
 @endsection
@@ -299,7 +304,7 @@
                 typeUser()
                 }
         });
-        //enviar foto al servidor
+        //enviar foto al servidor NO SE UTULIZA
         function enviarFoto(num) {
             var nombre = $("#nombre").val();
             var apa  = $("#apa").val();
@@ -564,6 +569,9 @@
                 $('#save_user').show();
                 $('#save_book').hide();
                 $('#user_data_login').show();
+                $('#pass-group').show();
+                $('#label_show_us').show();
+                $('#show_in_us_tab').show();
             }else{
                 $('#title_form').html('AGREGAR NUEVO AUTOR')
                 $('#semblanza_id').show();
@@ -573,6 +581,9 @@
                 $('#save_book').show();
                 $('#user_data_login').hide();
                 $('#rol_container').hide();
+                $('#pass-group').hide();
+                $('#label_show_us').hide();
+                $('#show_in_us_tab').hide();
             }
         }
     </script>

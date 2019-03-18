@@ -98,6 +98,7 @@ Route::post('/editar/borrar/servicio/{id}','ControlController@deleteService')->n
 //Editar Libros y autores
 Route::get('/crear/libro', 'ControlController@createBook')->name('crear.libro')->middleware('auth');
 Route::get('/crear/autor', 'ControlController@createAutor')->name('crear.autor')->middleware('auth');
+Route::post('/guardar/autor', 'IntegrantesController@store')->name('save.autor')->middleware('auth');
 Route::put('/control/order/save', 'TabsController@orderAutorSave')->name('change_autor_order_save')->middleware('auth');
 Route::get('/control', 'ControlController@control')->name('control.gral')->middleware('auth');
 Route::post('/crear/libro/data', 'ControlController@AgregarLibro')->name('guardar.libro')->middleware('auth');
