@@ -2,71 +2,95 @@
 
 @section('content')
     <div class="container text-center">
-        <div class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
-            <div class="form-group text-center">
-                <h1>EDITAR INTEGRANTE </h1>
-            </div>
-            <hr>
-            <div class="col-md-9">
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
-                    <div class="form-group col-md-10">
-                        <input id="id_usuario" type="hidden" class="form-control" value="{{ $usuario->id }}">
-                        <input id="nombre" type="text" class="form-control" value="{{ $usuario->name }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="apa">Apellidos:</label>
-                    <div class="form-group col-md-5">
-                        <input id="apa" type="text" class="form-control" placeholder="Apellido paterno" value="{{ $usuario->last_name }}">
-                    </div>
-
-                    <div class="form-group col-md-5">
-                        <input id="apm" class="form-control" type="text" placeholder="Apellido materno" value="{{ $usuario->second_last_name }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="apa">Datos de logeo:</label>
-                    <div class="form-group col-md-5">
-                        <input id="email" type="text" class="form-control" placeholder="email" value="{{ $usuario->email }}">
-                    </div>
-
-                    <div class="form-group col-md-5">
-                        <input id="pass" class="form-control" type="password" placeholder="Apellido materno" value="{{ $usuario->password }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label col-md-2" for="nombre">Cargo:</label>
-                    <div class="form-group col-md-10">
-                        <input id="puesto" type="text" class="form-control" value="{{ $usuario->puesto }}">
-                    </div>
-                </div>
-              <div style="margin-top:45px;">&nbsp;</div>
-
-
-            </div>
-            <div class="row col-md-3 text-center">
-                <button id="addbtn" onclick="triggerFile()"  class="add-img">CAMBIAR IMAGEN</button>
-
-                <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
-                <div class="col-md-12">
-                <img id="preview-img" src="{{ URL::to('/') }}/images/fotos_usuarios/{{ $usuario->imagen }}" alt="" style="width: 200px">
-                </div>
-            </div>
-            <div class="col-md-12">
-                <hr>
-                <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
+        <form action="{{route('edit.user',$usuario->id)}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" value="{{ csrf_token() }}" name="_token">
+            <div class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
                 <div class="form-group text-center">
-                    <div class="form-group col-md-12 text-center">
-                        <textarea class="form-control" id="summary-ckeditor">{!! $usuario->text !!}</textarea>
+                    <h1>EDITAR INTEGRANTE </h1>
+                </div>
+                <hr>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
+                        <div class="form-group col-md-10">
+                            <input id="id_usuario" type="hidden" class="form-control" value="{{ $usuario->id }}">
+                            <input id="nombre" type="text" class="form-control" name="name" value="{{ $usuario->name }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label col-md-2" for="apa">Apellidos:</label>
+                        <div class="form-group col-md-5">
+                            <input id="apa" type="text" class="form-control" placeholder="Apellido paterno" name="last_name" value="{{ $usuario->last_name }}">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <input id="apm" class="form-control" type="text" placeholder="Apellido materno" name="second_last_name" value="{{ $usuario->second_last_name }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label col-md-2" for="apa">Email / usuario:</label>
+                        <div class="form-group col-md-5">
+                            <input id="email" type="text" class="form-control" placeholder="email" name="email" value="{{ $usuario->email }}">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <input id="pass" class="form-control" type="password" placeholder="nueva contraseña" name="password" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label col-md-2" for="nombre">Puesto:</label>
+                        <div class="form-group col-md-5">
+                            <input id="puesto" type="text" class="form-control" name="puesto" value="{{ $usuario->puesto }}">
+                        </div>
+                        <label for="rol_type" class="form-control-label col-md-1" name="rol">Rol: </label>
+                        <div class="form-group col-md-4">
+                            <select name="role_id" id="role_type" class="form-control">
+                                <option value="1">Escritor</option>
+                                <option value="2">Editor</option>
+                                <option value="3">Administrador</option>
+                            </select>
+                        </div>
+                    </div>
+                      <div class="form-group">
+                            <hr>
+                            &nbsp;
+                            <hr class="hr">
+                            <label class="form-control-label col-md-3 checkbox-label" for="is_blog_writer">Es escritor de blog:</label>
+                            <div class="form-group col-md-3">
+                                <input id="is_blog_writer" type="checkbox" name="is_blog_writer" class="form-control checkbox-style">
+                            </div>
+                            <label id="label_show_us"  class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en pestaña <i>nosotros:</i></label>
+                            <div class="form-group col-md-3">
+                                <input id="show_in_us_tab" type="checkbox" name="show_in_us_tab" class="form-control checkbox-style">
+                            </div>
+                        </div>
+                  <div style="margin-top:45px;">&nbsp;</div>
+
+
+                </div>
+                <div class="row col-md-3 text-center">
+                    <button id="addbtn" onclick="triggerFile()"  class="add-img">CAMBIAR IMAGEN</button>
+
+                    <input type="file" onchange="readURL(this)" id="fileUp" name="file" style="display: none;">
+                    <div class="col-md-12">
+                    <img id="preview-img" src="{{ URL::to('/') }}/images/fotos_usuarios/{{ $usuario->imagen }}" alt="" style="width: 200px">
                     </div>
                 </div>
-            </div>
+                <div class="col-md-12">
+                    <hr>
+                    <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
+                    <div class="form-group text-center">
+                        <div class="form-group col-md-12 text-center">
+                            <textarea class="form-control" name="description" id="summary-ckeditor">{!! $usuario->text !!}</textarea>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="col-md-12 text-center">
-                <button id="save-book" class="btn-hover color-4" onclick="enviarFoto()">Guardar usuario</button>
+                <div class="col-md-12 text-center">
+                    <button id="save-book" type="submit" class="btn-hover color-4" onclick="enviarFot()">Guardar usuario</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
 @endsection

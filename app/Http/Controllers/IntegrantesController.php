@@ -46,9 +46,11 @@ class IntegrantesController extends Controller
 
     	# Si es autor
 		$blog_writer = 0;
-		if ($input['is_blog_writer']=='on') {
-			$blog_writer = 1;
-		}
+		if(isset($input['is_blog_writer'])){
+            if ($input['is_blog_writer']=='on') {
+                $blog_writer = 1;
+            }
+        }
     	if ($input['select_type'] == 1) {
     		try {
 	    		$autors = DB::table('autors')
@@ -83,9 +85,11 @@ class IntegrantesController extends Controller
     	# Si es un usuario de Elementum
     	elseif ($input['select_type'] == 2) {
     		$show_in_us_tab = 0;
-    		if($input['show_in_us_tab'] == 'on'){
-    			$show_in_us_tab = 1;
-    		}
+    		if(isset($input['show_in_us_tab'])){
+                if($input['show_in_us_tab'] == 'on'){
+                    $show_in_us_tab = 1;
+                }
+            }
     		try {
 	    		$users = DB::table('users')
 	            ->insertGetId([
@@ -137,7 +141,50 @@ class IntegrantesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $input = Input::all();
+        $blog_writer = 0;
+        if(isset($input['is_blog_writer'])){
+            if ($input['is_blog_writer']=='on') {
+                $blog_writer = 1;
+            }
+        }
+        $show_in_us_tab = 0;
+        if(isset($input['show_in_us_tab'])){
+            if($input['show_in_us_tab'] == 'on'){
+                $show_in_us_tab = 1;
+            }
+        }
+        try {
+            $users = DB::table('users')->where('id',$id)
+            ->update([
+                'name'=>$input['name'],
+                'last_name'=>$input['last_name'],
+                'second_last_name'=>$input['second_last_name'],
+                'email'=>$input['email'],
+                'role_id'=>$input['role_id'],
+                'puesto'=>$input['puesto'],
+                'text'=>$input['description'],
+                'is_blog_writer'=>$blog_writer,
+                'show_in_us_tab'=>$show_in_us_tab,
+                ]);
+            if(isset($input['password'])){
+                DB::table('users')->where('id',$id)->update(['password'=>$input['password']]);
+            }            
+            if(Input::hasFile('file')){
+                $file = Input::file('file');
+                $destinationPath = public_path() . '/images/fotos_usuarios/';
+                $destinationPath1 = $destinationPath . $file->getClientOriginalName();
+                copy($file, $destinationPath1);
+                DB::table('users')->where('id',$id)->update([
+                    'imagen'=> $file->getClientOriginalName(),
+                ]);  
+            }
+            $users = DB::table('users')->get();
+            return view('tabs_controller.integrantes',compact('users'));
+            
+        } catch (Exception $e) {
+            return Redirect::back()->withErrors($validator);
+        }
     }
 
     /**

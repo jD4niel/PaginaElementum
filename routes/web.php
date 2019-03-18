@@ -103,7 +103,7 @@ Route::put('/control/order/save', 'TabsController@orderAutorSave')->name('change
 Route::get('/control', 'ControlController@control')->name('control.gral')->middleware('auth');
 Route::post('/crear/libro/data', 'ControlController@AgregarLibro')->name('guardar.libro')->middleware('auth');
 Route::post('/crear/autor/data', 'ControlController@AgregarAutor')->name('guardar.autor')->middleware('auth');
-Route::post('/crear/usuario/data', 'ControlController@AgregarUsuario')->name('guardar.usuario')->middleware('auth');
+Route::post('/editar/usuario/{id}', 'IntegrantesController@edit')->name('edit.user')->middleware('auth');
 Route::post('/editar/libro/', 'LibroController@update')->name('editar.libro')->middleware('auth');
 Route::post('/editar/autor/', 'AutorController@update')->name('editar.autor')->middleware('auth');
 Route::post('/control/autor/borrar/{id}', 'AutorController@destroy')->name('borra.autor')->middleware('auth');
