@@ -5,7 +5,9 @@
     <div class="row">
         <h1 class="text-center b1">Integrantes</h1>
     </div>
+
     <hr>
+    <a href="{{route('crear.autor')}}#integrante-elementum"><button  class="btn-hover color-3 b1" style="float: right;">Agregar nuevo integrante</button></a>
     <div class="row" id="t1">
         <table id="tabla1" class="table">
             <thead>
@@ -49,7 +51,6 @@
         });
         function eliminar(id) {
             path = window.location +'/borrar/'+id
-            alert(path)
             swal({
                 title: "¿Eliminar integrante?",
                 text: "Una vez eliminado, no se podrá recuperar los datos",
@@ -69,10 +70,12 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log(data);
-                            $('#id'+el+id).hide();
-                            swal("El registro fue eliminado correctamente", "",{
-                                icon: "success",
-                            });
+                            $('#id1'+id).hide();
+                                swal("El integrante fue eliminado correctamente", " ",{
+                                        icon: "success"
+                                    }).then((value) => {
+                                     //window.location.reload();
+                                });
                         },
                         error: function (data) {
                             console.log("error")

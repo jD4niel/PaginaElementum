@@ -31,19 +31,6 @@
                         <input id="apm" class="form-control" type="text" placeholder="Apellido materno">
                     </div>
                 </div>
-                <div id="user_data_login" class="form-group" style="display: none;">
-                    <label class="form-control-label col-md-2" for="apa">Cuenta:</label>
-                    <div class="form-group col-md-5">
-                        <input id="mail" type="text" class="form-control" placeholder="Nombre de usuario o email">
-                    </div>
-
-                    <div class="form-group col-md-5">
-                        <input id="password" class="form-control" type="password" placeholder="Contraseña">
-                    </div>
-                </div>
-                <div class="form-group">
-
-                </div>
                 <div class="form-group">
                     <div id="puesto_container" style="display: none;">
                         <label for="" class="form-control-label col-md-2">Puesto: </label>
@@ -52,8 +39,8 @@
                         </div>
                     </div>
                     <div id="rol_container" style="display: none;">
-                        <label for="" class="form-control-label col-md-2">Rol: </label>
-                        <div class="form-group col-md-5">
+                        <label for="rol_type" class="form-control-label col-md-1">Rol: </label>
+                        <div class="form-group col-md-4">
                             <select name="" id="role_type" class="form-control">
                                 <option value="1">Escritor</option>
                                 <option value="2">Editor</option>
@@ -61,13 +48,36 @@
                             </select>
                         </div>
                     </div>
+                </div>
+                <div id="user_data_login" class="form-group" style="display: none;">
+                    <label class="form-control-label col-md-2" for="mail">Cuenta:</label>
+                    <div class="form-group col-md-10">
+                        <input id="mail" type="text" class="form-control" placeholder="Nombre de usuario o email">
+                    </div>
 
-                    <label class="form-control-label col-md-2" for="apa">Es escritor de blog:</label>
-                    <div class="form-group col-md-1">
-                        <input id="is_blog_writer" type="checkbox" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-control-label col-md-2">Contraseña:</label>
+                    <div class="form-group col-md-5">
+                        <input id="password" class="form-control" type="password" placeholder="Contraseña">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <input id="password" class="form-control" type="password" placeholder="Confirmar contraseña">
                     </div>
                 </div>
-              <div style="margin-top:45px;">&nbsp;</div>
+                <div class="form-group">
+                    <hr>
+                    &nbsp;
+                    <hr class="hr">
+                    <label class="form-control-label col-md-3 checkbox-label" for="is_blog_writer">Es escritor de blog:</label>
+                    <div class="form-group col-md-3">
+                        <input id="is_blog_writer" type="checkbox" class="form-control checkbox-style">
+                    </div>
+                    <label class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en pestaña <i>nosotros:</i></label>
+                    <div class="form-group col-md-3">
+                        <input id="show_in_us_tab" type="checkbox" class="form-control checkbox-style">
+                    </div>
+                </div>
                 <div id="social_media_links" class="form-group">
                     <div class="col-md-12">
                     <div class="form-check text-center">
@@ -283,6 +293,11 @@
                    $("#insta_in").val("not_");
                 }
             });
+            // trigger new user
+            if(String(window.location).includes('integrante-elementum')){
+                $('#select_').val(2);
+                typeUser()
+                }
         });
         //enviar foto al servidor
         function enviarFoto(num) {

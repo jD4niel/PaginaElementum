@@ -347,9 +347,19 @@
   border: solid 4px lightblue;
 }
 
-
-
-
+.checkbox-style{
+  width: 1.2em;
+  height: 1.2em;
+  font-size: 50px !important;
+}
+.checkbox-label{
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
+}
+.checkbox-label:hover{
+  cursor: pointer;
+  color:#45A67AFF;
+}
 
 
 

@@ -14,7 +14,7 @@ class ControlController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\response
      */
     public function index()
     {
