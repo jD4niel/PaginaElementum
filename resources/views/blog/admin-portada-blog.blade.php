@@ -441,50 +441,65 @@
 
         function onAddSection() {
             var route = "{{route("add.section")}}";
+            if($('#addTipo').val() !== ""){
+                $.ajax({
+                    url: route,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {tipo: $('#addTipo').val()},
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        alert('Sección Agregada Exitosamente');
+                        location.reload();
 
-            $.ajax({
-                url: route,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {tipo: $('#addTipo').val()},
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    alert('Sección Agregada Exitosamente');
-                    $('#addSection').modal('hide')
-
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus + ': ' + errorThrown);
-                }
-            });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Nombre de la sección invalido',
+                    text: 'Verifica el nombre de la sección.',
+                })
+            }
         }
 
         function onEditSection() {
             var route = "{{route("edit.section")}}";
 
-            $.ajax({
-                url: route,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    id: $('#editId').val(),
-                    tipo: $('#editTipo').val(),
-                    position: 0
-                },
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    alert('Sección Editada Exitosamente');
-                    $('#editSection').modal('hide')
+            if($('#editTipo').val() !== ""){
+                $.ajax({
+                    url: route,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        id: $('#editId').val(),
+                        tipo: $('#editTipo').val(),
+                        position: 0
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        alert('Sección Editada Exitosamente');
+                        location.reload();
 
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus + ': ' + errorThrown);
-                }
-            });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Nombre de la sección invalido',
+                    text: 'Verifica el nombre de la sección.',
+                });
+            }
         }
 
         function onDeleteSection(id) {
@@ -511,6 +526,7 @@
                         dataType: 'json',
                         success: function (data) {
                             alert('Sección Borrada Exitosamente');
+                            location.reload();
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log(textStatus + ': ' + errorThrown);
