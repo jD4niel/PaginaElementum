@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="{{ URL::to('/') }}/fonts/InriaSerif/Web/fonts.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <!-- Styles -->
-        <link rel="stylesheet" href="{{asset('css/template.css')}}">
+            <link rel="stylesheet" href="{{asset('css/template.css')}}">
         <link rel="stylesheet" href="{{asset('css/blog_style.css')}}">
 
         <script src="{{asset('js/wow.js')}}"></script>

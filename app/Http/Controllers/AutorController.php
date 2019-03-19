@@ -16,7 +16,8 @@ class AutorController extends Controller
     public function index()
     {
         $autores = Autor::where('id','<','999')->get();
-        return view('blog.create-post',compact('autores'));
+        $sections = DB::table('clasificacion')->get();
+        return view('blog.create-post',compact('autores', 'sections'));
     }
 
     /**

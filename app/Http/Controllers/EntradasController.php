@@ -23,71 +23,79 @@ class EntradasController extends Controller
      */
     public function index()
     {
-        $entradas=Entradas::all();
-        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        $entradas = Entradas::all();
+        $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
 
-        return view('blog.entrada',compact('entradas','entradas'));
+        return view('blog.entrada', compact('entradas', 'entradas'));
     }
-    public function go(){
-        return view('blog.create-post');
+
+    public function go()
+    {
+        $sections = DB::table('clasificacion')->all();
+        return view('blog.create-post', compact('sections'));
     }
-    public function entrada($id){
+
+    public function entrada($id)
+    {
         $entrada = Entradas::findOrFail($id);
-        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
 
         $autor = Autor::findOrFail($entrada->user_id);
         $entrada['fecha'] = $entrada->created_at->format('d M');
-        $entrada['autor'] = $autor->nombre.' '.$autor->apellido_p;
+        $entrada['autor'] = $autor->nombre . ' ' . $autor->apellido_p;
 
 
         $ep = Entradas::orderBy('visitas', 'DESC')->take(4)->get();
-        foreach ($ep as $item){
+        foreach ($ep as $item) {
             $autor_e = Autor::findOrFail($item->user_id);
-            $item['autor'] = $autor_e->nombre.' '.$autor_e->apellido_p;
+            $item['autor'] = $autor_e->nombre . ' ' . $autor_e->apellido_p;
             $item['fecha'] = $item->created_at->format('d M');
         }
 
-        return view ('blog.entrada-blog', compact('entrada','ep', 'autor'));
+        return view('blog.entrada-blog', compact('entrada', 'ep', 'autor'));
     }
 
-    public function blog(){
-        $entrada= Entradas::all();
-        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
-        return view('blog.blog',compact('entradas'));
+    public function blog()
+    {
+        $entrada = Entradas::all();
+        $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
+        return view('blog.blog', compact('entradas'));
     }
 
-    public function uploadImg(Request $request){
+    public function uploadImg(Request $request)
+    {
 
         //DB::beginTransaction();
-        try{
+        try {
 
             $data = $request;
             $file = $data["file"];
+            $filename_img = $file->getClientOriginalName();
+            $mime = $file->getMimeType();
+
+            if (($mime == 'image/jpeg') || ($mime == 'image/jpg') || ($mime == 'image/png') || ($mime == 'image/PNG')) {
+
+                $destinationPath = public_path() . '/images/entradas';
                 $filename_img = $file->getClientOriginalName();
-                $mime = $file->getMimeType();
-
-                if (($mime == 'image/jpeg') || ($mime == 'image/jpg' ) || ($mime == 'image/png') || ($mime == 'image/PNG')) {
-
-                    $destinationPath = public_path() . '/images/entradas';
-                    $filename_img = $file->getClientOriginalName();
-                    if (!File::exists($destinationPath)) {
-                        File::makeDirectory($destinationPath, 0755, true);
-                    }
-                    $destinationPath1 = $destinationPath . '/' . $filename_img;
-
-                    copy($file, $destinationPath1);
-                    return $data;
-                } else {
-                    return $mime;
-                    abort(500);
+                if (!File::exists($destinationPath)) {
+                    File::makeDirectory($destinationPath, 0755, true);
                 }
-        }catch (\Exception $e){
+                $destinationPath1 = $destinationPath . '/' . $filename_img;
+
+                copy($file, $destinationPath1);
+                return $data;
+            } else {
+                return $mime;
+                abort(500);
+            }
+        } catch (\Exception $e) {
             //DB::rollBack();
             return $e . "mal we";
         }
-       // DB::commit();
+        // DB::commit();
 
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -95,10 +103,10 @@ class EntradasController extends Controller
      */
     public function crearEntradaFinal(Request $request)
     {
-        try{
-            if($request->hasFile('file')){
+        try {
+            if ($request->hasFile('file')) {
                 $mime = $request->file->getMimeType();
-                if (($mime == 'image/jpeg') || ($mime == 'image/jpg' ) || ($mime == 'image/png') || ($mime == 'image/PNG')) {
+                if (($mime == 'image/jpeg') || ($mime == 'image/jpg') || ($mime == 'image/png') || ($mime == 'image/PNG')) {
                     $destinationPath = public_path() . '/images/entradas';
                     $fileName = $request->file->getClientOriginalName();
                     if (!File::exists($destinationPath)) {
@@ -119,20 +127,20 @@ class EntradasController extends Controller
                 $entrada->autor_externo = $request['autor_externo'];
                 $entrada->save();
 
-                if ($request['seccion_id']!=0) {
-                    try{
+                if ($request['seccion_id'] != 0) {
+                    try {
                         $entrada_sections = DB::table('entrada_sections')
-                          ->insertGetId([
-                            'section_obj_id'=>$request['seccion_id'],
-                            'entradas_id'=>$entrada->id,
-                        ]);
-                    }catch (\Exception $e){
+                            ->insertGetId([
+                                'section_obj_id' => $request['seccion_id'],
+                                'entradas_id' => $entrada->id,
+                            ]);
+                    } catch (\Exception $e) {
                         return abort(403, 'Unauthorized action.');
                     }
                 }
                 return $entrada;
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return abort(403, 'Unauthorized action.');
         }
     }
@@ -141,18 +149,18 @@ class EntradasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $entrada = new Entradas();
-        $entrada->intro=$request['intro'];
-        $entrada->imagen=$request['imagen'];
-        $entrada->nombre=$request['titulo'];
-        $entrada->texto=$request['texto'];
-        $entrada->user_id=$request['autor'];
-        $entrada->etiquetas=$request['etiquetas'];
+        $entrada->intro = $request['intro'];
+        $entrada->imagen = $request['imagen'];
+        $entrada->nombre = $request['titulo'];
+        $entrada->texto = $request['texto'];
+        $entrada->user_id = $request['autor'];
+        $entrada->etiquetas = $request['etiquetas'];
         $entrada->save();
         return response()->json($entrada);
     }
@@ -160,7 +168,7 @@ class EntradasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Entradas  $entradas
+     * @param  \App\Entradas $entradas
      * @return \Illuminate\Http\Response
      */
     public function show(Entradas $entradas)
@@ -169,10 +177,10 @@ class EntradasController extends Controller
     }
 
     /**
-use Illuminate\Support\Facades\DB;
+     * use Illuminate\Support\Facades\DB;
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Entradas  $entradas
+     * @param  \App\Entradas $entradas
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -180,24 +188,26 @@ use Illuminate\Support\Facades\DB;
         $entrada = Entradas::findOrFail($id);
         $autor = Autor::findOrFail($entrada->user_id);
         $autores = Autor::all();
-        $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        $sections = DB::table('clasificacion')->get();
+        $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
 
-        return view('blog.edit-post', compact('entrada', 'autores', 'autor','entradas'));
+        return view('blog.edit-post', compact('entrada', 'autores', 'autor', 'entradas', 'sections'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Entradas  $entradas
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Entradas $entradas
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        try{
-            if($request->hasFile('file')){
+        try {
+
+            if ($request->hasFile('file')) {
                 $mime = $request->file->getMimeType();
-                if (($mime == 'image/jpeg') || ($mime == 'image/jpg' ) || ($mime == 'image/png') || ($mime == 'image/PNG')) {
+                if (($mime == 'image/jpeg') || ($mime == 'image/jpg') || ($mime == 'image/png') || ($mime == 'image/PNG')) {
                     $destinationPath = public_path() . '/images/entradas';
                     $fileName = $request->file->getClientOriginalName();
                     if (!File::exists($destinationPath)) {
@@ -206,14 +216,14 @@ use Illuminate\Support\Facades\DB;
                     $finalPath = $destinationPath . '/' . $fileName;
                     copy($request->file, $finalPath);
 
-                    $entrada = Entradas::where('id',$request->id)->update([
+                    $entrada = Entradas::where('id', $request->id)->update([
                         'intro' => $request['intro'],
                         'imagen' => $fileName,
                         'nombre' => $request['nombre'],
                         'texto' => $request['texto'],
                         'user_id' => $request['user_id'],
                         'etiquetas' => $request['etiquetas'],
-                        'clasificación_id' => $request['clasificacion_id'],
+                        'clasificacion_id' => $request['clasificacion_id'],
                         'autor_externo' => $request['autor_externo']
                     ]);
                     return response()->json($entrada);
@@ -221,7 +231,7 @@ use Illuminate\Support\Facades\DB;
             } else {
                 $fileName = $request['imagen'];
 
-                $entrada = Entradas::where('id',$request->id)->update([
+                $entrada = Entradas::where('id', $request->id)->update([
                     'intro' => $request['intro'],
                     'imagen' => $fileName,
                     'nombre' => $request['nombre'],
@@ -233,15 +243,17 @@ use Illuminate\Support\Facades\DB;
                 ]);
                 return response()->json($entrada);
             }
-        }catch (\Exception $e){
+
+        } catch (\Exception $e) {
             return abort(403, 'Unauthorized action.');
         }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Entradas  $entradas
+     * @param  \App\Entradas $entradas
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

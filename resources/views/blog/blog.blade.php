@@ -2,9 +2,8 @@
 @section('home')
 
     <div class="container" id="todo">
-        <div class="row" style="padding-top: 15px; margin: 0 10px 0 0">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">
+        <div class="row" style="padding-top: 15px;">
+            <div class="col-12">
                 <form action="{{route('blog.search')}}" method="post" id="form-search">
                     {{csrf_field()}}
                     <div class="input-group input-group-sm mb-3">
@@ -21,9 +20,12 @@
         <div id="p2"></div>
         <div id="p3"></div>
         <div id="p4"></div>
+        <div class="panel panel-default">
+            <div class="panel-body">A Basic Panel</div>
+        </div>
         <div id="entradas_recientes">
             <div class="row" style="padding-top: 10px">
-                <div class="col-xs-12 col-lg-6 col-md-12" style="min-height: 540px">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="min-height: 540px">
                     <a href="{{ route('blog.entrada.elementum',$ue->id) }}"><img
                                 src="{{asset("images/entradas")}}/{{$ue->imagen}}" alt="" class="main-cropped"
                                 style="padding-bottom: 10px;"></a>
@@ -38,18 +40,18 @@
                     @endif
                     <p style="font-size: .9em">{!! substr($ue->intro,0,200) !!} ...</p>
                 </div>
-                <div class="col-xs-12 col-lg-6 col-md-12">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                     @foreach($pe as $item)
                         <div class="row" style="min-height: 179px; max-height: 180px">
-                            <div class="col-md-4">
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                                 <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
                                             src="{{asset("images/entradas")}}/{{$item->imagen}}"
                                             class="img-fluid center-cropped" style="padding-bottom: 10px;"></a>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                 <div class="row">
-                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h3 class="serif"
-                                                                                                  style="color:#1d3b4f;">{{$item->nombre}}</h3>
+                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h4 class="serif"
+                                                                                                  style="color:#1d3b4f;">{{$item->nombre}}</h4>
                                     </a>
                                 </div>
                                 <div class="row">
@@ -81,8 +83,10 @@
             <div class="row">
                 <div class="col-md-12">
                     @if($banner->estado == 1)
-                        <img src="{{asset("images/banners")}}/{{$banner->imagen}}" alt="Banner Publicitario"
-                             class="img-fluid shadow" style="min-width: 100%">
+                        <a href="{{$banner->enlace}}" target="_blank">
+                            <img src="{{asset("images/banners")}}/{{$banner->imagen}}" alt="Banner Publicitario"
+                                 class="img-fluid shadow" style="min-width: 100%">
+                        </a>
                     @else
                         <img src="{{asset("images/banners/banner.jpg")}}" alt="Banner Publicitario"
                              class="img-fluid shadow" style="min-width: 100%">
@@ -162,12 +166,9 @@
                             <h4>Nube de Etiquetas</h4>
                             <hr>
                             @for($i = 0; $i < count($nube) && $i < 20; $i++)
-                                    <span class="etiqueta my-2"
-                                          style="background-color: #00394C;">
-                                        <a
-                                                href="/blog/entradas/{{$nube[$i]}}"
-                                                style="color: white; cursor:pointer;">{{$nube[$i]}}</a>
-                                    </span>
+                                <a href="/blog/entradas/{{$nube[$i]}}" style="color: white; cursor:pointer;">
+                                    <span class="etiqueta my-2" style="background-color: #00394C;">{{$nube[$i]}}</span>
+                                </a>
                             @endfor
                         </div>
                     </div>
@@ -218,6 +219,52 @@
                 </div>
             </div>
         </div>
+
+        @foreach($sections->where('id','>',1) as $section)
+            <div id="section-{{$section->id}}">
+                <div class="row" style="padding-top: 50px">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-10"><h3>{{$section->tipo}}</h3></div>
+                            {{--<div class="col-md-2"><a href="{{ route('blog.secciones','leido-en-elementario') }}">Ver más--}}
+                                    {{--<span class="dropdown-toggle"></span></a></div>--}}
+                        </div>
+                        <hr>
+                        @foreach($entradas->where('clasificacion_id', $section->id)->take(4) as $item)
+                            <div class="row" style="min-height: 179px; max-height: 180px">
+                                <div class="col-md-4">
+                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
+                                                src="{{asset("images/entradas")}}/{{$item->imagen}}" alt=""
+                                                class="img-fluid center-cropped " style="padding-bottom: 10px;"></a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h3 class="serif"
+                                                                                                      style="color:#1d3b4f;">{{$item->nombre}}</h3>
+                                        </a>
+                                    </div>
+                                    <div class="row">
+                                        @if($item->user_id != 999)
+                                            <p>Escrito por <a
+                                                        href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
+                                                        ,</b></a> {{$item->fecha}}
+                                            </p>
+                                        @else
+                                            <p>Escrito por <b>{{$item->autor_externo}}
+                                                    ,</b> {{$item->fecha}}</p>
+                                        @endif
+                                    </div>
+                                    <div class="row">
+                                        <p>{{substr($item->intro,0,150)}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
     </div>
 
 

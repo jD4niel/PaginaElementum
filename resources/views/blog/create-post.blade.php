@@ -40,12 +40,15 @@
             border: 1px solid rgba(0, 0, 0, 0.01);
             background: transparent;
         }
+        .swal2-popup {
+            font-size: 1.6rem !important;
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="container" style="background-color: white">
-        <div class="row" style="background-color: rgb(0,0,0,0) !important;">
+        <div class="row" style="background-color: rgba(0,0,0,0) !important;">
             @if(!empty($seccion_id))
                 <input id="section_val_id" type="hidden" value="{{ $seccion_id }}">
                 <div class="container-section">
@@ -57,8 +60,9 @@
                     <div class="row">
                         <p class="h1 text-center">Nueva entrada:
                             <select name="clasificacion_id" id="clasificacion_id" class="custom-select" style="">
-                                <option value="1">Normal</option>
-                                <option value="2">Leído en Elementario</option>
+                                @foreach($sections as $item)
+                                    <option value="{{$item->id}}">{{$item->tipo}}</option>
+                                @endforeach
                             </select>
                         </p>
                     </div>
@@ -84,7 +88,7 @@
                                         <div class="form-group" id="select-autor">
                                             <select name="user_id" id="user_id" class="form-control">
                                                 <option value="" disabled selected>Seleccione un Autor</option>
-                                                @foreach($autores as $item)
+                                                @foreach($autores->where('is_blog_writer',1) as $item)
                                                     <option value="{{$item->id}}">{{$item->nombre.' '.$item->apellido_p.' '.$item->apellido_m}}</option>
                                                 @endforeach
                                             </select>
