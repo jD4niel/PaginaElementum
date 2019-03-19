@@ -27,17 +27,8 @@
                             <input id="apm" class="form-control" type="text" placeholder="Apellido materno" name="second_last_name" value="{{ $usuario->second_last_name }}">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label col-md-2" for="apa">Email / usuario:</label>
-                        <div class="form-group col-md-5">
-                            <input id="email" type="text" class="form-control" placeholder="email" name="email" value="{{ $usuario->email }}">
-                        </div>
-
-                        <div class="form-group col-md-5">
-                            <input id="pass" class="form-control" type="password" placeholder="nueva contraseña" name="password" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
+                    <br>
+                    <div class="form-group" style="background-color: red;">
                         <label class="form-control-label col-md-2" for="nombre">Puesto:</label>
                         <div class="form-group col-md-5">
                             <input id="puesto" type="text" class="form-control" name="puesto" value="{{ $usuario->puesto }}">
@@ -51,6 +42,27 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label col-md-2" for="apa">Email / usuario:</label>
+                        <div class="form-group col-md-10">
+                            <input id="email" type="text" class="form-control" placeholder="email" name="email" value="{{ $usuario->email }}">
+                        </div>
+                    </div>
+
+                    <div id="pass-group" class="form-group" >
+                        <label for="password" class="form-control-label col-md-2">Contraseña:</label>
+                        <div class="form-group col-md-5">
+                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña" oninput="checkPassword()">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input id="password_confirm" class="form-control" type="password" placeholder="Confirmar contraseña" oninput="checkPassword()">
+                        </div>
+                        <div class="col-md-12 text-right">
+                            **Si no escribe ninguna contraseña se conservará la anterior <br>
+                        </div>
+                    </div>
+                    <div class="col-md-2">&nbsp;</div>
+                    <div id="pass_validate" class="col-md-10 text-center" style="color: #CA2C2FFF; display: none;">Las contraseñas no coinciden</div>
                       <div class="form-group">
                             <hr>
                             &nbsp;
@@ -69,7 +81,7 @@
 
                 </div>
                 <div class="row col-md-3 text-center">
-                    <button id="addbtn" onclick="triggerFile()"  class="add-img">CAMBIAR IMAGEN</button>
+                    <button id="addbtn" onclick="triggerFile()" type="button"  class="add-img">CAMBIAR IMAGEN</button>
 
                     <input type="file" onchange="readURL(this)" id="fileUp" name="file" style="display: none;">
                     <div class="col-md-12">
@@ -87,7 +99,8 @@
                 </div>
 
                 <div class="col-md-12 text-center">
-                    <button id="save-book" type="submit" class="btn-hover color-4" onclick="enviarFot()">Guardar usuario</button>
+                    <button id="save-book" type="button" class="btn-hover color-4" onclick="triggerSubmit('usuario')">Guardar usuario</button>
+                    <input id="submit_btn" type="submit" style="display: none;">
                 </div>
             </div>
         </form>
@@ -96,8 +109,43 @@
 @endsection
 
 @section('script_section')
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function checkPassword(){
+            var pass = $('#password').val();
+            var pass_confirm = $('#password_confirm').val();
+            console.log(pass, '!=', pass_confirm);
+            if (pass != pass_confirm) {
+                $('#save_user').attr("disabled", true);
+                $('#pass_validate').show();
+                $('#password').addClass('error');
+                $('#password_confirm').addClass('error');
+            }else if(pass == pass_confirm){
+                $('#save_user').attr("disabled", false);
+                $('#pass_validate').hide();
+                $('#password').removeClass('error');
+                $('#password_confirm').removeClass('error');
+            }
+        }
+        function triggerSubmit(text){
+            swal({
+                    title: "¿Editar "+text+"?",
+                    text: "Los datos serán aplicados en toda la página",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                    if(willDelete) {
+                        swal("El "+text+" fue editado correctamente", " ",{
+                                icon: "success"
+                            }).then((value) => {
+                            $('#submit_btn').click();
+                        });
+                    }
+                });
+        }
+    </script>
     <script>
         var ckEditorID;
         ckEditorID = 'summary-ckeditor';

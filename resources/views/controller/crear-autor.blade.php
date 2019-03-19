@@ -62,12 +62,14 @@
                     <div id="pass-group" class="form-group" style="display: none;">
                         <label for="password" class="form-control-label col-md-2">Contraseña:</label>
                         <div class="form-group col-md-5">
-                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña">
+                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña" oninput="checkPassword()">
                         </div>
                         <div class="form-group col-md-5">
-                            <input id="password" class="form-control" type="password" placeholder="Confirmar contraseña">
+                            <input id="password_confirm" class="form-control" type="password" placeholder="Confirmar contraseña" oninput="checkPassword()">
                         </div>
                     </div>
+                    <div class="col-md-2">&nbsp;</div>
+                    <div id="pass_validate" class="col-md-10 text-center" style="color: #CA2C2FFF; display: none;">Las contraseñas no coinciden</div>
                     <div class="form-group">
                         <hr>
                         &nbsp;
@@ -147,8 +149,9 @@
                 </div>
 
                 <div class="col-md-12 text-center">
-                    <button id="save_book" type="submit" class="btn-hover color-10" onclick="enviarFot(1)">Guardar autor</button>
-                    <button id="save_user" type="submit" class="btn-hover color-1" style="display: none;" onclick="enviarFot(2)">Guardar usuario</button>
+                    <button id="save_book" type="button" class="btn-hover color-10" onclick="triggerSubmit('autor')">Guardar autor</button>
+                    <button id="save_user" type="button" class="btn-hover color-1" style="display: none;" onclick="triggerSubmit('usuario')">Guardar usuario</button>
+                    <input id="submit_btn" type="submit" style="display: none;">
                 </div>
 
             </div>
@@ -158,8 +161,42 @@
 @endsection
 
 @section('script_section')
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function checkPassword(){
+            var pass = $('#password').val();
+            var pass_confirm = $('#password_confirm').val();
+            console.log(pass, '!=', pass_confirm);
+            if (pass != pass_confirm) {
+                $('#save_user').attr("disabled", true);
+                $('#pass_validate').show();
+                $('#password').addClass('error');
+                $('#password_confirm').addClass('error');
+            }else if(pass == pass_confirm){
+                $('#save_user').attr("disabled", false);
+                $('#pass_validate').hide();
+                $('#password').removeClass('error');
+                $('#password_confirm').removeClass('error');
+            }
+        }
+        function triggerSubmit(text){
+            swal({
+                    title: "¿Agregar nuevo "+text+"?",
+                    text: "Los datos serán aplicados en toda la página",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                    if(willDelete) {
+                        swal("El "+text+" fue agregado correctamente", " ",{
+                                icon: "success"
+                            }).then((value) => {
+                            $('#submit_btn').click();
+                        });
+                    }
+                });
+        }
+    </script>
     <script>
         var ckEditorID;
         ckEditorID = 'summary-ckeditor';
@@ -361,10 +398,10 @@
                 myFormData.append('blog_writer', is_blog_writer);
 
 
-                var url = '{{route('guardar.autor')}}';
+                //var url = '';
                 var swal_text = 'autor';
                 if(num == 2){ 
-                    url = '{{route('guardar.usuario')}}'; 
+                    //url = ''; 
                     swal_text = 'usuario'
                     myFormData.append('puesto', puesto);
                     myFormData.append('email', email);

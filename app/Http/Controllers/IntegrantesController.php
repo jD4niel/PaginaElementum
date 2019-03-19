@@ -97,7 +97,7 @@ class IntegrantesController extends Controller
 	                'last_name'=>$input['last_name'],
 	                'second_last_name'=>$input['second_last_name'],
 	                'email'=>$input['email'],
-	                'password'=>$input['password'],
+	                'password'=>Hash::make($input['password']),
 	                'role_id'=>$input['role_id'],
 	                'puesto'=>$input['puesto'],
 	                'text'=>$input['description'],
@@ -168,7 +168,7 @@ class IntegrantesController extends Controller
                 'show_in_us_tab'=>$show_in_us_tab,
                 ]);
             if(isset($input['password'])){
-                DB::table('users')->where('id',$id)->update(['password'=>$input['password']]);
+                DB::table('users')->where('id',$id)->update(['password'=>Hash::make($input['password'])]);
             }            
             if(Input::hasFile('file')){
                 $file = Input::file('file');

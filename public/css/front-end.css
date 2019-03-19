@@ -360,6 +360,18 @@
   cursor: pointer;
   color:#45A67AFF;
 }
+.pass_validator{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  color: red; 
+}
+.error{
+  box-shadow: 0 0 5px 0px rgba(300,0,0,0.6) !important;
+  border: 1px solid rgba(360,0,0,0.6) !important;
+}
+
 
 
 
