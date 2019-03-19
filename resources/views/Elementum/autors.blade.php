@@ -82,6 +82,7 @@
             //Home
             @yield('estilos') //aquiwe
         });
+
         function trigger_a(id){
           var a = document.URL;
           window.location.href=a+"/"+id;
