@@ -178,46 +178,6 @@
 
 
         <div id="leido_elementario">
-            <div class="row" style="padding-top: 50px">
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-10"><h3>Leído en Elementario</h3></div>
-                        <div class="col-md-2"><a href="{{ route('blog.secciones','leido-en-elementario') }}">Ver más
-                                <span class="dropdown-toggle"></span></a></div>
-                    </div>
-                    <hr>
-                    @foreach($le as $item)
-                        <div class="row" style="min-height: 179px; max-height: 180px">
-                            <div class="col-md-4">
-                                <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
-                                            src="{{asset("images/entradas")}}/{{$item->imagen}}" alt=""
-                                            class="img-fluid center-cropped " style="padding-bottom: 10px;"></a>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h3 class="serif"
-                                                                                                  style="color:#1d3b4f;">{{$item->nombre}}</h3>
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    @if($item->user_id != 999)
-                                        <p>Escrito por <a
-                                                    href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
-                                                    ,</b></a> {{$item->fecha}}
-                                        </p>
-                                    @else
-                                        <p>Escrito por <b>{{$item->autor_externo}}
-                                                ,</b> {{$item->fecha}}</p>
-                                    @endif
-                                </div>
-                                <div class="row">
-                                    <p>{{substr($item->intro,0,150)}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
         </div>
 
         @foreach($sections->where('id','>',1) as $section)
