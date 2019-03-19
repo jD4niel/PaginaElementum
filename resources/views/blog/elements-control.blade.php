@@ -21,8 +21,8 @@
         <a href="{{route('crear.libro')}}"><button class="btn-hover color-3 b2" style="float: right;display: none;">Agregar nuevo libro</button></a>
     </div>
     <hr>
-    <button class="btn btn-success" onclick="check_remaining_checkboxes()" style="position: sticky;top:0;z-index: 10;left: 80%;margin-bottom: 25px;">Seleccionar restantes</button>
-    <button class="btn btn-danger" onclick="save_new_order()" style="position: sticky;top:0;z-index: 10;left: 95%;margin-bottom: 25px;">Guardar</button>
+    <button class="btn btn-success" id="trigger_check_rc" style="position: sticky;top:0;z-index: 10;left: 80%;margin-bottom: 25px;display: none;">Seleccionar restantes</button>
+    <button class="btn btn-danger" id="save_order_" onclick="save_new_order()" style="display:none;position: sticky;top:0;z-index: 10;left: 95%;margin-bottom: 25px;">Guardar</button>
     <br>
     <div class="row" id="t1">
         <table id="tabla1" class="table">
@@ -32,6 +32,7 @@
                 <th>Ordenar</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
+                <th>Mostrar en la página</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -42,6 +43,11 @@
                     <td><input id="checkbox{{$item->id}}" class="checkbox_class" data-id="{{$item->id}}" onclick="order_checkbox({{$item->id}})" type="checkbox">&nbsp;<span id="orderChk{{$item->id}}"></span></td>
                     <td>{{$item->nombre}}</td>
                     <td>{{$item->apellido_p}}&nbsp;{{$item->apellido_m}}</td>
+                    @if($item->show_in_page == 0)
+                        <td class="text-center">NO</td>
+                    @else
+                        <td class="text-center">SI</td>
+                    @endif
                     <td class="text-center buttons-inside">
                         <button onclick="eliminar({{$item->id}},1)" class="del-btn col-md-4"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
                         <a href="{{ route('modifica.autor',$item->id) }}" target="_blank"><button onclick="modificar({{$item->id}})" class="ed-btn col-md-4"  data-toggle="modal" data-target="#ModificarEntrada"><i class="fas fa-plus"></i>&nbsp;Modificar</button></a>
@@ -85,12 +91,21 @@
 
         $.noConflict();
         jQuery( document ).ready(function( $ ) {
-            $('#tabla1').DataTable();
+            var tabla1 = $('#tabla1').DataTable({
+               "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+            });
             $('#tabla2').DataTable();
             if(String(window.location).includes('ver-libros')){
                 $('#sel').val(2);
                 change_select()
             }
+
+            $('#trigger_check_rc').on('click',function(){
+                  //Mostramos todos los elementos para trigger
+                tabla1.page.len(-1) // set the length to -1
+                .draw()
+                check_remaining_checkboxes();
+            });
         } );
         $("#sel").on('change',function () {
             var val = $("#sel").val();

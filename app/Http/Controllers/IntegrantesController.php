@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
+use Redirect;
 use App\Autor;
 use App\Collection;
 use App\Libro;
@@ -51,6 +52,12 @@ class IntegrantesController extends Controller
                 $blog_writer = 1;
             }
         }
+        $show_in_us_tab = 0;
+        if(isset($input['show_in_us_tab'])){
+            if($input['show_in_us_tab'] == 'on'){
+                $show_in_us_tab = 1;
+            }
+        }
     	if ($input['select_type'] == 1) {
     		try {
 	    		$autors = DB::table('autors')
@@ -64,7 +71,9 @@ class IntegrantesController extends Controller
 	                'twitter'=>$input['twitter_txt'],
 	                'instagram'=>$input['insta_txt'],
 	                'semblanza'=>$input['long_description'],
+                    'show_in_tab'=>$show_in_us_tab,
 		            ]);
+                DB::table('autors')->where('id',$autors)->update(['order_num'=>$autors]);
 		        if(Input::hasFile('file')){
 		        	$file = Input::file('file');
 		            $destinationPath = public_path() . '/images/fotos_autores/';
@@ -74,9 +83,7 @@ class IntegrantesController extends Controller
 		            	'imagen'=> $file->getClientOriginalName(),
 		            ]);  
 		        }
-		        $autor = DB::table('autors')->orderBy('order_num')->get();
-		        $libro = Libro::all();
-		        return view('blog.elements-control',compact('autor','libro'));
+		        return Redirect::back()->with('message','Operation Successful !');
     			
     		} catch (Exception $e) {
     			return Redirect::back()->withErrors($validator);
@@ -84,12 +91,6 @@ class IntegrantesController extends Controller
     	} #fin si es autor
     	# Si es un usuario de Elementum
     	elseif ($input['select_type'] == 2) {
-    		$show_in_us_tab = 0;
-    		if(isset($input['show_in_us_tab'])){
-                if($input['show_in_us_tab'] == 'on'){
-                    $show_in_us_tab = 1;
-                }
-            }
     		try {
 	    		$users = DB::table('users')
 	            ->insertGetId([

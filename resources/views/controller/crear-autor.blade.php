@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
                         <div class="form-group col-md-10">
-                            <input id="nombre" type="text" name="name" class="form-control" required>
+                            <input id="nombre" type="text" name="name" class="form-control" placeholder="Nom" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -78,9 +78,9 @@
                         <div class="form-group col-md-3">
                             <input id="is_blog_writer" type="checkbox" name="is_blog_writer" class="form-control checkbox-style">
                         </div>
-                        <label style="display: none;" id="label_show_us"  class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en pestaña <i>nosotros:</i></label>
+                        <label id="label_show_us"  class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en la página</label>
                         <div class="form-group col-md-3">
-                            <input style="display: none;" id="show_in_us_tab" type="checkbox" name="show_in_us_tab" class="form-control checkbox-style">
+                            <input id="show_in_us_tab" type="checkbox" name="show_in_us_tab" class="form-control checkbox-style">
                         </div>
                     </div>
                     <div id="social_media_links" class="form-group">
@@ -607,8 +607,6 @@
                 $('#save_book').hide();
                 $('#user_data_login').show();
                 $('#pass-group').show();
-                $('#label_show_us').show();
-                $('#show_in_us_tab').show();
             }else{
                 $('#title_form').html('AGREGAR NUEVO AUTOR')
                 $('#semblanza_id').show();
@@ -619,8 +617,6 @@
                 $('#user_data_login').hide();
                 $('#rol_container').hide();
                 $('#pass-group').hide();
-                $('#label_show_us').hide();
-                $('#show_in_us_tab').hide();
             }
         }
     </script>

@@ -287,7 +287,7 @@ class ControlController extends Controller
         return view('controller.crear-autor');
     }
     public function control(){
-        $autor = DB::table('autors')->orderBy('order_num')->get();
+        $autor = DB::table('autors')->orderBy('id')->get();
         $libro = Libro::all();
         return view('blog.elements-control',compact('autor','libro'));
     }

@@ -164,7 +164,7 @@ class LibroController extends Controller
         return view('libro','elementum');
     }
     public function autors(){
-        $autors = DB::table('autors')->orderBy('order_num')->get();
+        $autors = DB::table('autors')->orderBy('order_num')->where('show_in_page',1)->get();
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
         return view('Elementum.autors',compact('autors','elementum'));
     }

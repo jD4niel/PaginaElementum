@@ -82,6 +82,7 @@ class AutorController extends Controller
                     'apellido_m'=>$request->apm,
                     'breve_desc'=>$request->des,
                     'is_blog_writer'=>$request->is_blog_writer,
+                    'show_in_page'=>$request->show_in_us_tab,
                     'facebook'=>$request->face_in,
                     'twitter'=>$request->twitter_in,
                     'instagram'=>$request->insta_in,

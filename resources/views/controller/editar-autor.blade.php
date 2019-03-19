@@ -27,9 +27,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label col-md-2 text-left" for="is_blog_writter">Es escritor del blog:</label>
+                    <label class="form-control-label col-md-2 text-left checkbox-label" for="is_blog_writter">Es escritor del blog:</label>
                     <div class="form-group col-md-5 float-left text-left left">
-                        <input id="is_blog_writter" type="checkbox" class="float-left text-left">
+                        <input id="is_blog_writter" type="checkbox" class="float-left text-left checkbox-style">
+                    </div>
+
+                    <label id="label_show_us"  class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en la página</label>
+                    <div class="form-group col-md-2">
+                        <input id="show_in_us_tab" type="checkbox" name="show_in_us_tab" class="form-control checkbox-style">
                     </div>
                 </div>
               <div style="margin-top:45px;">&nbsp;</div>
@@ -220,6 +225,9 @@
             if({{$autor->is_blog_writer}} == 1){
                 $('#is_blog_writter').prop('checked', true);
             }
+            if({{$autor->show_in_page}} == 1){
+                $('#show_in_us_tab').prop('checked', true);
+            }
         });
         //enviar foto al servidor
         function enviarFoto(){
@@ -234,6 +242,10 @@
             var is_blog_writer = 0;
             if ($('#is_blog_writter').is(':checked')) {
                 is_blog_writer = 1;
+            }
+            var show_in_us_tab = 0;
+            if($('#show_in_us_tab').is(':checked')) {
+                show_in_us_tab = 1;
             }
             var descripcion = CKEDITOR.instances[my_editor].getData();
             var semblanza = CKEDITOR.instances[my_editor2].getData();
@@ -306,6 +318,7 @@
                 myFormData.append('twitter_in', twitter_in);
                 myFormData.append('insta_in', insta_in);
                 myFormData.append('is_blog_writer', is_blog_writer);
+                myFormData.append('show_in_us_tab', show_in_us_tab);
 
                 myFormData.append('des', descripcion);
                 myFormData.append('sem', semblanza);

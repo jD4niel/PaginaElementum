@@ -3,6 +3,8 @@ var counter = 1;
 var container_ids = []
 
 function order_checkbox(id) {
+  document.getElementById('trigger_check_rc').style.display = '';
+  document.getElementById('save_order_').style.display = '';
 	var order_text = document.getElementById('orderChk'+id); //Mostrar ordenamiento
 	var checkbox = document.getElementById('checkbox'+id); //Checkbox
 	//Si esta seleccionado y el arreglo no incluye el ID
@@ -21,8 +23,8 @@ function order_checkbox(id) {
 	//console.log(container_ids);
 }
 function check_remaining_checkboxes(){
-  var inputs = document.querySelectorAll('.checkbox_class');
   //alert(inputs.length)
+  var inputs = document.querySelectorAll('.checkbox_class');
   for(var i = 0; i < inputs.length; i++) {
   	if(inputs[i].checked == false){
   		id = inputs[i].getAttribute('data-id');
@@ -67,7 +69,8 @@ function save_new_order(){
 				swal("Ordenamiento de autores", "realizado correctamente ",{
 				    icon: "success"
 				}).then((value) => {
-					//window.location.reload();
+
+					window.location.reload();
 				});
               },
               error: function (jqXHR, textStatus, errorThrown) {
