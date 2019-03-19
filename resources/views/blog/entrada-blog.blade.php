@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12"
-                 style="background: linear-gradient(0deg,rgba(32,34,33,0.89),rgba(68,76,87,0.73)),url('{{asset("images/entradas/")}}/{{$entrada->imagen}}');background-repeat: no-repeat;color:white;padding: 100px;vertical-align:center;text-align:center;background-color: #1d3b4f;height: 300px; margin-top:40px;">
+                 style="background: linear-gradient(0deg,rgba(32,34,33,0.89),rgba(68,76,87,0.73)),url('{{asset("images/entradas/")}}/{{$entrada->imagen}}');background-repeat: no-repeat;color:white;padding: 100px;vertical-align:center;text-align:center;background-color: #1d3b4f;height: 300px; margin-top:40px;background-size: cover;">
                 <h4>{{$entrada->intro}}</h4></div>
         </div>
         <div class="row">
@@ -23,7 +23,7 @@
                 <div class="col-md-12">
                     <h1 class="serif display-3" style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h1>
                     @if($entrada->user_id != 999)
-                        <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor}}</b>,
+                        <div>Escrito por <b style="color:#1d3b4f;"><a href="{{ route('autores.detalle', $entrada->user_id) }}">{{$entrada->autor}}</a></b>,
                             {{$entrada->fecha}} &middot; No. de Visita: {{$entrada->visitas}}</div>
                     @else
                         <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor_externo}}</b>,
@@ -71,10 +71,10 @@
                         @if($autor->twitter != "not_")
                             <i onclick="openInNewTab('https://twitter.com/{{$autor->twitter}}')"
                                class="fab social_icons fa-twitter link"
-                               style="color: rgba(29, 59, 79); border: 2px solid rgba(29,59,79,0.23); color: rgb(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
+                               style="color: rgb(29, 59, 79); border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
                         @endif
                         @if($autor->instagram != "not_")
-                            <i onclick="openInNewTab('instagram.com/{{$autor->instagram}}')"
+                            <i onclick="openInNewTab('https://instagram.com/{{$autor->instagram}}')"
                                class="fab social_icons fa-instagram link"
                                style="color: rgba(29, 59, 79); border: 2px solid rgba(29,59,79,0.23); color: rgb(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
                         @endif
@@ -173,7 +173,7 @@
             var etiquetas = '{{$entrada->etiquetas}}';
             etiquetas = etiquetas.split(',');
             $.each(etiquetas, function (index, value) {
-                $('#etiquetas').append('<span style="color: #fff;">ee</span><span class="etiqueta" style="background-color: #00394C"><a href="/blog/entradas/' + value + '" style="color: white; cursor:pointer;">' + value + '</a></span>');
+                $('#etiquetas').append('<span style="color: #fff;">ee</span><a href="/blog/entradas/' + value + '" style="color: white; cursor:pointer;"><span class="etiqueta" style="background-color: #00394C">' + value + '</span></a>');
                 tags = value;
                 console.log(tags);
             });

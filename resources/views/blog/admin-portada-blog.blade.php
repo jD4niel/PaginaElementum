@@ -28,6 +28,10 @@
             opacity: 0;
         }
 
+        .swal2-popup {
+            font-size: 1.6rem !important;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -122,7 +126,7 @@
                                 </form>
                             </div>
                             <div class="col-md-6">
-                                <table class="table table-responsive table-bordered" >
+                                <table class="table table-responsive table-bordered">
                                     <tr>
                                         <th>Sección</th>
                                         <th>Posición Actual</th>
@@ -168,6 +172,8 @@
                                                     Fecha de Inicio: {{$banner->fecha_inicio}} <br>
                                                     Fecha de Vencimiento: {{$banner->fecha_final}} <br>
                                                     Días Restantes: {{$dias_restantes}} <br>
+                                                    Enlace asignado; <a
+                                                            href="{{$banner->enlace}}">{{$banner->enlace}}</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -192,15 +198,20 @@
                                 <form method="post" id="form-banner" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="asunto" name="asunto"
-                                               placeholder="Evento del Banner">
+                                               placeholder="Evento del Banner" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="enlace" name="enlace"
+                                               placeholder="Enlace para el Banner">
                                     </div>
                                     <div class="form-group">
                                         <div class="file-input-wrapper">
-                                            <button type="button" class="btn btn-default btn-block">Click para seleccionar
-                                                miniatura
+                                            <button type="button" class="btn btn-default btn-block">Click para
+                                                seleccionar
+                                                banner
                                             </button>
                                             <input class="form-control" id="file" name="file" type="file"
-                                                   placeholder="Portada/Miniatura" accept="image/*">
+                                                   placeholder="Portada/Miniatura" accept="image/*" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -219,7 +230,100 @@
                                 </form>
                             </div>
                         </div>
+
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 20px">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Administrador de Secciones Extra</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table table-responsive table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Posición Actual</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($sections->where('id','>',1) as $item)
+                                        <tr>
+                                            <td>{{$item->tipo}}</td>
+                                            <td>{{$item->position}}</td>
+                                            <td class="text-center">
+                                                <a href="#" id="btnEditSection" class="btn btn-warning btnEditSection"
+                                                   data-toggle="modal" data-target="#editSection"
+                                                   data-tipo="{{$item->tipo}}" data-id="{{$item->id}}"><i class="fas fa-edit"></i> Editar</a>
+                                                <a class="btn btn-danger" onclick="onDeleteSection({{$item->id}})"><i
+                                                            class="fas fa-trash-alt"></i> Borrar</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-xs-12">
+                                <button class="btn btn-block btn-success" data-toggle="modal" data-target="#addSection">
+                                    Agregar Nueva Sección
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="editSection" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Editar Sección</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="tipo">Nombre de la Sección</label>
+                            <input type="text" id="editTipo" name="tipo" class="form-control">
+                            <input type="text" id="editId" name="id" class="hidden">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-block btn-success" type="button" onclick="onEditSection()">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addSection" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Agregar Sección</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addSectionForm">
+                        <div class="form-group">
+                            <label for="tipo">Nombre de la Sección</label>
+                            <input type="text" id="addTipo" name="tipo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-block btn-success" type="button" onclick="onAddSection()">Agregar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -229,10 +333,13 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
     <script>
 
         var fecha_inicio;
         var fecha_final;
+
+        var x = document.getElementById("file").required;
 
         $(document).ready(function () {
 
@@ -326,6 +433,108 @@
                 }
             });
         });
+
+        $('.btnEditSection').on('click', function () {
+            $('#editTipo').val($(this).data('tipo'));
+            $('#editId').val($(this).data('id'));
+        });
+
+        function onAddSection() {
+            var route = "{{route("add.section")}}";
+            if($('#addTipo').val() !== ""){
+                $.ajax({
+                    url: route,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {tipo: $('#addTipo').val()},
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        alert('Sección Agregada Exitosamente');
+                        location.reload();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Nombre de la sección invalido',
+                    text: 'Verifica el nombre de la sección.',
+                })
+            }
+        }
+
+        function onEditSection() {
+            var route = "{{route("edit.section")}}";
+
+            if($('#editTipo').val() !== ""){
+                $.ajax({
+                    url: route,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        id: $('#editId').val(),
+                        tipo: $('#editTipo').val(),
+                        position: 0
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        alert('Sección Editada Exitosamente');
+                        location.reload();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Nombre de la sección invalido',
+                    text: 'Verifica el nombre de la sección.',
+                });
+            }
+        }
+
+        function onDeleteSection(id) {
+            var route = "{{route("delete.section")}}";
+
+            Swal.fire({
+                title: "¿Esta Seguro de Borrar esta Sección?",
+                type: "warning",
+                text: 'Esta acción será irreversible y eliminará todas las entradas relacionadas con esta sección',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Borrar'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: route,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {id: id},
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            alert('Sección Borrada Exitosamente');
+                            location.reload();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus + ': ' + errorThrown);
+                        }
+                    });
+                }
+            });
+        }
 
         function calcularFechas(periodo) {
             inicio = new Date();

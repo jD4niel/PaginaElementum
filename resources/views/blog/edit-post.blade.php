@@ -40,6 +40,9 @@
             border: 1px solid rgba(0, 0, 0, 0.08);
             background: transparent;
         }
+        .swal2-popup {
+            font-size: 1.6rem !important;
+        }
     </style>
 @endsection
 
@@ -51,8 +54,9 @@
                     <div class="row">
                         <p class="h1 text-center">Nueva entrada:
                             <select name="clasificacion_id" id="clasificacion_id" class="custom-select" style="">
-                                <option value="1">Normal</option>
-                                <option value="2">Leído en Elementario</option>
+                                @foreach($sections as $item)
+                                    <option value="{{$item->id}}">{{$item->tipo}}</option>
+                                @endforeach
                             </select>
                         </p>
                     </div>
@@ -125,7 +129,7 @@
                         <div class="row">
                             <div class="com-md-12">
                                 <div class="form-group text-center">
-                                    <input id="submit" type="submit" value="Registrar entrada" class="btn-add-new">
+                                    <input id="submit" type="submit" value="Editar entrada" class="btn-add-new">
                                 </div>
                             </div>
                         </div>

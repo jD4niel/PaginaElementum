@@ -40,6 +40,9 @@ Route::get('/entradas', 'EntradasController@index')->name('entradas')->middlewar
 Route::post('/crear/banner', 'BlogController@upBanner')->name('up.banner')->middleware('auth');
 Route::get('/admin-portada', 'BlogController@adminPortada')->name('admin.portada')->middleware('auth');
 Route::post('/posiciones/portada', 'BlogController@portadaPos')->name('pos.portada')->middleware('auth');
+Route::post('/add/blog-section', 'BlogController@newSection')->name('add.section')->middleware('auth');
+Route::post('/edit/blog-section', 'BlogController@editSection')->name('edit.section')->middleware('auth');
+Route::post('/delete/blog-section', 'BlogController@deleteSection')->name('delete.section')->middleware('auth');
 
 
 
