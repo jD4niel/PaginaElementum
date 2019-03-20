@@ -20,9 +20,6 @@
         <div id="p2"></div>
         <div id="p3"></div>
         <div id="p4"></div>
-        <div class="panel panel-default">
-            <div class="panel-body">A Basic Panel</div>
-        </div>
         <div id="entradas_recientes">
             <div class="row" style="padding-top: 10px">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="min-height: 540px">
@@ -42,31 +39,41 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                     @foreach($pe as $item)
-                        <div class="row" style="min-height: 179px; max-height: 180px">
-                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                                <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
-                                            src="{{asset("images/entradas")}}/{{$item->imagen}}"
-                                            class="img-fluid center-cropped" style="padding-bottom: 10px;"></a>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
+                                                    src="{{asset("images/entradas")}}/{{$item->imagen}}"
+                                                    class="img-fluid center-cropped pb-2"></a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
                                 <div class="row">
-                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h4 class="serif"
-                                                                                                  style="color:#1d3b4f;">{{$item->nombre}}</h4>
-                                    </a>
+                                    <div class="col-12">
+                                        <a href="{{ route('blog.entrada.elementum',$item->id) }}">
+                                            <h4 class="serif" style="color:#1d3b4f;">{{$item->nombre}}</h4>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    @if($item->user_id != 999)
-                                        <p style="font-size: .8em">Escrito por <a
-                                                    href="{{ route('autores.detalle', $item->user_id) }}"><b>{{$item->autor}}
-                                                    ,</b></a> {{$item->fecha}}
-                                        </p>
-                                    @else
-                                        <p style="font-size: .8em">Escrito por <b>{{$item->autor_externo}}
-                                                ,</b> {{$item->fecha}}</p>
-                                    @endif
+                                    <div class="col-12">
+                                        @if($item->user_id != 999)
+                                            <p style="font-size: .8em">Escrito por <a
+                                                        href="{{ route('autores.detalle', $item->user_id) }}"><b>{{$item->autor}}
+                                                        ,</b></a> {{$item->fecha}}
+                                            </p>
+                                        @else
+                                            <p style="font-size: .8em">Escrito por <b>{{$item->autor_externo}}
+                                                    ,</b> {{$item->fecha}}</p>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <p style="font-size: .8em">{{substr($item->intro,0,150)}} . . .</p>
+                                    <div class="col-12">
+                                        <p style="font-size: .8em">{{substr($item->intro,0,150)}} . . .</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +105,7 @@
 
         <div id="colaboradores">
             <div class="row" style="padding-top: 50px">
-                <div class="col-md-8">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
                     <div class="row" style="margin-bottom: -20px">
                         <div class="col-md-10"><h3>Nuestros Colaboradores</h3></div>
                         <div class="col-md-2"><a href="{{ route('blog.secciones','nuestros-colaboradores') }}">Ver más
@@ -107,35 +114,39 @@
                     <hr>
                     @foreach($uea as $item)
                         @if($item != null)
-                            <div class="row" style="min-height: 179px; max-height: 180px">
-                                <div class="col-md-4">
-                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
-                                                src="{{asset("images/entradas")}}/{{$item->imagen}}"
-                                                alt=""
-                                                class="img-fluid center-cropped " style="padding-bottom: 10px;"></a>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}">
+                                        <img src="{{asset("images/entradas")}}/{{$item->imagen}}" alt="" class="img-fluid center-cropped pb-2 "></a>
                                 </div>
-                                <div class="col-md-8 ">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
                                     <div class="row ">
-                                        <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h3 class="serif"
-                                                                                                      style="color:#1d3b4f;">{{$item->nombre}}</h3>
-                                        </a>
+                                        <div class="col-12">
+                                            <a href="{{ route('blog.entrada.elementum',$item->id) }}">
+                                                <h3 class="serif" style="color:#1d3b4f;">{{$item->nombre}}</h3>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="row ">
-                                        <p>Escrito por <a
-                                                    href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
-                                                    ,</b></a> {{$item->fecha}}</p>
+                                        <div class="col-12">
+                                            <p>
+                                                Escrito por <a href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}},</b></a> {{$item->fecha}}
+                                            </p>
+                                        </div>
                                     </div>
                                     <div class="row ">
-                                        <p>{{substr($item->intro,0,150)}}</p>
+                                        <div class="col-12">
+                                            <p>{{substr($item->intro,0,150)}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         @endif
                     @endforeach
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <h4>Populares en elementum</h4>
                             <hr>
                             <ol class="ol-blog">
@@ -161,8 +172,8 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="row mt-4git">
-                        <div class="col-md-12">
+                    <div class="row pt-4">
+                        <div class="col-12">
                             <h4>Nube de Etiquetas</h4>
                             <hr>
                             @for($i = 0; $i < count($nube) && $i < 20; $i++)
@@ -191,31 +202,35 @@
                         </div>
                         <hr>
                         @foreach($entradas->where('clasificacion_id', $section->id)->take(4) as $item)
-                            <div class="row" style="min-height: 179px; max-height: 180px">
-                                <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                                     <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
                                                 src="{{asset("images/entradas")}}/{{$item->imagen}}" alt=""
-                                                class="img-fluid center-cropped " style="padding-bottom: 10px;"></a>
+                                                class="img-fluid center-cropped pb-2" ></a>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
                                     <div class="row">
-                                        <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h3 class="serif"
-                                                                                                      style="color:#1d3b4f;">{{$item->nombre}}</h3>
-                                        </a>
+                                        <div class="col-12">
+                                            <a href="{{ route('blog.entrada.elementum',$item->id) }}">
+                                                <h3 class="serif" style="color:#1d3b4f;">{{$item->nombre}}</h3>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        @if($item->user_id != 999)
-                                            <p>Escrito por <a
-                                                        href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
-                                                        ,</b></a> {{$item->fecha}}
-                                            </p>
-                                        @else
-                                            <p>Escrito por <b>{{$item->autor_externo}}
-                                                    ,</b> {{$item->fecha}}</p>
-                                        @endif
+                                        <div class="col-12">
+                                            @if($item->user_id != 999)
+                                                <p>
+                                                    Escrito por <a href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}},</b></a> {{$item->fecha}}
+                                                </p>
+                                            @else
+                                                <p>Escrito por <b>{{$item->autor_externo}},</b> {{$item->fecha}}</p>
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        <p>{{substr($item->intro,0,150)}}</p>
+                                        <div class="col-12">
+                                            <p>{{substr($item->intro,0,150)}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

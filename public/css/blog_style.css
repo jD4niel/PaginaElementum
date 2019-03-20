@@ -63,6 +63,14 @@ p {
     width: 220px;
 }
 
+@media only screen and (max-width: 991px) {
+    .center-cropped {
+        width: 100%;
+        height: 200px;
+
+    }
+}
+
 .new-cropped {
     object-fit: cover; /* Do not scale the image */
     object-position: bottom; /* Center the image within the element */
@@ -179,3 +187,10 @@ p {
     width: 100%;
     height: 100%;
 }
+
+.row-height {
+    min-height: 179px;
+    max-height: 180px;
+}
+
+
