@@ -5,22 +5,17 @@
       <div class="row col-md-8 text-center" style="margin: auto;float: none;">
           <div class="col-md-12">
               <br>
-          <form class="taller-form form" >
+          <form class="taller-form form" action="{{route('edit.taller.data',$item->id)}}" method="post" enctype="multipart/form-data">
+              <input type="hidden" value="{{ csrf_token() }}" name="_token">
               <h1>EDITAR TALLER</h1>
               <br>
               <hr>
               <div class="form-group" id="contenedor-img">
-                 {{-- <div class="form-group col-md-12 text-center" id="drop" >
-                      <div class="dropzone dropzone-file-area" id="my-dropzone" style="width: 100%; height: 250px; border-width: 4px; border-color: rgb(54, 198, 211);">
-                          <div class="dz-message" data-dz-message><span style="font-size: 24px; color: rgba(30,167,159,0.87)">Arrastra o selecciona una imagen</span></div>
-                          <div class="fallback text-center">
-                              <input name="file" type="file" id="file_" hidden>
-                          </div>
-                      </div>--}}
+
                   <div class="col-md-12">
                       <button type="button" onclick="triggerFile()" style="width: 60%" class="btn btn-success ">Cambiar imagen</button>
                       <br>
-                      <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
+                      <input  name="file" type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
                   </div>
                   <img id="preview-img" width="60%" src="{{asset('images/talleres')}}/{{$item->imagen}}" alt="">
 
@@ -29,30 +24,31 @@
                   <label for="" class="form-control-label">Titulo:</label>
                   <input type="hidden" value="{{$item->imagen}}" id="imagenNom">
                   <input type="hidden" value="{{$item->id}}" id="id_taller">
-                  <input id="titulo-taller" type="text" class="form-control" value="{!! $item->titulo !!}">
+                  <input name="title" id="titulo-taller" type="text" class="form-control" value="{!! $item->titulo !!}">
               </div>
               <div class="form-group">
                   <label for="" class="form-control-label">Descripción:</label>
-                  <textarea class="form-control" id="summary-ckeditor">{!! $item->descripcion !!}</textarea>
+                  <textarea name="description" class="form-control" id="summary-ckeditor">{!! $item->descripcion !!}</textarea>
               </div>
               <div class="form-group">
                   <label for="" class="form-control-label">Duración:</label>
-                  <input id="duracion" type="text" class="form-control" value="{!! $item->duracion !!}">
+                  <input name="duration"  id="duracion" type="text" class="form-control" value="{!! $item->duracion !!}">
               </div>
               <div class="form-group">
                   <label for="" class="form-control-label">Imparte:</label>
-                  <input id="persona" type="text" class="form-control" value="{!! $item->persona !!}">
+                  <input name="imparte"  id="persona" type="text" class="form-control" value="{!! $item->persona !!}">
               </div>
               <div class="form-group">
                   <label for="" class="form-control-label">Sede:</label>
-                  <input id="sede" type="text" class="form-control" value="{{$item->sede}}">
+                  <input name="sede"  id="sede" type="text" class="form-control" value="{{$item->sede}}">
               </div>
-              {{--<div class="form-group">
+              <div class="form-group">
                   <label for="" class="form-control-label">Informes:</label>
-                  <input id="informes" type="text" class="form-control" value="{!! $item->informes !!}">
-              </div>--}}
+                  <input name="info"  id="informes" type="text" class="form-control" value="{!! $item->informes !!}">
+              </div>
               <br><br>
-              <button type="button" onclick="enviarFoto()" class="edit-btn">Editar taller</button>
+              <button type="button" onclick="triggerSubmit('¿Editar taller?','taller')" class="edit-btn">Editar taller</button>
+              <input type="submit" id="submit-taller" style="display: none;">
           </form>
           </div>
       </div>
@@ -61,8 +57,6 @@
 @endsection
 
 @section('script_section')
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         var ckEditorID;
         ckEditorID = 'summary-ckeditor';
@@ -379,5 +373,6 @@
              })*/
         }
     </script>
+    <script src="{{asset('js/talleres.js')}}"></script>
 @endsection
 

@@ -86,9 +86,9 @@ Route::post('/editar/slider/nueva','ControlController@uploadNewImage')->name('ne
 Route::post('/editar/slider/borrar/{id}', 'ControlController@destroy')->name('slider.delete')->middleware('auth');
 Route::get('/editar/nuevo/taller', 'ControlController@taller')->name('new.taller')->middleware('auth');
 Route::get('/editar/taller/{id}', 'ControlController@EditarTaller')->name('edit.taller')->middleware('auth');
-Route::get('/editar/taller/data/{id}', 'ControlController@EditarTallerDatos')->name('edit.taller.data')->middleware('auth');
+Route::post('/editar/taller/data/{id}', 'TallerController@edit')->name('edit.taller.data')->middleware('auth');
 Route::post('/editar/taller/editar', 'ControlController@EditarTallerSend')->name('edit.taller.send')->middleware('auth');
-Route::post('/agregar/taller/nuevo', 'ControlController@AgregarTallerSend')->name('new.taller.send')->middleware('auth');
+Route::post('/agregar/taller/nuevo', 'TallerController@create')->name('new.taller.send')->middleware('auth');
 Route::delete('/editar/taller/borrar/{id}', 'ControlController@destroyTaller')->name('taller.delete')->middleware('auth');
 Route::post('/editar/pdf','ControlController@uploadPDF')->name('new.pdf.up')->middleware('auth');
 Route::get('/editar/entrada/{id}', 'EntradasController@edit')->name('edit.post')->middleware('auth');

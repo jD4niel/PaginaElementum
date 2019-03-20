@@ -290,9 +290,13 @@
                             processData: false, // NEEDED, DON'T OMIT THIS
                             success: function (response, file) {
                                 console.log(response);
+                                
                                 swal("El libro fue editado correctamente", " ",{
-                                    icon: "success"
+                                        icon: "success"
+                                    }).then((value) => {
+                                    window.location.reload();
                                 });
+
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 console.log(textStatus + ': ' + errorThrown);
