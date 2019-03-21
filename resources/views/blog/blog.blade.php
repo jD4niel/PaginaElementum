@@ -151,23 +151,28 @@
                             <hr>
                             <ol class="ol-blog">
                                 @foreach($ep as $item)
-                                    <li class="li-blog">
-                                        <div>
-                                            <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h4
-                                                        class="serif bold"
-                                                        style="color:#1d3b4f;">{{$item->nombre}}</h4>
-                                            </a>
-                                            @if($item->user_id != 999)
-                                                <p style="font-size:.8em;">Escrito por <a
-                                                            href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
-                                                            ,</b></a> {{$item->fecha}}
-                                                </p>
-                                            @else
-                                                <p style="font-size:.8em;">Escrito por <b>{{$item->autor_externo}}
-                                                        ,</b> {{$item->fecha}}</p>
-                                            @endif
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <li class="li-blog">
+                                                <div>
+                                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h4
+                                                                class="serif bold"
+                                                                style="color:#1d3b4f;">{{$item->nombre}}</h4>
+                                                    </a>
+                                                    @if($item->user_id != 999)
+                                                        <p style="font-size:.8em;">Escrito por <a
+                                                                    href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}}
+                                                                    ,</b></a> {{$item->fecha}}
+                                                        </p>
+                                                    @else
+                                                        <p style="font-size:.8em;">Escrito por <b>{{$item->autor_externo}}
+                                                                ,</b> {{$item->fecha}}</p>
+                                                    @endif
+                                                </div>
+                                            </li>
                                         </div>
-                                    </li>
+                                    </div>
+
                                 @endforeach
                             </ol>
                         </div>

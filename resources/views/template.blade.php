@@ -24,6 +24,9 @@
         <script>
             new WOW().init();
         </script>
+        <style>
+            @yield('style')
+        </style>
 
     </head>
 

@@ -1,63 +1,99 @@
 @extends('template')
 
 @section('home')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12"
-                 style="background: linear-gradient(0deg,rgba(32,34,33,0.89),rgba(68,76,87,0.73)),url('{{asset("images/entradas/")}}/{{$entrada->imagen}}');background-repeat: no-repeat;color:white;padding: 100px;vertical-align:center;text-align:center;background-color: #1d3b4f;height: 300px; margin-top:40px;background-size: cover;">
-                <h4>{{$entrada->intro}}</h4></div>
-        </div>
-        <div class="row">
-            <div id="cuerpo_blog" class="col-md-10"
-                 style="padding: 20px; margin: -50px auto 0; align-content:center;background-color: white; box-shadow: 0px 4px 5px 0px rgba(161,161,161,1);">
-                <div class="col-md-12" align="right" style="color: rgba(29,59,79,0.23)"> Compartir:
-                    <a class="compartir_"
-                       href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}"><i
-                                class="fab social_icons fa-facebook-f link"
-                                style=" border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i></a>
-                    <a class="compartir_"
-                       href="https://twitter.com/intent/tweet?url={{ urlencode(Request::fullUrl()) }}"><i
-                                class="fab social_icons fa-twitter link"
-                                style=" border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i></a>
-                </div>
-                <div class="col-md-12">
-                    <h1 class="serif display-3" style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h1>
-                    @if($entrada->user_id != 999)
-                        <div>Escrito por <b style="color:#1d3b4f;"><a href="{{ route('autores.detalle', $entrada->user_id) }}">{{$entrada->autor}}</a></b>,
-                            {{$entrada->fecha}} &middot; No. de Visita: {{$entrada->visitas}}</div>
-                    @else
-                        <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor_externo}}</b>,
-                            {{$entrada->fecha}} &middot;
-                            No. de Visita: {{$entrada->visitas}}</div>
-                    @endif
-                    <br><br>
-                    <div class="col-md-12" style="margin-bottom: 50px;text-align: justify;">
-                        {!! $entrada->texto !!}
+    <div class="container-fluid">
+        <div class="row pt-2">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1 offset-xl-1">
+                <div class="row">
+                    <div class="col-12 d-none d-sm-none d-md-none d-lg-block d-xl-block">
+                        <div class="" style="background: linear-gradient(0deg,rgba(32,34,33,0.89),rgba(68,76,87,0.73)),url('{{asset("images/entradas/")}}/{{$entrada->imagen}}');background-repeat: no-repeat;color:white;padding: 100px;text-align:center;background-color: #1d3b4f;height: 300px; background-size: cover;">
+                            <h4>{{$entrada->intro}}</h4>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-12" align="center">
-                <span class="fa-stack fa-2x">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                </span><br>
-                    <div class="fb-like" data-href="http://localhost:8000/blog/entrada/{{$entrada->id}}"
-                         data-layout="box_count" data-action="like" data-size="small" data-show-faces="true"
-                         data-share="false"></div>
-                    {{--<span style="font-size: 1.5em">Likes <input type="text" id="likes" size="2" value="200"--}}
-                                                                {{--style="background: transparent; border: none;"></span>--}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 d-block d-sm-block d-md-block d-lg-none d-xl-none">
+                        <img src="{{asset("images/entradas/")}}/{{$entrada->imagen}}" alt="" class="img-fluid" style="max-height: 300px; object-fit: cover; min-width: 100%">
+                    </div>
                 </div>
-                <hr class="shine">
-                @if($autor->id != 999)
-                    <div class="col-md-12 align-self-center" style="margin-top: 80px">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div id="cuerpo_blog" class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1 offset-xl-1 shadow-lg" style="margin-top: -50px; background-color: white;">
+                <div class="row">
+                    <div class="col-12" style="color: rgba(29,59,79,0.23)">
+                        <p class="text-right pt-2">
+                            Compartir:
+                            <a class="compartir_"
+                               href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}"><i
+                                        class="fab social_icons fa-facebook-f link"
+                                        style=" border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i></a>
+                            <a class="compartir_"
+                               href="https://twitter.com/intent/tweet?url={{ urlencode(Request::fullUrl()) }}"><i
+                                        class="fab social_icons fa-twitter link"
+                                        style=" border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <div class="row">
-                            <div class="col-md-3">
-                                <img style="filter: drop-shadow(-1px 3px 2px #4e4e4eb5);border-radius: 10%;"
-                                     class="img-fluid rounded-circle"
+                            <div class="col-12">
+                                <h1 class="serif display-4 d-none d-md-block d-lg-block d-xl-block" style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h1>
+                                <h3 class="serif d-block d-sm-block d-md-none" style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h3>
+                            @if($entrada->user_id != 999)
+                                    <div>Escrito por <b style="color:#1d3b4f;"><a href="{{ route('autores.detalle', $entrada->user_id) }}">{{$entrada->autor}}</a></b>,
+                                        {{$entrada->fecha}} &middot; No. de Visita: {{$entrada->visitas}}</div>
+                                @else
+                                    <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor_externo}}</b>,
+                                        {{$entrada->fecha}} &middot;
+                                        No. de Visita: {{$entrada->visitas}}</div>
+                                @endif
+                                <br><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="margin-bottom: 50px;text-align: justify;">
+                                {!! $entrada->texto !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" align="center">
+                        <span class="fa-stack fa-2x">
+                          <i class="fas fa-circle fa-stack-2x"></i>
+                          <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <br>
+                        <div class="fb-like" data-href="http://localhost:8000/blog/entrada/{{$entrada->id}}"
+                             data-layout="box_count" data-action="like" data-size="small" data-show-faces="true"
+                             data-share="false"></div>
+                        {{--<span style="font-size: 1.5em">Likes <input type="text" id="likes" size="2" value="200"--}}
+                        {{--style="background: transparent; border: none;"></span>--}}
+                    </div>
+                </div>
+
+
+                <hr class="shine">
+                <div class="row py-5">
+                @if($autor->id != 999)
+                    <div class="col-10 offset-1">
+                        <div class="row">
+                            <div class="col-8 col-sm-8 col-md-3  offset-2 offset-sm-2 offset-md-0 py-4 py-sm-4 py-md-0" >
+                                <img class="img-fluid rounded-circle shadow"
                                      src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="">
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-12 col-sm-12 col-md-9">
                                 <a href="{{ route('autores.detalle', $autor->id) }}">
-                                    <h3>{{$autor->nombre}}{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h3></a>
+                                    <h3 class="text-center text-sm-center text-md-left">{{$autor->nombre}}{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h3></a>
                                 <p style="font-size: 1em; text-align: justify;text-justify: inter-word;">{!! $autor->breve_desc!!}</p>
                             </div>
                         </div>
@@ -80,13 +116,14 @@
                         @endif
                     </div>
                 @else
-                    <div class="col-md-12 align-self-center" style="margin-top: 80px">
+                    <div class="col-10 offset-1">
                         Autor: <h3>{{$entrada->autor_externo}}</h3>
                     </div>
                 @endif
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row pt-5">
             <div class="col-md-10" align="right" style="padding-top: 1em; margin: 0 auto 0;">
                 <h3>Etiquetas</h3>
                 <hr class="hr-tags">
@@ -100,31 +137,29 @@
                      data-width="950" data-numposts="5" data-colorscheme="light"></div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12" align="left" style="padding-top: 30px; margin: 0 auto 0;">
+        <div class="row pt-5">
+            <div class="col-12" align="left" style="padding-top: 30px;">
                 <h3>Populares Elementum</h3>
                 <hr class="hr-tags" style="background: linear-gradient(to left, rgba(0, 0, 0, 0.17) 75%, #00394c 14%);">
             </div>
         </div>
         <div class="row" style="padding-top: 25px">
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="d-none">{{$contador = 1}}</div>
-
                 <div class="row">
                     @foreach($ep as $item)
-                        <div class="col-md-3" align="">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
                             <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
                                         src="{{asset("images/entradas/")}}/{{$item->imagen}}"
                                         class="img-fluid center-cropped" style="width: 100%; height: 160px"></a>
                             <div class="row" style="padding-top: 10px">
-                                <div class="col-md-2">
+                                <div class="col-2">
                                     <span style="content: '0' counter(my-awesome-counter); font-weight: bold; font-size: 2.3em; line-height: 1; color: rgba(38, 69, 99, 0.25);"> 0{{$contador++}}</span>
-
                                 </div>
-                                <div class="col-md-10">
-                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h3 class="serif bold"
+                                <div class="col-10">
+                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><h5 class="serif bold"
                                                                                                   style="color:#1d3b4f"
-                                                                                                  align="">{{$item->nombre}}</h3>
+                                                                                                  align="">{{$item->nombre}}</h5>
                                     </a>
                                     @if($item->user_id != 999)
                                         <p style="font-size:.8em;">Escrito por <a
