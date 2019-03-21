@@ -5,22 +5,17 @@
         <div class="row col-md-8 text-center" style="margin: auto;float: none;">
             <div class="col-md-12">
                 <br>
-                <form class="taller-form form" >
+                <form class="taller-form form" action="{{route('new.taller.send')}}" method="post" enctype="multipart/form-data">
                     <h1>CREAR TALLER</h1>
                     <br>
                     <hr>
                     <div class="form-group" id="contenedor-img">
-                        {{-- <div class="form-group col-md-12 text-center" id="drop" >
-                             <div class="dropzone dropzone-file-area" id="my-dropzone" style="width: 100%; height: 250px; border-width: 4px; border-color: rgb(54, 198, 211);">
-                                 <div class="dz-message" data-dz-message><span style="font-size: 24px; color: rgba(30,167,159,0.87)">Arrastra o selecciona una imagen</span></div>
-                                 <div class="fallback text-center">
-                                     <input name="file" type="file" id="file_" hidden>
-                                 </div>
-                             </div>--}}
+
+                        <input type="hidden" value="{{ csrf_token() }}" name="_token">
                         <div class="col-md-12">
                             <button type="button" onclick="triggerFile()" style="width: 60%" class="btn btn-success ">Agregar una imagen</button>
                             <br>
-                            <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
+                            <input type="file" onchange="readURL(this)" id="fileUp" name="file" style="display: none;">
                         </div>
                         <img id="preview-img" width="60%" src="" alt="">
 
@@ -28,30 +23,31 @@
                     <div class="form-group">
                         <label for="" class="form-control-label">Titulo:</label>
                         <input type="hidden" value="" id="imagenNom">
-                        <input id="titulo-taller" type="text" class="form-control" value="">
+                        <input id="titulo-taller" type="text" name="title" class="form-control" value="" required>
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">Descripción:</label>
-                        <textarea class="form-control" id="summary-ckeditor"></textarea>
+                        <textarea class="form-control" id="summary-ckeditor" name="description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">Duración:</label>
-                        <input id="duracion" type="text" class="form-control" value="">
+                        <input id="duracion" type="text" class="form-control" name="duration" value="" required>
                     </div>
                     <div class="form-group">
-                        <label for="" class="form-control-label">Imparte:</label>
-                        <input id="persona" type="text" class="form-control" >
+                        <label for="" class="form-control-label" >Imparte:</label>
+                        <input id="persona" type="text" class="form-control"  name="imparte" required>
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">Sede:</label>
-                        <input id="sede" type="text" class="form-control" value="">
+                        <input id="sede" type="text" class="form-control" name="sede" value="" required>
                     </div>
-                    {{--<div class="form-group">
+                    <div class="form-group">
                         <label for="" class="form-control-label">Informes:</label>
-                        <input id="informes" type="text" class="form-control" value="{!! $item->informes !!}">
-                    </div>--}}
+                        <input id="informes" type="text" class="form-control" name="info" value="">
+                    </div>
                     <br><br>
-                    <button type="button" onclick="enviarFoto()" class="edit-btn">Agregar taller</button>
+                    <button type="button" onclick="triggerSubmit('¿Crear nuevo taller?','taller')" class="edit-btn">Agregar taller</button>
+                    <input type="submit" id="submit-taller" style="display: none;">
                 </form>
             </div>
         </div>
@@ -60,8 +56,7 @@
 @endsection
 
 @section('script_section')
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{{asset('js/talleres.js')}}"></script>
     <script>
         var ckEditorID;
         ckEditorID = 'summary-ckeditor';

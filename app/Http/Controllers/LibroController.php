@@ -111,6 +111,7 @@ class LibroController extends Controller
         if (($request->hasFile('file'))) {
             $destinationPath = public_path() . '/images/libros/';
             $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
+            DB::table('libros')->where('id',$request->id)->update(['imagen'=>$request->file('file')->getClientOriginalName()]);
             copy($request->file('file'), $destinationPath1);
             return $request;
         }else {
@@ -182,7 +183,7 @@ class LibroController extends Controller
 
     }
     public function nosotros(){ 
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->where('show_in_us_tab','=',1)->get();
         $nosotros = DB::table('tabs_images')->where('tab_name','=','nosotros')->first();
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
         return view('Elementum.nosotros',compact('users','nosotros','elementum'));

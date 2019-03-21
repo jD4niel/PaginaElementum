@@ -121,8 +121,8 @@
             path = "";
             if(el == 1)
                 path = '/control/autor/borrar/'+id;
-            else
-                path = '/control/autor/borrar/'+id;
+            else if(el == 2)
+                path = '/control/libro/borrar/'+id;
             swal({
                 title: "¿Eliminar slider?",
                 text: "Una vez eliminado, no se podrá recuperar los datos",
