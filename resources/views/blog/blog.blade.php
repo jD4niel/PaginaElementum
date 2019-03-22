@@ -2,20 +2,16 @@
 @section('home')
 
     <div class="container" id="todo">
-        <div class="row" style="padding-top: 15px;">
-            <div class="col-12">
-                <form action="{{route('blog.search')}}" method="post" id="form-search">
-                    {{csrf_field()}}
-                    <div class="input-group input-group-sm mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar" name="busqueda">
-                        <input type="text" class="form-control" placeholder="Buscar" name="tipo" hidden value="nombre">
-                        <div class="input-group-append">
-                            <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                </form>
+        <form action="{{route('blog.search')}}" method="post" id="form-search" class="pt-5">
+            {{csrf_field()}}
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" placeholder="Buscar" name="busqueda">
+                <input type="text" class="form-control" placeholder="Buscar" name="tipo" hidden value="nombre">
+                <div class="input-group-append">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                </div>
             </div>
-        </div>
+        </form>
         <div id="p1"></div>
         <div id="p2"></div>
         <div id="p3"></div>
