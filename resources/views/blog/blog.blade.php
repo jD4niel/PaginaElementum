@@ -202,8 +202,8 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-10"><h3>{{$section->tipo}}</h3></div>
-                            {{--<div class="col-md-2"><a href="{{ route('blog.secciones','leido-en-elementario') }}">Ver más--}}
-                                    {{--<span class="dropdown-toggle"></span></a></div>--}}
+                            <div class="col-md-2"><a href="{{ route('blog.secciones',$section->id) }}">Ver más
+                                    <span class="dropdown-toggle"></span></a></div>
                         </div>
                         <hr>
                         @foreach($entradas->where('clasificacion_id', $section->id)->take(4) as $item)

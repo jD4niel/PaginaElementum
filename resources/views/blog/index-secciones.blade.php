@@ -3,17 +3,21 @@
     <div class="container">
         <div class="row">
             <div class="offset-md-1 col-md-10">
-                @switch($tipo)
-                    @case('entradas')
-                    <h1 style="padding-top: 20px" class="display-5">Entradas Recientes</h1>
-                    @break
-                    @case('nuestros-colaboradores')
-                    <h1 style="padding-top: 20px" class="display-5">Nuestros Colaboradores</h1>
-                    @break
-                    @case('leido-en-elementario')
-                    <h1 style="padding-top: 20px" class="display-5">Leído en Elementario</h1>
-                    @break
-                @endswitch
+                @if(intval($tipo) > 0)
+                    <h1 style="padding-top: 20px" class="display-5">{{$seccion}}</h1>
+                @else
+                    @switch($tipo)
+                        @case('entradas')
+                        <h1 style="padding-top: 20px" class="display-5">Entradas Recientes</h1>
+                        @break
+                        @case('nuestros-colaboradores')
+                        <h1 style="padding-top: 20px" class="display-5">Nuestros Colaboradores</h1>
+                        @break
+                        @case('leido-en-elementario')
+                        <h1 style="padding-top: 20px" class="display-5">Leído en Elementario</h1>
+                        @break
+                    @endswitch
+                @endif
             </div>
         </div>
         @foreach($entradas as $item)

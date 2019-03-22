@@ -114,60 +114,62 @@ class BlogController extends Controller
 
     public function indexPorSeccion($tipo)
     {
+        if(intval($tipo) > 0){
 
-        switch ($tipo) {
-            case "entradas":
-                $entradas = Entradas::orderBy('id', 'DESC')->paginate(15);
-                foreach ($entradas as $item) {
-                    $autor = Autor::findOrFail($item->user_id);
-                    $item['autor'] = $autor->nombre . ' ' . $autor->apellido_p;
-                    $item['fecha'] = $item->created_at->format('d M');
-                }
+            $entradas = Entradas::where('clasificacion_id', $tipo)->get();
+            foreach ($entradas as $item) {
+                $autor = Autor::findOrFail($item->user_id);
+                $item['autor'] = $autor->nombre . ' ' . $autor->apellido_p;
+                $item['fecha'] = $item->created_at->format('d M');
+            }
 
-                $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
-                return view('blog.index-secciones', compact('elementum', 'entradas', 'tipo'));
-                break;
+            $seccion = DB::table('clasificacion')->where('id',$tipo)->get();
+            $seccion = $seccion[0]->tipo;
 
-            case "nuestros-colaboradores":
-                $nc = Entradas::orderBy('id', 'DESC')->get();
-                $autores = Autor::all();
-                $entradas = [];
-                foreach ($autores as $autor) {
-                    array_push($entradas, $nc->where('user_id', $autor->id)->first());
-                }
-                $n = count($entradas);
-                for ($i = 0; $i < $n; $i++) {
-                    if ($entradas[$i] === null) {
-                        unset($entradas[$i]);
+            $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
+            return view('blog.index-secciones', compact('elementum', 'entradas', 'tipo', 'seccion'));
+
+        } else {
+            switch ($tipo) {
+                case "entradas":
+                    $entradas = Entradas::orderBy('id', 'DESC')->paginate(15);
+                    foreach ($entradas as $item) {
+                        $autor = Autor::findOrFail($item->user_id);
+                        $item['autor'] = $autor->nombre . ' ' . $autor->apellido_p;
+                        $item['fecha'] = $item->created_at->format('d M');
                     }
-                }
-                foreach ($entradas as $item) {
-                    $autor = Autor::findOrFail($item->user_id);
-                    $item['autor'] = $autor->nombre . ' ' . $autor->apellido_p;
-                    $item['fecha'] = $item->created_at->format('d M');
-                }
-                if (count($entradas) > 2) {
-                    $entradas = array_slice($entradas, 0, 4);
-                }
 
-                $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
-                return view('blog.index-secciones', compact('elementum', 'entradas', 'tipo'));
-                break;
+                    $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
+                    return view('blog.index-secciones', compact('elementum', 'entradas', 'tipo'));
+                    break;
 
-            case "leido-en-elementario":
-                $entradas = Entradas::where('clasificacion_id', 2)->get();
-                foreach ($entradas as $item) {
-                    $autor = Autor::findOrFail($item->user_id);
-                    $item['autor'] = $autor->nombre . ' ' . $autor->apellido_p;
-                    $item['fecha'] = $item->created_at->format('d M');
-                }
+                case "nuestros-colaboradores":
+                    $nc = Entradas::orderBy('id', 'DESC')->get();
+                    $autores = Autor::all();
+                    $entradas = [];
+                    foreach ($autores as $autor) {
+                        array_push($entradas, $nc->where('user_id', $autor->id)->first());
+                    }
+                    $n = count($entradas);
+                    for ($i = 0; $i < $n; $i++) {
+                        if ($entradas[$i] === null) {
+                            unset($entradas[$i]);
+                        }
+                    }
+                    foreach ($entradas as $item) {
+                        $autor = Autor::findOrFail($item->user_id);
+                        $item['autor'] = $autor->nombre . ' ' . $autor->apellido_p;
+                        $item['fecha'] = $item->created_at->format('d M');
+                    }
+                    if (count($entradas) > 2) {
+                        $entradas = array_slice($entradas, 0, 4);
+                    }
 
-                $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
-                return view('blog.index-secciones', compact('elementum', 'entradas', 'tipo'));
-                break;
-
+                    $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
+                    return view('blog.index-secciones', compact('elementum', 'entradas', 'tipo'));
+                    break;
+            }
         }
-
     }
 
     public function adminPortada()
