@@ -55,20 +55,17 @@ class ControlController extends Controller
         }
     }
     public function uploadPDF(Request $request){
-        $foto = $request->file('file');
-        $pdf = $request->file('pdf');
-        // Si el request tiene una imagen la guarda como
         if ($request['foto'] != 'nothing') {
             $destinationPath = public_path() . '/images';
             $destinationPath1 = $destinationPath . '/img_ref.jpg';
-            copy($request->file('file'), $destinationPath1);
+            copy($request['foto'], $destinationPath1);
         }
-        if ($request['pdf']!= 'nothing') {
+        if ($request['pdf'] != 'nothing') {
             $destinationPath = public_path();
             $destinationPath1 = $destinationPath . '/descarga.pdf';
-            copy($request->file('file'), $destinationPath1);
+            copy($request['pdf'], $destinationPath1);
         }
-        return "functiona";
+        return $request;
     }
     public function uploadNewImage(Request $request){
         $id =DB::table('slider')->max('id');

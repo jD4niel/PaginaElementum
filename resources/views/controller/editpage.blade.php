@@ -259,9 +259,8 @@
             var myFormData = new FormData();
             var foto = $("#changeImg");
             var pdf = $("#changePdf");
-            alert(foto.val().length)
             if(pdf.val().length != 0){ myFormData.append('pdf', pdf[0]['files'][0]); }else{ myFormData.append('pdf', 'nothing'); }
-            if(foto.val().length != 0){ myFormData.append('file', foto[0]['files'][0]); }else{ myFormData.append('file', 'nothing'); }
+            if(foto.val().length != 0){ myFormData.append('foto', foto[0]['files'][0]); }else{ myFormData.append('foto', 'nothing'); }
             var url = '{{route('new.pdf.up')}}';
             swal({
                 title: "¿Modificar imagen/PDF?",
@@ -282,16 +281,19 @@
                         contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
                         processData: false, // NEEDED, DON'T OMIT THIS
                         success: function (response, file) {
+                            console.log('success: ' + response);
                             if (response == 0){
                                 swal("No se modificaron cambios", "No agrego PDF ni imagen",{
                                     icon: "warning"
                                 });
                             }else {
+                                console.log('----------------------')
                                 console.log(response)
+                                console.log('----------------------')
                                 swal("PDF/Imagen agregados correctamente", " ",{
                                         icon: "success"
                                     }).then((value) => {
-                                     window.location.reload();
+                                     //window.location.reload();
                                 });
                             }
                         },
@@ -539,12 +541,12 @@
                 '<div class="col-md-3">'+
                 '<button id="btn-change-img'+id+'" class="change-img-sections for-service" onclick="triggerFileService('+id+')" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">Cambiar imagen</button>'+
                 '<div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section()"><i class="far fa-trash-alt"></i></div>'+
-                    '<div class="service-card" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
+                    '<div class="service-card" data-id="'+id+'" data-text="" onmouseenter="btn_appear('+id+')" data-text="" onmouseenter="btn_appear('+id+')" onmouseleave="btn_disapear('+id+')">'+
                        ' <div id="noimg'+id+'" class="img-from-fa"><i class="far fa-image"></i></div><img id="img-element-service'+id+'" class="img-fluid" style="width:100%">'+
-                        '<input id="service_name'+id+'" type="text" class="service-name" value="">'+
+                        '<input id="service_name'+id+'" type="text"  class="service-name" value="">'+
                         '<button id="btn-change-img" class="change-img-sections" onclick="triggerFileService('+id+')">Cambiar imagen</button>'+
-                        '<input type="file" onchange="readURLservice(this,'+id+')" id="fileUpService'+id+'" style="display: none;">'+
-                    '</div></div>');
+                        '<input type="file" onchange="readURLservice(this,'+id+')" id="fileUpService'+id+'" style="display: none;"><textarea class="form-control" id="text'+id+'" style="display: none"></textarea>'+
+                    '</div><button class="btn-hover color-8" data-toggle="modal" data-target="#serviceModal" data-title="" data-id="'+id+'">Agregar texto</button></div> ');
         }
         
         

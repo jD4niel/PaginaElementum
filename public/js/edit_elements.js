@@ -39,6 +39,7 @@ function edit_section(id,path,title,mes){
       var name = $('#service_name'+id).val();
       var text = $('#text'+id).val();
       var foto = $("#fileUpService"+id);
+      myFormData.append('text', text);
       myFormData.append('id', id);
     }else{
       var name = $('#text_section'+id).val();
@@ -179,7 +180,6 @@ $('#serviceModal').on('show.bs.modal', function (event) {
             var myFormData = new FormData();
             var last_id = $('#id-input-sec').val();
             var nombre = $('#text_section'+last_id).val();
-            alert(nombre)
             var foto = $("#fileUp"+last_id);
             if(foto[0]!=null){
               myFormData.append('file', foto[0]['files'][0]);
