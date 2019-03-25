@@ -394,60 +394,45 @@ body{
     left: 30%;
     top:20%;
 }
-.delete_section{
+.delete_section i{
     background-color: #ee2a00;
     border-radius: 50%;
     color: #fff;
-    width: 3em;
-    height: 3em;
+    padding: 10px 12px;
+    vertical-align: middle;
     position: absolute;
     left: 66%;
-    top:4em;
+    top:-1em;
     z-index: 1000;
     box-shadow: 3px 3px 4px 0px rgba(10,11,11,0.2);
     transition-duration: 100ms;
+    font-size: 25px;
 }
-.delete_section:hover{
-    width: 3.5em;
-    height: 3.5em;
-    top:3.9em;
+.delete_section:hover i{
+    padding: 12px 14px;
     color: #fff;
     box-shadow: 3px 3px 4px 0px rgba(213, 134, 31, 0.71);
     cursor: pointer;
 }
-.delete_section i{
-    font-size: 3.5vh;
-    position: absolute;
-    left: 30%;
-    top:20%;
-}
-.edit_individual_section{
+.edit_individual_section i{
     display: none;
     background-color: #154fff;
     border-radius: 50%;
     color: #fff;
-    width: 3em;
-    height: 3em;
+    padding: 10px;
     position: absolute;
-    left: 73%;
-    top:8em;
+    right: -15px;
+    top:-1em;
     z-index: 1000;
     box-shadow: 3px 3px 4px 0px rgba(10,11,11,0.2);
     transition-duration: 100ms;
+    font-size:25px;
 }
-.edit_individual_section:hover{
-    width: 3.3em;
-    height: 3.3em;
-    top:7.4em;
+.edit_individual_section:hover i{
+    padding: 12px;
     color: #fff;
     box-shadow: 3px 3px 4px 0px rgba(0, 98, 246, 0.71);
     cursor: pointer;
-}
-.edit_individual_section i{
-    font-size: 3.3vh;
-    position: absolute;
-    left: 27%;
-    top:20%;
 }
 .btn-entry{
     font-size: 2.5vh;

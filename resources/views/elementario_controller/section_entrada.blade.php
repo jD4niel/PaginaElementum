@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <h1>Secciones</h1>
+    <div class="row text-center">
+        <h1> {{$section_obj->name}} </h1>
     </div>
     <div class="row btn-entry-container">
-        <a href="{{ route('section.entry', $seccion_id) }}" target="_blank"><button class="btn-entry">CREAR ENTRADA</button></a>
+        <a href="{{ route('section.entry', $seccion_id) }}" target="_blank"><button class="btn-hover color-9" style="position:absolute;right: 0;">CREAR ENTRADA</button></a>
     </div>
     <br><br><hr>
     <div class="row entry-style">

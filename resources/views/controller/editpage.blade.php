@@ -55,8 +55,6 @@
             <div class="col-md-3">
             <button id="btn-change-img{{ $item->id }}" class="change-img-sections for-service" onclick="triggerFileService('{{ $item->id }}')" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')">Cambiar imagen</button>
             
-
-
             <div id="eis_{{$item->id}}" class="edit_individual_section for-service-edit" title="Guardar cambios" onclick="edit_section({{$item->id}},'servicio','¿Editar este servicio?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
             <div class="delete_section" style="top:0px !important; right: 0 !important;" title="Eliminar servicio" onclick="delete_section({{$item->id}},'servicio','Eliminar servicio','Una vez eliminado, no se puede revertir el cambio')"><i class="far fa-trash-alt"></i></div>
                 
@@ -151,7 +149,7 @@
 
 <div class="container text-center">
     <h2>Aviso de Privacidad</h2>
-    <button type="button" class="btn-hover color-2" data-toggle="collapse" data-target="#politica">Editar Aviso de Privacidad</button>
+    <button type="button" class="btn-hover color-3" data-toggle="collapse" data-target="#politica">&nbsp;Editar Aviso de Privacidad&nbsp;</button>
     <div id="politica" class="collapse">
         <form action="{{route('politica.edit',$politicaSimplificada[0]->id)}}" id="formPolitica" method="post">
             {{ csrf_field() }}

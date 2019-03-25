@@ -382,6 +382,20 @@
   cursor: pointer;
   background-color:#81e6a9;
 }
+/*Collection tab*/
+.collection{
+  background-color: lightgray;
+  padding: 20px 50px;
+  border-radius: 10px;
+  margin:5px
+}
+.collection:hover{
+  background-color: #ececec;
+  cursor:pointer;
+}
+.collection img{
+  width: 100%;
+}
 
 
 

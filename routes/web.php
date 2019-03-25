@@ -128,6 +128,9 @@ Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioControll
 //Elementum
 Route::get('/elementum/info', 'ElementumController@info')->name('elementum.info')->middleware('auth');
 Route::post('/elementum/info/save', 'ElementumController@infoSave')->name('elementum.info.save')->middleware('auth');
+Route::post('/editar/colecciones/add', 'ElementumController@collectionAdd')->name('elementum.collection.save')->middleware('auth');
+Route::post('/editar/colecciones/borrar/coleccion/{id}', 'ElementumController@destroy')->name('elementum.collection.delete')->middleware('auth');
+Route::post('/editar/colecciones/coleccion/{id}', 'ElementumController@editCollection')->name('elementum.collection.edit')->middleware('auth');
 Route::get('/elementum/footer', 'ElementumController@footer')->name('elementum.footer')->middleware('auth');
 
 

@@ -35,7 +35,12 @@ function delete_section(id,path,title,mes){
 function edit_section(id,path,title,mes){
     var myFormData = new FormData();
     myFormData.append('text',text);
-    if(path == 'servicio'){
+    if(path == 'coleccion'){
+      var name = '';
+      myFormData.append('path', path);
+      var foto = $("#fileUpService"+id);
+    }
+    else if(path == 'servicio'){
       var name = $('#service_name'+id).val();
       var text = $('#text'+id).val();
       var foto = $("#fileUpService"+id);
@@ -90,7 +95,9 @@ function getTextFromModal() {
 
 // Al editar un input se dispara esta funcion
 function onchangeinput(id) {
-  $('#eis_'+id).show(300,"linear")
+  console.log(id);
+  $('#eis_'+id+' i').show(300,"linear")
+  console.log($('#eis_'+id));
   //$('#eis_'+id).animate({width: "55px",height:"55px"},100,"swing");
 }
 
@@ -99,7 +106,7 @@ function btn_disapear(e){$('#btn-change-img'+e).hide();}
 
 
 // Ejecutar el input file para subir imagenes
-function triggerFileService(id) {$('#fileUpService'+id).trigger('click');}
+function triggerFileService(id){$('#fileUpService'+id).trigger('click');}
 // Lee el input con la imagen
 function readURLservice(input,id) {
     if (input.files && input.files[0]){
@@ -176,43 +183,88 @@ $('#serviceModal').on('show.bs.modal', function (event) {
 
 });
 
-        function saveSections() {
-            var myFormData = new FormData();
-            var last_id = $('#id-input-sec').val();
-            var nombre = $('#text_section'+last_id).val();
-            var foto = $("#fileUp"+last_id);
-            if(foto[0]!=null){
-              myFormData.append('file', foto[0]['files'][0]);
-            }
-            myFormData.append('name', nombre);
-            //Enviar meses al controlador
-            swal({
-                title: "¿Guardar secciones?",
-                text: "Los cambios se actualizarán en el inicio de Elementario",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                })
-                .then((willDelete) => {
-                if (willDelete) {
-                   var url = window.location + '/seccion/';
-                   fetch(url, {
-                      method: 'POST', 
-                      body: myFormData, 
-                      mode: 'cors',
-                      headers:{
-                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-                      }
-                      })
-                    .then(response => {
-                          console.log(response);
-                            swal("El autor fue agregado correctamente", " ",{
-                                    icon: "success"
-                                }).then((value) => {
-                                 //window.location.reload();
-                                 console.log(response+"hosjanjkasdn")
-                            });
-                    });
+function saveSections() {
+    var myFormData = new FormData();
+    var last_id = $('#id-input-sec').val();
+    var nombre = $('#text_section'+last_id).val();
+    var foto = $("#fileUp"+last_id);
+    if(nombre == '' || nombre==null){
+      swal("Error...", "La sección no tiene titulo",{icon: "error"})
+    }else{
+      if(foto[0]!=null){
+        myFormData.append('file', foto[0]['files'][0]);
+      }
+      myFormData.append('name', nombre);
+      //Enviar meses al controlador
+      swal({
+          title: "¿Guardar secciones?",
+          text: "Los cambios se actualizarán en el inicio de Elementario",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+          })
+          .then((willDelete) => {
+          if (willDelete) {
+             var url = window.location + '/seccion/';
+             fetch(url, {
+                method: 'POST', 
+                body: myFormData, 
+                mode: 'cors',
+                headers:{
+                  'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
                 }
+                })
+              .then(response => {
+                    console.log(response);
+                      swal("La sección se agrego correctamente", " ",{
+                              icon: "success"
+                          }).then((value) => {
+                           window.location.reload();
+                           console.log(response+"works")
+                      });
+              });
+          }
+      });
+    }
+}  
+
+function saveCollectionImg(id){
+  var last_id = id + 1;
+  var myFormData = new FormData();
+  var foto = $("#fileUpService"+last_id);
+  if(foto[0]==null){
+    swal("Error...", "No ha seleccionado una imagen",{icon: "error"})
+  }else{
+    var img = foto[0]['files'][0];
+    myFormData.append('file', img);
+    swal({
+        title: "¿Guardar colección?",
+        text: "Los cambios se actualizarán en la pestaña colecciones",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+           var url = window.location + '/add';
+           fetch(url, {
+              method: 'POST', 
+              body: myFormData, 
+              mode: 'cors',
+              headers:{
+                'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+              }
+              })
+            .then(response => {
+                  console.log(response);
+                    swal("La sección se agrego correctamente", " ",{
+                            icon: "success"
+                        }).then((value) => {
+                         window.location.reload();
+                         console.log(response+"works")
+                    });
             });
-        }  
+        }
+    });
+}
+}

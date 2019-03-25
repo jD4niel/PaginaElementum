@@ -97,7 +97,6 @@
                     </div>
                     <div class="btn-cont">
                         <input id="text_section{{ $item->id }}" onchange="onchangeinput({{$item->id}})" class="btn_element" type="text" value="{{ $item->name }}">
-                         <!-- <input id="color{{ $item->id}}" oninput="changeColor(input)" type="color" value="" /> -->
                         <button id="btn-change-img{{ $item->id }}" class="change-img-sections" onclick="triggerFile('{{ $item->id }}')">Cambiar imagen</button>
                         <input type="file" onchange="readURL(this, '{{$item->id}}')" id="fileUp{{ $item->id }}" style="display: none;">
                     </div>
@@ -107,8 +106,8 @@
            
         </div>
         <div class="add-more">
-            <button class="add-more-btn" onclick="addMoreSection(this)">Agregar más</button>
-            <button id="save-sections" class="add-more-btn" onclick="saveSections()" style="display: none;">Guardar</button>
+            <button class="btn-hover color-2" onclick="addMoreSection(this)">Agregar más</button>
+            <button id="save-sections" class="btn-hover color-3" onclick="saveSections()" style="display: none;">Guardar</button>
         </div>
     </div>
     <br>

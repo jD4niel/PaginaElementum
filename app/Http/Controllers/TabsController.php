@@ -37,8 +37,9 @@ class TabsController extends Controller
     
     public function coleccionesTab()
     {
+        $collections = DB::table('collections')->get();
         $colecciones = DB::table('tabs_images')->where('tab_name','=','colecciones')->first();
-        return view('tabs_controller.colecciones_tab',compact('colecciones'));
+        return view('tabs_controller.colecciones_tab',compact('colecciones','collections'));
     }    
     public function integrantesTab()
     {

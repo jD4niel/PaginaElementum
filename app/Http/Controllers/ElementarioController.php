@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Autor;
+use App\Blog;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Entradas;
@@ -91,21 +94,23 @@ class ElementarioController extends Controller
     public function individualSection($id)
     {
         $seccion_id = $id;
+        $section_obj = DB::table('section_obj')->where('id',$id)->first();
         $entradas=DB::table('entrada_sections')
             ->join('entradas', 'entradas.id', '=', 'entrada_sections.entradas_id')
             ->join('section_obj', 'section_obj.id', '=', 'entrada_sections.section_obj_id')
             ->where('section_obj.id','=',$seccion_id)
             ->get();
-        return view('elementario_controller.section_entrada',compact('entradas','seccion_id'));
+        return view('elementario_controller.section_entrada',compact('entradas','seccion_id','section_obj'));
     }
     /**
         Enntradas desde Elementario
     */
     public function entry($id){
-        $autores = Autor::all();
+        $autores = DB::table('autors')->get();
         $seccion_id = $id;
         $section_obj = DB::table('section_obj')->where('id','=',$id)->first();
-        return view('blog.create-post',compact('autores','seccion_id','section_obj'));
+        $sections = DB::table('clasificacion')->get();
+        return view('blog.create-post',compact('autores','seccion_id','section_obj','sections'));
     }
 
     /**
