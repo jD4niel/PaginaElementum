@@ -1,18 +1,18 @@
 @extends('template')
 @section('home')
-<div class="container ">
+<div class="container">
+  <div class="row">&nbsp;</div>
     <div class="row align-content-center text-center">
-        <div id="logoloselementales" onclick="cambio(2)"  data-num="1" class="col-md-2 cont uno"><div class="contenedor_colecciones">
-                <a><img src="{{ URL::to('/') }}/images/colecciones/logoloselementales.png" alt=""></a></div></div>
-        <div id="logocreativaindependiente" onclick="cambio(1)"  data-num="2" class="col-md-2 cont dos"><div class="contenedor_colecciones">
-                <a><img src="{{ URL::to('/') }}/images/colecciones/logocreativaindependiente.png" alt=""></a></div></div>
-        <div id="logometrica"  data-num="3" onclick="cambio(4)" class="col-md-2 cont tres"><div class="contenedor_colecciones">
-                <a><img src="{{ URL::to('/') }}/images/colecciones/logometrica.png" alt=""></a></div></div>
-        <div id="logotravesia"  data-num="4" onclick="cambio(3)" class="col-md-2 cont cuatro"><div class="contenedor_colecciones">
-                <a><img src="{{ URL::to('/') }}/images/colecciones/logotravesia.png" alt=""></a></div></div>
-        <div id="logoteatro"  data-num="5" onclick="cambio(5)" class="col-md-2 cont cinco"><div class="contenedor_colecciones">
-                <a><img src="{{ URL::to('/') }}/images/colecciones/logoteatro.png" alt=""></a></div></div>
+      @foreach($collection as $item)
+        <div class="cont col-md-2" onclick="cambio({{$item->id}})">
+          <div id="collectionID{{$item->id}}" class="contenedor_colecciones">
+            <img id="img-col-id-{{$item->id}}" class="collection_img_card" src="{{asset('images/colecciones')}}/{{ $item->imagen }}" alt="{{ $item->imagen }}">
+          </div>
+        </div>
+      @endforeach()
     </div>
+  </div>
+<div class="container ">
     <hr>
     <div id="contenedor_libros" class="row">
             @foreach($libros as $item)
@@ -56,9 +56,26 @@
         function salir(a) {
             $('#imgboxId'+a+' figcaption').hide();
         }
+        function generate() {
+
+            const colors = [
+                '#60A0FFFF', 
+                '#FF8AF4FF', 
+                '#F06B4F', 
+                '#F2AE52', 
+                '#B0CD6D', 
+                '#A33120'
+            ];
+
+             return colors[Math.floor(Math.random() * colors.length)];
+        }
         function cambio(a){
            var current_url=window.location.href;
             //$('#contenedor_libros').slideUp(500);
+            $('.contenedor_colecciones').css({'background-color':'#e3e3e3'})
+            $('#collectionID'+a).css({'background-color':generate()})
+            $('.collection_img_card').css({'filter':'brightness(1) invert(0)'})
+            $('#img-col-id-'+a).css({'filter':'brightness(0) invert(1)'})
             var nombre = $('#buscartxt').val();
             var route = "{{ route("ver.libros")}}";
             $.ajax({

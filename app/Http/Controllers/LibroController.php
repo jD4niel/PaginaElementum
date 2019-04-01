@@ -135,8 +135,9 @@ class LibroController extends Controller
     public function colecciones(){
         $libros= Libro::orderBy('fecha', 'desc')->get();
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
+        $collection = DB::table('collections')->get();
         //dd($libros->imagen);
-        return view('Elementum.collection',compact('libros','elementum'));
+        return view('Elementum.collection',compact('libros','elementum','collection'));
     }
     public function buscar(Request $request){
         $data = $request;

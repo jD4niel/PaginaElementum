@@ -399,11 +399,11 @@ footer{
 }
 /*fin cajas estilos*/
 .cont{
-    padding:20px;
+    padding:5px;
     margin:auto;
 }
 .contenedor_colecciones{
-    width: 200px;
+    width: 100%;
     height: 100px;
     margin: auto;
     border-radius: 15px;
@@ -419,7 +419,7 @@ footer{
 }
 .contenedor_colecciones:hover{
     cursor: pointer;
-    background-color: #f8f8f8;
+    background-color: #F8F8F8;
 }
 .imgbox{
     margin: 15px auto;
