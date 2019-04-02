@@ -33,7 +33,7 @@
             <div class="col-md-6 text-center" style="vertical-align:middle; margin-top: 60px">
                 <div class="map-responsive">
                     <iframe style="border-radius: 15px;"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1469.6436497436994!2d-98.73256771458443!3d20.121537649016968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d109fbef270a93%3A0x8ebdf798457ff71f!2sEditorial+Elementum!5e0!3m2!1ses!2smx!4v1538584320015"
+                            src="{{ $elementum->addr }}"
                             width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
                 <div style="margin-top: 30px">

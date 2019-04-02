@@ -1,8 +1,9 @@
 
 @extends('template')
 @section('autores')
-        <img  width="100%" src="{{ URL::to('/') }}/images/autores.png" alt="">
-
+    
+    <img class="img-fluid" src="{{ URL::to('/') }}/images/autores.png" alt="">
+    
     <div class="container ">
     </div>
     <div class="separador"></div>

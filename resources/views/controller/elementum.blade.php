@@ -46,8 +46,20 @@
                     <textarea class="form-control" name="direccion" id="direccion" cols="30" rows="10" required>{{ $elementum->direccion }}</textarea>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="insta" class="col-sm-2 col-form-label">Mapa:</label>
+                <div class="map-responsive col-md-10">
+                    <textarea id="embed" onchange="set_text()" type="text" class="form-control" placeholder="Pega aqui el iframe de tu dirección desde google maps o el botón *Obtener dirección*"></textarea>
+                    <a href="https://www.mapsdirections.info/crear-un-mapa-de-google/" target="_blank" class="btn btn-success btn-block">Obtener direccion</a><hr>
+                    <input  id="dir" name="dir"   onchange="set_text_from_input()"  type="text" class="form-control" value="{{ $elementum->addr }}">
+                    <div id="map-container" class="col-md-12">
+                        <iframe id="ele-frame" src="{{ $elementum->addr }}"  width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen></iframe>
+                        <div>**Nota: mapa solo para visualización</div>
+                    </div>
+                </div>
+            </div>
             <div class="text-center">
-                <button type="submit" class="btn-hover color-4">Guardar</button>
+                <button type="submit" target="_blank" class="btn-hover color-4">Guardar</button>
             </div>
         </form>
     </div>
@@ -56,7 +68,25 @@
 
 @section('script_section')
     <script>
-        var ckEditorID;
+        function set_text(){
+            var text = $('#embed').val();
+            src_text = text.split('src="')[1]
+            src_full = src_text.split('" ')[0]
+            var dir = $('#dir').val(src_full)
+            if (dir) {
+                $('#ele-frame').attr('src',src_full);
+                $('#map-container').show();
+            }
+        }
+        function set_text_from_input(){
+            var dir = $('#dir').val()
+            if (dir) {
+                $('#ele-frame').attr('src',dir);
+                $('#map-container').show();
+            }
+        }
+
+          var ckEditorID;
         ckEditorID = 'summary-ckeditor';
         CKEDITOR.config.forcePasteAsPlainText = true;
         CKEDITOR.replace( ckEditorID,
