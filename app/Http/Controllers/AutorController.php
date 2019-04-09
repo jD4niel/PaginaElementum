@@ -61,7 +61,6 @@ class AutorController extends Controller
     public function edit($id)
     {
         $autor = Autor::find($id);
-       //dd($autor);
         return view('controller.editar-autor', compact('autor'));
     }
 

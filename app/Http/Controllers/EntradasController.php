@@ -191,7 +191,7 @@ class EntradasController extends Controller
         $sections = DB::table('clasificacion')->get();
         $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
 
-        return view('blog.edit-post', compact('entrada', 'autores', 'autor', 'entradas', 'sections'));
+        return view('blog.edit-post', compact('entrada', 'autores', 'autor', 'sections'));
     }
 
     /**

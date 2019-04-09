@@ -56,6 +56,8 @@
                 </div>
             @endif
             <form method="post" id="form-entrada" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+
                 <div class="panel panel-default">
                     <div class="row">
                         <p class="h1 text-center">Nueva entrada:

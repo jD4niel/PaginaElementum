@@ -204,7 +204,7 @@ class BlogController extends Controller
 
     public function upBanner(Request $request)
     {
-        try {
+//        try {
             if ($request->hasFile('file')) {
                 $mime = $request->file->getMimeType();
                 if (($mime == 'image/jpeg') || ($mime == 'image/jpg') || ($mime == 'image/png') || ($mime == 'image/PNG')) {
@@ -226,9 +226,9 @@ class BlogController extends Controller
                 $banner->save();
                 return $banner;
             }
-        } catch (\Exception $e) {
-            return abort(403, 'Unauthorized action.');
-        }
+//        } catch (\Exception $e) {
+//            return abort(403, 'Unauthorized action.');
+//        }
     }
 
     public function show($id)

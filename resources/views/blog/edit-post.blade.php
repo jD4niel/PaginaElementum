@@ -84,7 +84,7 @@
                                             <select name="user_id" id="user_id" class="form-control" >
                                                 <option value="{{$entrada->user_id}}"
                                                         selected>{{$autor->nombre.' '.$autor->apellido_p.' '.$autor->apellido_m}}</option>
-                                                @foreach($autores as $item)
+                                                @foreach($autores->where('is_blog_writer',1) as $item)
                                                     <option value="{{$item->id}}">{{$item->nombre.' '.$item->apellido_p.' '.$item->apellido_m}}</option>
                                                 @endforeach
                                             </select>
