@@ -166,9 +166,11 @@ class LibroController extends Controller
         return view('libro','elementum');
     }
     public function autors(){
+
+        $autores = DB::table('tabs_images')->where('tab_name','=','autores')->first();
         $autors = DB::table('autors')->orderBy('order_num')->where('show_in_page',1)->get();
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
-        return view('Elementum.autors',compact('autors','elementum'));
+        return view('Elementum.autors',compact('autors','elementum','autores'));
     }
     public function autors_details($id){
         $autor=Autor::findOrFail($id);
@@ -178,9 +180,10 @@ class LibroController extends Controller
     }
     public function contacto(){
 
+        $contacto = DB::table('tabs_images')->where('tab_name','=','contacto')->first();
         $politicaSimplificada = DB::table('politica')->where('id', 2)->get();
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
-        return view('Elementum.contacto',compact('elementum', 'politicaSimplificada'));
+        return view('Elementum.contacto',compact('elementum', 'politicaSimplificada','contacto'));
 
     }
     public function nosotros(){ 

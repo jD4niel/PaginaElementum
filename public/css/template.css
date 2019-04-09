@@ -873,3 +873,18 @@ footer{
 .modal-text{
     width: 95%;
 }
+/*Estilos para las portadas*/
+.image-tab-crop{
+    margin:0 0 0 0;
+    width: 100vw;
+    object-fit: cover;
+    min-width: 100%;
+    text-align: center;
+    color:#ABABB0FF;
+    font-size: 10vw;
+}
+.image-container-crop{
+    width: 100%;max-height: 90vh; margin:0;background-color: #EFF;overflow: hidden;
+    text-align: center;
+    padding: 0;
+}

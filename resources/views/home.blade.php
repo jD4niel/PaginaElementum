@@ -131,7 +131,7 @@
                 <div class="card" style="width: 26rem; margin:10px;background-color: #BB4F24;">
                     <div class="card-body">
                         <h2 class="card-title" style="z-index: 50;">Control</h2>
-                        <h4 class="card-subtitle mb-2 " style="color:#fff;">Elementario</h4>
+                        <h4 class="card-subtitle mb-2 " style="color:#fff;">Actividades</h4>
                         <i class="fas fa-edit card-fa"></i>
                         <div class="variable-card text-right">
                             &nbsp;

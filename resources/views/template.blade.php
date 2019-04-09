@@ -50,7 +50,7 @@
                         <a href="{{route('autores.libros')}}">Autores</a>
                     </li>
                     <li>
-                        <a href="{{route('elementario.elementum')}}">Elementario</a>
+                        <a href="{{route('elementario.elementum')}}">Actividades</a>
                     </li>
                     <li>
                         <a href="{{route('contacto.elementum')}}">Contacto</a>

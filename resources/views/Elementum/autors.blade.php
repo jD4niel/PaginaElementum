@@ -2,8 +2,9 @@
 @extends('template')
 @section('autores')
     
-    <img class="img-fluid" src="{{ URL::to('/') }}/images/autores.png" alt="">
-    
+    <div class="image-container-crop">
+      <img  class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/xd.jpg" alt="1280 x 700">
+    </div>
     <div class="container ">
     </div>
     <div class="separador"></div>
