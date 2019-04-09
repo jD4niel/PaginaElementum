@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
                         <div class="form-group col-md-10">
-                            <input id="nombre" type="text" name="name" class="form-control" placeholder="Nom" required>
+                            <input id="nombre" type="text" name="name" class="form-control" placeholder="Nombre" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,17 +55,17 @@
                     <div id="user_data_login" class="form-group" style="display: none;">
                         <label class="form-control-label col-md-2" for="mail">Cuenta:</label>
                         <div class="form-group col-md-10">
-                            <input id="mail" type="text" class="form-control" name="email" placeholder="Nombre de usuario o email">
+                            <input id="mail" type="text" class="form-control" name="email" placeholder="Nombre de usuario o email" required>
                         </div>
 
                     </div>
                     <div id="pass-group" class="form-group" style="display: none;">
                         <label for="password" class="form-control-label col-md-2">Contraseña:</label>
                         <div class="form-group col-md-5">
-                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña" oninput="checkPassword()">
+                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña" oninput="checkPassword()" required>
                         </div>
                         <div class="form-group col-md-5">
-                            <input id="password_confirm" class="form-control" type="password" placeholder="Confirmar contraseña" oninput="checkPassword()">
+                            <input id="password_confirm" class="form-control" type="password" placeholder="Confirmar contraseña" oninput="checkPassword()" required>
                         </div>
                     </div>
                     <div class="col-md-2">&nbsp;</div>
@@ -133,7 +133,7 @@
                         <label class="form-control-label col-md-2" for="semblanza">Breve descripción:</label>
                         <div class="form-group text-center">
                             <div class="form-group col-md-12 text-center">
-                                <textarea class="form-control" name="description" id="summary-ckeditor2"></textarea>
+                                <textarea class="form-control" name="description" id="summary-ckeditor2" required></textarea>
                             </div>
                         </div>
                     </div>

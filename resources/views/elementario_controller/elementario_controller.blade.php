@@ -89,8 +89,12 @@
             @foreach($section_obj as $item)
             <div class="col-md-4">
                 <a href="{{route('elementario.individual.section',$item->id) }}" target="_blank" title="Editar entradas de esta sección"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
-                <div class="delete_section" title="Eliminar sección" onclick="delete_section({{$item->id}},'seccion','Eliminar sección','Una vez eliminada, se eliminará las entradas pertenecientes a ella')"><i class="far fa-trash-alt"></i></div>
-                <div id="eis_{{$item->id}}" class="edit_individual_section" title="Guardar cambios" onclick="edit_section({{$item->id}},'editar/seccion','¿Editar esta sección?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
+                <div style="position: absolute;left:70%;top:25%;">
+                    <div class="delete_section" title="Eliminar sección" onclick="delete_section({{$item->id}},'seccion','Eliminar sección','Una vez eliminada, se eliminará las entradas pertenecientes a ella')"><i class="far fa-trash-alt"></i></div>
+                </div>
+                <div style="position: absolute;left:85%;top:40%;">
+                    <div id="eis_{{$item->id}}" class="edit_individual_section" title="Guardar cambios" onclick="edit_section({{$item->id}},'editar/seccion','¿Editar esta sección?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
+                </div>
                 <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" class="section_element col-md-12">
                     <div class="el-cont">
                         <img id="img-element_{{ $item->id }}" src="{{asset('images/secciones/headers')}}/{{$item->img}}" alt="" class="img-element"/>

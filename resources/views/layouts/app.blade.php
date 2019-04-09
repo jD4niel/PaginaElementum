@@ -168,7 +168,7 @@
                             </ul>
 
 
-                        <a href="{{route('elementario.index.controller')}}" class="no-style"><li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Elementario</div></li></a>
+                        <a href="{{route('elementario.index.controller')}}" class="no-style"><li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Actividades</div></li></a>
                         <a href="{{route('control.gral')}}" class="no-style"><li class="li-item"><div><i class="fab fa-elementor"></i>&nbsp;Control de elementos</div></li></a>
                         </li>
                         <li class="li-item"><div><i class="fas fa-book-reader"></i>&nbsp;Elementum</div>

@@ -19,7 +19,7 @@ Route::get('/colecciones/buscar/autores','LibroController@buscarAutores')->name(
 Route::get('/colecciones/libroInds','LibroController@ver')->name('ver.libros');
 Route::get('/contacto','LibroController@contacto')->name('contacto.elementum');
 Route::get('/nosotros','LibroController@nosotros')->name('nosotros.elementum');
-Route::get('/elementario','LibroController@elementario')->name('elementario.elementum');
+Route::get('/actividades','LibroController@elementario')->name('elementario.elementum');
 Route::get('/blog','BlogController@index')->name('blog.elementum');
 Route::get('/control/entrada/{id}','EntradasController@entrada')->name('control.entrada.elementum');
 Route::get('/blog/entrada/{id}','BlogController@show')->name('blog.entrada.elementum');
@@ -118,13 +118,13 @@ Route::post('/upload_image','CkeditorController@uploadImage')->name('upload.ck')
 
 
 //Elementario
-Route::get('/elementario/controlador', 'ElementarioController@indexController')->name('elementario.index.controller')->middleware('auth');
-Route::post('/elementario/controlador/mes/', 'ElementarioController@updateMonth')->name('elementario.update.month')->middleware('auth');
-Route::post('/elementario/controlador/seccion/', 'ElementarioController@updateSection')->name('elementario.update.section')->middleware('auth');
-Route::get('/elementario/controlador/seccion/{id}', 'ElementarioController@individualSection')->name('elementario.individual.section')->middleware('auth');
-Route::post('/elementario/controlador/borrar/seccion/{id}', 'ElementarioController@destroy')->name('section.delete')->middleware('auth');
-Route::post('/elementario/controlador/borrar/servicio/{id}', 'ElementarioController@destroyService')->name('service.delete')->middleware('auth');
-Route::post('/elementario/controlador/editar/seccion/{id}', 'ElementarioController@editSection')->name('section.edit')->middleware('auth');
+Route::get('/actividades/controlador', 'ElementarioController@indexController')->name('elementario.index.controller')->middleware('auth');
+Route::post('/actividades/controlador/mes/', 'ElementarioController@updateMonth')->name('elementario.update.month')->middleware('auth');
+Route::post('/actividades/controlador/seccion/', 'ElementarioController@updateSection')->name('elementario.update.section')->middleware('auth');
+Route::get('/actividades/controlador/seccion/{id}', 'ElementarioController@individualSection')->name('elementario.individual.section')->middleware('auth');
+Route::post('/actividades/controlador/borrar/seccion/{id}', 'ElementarioController@destroy')->name('section.delete')->middleware('auth');
+Route::post('/actividades/controlador/borrar/servicio/{id}', 'ElementarioController@destroyService')->name('service.delete')->middleware('auth');
+Route::post('/actividades/controlador/editar/seccion/{id}', 'ElementarioController@editSection')->name('section.edit')->middleware('auth');
 //Elementum
 Route::get('/elementum/info', 'ElementumController@info')->name('elementum.info')->middleware('auth');
 Route::post('/elementum/info/save', 'ElementumController@infoSave')->name('elementum.info.save')->middleware('auth');
@@ -135,8 +135,8 @@ Route::get('/elementum/footer', 'ElementumController@footer')->name('elementum.f
 
 
 //Entradas para Elementario
-Route::get('/elementario/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');
-Route::get('/elementario/seccion/{id}', 'ElementarioController@section')->name('section.tab');
+Route::get('/actividades/controlador/entrada/{id}', 'ElementarioController@entry')->name('section.entry')->middleware('auth');
+Route::get('/actividades/seccion/{id}', 'ElementarioController@section')->name('section.tab');
 
 
 
