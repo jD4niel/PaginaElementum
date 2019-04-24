@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
@@ -42,8 +45,14 @@ class IntegrantesController extends Controller
      */
     public function store()
     {
+
+        $messages = [
+            'required' => 'El campo [:attribute] se trato de guardar con valor nulo/vacío.',
+            'max' => 'El campo [:attribute] supera el limite de caracteres.',
+            'min' => 'El campo [:attribute] debe de contener mínimo 5 caracteres.',
+        ];
+        $input = Input::all();
     	//dd(Input::all());
-    	$input = Input::all();
 
     	# Si es autor
 		$blog_writer = 0;
@@ -58,7 +67,14 @@ class IntegrantesController extends Controller
                 $show_in_us_tab = 1;
             }
         }
+        // Si es un autor
     	if ($input['select_type'] == 1) {
+            $validator = Validator::make($input, [
+                'name'     => 'required|max:250',
+                'last_name'    => 'required|max:250',
+                'description'    => 'required',
+
+            ],$messages)->validate();
     		try {
 	    		$autors = DB::table('autors')
 	            ->insertGetId([
@@ -71,7 +87,7 @@ class IntegrantesController extends Controller
 	                'twitter'=>$input['twitter_txt'],
 	                'instagram'=>$input['insta_txt'],
 	                'semblanza'=>$input['long_description'],
-                    'show_in_tab'=>$show_in_us_tab,
+                    'show_in_page'=>$show_in_us_tab,
 		            ]);
                 DB::table('autors')->where('id',$autors)->update(['order_num'=>$autors]);
 		        if(Input::hasFile('file')){
@@ -91,6 +107,14 @@ class IntegrantesController extends Controller
     	} #fin si es autor
     	# Si es un usuario de Elementum
     	elseif ($input['select_type'] == 2) {
+            $validator = Validator::make($input, [
+                'name'     => 'required|max:250',
+                'last_name'    => 'required|max:250',
+                'puesto'    => 'required|max:250',
+                'email'    => 'required|max:100|min:5',
+                'password'    => 'required|max:20|min:5',
+
+            ],$messages)->validate();
     		try {
 	    		$users = DB::table('users')
 	            ->insertGetId([
@@ -142,7 +166,18 @@ class IntegrantesController extends Controller
      */
     public function edit($id)
     {
+        $messages = [
+            'required' => 'El campo [:attribute] se trato de guardar con valor nulo/vacío.',
+            'max' => 'El campo [:attribute] supera el limite de caracteres.',
+            'min' => 'El campo [:attribute] debe de contener mínimo 5 caracteres.',
+        ];
         $input = Input::all();
+        $validator = Validator::make($input, [
+            'name'     => 'required|max:250',
+            'last_name'    => 'required|max:250',
+            'puesto'    => 'required|max:250',
+            'email'    => 'required|max:100|min:5',
+        ],$messages)->validate();
         $blog_writer = 0;
         if(isset($input['is_blog_writer'])){
             if ($input['is_blog_writer']=='on') {

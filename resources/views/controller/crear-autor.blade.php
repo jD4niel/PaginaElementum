@@ -16,20 +16,29 @@
                     </div>
                 </div>
                 <hr>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <h4><b>Error al intentar guardar los datos</b></h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="col-md-9">
                     <div class="form-group">
                         <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
                         <div class="form-group col-md-10">
-                            <input id="nombre" type="text" name="name" class="form-control" placeholder="Nombre" required>
+                            <input id="nombre" type="text" name="name" class="form-control" placeholder="Nombre" oninput="fieldChange('nombre','save_user')"required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label col-md-2" for="apa">Apellidos:</label>
                         <div class="form-group col-md-5">
-                            <input id="apa" type="text" class="form-control" name="last_name" placeholder="Apellido paterno" required>
+                            <input id="apa" type="text" class="form-control" name="last_name" placeholder="Apellido paterno" oninput="fieldChange('apa','save_user')" required>
                         </div>
-
                         <div class="form-group col-md-5">
                             <input id="apm" class="form-control" type="text" name="second_last_name" placeholder="Apellido materno">
                         </div>
@@ -38,7 +47,7 @@
                         <div id="puesto_container" style="display: none;">
                             <label for="" class="form-control-label col-md-2">Puesto: </label>
                             <div class="form-group col-md-5">
-                                <input id="puesto" type="text" name="puesto" class="form-control" placeholder="Ej. Diseñador gráfico">
+                                <input id="puesto" type="text" name="puesto" class="form-control" placeholder="Ej. Diseñador gráfico" oninput="fieldChange('puesto','save_user')" required>
                             </div>
                         </div>
                         <div id="rol_container" style="display: none;">
@@ -55,7 +64,7 @@
                     <div id="user_data_login" class="form-group" style="display: none;">
                         <label class="form-control-label col-md-2" for="mail">Cuenta:</label>
                         <div class="form-group col-md-10">
-                            <input id="mail" type="text" class="form-control" name="email" placeholder="Nombre de usuario o email" required>
+                            <input id="mail" type="text" class="form-control" name="email" placeholder="Nombre de usuario o email" oninput="fieldChange('mail','save_user')" required>
                         </div>
 
                     </div>
@@ -69,7 +78,10 @@
                         </div>
                     </div>
                     <div class="col-md-2">&nbsp;</div>
-                    <div id="pass_validate" class="col-md-10 text-center" style="color: #CA2C2FFF; display: none;">Las contraseñas no coinciden</div>
+                    <div id="pass_validate" class="col-md-10 text-center" style="color: #CA2C2FFF; display: none;">Las contraseñas no coinciden
+
+                        <div id="pass_validate_char" style="color: #CA2C2FFF; display: none;width: 100%;">La contraseña debe de tener más de 5 caracteres</div>
+                    </div>
                     <div class="form-group">
                         <hr>
                         &nbsp;
@@ -161,11 +173,22 @@
 @endsection
 
 @section('script_section')
+    <script src="{{ asset('js/form_validations.js') }}"></script>
     <script>
         function checkPassword(){
             var pass = $('#password').val();
             var pass_confirm = $('#password_confirm').val();
-            console.log(pass, '!=', pass_confirm);
+            if(pass.length < 5){
+                $('#save_user').attr("disabled", true);
+                $('#pass_validate_char').show();
+                $('#password').addClass('error');
+                $('#password_confirm').addClass('error');
+            }else{
+                $('#save_user').attr("disabled", false);
+                $('#pass_validate_char').hide();
+                $('#password').removeClass('error');
+                $('#password_confirm').removeClass('error');
+            }
             if (pass != pass_confirm) {
                 $('#save_user').attr("disabled", true);
                 $('#pass_validate').show();
@@ -179,22 +202,37 @@
             }
         }
         function triggerSubmit(text){
-            swal({
-                    title: "¿Agregar nuevo "+text+"?",
-                    text: "Los datos serán aplicados en toda la página",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                    if(willDelete) {
-                        swal("El "+text+" fue agregado correctamente", " ",{
-                                icon: "success"
-                            }).then((value) => {
-                            $('#submit_btn').click();
-                        });
-                    }
-                });
+            if(validateAll(text)){
+                swal({
+                        title: "¿Agregar nuevo "+text+"?",
+                        text: "Los datos serán aplicados en toda la página",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                        if(willDelete) {
+                            swal("Enviando datos al servidor...", " ",{
+                                    icon: "info",
+                                    button:false
+                                })
+                                $('#submit_btn').click();
+                        }
+                    });
+            }else{
+                fieldChange('nombre','save-button');
+                fieldChange('apa','save-button');
+                if(text == 'usuario'){
+
+                    swal('Campos vacios', 'Debes de llenar todos los campos requeridos \n (nombre, apellido paterno, email y/o puesto)','error')
+                    fieldChange('puesto','save-button');
+                    fieldChange('mail','save-button');
+                    fieldChange('password','save-button');
+                }else{
+                        swal('Campos vacios', 'Debe de llenar todos los campos requeridos\n(nombre, apellido paterno y breve semblanza)','error')
+                }
+
+            }
         }
     </script>
     <script>
@@ -339,6 +377,15 @@
             if(String(window.location).includes('integrante-elementum')){
                 $('#select_').val(2);
                 typeUser()
+                    $('#puesto').prop('required',true);
+                    $('#mail').prop('required',true);
+                    $('#password').prop('required',true);
+                    $('#password_confirm').prop('required',true);
+                }else{
+                    $('#puesto').removeAttr('required');
+                    $('#mail').removeAttr('required');
+                    $('#password').removeAttr('required');
+                    $('#password_confirm').removeAttr('required');
                 }
         });
         //enviar foto al servidor NO SE UTULIZA
@@ -595,6 +642,9 @@
                     console.log(response['data']);
                 }).catch(function (error) {console.log(error);});
         }
+        function typeUser(){
+            console.log("hola")
+        }
         function typeUser() {
             var sel_val = $('#select_').val();
             if(sel_val == 2){
@@ -602,6 +652,10 @@
                 $('#semblanza_id').hide();
                 $('#social_media_links').hide();
                 $('#puesto_container').show();
+                $('#puesto').prop('required',true);
+                $('#mail').prop('required',true);
+                $('#password').prop('required',true);
+                $('#password_confirm').prop('required',true);
                 $('#rol_container').show();
                 $('#save_user').show();
                 $('#save_book').hide();
@@ -612,6 +666,10 @@
                 $('#semblanza_id').show();
                 $('#social_media_links').show();
                 $('#puesto_container').hide();
+                $('#puesto').removeAttr('required');
+                $('#mail').removeAttr('required');
+                $('#password').removeAttr('required');
+                $('#password_confirm').removeAttr('required');
                 $('#save_user').hide();
                 $('#save_book').show();
                 $('#user_data_login').hide();

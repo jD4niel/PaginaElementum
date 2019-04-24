@@ -9,6 +9,16 @@
                     <h1>EDITAR INTEGRANTE </h1>
                 </div>
                 <hr>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <h4><b>Error al intentar guardar los datos</b></h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="col-md-9">
                     <div class="form-group">
                         <label class="form-control-label col-md-2" for="nombre">Nombre:</label>
@@ -20,7 +30,7 @@
                     <div class="form-group">
                         <label class="form-control-label col-md-2" for="apa">Apellidos:</label>
                         <div class="form-group col-md-5">
-                            <input id="apa" type="text" class="form-control" placeholder="Apellido paterno" name="last_name" value="{{ $usuario->last_name }}">
+                            <input id="apa" type="text" class="form-control" placeholder="Apellido paterno" name="last_name" value="{{ $usuario->last_name }}" required>
                         </div>
 
                         <div class="form-group col-md-5">
@@ -28,10 +38,10 @@
                         </div>
                     </div>
                     <br>
-                    <div class="form-group" style="background-color: red;">
+                    <div class="form-group">
                         <label class="form-control-label col-md-2" for="nombre">Puesto:</label>
                         <div class="form-group col-md-5">
-                            <input id="puesto" type="text" class="form-control" name="puesto" value="{{ $usuario->puesto }}">
+                            <input id="puesto" type="text" class="form-control" name="puesto" value="{{ $usuario->puesto }}" required>
                         </div>
                         <label for="rol_type" class="form-control-label col-md-1" name="rol">Rol: </label>
                         <div class="form-group col-md-4">
@@ -45,14 +55,14 @@
                     <div class="form-group">
                         <label class="form-control-label col-md-2" for="apa">Email / usuario:</label>
                         <div class="form-group col-md-10">
-                            <input id="email" type="text" class="form-control" placeholder="email" name="email" value="{{ $usuario->email }}">
+                            <input id="email" type="text" class="form-control" placeholder="email" name="email" value="{{ $usuario->email }}" required>
                         </div>
                     </div>
 
                     <div id="pass-group" class="form-group" >
                         <label for="password" class="form-control-label col-md-2">Contraseña:</label>
                         <div class="form-group col-md-5">
-                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña" oninput="checkPassword()">
+                            <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña" oninput="checkPassword()" pattern=".{5,10}" title="La contraseña debe de ser de 5 a 10 caracteres">
                         </div>
                         <div class="form-group col-md-5">
                             <input id="password_confirm" class="form-control" type="password" placeholder="Confirmar contraseña" oninput="checkPassword()">
@@ -62,18 +72,29 @@
                         </div>
                     </div>
                     <div class="col-md-2">&nbsp;</div>
-                    <div id="pass_validate" class="col-md-10 text-center" style="color: #CA2C2FFF; display: none;">Las contraseñas no coinciden</div>
+                     <div id="pass_validate" class="col-md-10 text-center" style="color: #CA2C2FFF; display: none;">Las contraseñas no coinciden
+
+                        <div id="pass_validate_char" style="color: #CA2C2FFF; display: none;width: 100%;">La contraseña debe de tener más de 5 caracteres</div>
+                    </div>
                       <div class="form-group">
                             <hr>
                             &nbsp;
                             <hr class="hr">
                             <label class="form-control-label col-md-3 checkbox-label" for="is_blog_writer">Es escritor de blog:</label>
                             <div class="form-group col-md-3">
-                                <input id="is_blog_writer" type="checkbox" name="is_blog_writer" class="form-control checkbox-style">
+                                <input id="is_blog_writer" type="checkbox" name="is_blog_writer" class="form-control checkbox-style"
+                                @if($usuario->is_blog_writer == 1)
+                                    checked
+                                @endif
+                                >
                             </div>
                             <label id="label_show_us"  class="form-control-label col-md-3 checkbox-label" for="show_in_us_tab">Mostrar en pestaña <i>nosotros:</i></label>
                             <div class="form-group col-md-3">
-                                <input id="show_in_us_tab" type="checkbox" name="show_in_us_tab" class="form-control checkbox-style">
+                                <input id="show_in_us_tab" type="checkbox" name="show_in_us_tab" class="form-control checkbox-style"
+                                @if($usuario->show_in_us_tab == 1)
+                                    checked
+                                @endif
+                                >
                             </div>
                         </div>
                   <div style="margin-top:45px;">&nbsp;</div>
@@ -85,7 +106,12 @@
 
                     <input type="file" onchange="readURL(this)" id="fileUp" name="file" style="display: none;">
                     <div class="col-md-12">
-                    <img id="preview-img" src="{{ URL::to('/') }}/images/fotos_usuarios/{{ $usuario->imagen }}" alt="" style="width: 200px">
+                    <img id="preview-img" src="{{ URL::to('/') }}/images/fotos_usuarios/{{ $usuario->imagen }}" alt="" style="width: 200px;
+                    @if(!isset($usuario->imagen))
+                        display: none;
+                    @endif
+                    ">
+
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -114,7 +140,17 @@
         function checkPassword(){
             var pass = $('#password').val();
             var pass_confirm = $('#password_confirm').val();
-            console.log(pass, '!=', pass_confirm);
+            if(pass.length < 5){
+                $('#save_user').attr("disabled", true);
+                $('#pass_validate_char').show();
+                $('#password').addClass('error');
+                $('#password_confirm').addClass('error');
+            }else{
+                $('#save_user').attr("disabled", false);
+                $('#pass_validate_char').hide();
+                $('#password').removeClass('error');
+                $('#password_confirm').removeClass('error');
+            }
             if (pass != pass_confirm) {
                 $('#save_user').attr("disabled", true);
                 $('#pass_validate').show();
@@ -128,22 +164,36 @@
             }
         }
         function triggerSubmit(text){
-            swal({
-                    title: "¿Editar "+text+"?",
-                    text: "Los datos serán aplicados en toda la página",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                    if(willDelete) {
-                        swal("El "+text+" fue editado correctamente", " ",{
-                                icon: "success"
-                            }).then((value) => {
-                            $('#submit_btn').click();
-                        });
+            var name = $('#nombre').val()
+            var apa = $('#apa').val();
+            var puesto = $('#puesto').val();
+            var email = $('#email').val();
+            console.log(name.length)
+            if(name.length>0 && apa.length>0 && puesto.length>0 && email.length>0){
+                swal({
+                        title: "¿Editar "+text+"?",
+                        text: "Los datos serán aplicados en toda la página",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                        if(willDelete) {
+                            swal("El "+text+" fue editado correctamente", " ",{
+                                    icon: "success"
+                                }).then((value) => {
+                                $('#submit_btn').click();
+                            });
+                        }
+                    });
+                    }else{
+                        swal({
+                        title: "Debes de llenar todos los campos requeridos",
+                        text: "(Nombre, apellido paterno, email y/o puesto)",
+                        icon: "warning",
+                        dangerMode: true,
+                        })
                     }
-                });
         }
     </script>
     <script>
