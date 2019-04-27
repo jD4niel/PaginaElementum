@@ -38,7 +38,7 @@
                 <img id="logoElementum2" class="hide" src="{{ URL::to('/') }}/images/logocolor.png" alt="Editorial Elementum logo">
             </div>
             <nav>
-                <div class="nav-mobile"><a id="nav-toggle" href="#!"><span><i style="font-size:50px; color:#00aa93;" class="fas fa-align-justify"></i></span></a></div>
+                <div class="nav-mobile"><a id="nav-toggle" href="#!"><span><i style="font-size:2em; color:#00aa93;" class="fas fa-align-justify"></i></span></a></div>
                 <ul class="nav-list">
                     <li id="barraleft" style="border-left: 1px solid white;">
                         <a href="{{route('nosotros.elementum')}}">Nosotros</a>
@@ -71,9 +71,9 @@
     @yield('libro')
     @yield('autores')
     <footer id="foter">
-        <div class="container">
+        <div id="footer-container" class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" id="footer-direction">
                     {!!  nl2br(e($elementum->direccion)) !!}
                     <br>
                     <hr style="background-color: white; width: 250px; float:left;">
@@ -88,7 +88,7 @@
                     <hr style="background-color: white; width: 200px; float: right;">
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="footer-derechos">
                 <div style="margin:0 auto -35px auto;">© Todos los derechos reservados para Editorial Elementum 2012</div>
             </div>
         </div>

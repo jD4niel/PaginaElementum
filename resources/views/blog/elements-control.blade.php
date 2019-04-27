@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
+    <div class="row text-center">
         <h1 class="text-center b1">Autores</h1>
         <h1 class="text-center b2" style="display: none;">Libros</h1>
     </div>
     <div class="row">
-        <label for="sel">
+        <label for="sel" style="float: left;">
             <span>
                 Mostrar por:
             </span>

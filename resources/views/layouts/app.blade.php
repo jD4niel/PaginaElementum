@@ -144,11 +144,14 @@
                     <ul class="ul-principal">
                         <li class="li-item"><div><i class="fas fa-file-alt"></i>&nbsp;Blog</div></a>
                             <ul class="ul-submenu">
+                                @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                                 <a href="{{route('admin.portada')}}" class="no-style"><li class="li-item">Administrador</li></a>
+                                @endif
                                 <a href="{{route('autor-entradas')}}" class="no-style"><li class="li-item">Crear entrada</li></a>
                                 <a href="{{route('entradas')}}" class="no-style"><li class="li-item">Entradas</li></a>
                             </ul>
                         </li>
+                        @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                         <li class="li-item"><div><i class="fas fa-users"></i>&nbsp;Autores</div>
                             <ul class="ul-submenu">
                                 <a href="{{route('control.gral')}}" class="no-style"><li class="li-item">Autores</li></a>
@@ -168,9 +171,14 @@
                             </ul>
 
 
+                        @endif
                         <a href="{{route('elementario.index.controller')}}" class="no-style"><li class="li-item"><div><i class="fas fa-edit"></i>&nbsp;Actividades</div></li></a>
+
+                        @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                         <a href="{{route('control.gral')}}" class="no-style"><li class="li-item"><div><i class="fab fa-elementor"></i>&nbsp;Control de elementos</div></li></a>
                         </li>
+                        @endif
+                        @if(Auth::user()->role_id == 2)
                         <li class="li-item"><div><i class="fas fa-book-reader"></i>&nbsp;Elementum</div>
                             <ul class="ul-submenu">
                                 <a href="{{route('elementum.info')}}" class="no-style"><li class="li-item">Información</li></a>
@@ -178,6 +186,7 @@
                                 <a href="{{route('integrantesTab')}}" class="no-style"><li class="li-item">Integrantes</li></a>
                             </ul>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

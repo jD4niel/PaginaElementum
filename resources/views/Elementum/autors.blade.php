@@ -3,7 +3,7 @@
 @section('autores')
     
     <div class="image-container-crop">
-      <img  class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/xd.jpg" alt="1280 x 700">
+      <img  class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$autores->image}}" alt="1280 x 700">
     </div>
     <div class="container ">
     </div>
@@ -39,7 +39,7 @@
                         <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">
                         <div class="nombre_autor">{{$item->nombre}}&nbsp;{{$item->apellido_p}}</div>
                         <br>
-                        <div class="obra overflow-hidden" style="height: 80px; width: 80%;margin: 0 auto;">{!! $item->breve_desc !!}</div>
+                        <div class="obra overflow-hidden" style="height: 90px; width: 80%;margin: 0 auto;">{!! $item->breve_desc !!}</div>
                         <br>
                         <a id="btn-id-{{$item->id}}" href="{{route('autores.detalle',$item->id)}}" style="text-decoration: none;"><button class="btn_contacto_autor">Acerca del autor</button></a>
 

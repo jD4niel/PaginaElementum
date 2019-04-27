@@ -17,10 +17,10 @@ class EscritorRole
     {
         $role = $request->user()->role_id;
 
-        if ($role == 4) {
+        if ($role == 4 || $role == 3 || $role == 2 || $role == 1 ) {
             return $next($request);
         } else {
-            return redirect('/');
+            return redirect('/home');
         }
     }
 }

@@ -911,11 +911,37 @@ footer{
     .nav-list {
         background-color: white;
     }
+    .nav-list li a:hover{
+        background-color: rgba(19, 148, 144, 1) !important;
+    }
     .navigation {
         padding:0;
     }
     .brand {
         padding: 20px;
         margin-bottom: 25px;
+    }
+    #footer-direction{
+        text-align: center;
+        width: 100% !important;
+        margin: 0 auto;
+        padding: 0;
+    }
+    #footer-direction hr{
+        float: none !important;
+    }
+    #footer-links{
+        align-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin: 0 auto;
+        padding: 0;
+    }
+    #footer-links hr{
+        float:none !important;
+    }
+    #footer-derechos{
+        max-width: 100%;
+        text-align: center; 
     }
 }

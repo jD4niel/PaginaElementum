@@ -44,12 +44,12 @@
                         <div class="img-bx">
                           <img src="" alt="personal Elementum" class="users-img-elementum">
                         </div>
-                        <div class="puesto-txt"></div>
+                        <div class="puesto-txt text-left"></div>
                       </div>
                     </div>
                       <div class="col-md-8 modal-text-elementum">
                         <h2 class="personal-name"></h2>
-                        <p class="modal-text"></p>
+                        <p class="modal-text text-left"></p>
                       </div>
                   </div>
                 </div>

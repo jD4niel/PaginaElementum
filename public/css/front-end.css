@@ -397,9 +397,25 @@
   width: 100%;
 }
 
-
-
-
+/*iconos*/
+.container{
+  text-align: center;
+}
+.icontainer i{
+    font-size: 6vw;
+}
+.icontainer div{
+  font-size: 2vw;
+}
+.yellow{
+  color:#FFAA00FF;
+}
+.blue{
+  color:#2959DEFF;
+}
+.green{
+  color:#09AA44FF;
+}
 
 
 
