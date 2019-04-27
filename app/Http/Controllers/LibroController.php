@@ -133,11 +133,12 @@ class LibroController extends Controller
         return response()->download(public_path('descarga.pdf'));
     }
     public function colecciones(){
+        $colecciones = DB::table('tabs_images')->where('tab_name','=','colecciones')->first();
         $libros= Libro::orderBy('fecha', 'desc')->get();
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
         $collection = DB::table('collections')->get();
         //dd($libros->imagen);
-        return view('Elementum.collection',compact('libros','elementum','collection'));
+        return view('Elementum.collection',compact('libros','elementum','collection','colecciones'));
     }
     public function buscar(Request $request){
         $data = $request;

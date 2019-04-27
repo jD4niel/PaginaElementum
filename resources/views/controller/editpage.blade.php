@@ -102,7 +102,7 @@
                     <div class="persona-taller">{!! $item->persona !!}</div>
                         <hr>
                 <div class="card-body text-card">
-                    Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
+                    Informes e inscripciones: {!! $item->informes !!}
                 </div>
 
                 <div class="overlay">

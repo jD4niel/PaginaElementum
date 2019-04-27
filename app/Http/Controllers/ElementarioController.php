@@ -154,7 +154,7 @@ class ElementarioController extends Controller
              ->where('section_obj.id','=',$id)
              ->paginate(9);
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
-        return view('Elementum.elementario_section',compact('entrada_sections','section_obj','entradas'));
+        return view('Elementum.elementario_section',compact('entrada_sections','section_obj','entradas','elementum'));
     }
 
     /**

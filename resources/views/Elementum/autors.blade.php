@@ -3,7 +3,7 @@
 @section('autores')
     
     <div class="image-container-crop">
-      <img  class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/xd.jpg" alt="1280 x 700">
+      <img  class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$autores->image}}" alt="1280 x 700">
     </div>
     <div class="container ">
     </div>
