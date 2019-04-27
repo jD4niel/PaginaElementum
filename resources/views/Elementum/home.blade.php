@@ -68,6 +68,35 @@
         </div>
     </div>
 
+    
+    <div style="background-color:#DCDDDE;">
+        <div class="container" style="background-color:#DCDDDE;padding:50px 0 50px 0;">
+        <div class="text-center"><h1 class="h1" style="color:#00949c; font-size: 4.5rem;">TALLERES</h1></div>
+            <div class="row text-center">
+                @foreach($talleres as $taller)
+                <div class="card mt-5 mt-md-0" style="width: 18rem;margin:auto;">
+                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/{{$taller->imagen}}" alt="Card image cap">
+                        <div class="card-body" onclick="reveal({{$taller->id}})" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
+                              <h5 class="card-title">{{$taller->titulo}}</h5>
+                              <i class="fas fa-sort-down"></i>
+                              <div class="card-text text-card-{{$taller->id}}" style="text-align:justify; display:none;">{!! $taller->descripcion !!}</div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                              <li class="list-group-item"><strong>Duración:</strong><br>{{$taller->duracion}}</li>
+                              <!-- <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li> -->
+                              <li style="display:none;" class="list-group-item text-card-{{$taller->id}}"><strong>Sede:</strong><br> {{$taller->sede}}</li>
+                        </ul>
+                        <div style="display:none;" class="card-body text-card-{{$taller->id}}">
+                              Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
+                        </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="contaier">
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -141,6 +170,9 @@
             $('#barraleft').css('border-left','1px solid #9FA09D');
             $('.social_icons').css({'border':'2px solid #00364F'});
             $('.social_icons').css({'color':'#1d3b4f'});
+            $('.footer').css({'color':'#ffffff'});
+            $('.footer').css({'border':'2px solid #ffffff'});
+
         }
     });
         $(window).scroll(function() {

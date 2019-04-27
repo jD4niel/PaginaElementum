@@ -79,9 +79,9 @@
                     <hr style="background-color: white; width: 250px; float:left;">
                 </div>
                 <div class="col-md-6 align-content-right" style="align-content: right; text-align: right;">
-                    <a id="fb_link" target="_blank" href="{{ $elementum->facebook }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link"></i></a>
-                    <a id="tw_link" target="_blank" href="{{ $elementum->twitter }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link"></i></a>
-                    <a id="insta_link" target="_blank" href="{{ $elementum->insta }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link"></i></a>
+                    <a id="fb_link" target="_blank" href="{{ $elementum->facebook }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-facebook-f social_icons link footer"></i></a>
+                    <a id="tw_link" target="_blank" href="{{ $elementum->twitter }}foo"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-twitter social_icons link footer"></i></a>
+                    <a id="insta_link" target="_blank" href="{{ $elementum->insta }}"><i style="font-size: 15px; padding-top:6px;height: 30px; width: 30px;" class="fab fa-instagram social_icons link footer"></i></a>
                     <br>
                     Teléfono <br>
                     {{ $elementum->telefono }} <br>

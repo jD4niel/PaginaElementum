@@ -1,10 +1,10 @@
 @extends('template')
 @section('libro')
-    <div class="separador"></div>
-<div class="container ">
+
+<div class="container my-5">
     <div class="row" style="margin: 0 auto;">
-        <div class="col-md-3" style="margin:0 auto;">
-                <img style="filter: drop-shadow(-5px 7px 2px #4e4e4eb5);border-radius: 50%;height:auto;width: 100%;margin-top: 70px;text-align: center;" class="img-responsive" src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="" height="400px">
+        <div class="col-md-3 mb-5 text-center" style="margin:0 auto;">
+                <img style="filter: drop-shadow(-5px 7px 2px #4e4e4eb5);border-radius: 50%;height:250px;width: 250px;margin-top: 70px;text-align: center; object-fit: cover" class="img-responsive" src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="" height="400px">
         </div>
         <div class="col-md-7" style="margin: 0 auto;">
           <h1>{{$autor->nombre}}{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h1>
@@ -26,7 +26,6 @@
         </div>
     </div>
     <br>
-    <div class="separador"></div>
     <div class="container">
         @if(count($libros)<1)
             <div class="separador"></div>
