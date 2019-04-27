@@ -46,9 +46,9 @@
                         <label for="rol_type" class="form-control-label col-md-1" name="rol">Rol: </label>
                         <div class="form-group col-md-4">
                             <select name="role_id" id="role_type" class="form-control">
-                                <option value="1">Escritor</option>
-                                <option value="2">Editor</option>
-                                <option value="3">Administrador</option>
+                                <option value="2">Escritor</option>
+                                <option value="3">Editor</option>
+                                <option value="4">Administrador</option>
                             </select>
                         </div>
                     </div>

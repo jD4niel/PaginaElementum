@@ -110,7 +110,8 @@ class ElementarioController extends Controller
         $seccion_id = $id;
         $section_obj = DB::table('section_obj')->where('id','=',$id)->first();
         $sections = DB::table('clasificacion')->get();
-        return view('blog.create-post',compact('autores','seccion_id','section_obj','sections'));
+        $come_from_activity_section = true;
+        return view('blog.create-post',compact('autores','seccion_id','section_obj','sections','come_from_activity_section'));
     }
 
     /**

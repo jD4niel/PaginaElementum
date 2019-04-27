@@ -60,12 +60,18 @@
 
                 <div class="panel panel-default">
                     <div class="row">
+                        @if(isset($come_from_activity_section))
+                            <p class="h1 text-center">
+                                Nueva entrada: {{ $section_obj->name }}
+                            </p>
+                        @else
                         <p class="h1 text-center">Nueva entrada:
                             <select name="clasificacion_id" id="clasificacion_id" class="custom-select" style="">
                                 @foreach($sections as $item)
                                     <option value="{{$item->id}}">{{$item->tipo}}</option>
                                 @endforeach
                             </select>
+                            @endif
                         </p>
                     </div>
                     <div class="panel-body">
@@ -102,7 +108,7 @@
                                     </div>
 
                                 </div>
-                                <div class="form-group" style="display: block   ">
+                                <div class="form-group" style="display: block;">
                                     <label for="etiquetas">Etiquetas(Separar usando una coma): </label><br>
                                     <input name="etiquetas" id="etiquetas" class="form-control bootstrap-tagsinput"
                                            type="text" value="" data-role="tagsinput" placeholder="">

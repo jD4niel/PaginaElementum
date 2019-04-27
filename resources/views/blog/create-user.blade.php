@@ -48,9 +48,9 @@
                 <div class="col-md-10">
                     <select name="" id="roles" class="form-control">
                         <option value="0" disabled selected>- seleccione un rol -</option>
-                        <option value="1"> Administrador </option>
-                        <option value="2"> Autor </option>
-                        <option value="3"> Escritor elementum </option>
+                        <option value="2"> Administrador </option>
+                        <option value="3"> Editor </option>
+                        <option value="4"> Escritor elementum </option>
                     </select>
                 </div>
             </div>
