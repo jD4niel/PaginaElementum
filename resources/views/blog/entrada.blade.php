@@ -29,7 +29,9 @@
                                 <td>
                                     <a class="see_btn" href="/blog/entrada/{{$item->id}}">Ver</a>
                                     <a href="{{ route('edit.post', $item->id) }}" class="edit_btn">Modificar</a>
+                                    @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                                     <button id="borrar-entrada" type="button" class="del_btn" onclick="borrar('{{ route('delete.post', $item->id) }}')">Borrar</button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

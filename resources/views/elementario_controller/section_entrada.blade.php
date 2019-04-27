@@ -30,7 +30,9 @@
                     <td>
                         <a target="_blank" class="btn btn-success" href="/blog/entrada/{{$item->entradas_id}}">Ver</a>
                         <a target="_blank"  href="{{ route('edit.post', $item->entradas_id) }}" class="btn btn-success">Modificar</a>
+                        @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                         <button onclick="borrar({{$item->entradas_id}})" class="btn btn-danger">Borrar</button>
+                        @endif
                     </td>
                 </tr>
 

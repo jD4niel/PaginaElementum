@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container text-center">
+        @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
         <div id="programming-schedule" class="row col-sm-12 text-center" style="border: 2px solid #d2d2d2; border-radius: 10px;padding: 15px 15px 40px 15px;">
             <button class="btn_save_changes" onclick="saveMonths()">Guardar cambios</button>
             <div class="row" style="width: 80%; margin:auto">
@@ -55,6 +56,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
     <!-- Modal programming section -->
     <div class="modal fade" id="modalMonth" role="dialog">
@@ -89,30 +91,38 @@
             @foreach($section_obj as $item)
             <div class="col-md-4">
                 <a href="{{route('elementario.individual.section',$item->id) }}" target="_blank" title="Editar entradas de esta sección"><div class="edit_section"><i class="fas fa-edit"></i></div></a>
+                @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                 <div style="position: absolute;left:70%;top:25%;">
                     <div class="delete_section" title="Eliminar sección" onclick="delete_section({{$item->id}},'seccion','Eliminar sección','Una vez eliminada, se eliminará las entradas pertenecientes a ella')"><i class="far fa-trash-alt"></i></div>
                 </div>
                 <div style="position: absolute;left:85%;top:40%;">
                     <div id="eis_{{$item->id}}" class="edit_individual_section" title="Guardar cambios" onclick="edit_section({{$item->id}},'editar/seccion','¿Editar esta sección?','Los cambios se verán reflejados en la pestaña de Elementario')"><i class="fas fa-check"></i></div>
                 </div>
+                @endif
                 <div id="section_element{{$item->id}}" onmouseenter="btn_appear('{{ $item->id }}')" onmouseleave="btn_disapear('{{ $item->id }}')" class="section_element col-md-12">
                     <div class="el-cont">
                         <img id="img-element_{{ $item->id }}" src="{{asset('images/secciones/headers')}}/{{$item->img}}" alt="" class="img-element"/>
                     </div>
                     <div class="btn-cont">
-                        <input id="text_section{{ $item->id }}" onchange="onchangeinput({{$item->id}})" class="btn_element" type="text" value="{{ $item->name }}">
+                        <input id="text_section{{ $item->id }}" onchange="onchangeinput({{$item->id}})" class="btn_element" type="text" value="{{ $item->name }}" @if(Auth::user()->role_id == 4)
+                            readonly
+                        @endif>
+                    @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                         <button id="btn-change-img{{ $item->id }}" class="change-img-sections" onclick="triggerFile('{{ $item->id }}')">Cambiar imagen</button>
                         <input type="file" onchange="readURL(this, '{{$item->id}}')" id="fileUp{{ $item->id }}" style="display: none;">
+                    @endif
                     </div>
                 </div>
             </div>
             @endforeach()
            
         </div>
+        @if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
         <div class="add-more">
             <button class="btn-hover color-2" onclick="addMoreSection(this)">Agregar más</button>
             <button id="save-sections" class="btn-hover color-3" onclick="saveSections()" style="display: none;">Guardar</button>
         </div>
+        @endif
     </div>
     <br>
     <br>

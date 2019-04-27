@@ -17,10 +17,10 @@ class EditorRole
     {
         $role = $request->user()->role_id;
 
-        if ($role == 3) {
+        if ($role == 3 || $role == 2 || $role == 1 ) {
             return $next($request);
         } else {
-            return redirect('/');
+            return redirect('/home');
         }
     }
 }

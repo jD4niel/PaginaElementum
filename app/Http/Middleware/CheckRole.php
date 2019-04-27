@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class RootRole
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -13,14 +13,11 @@ class RootRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role)
     {
-        $role = $request->user()->role_id;
-
-        if ($role == 1) {
-            return $next($request);
-        } else {
-            return redirect('/home');
+        if (! $request->user()->hasRole($role)) {
+            return redirect(‘home’);
         }
+        return $next($request);
     }
 }
