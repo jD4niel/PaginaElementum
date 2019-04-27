@@ -45,15 +45,15 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="col-md" for="face_in">Facebook: </label>
-                            <input id="face_in" type="text" class="form-control" placeholder="Facebook" value="{{ $autor->facebook }}" style="">
+                            <input id="face_in" type="text" class="form-control" placeholder="Facebook (URL completa)" value="{{ $autor->facebook }}" style="">
                         </div>
                         <div class="form-group">
                             <label class="col-md" for="twitter_in">Twitter: </label>
-                            <input id="twitter_in" type="text" class="form-control" placeholder="Twitter" value="{{ $autor->twitter }}" style="">
+                            <input id="twitter_in" type="text" class="form-control" placeholder="Twitter (nombre de usuario @elementum)" value="{{ $autor->twitter }}" style="">
                         </div>
                         <div class="form-group">
                             <label class="col-md" for="insta_in">Instragram: </label>
-                            <input id="insta_in" type="text" class="form-control" placeholder="Instagram" value="{{ $autor->instagram }}" style="">
+                            <input id="insta_in" type="text" class="form-control" placeholder="Instagram (nombre de usuario @elementum)" value="{{ $autor->instagram }}" style="">
                         </div>
                     </div>
                 </div>

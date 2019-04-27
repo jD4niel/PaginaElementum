@@ -118,13 +118,13 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input id="face_in" type="text" class="form-control" placeholder="Facebook" name="face_txt" value="not_" style="display: none;">
+                                <input id="face_in" type="text" class="form-control" placeholder="Facebook (URL completa)" name="face_txt" value="not_" style="display: none;">
                             </div>
                             <div class="form-group">
-                                <input id="twitter_in" type="text" class="form-control" placeholder="Twitter" name="twitter_txt" value="not_" style="display: none;">
+                                <input id="twitter_in" type="text" class="form-control" placeholder="Twitter (nombre de usuario @elementum)" name="twitter_txt" value="not_" style="display: none;">
                             </div>
                             <div class="form-group">
-                                <input id="insta_in" type="text" class="form-control" placeholder="Instagram" name="insta_txt" value="not_" style="display: none;">
+                                <input id="insta_in" type="text" class="form-control" placeholder="Instagram Twitter (nombre de usuario @elementum)" name="insta_txt" value="not_" style="display: none;">
                             </div>
                         </div>
                     </div>
