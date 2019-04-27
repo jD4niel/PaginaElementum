@@ -8,16 +8,16 @@
         </ol>
         <div class="carousel-inner">
             @foreach($slider as $item)
-            <div class="carousel-item @if($item->id == $first) active @endif">
-                <img class="d-block w-100 " height="80%" style="margin-top:-250px;"  src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
+            <div class="carousel-item @if($item->id == $first) active @endif responsive-slider">
+                <img class="d-block w-100 " src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
             </div>
             @endforeach
         </div>
     </div>
 
-    <div class="container">
+    <div class="container d-none d-md-block" style="margin-top: -70px">
         <div class="row">
-            <div class="col-md-12" style="margin-top: -80px;">
+            <div class="col-12">
                 <div class="input-group mb-3">
                     <input  id="buscartxt" type="text" class="form-control simplebox fade-up" placeholder="Búsqueda" aria-label="Recipient's username" aria-describedby="basic-addon2" style="background-color:#e9f2ef;border-top-left-radius: 15px;border-bottom-left-radius: 15px; height:45px;font-size: 20px; border:none;">
                     <div class="input-group-append">
@@ -27,91 +27,70 @@
             </div>
         </div>
 
-
     </div> {{--contenedor fin--}}
-    <div style="background-color:#DCDDDE;">
-       <div class="container">
-            <div id="cajaLibros" class="row center align-items-center text-center align-content-center" >
+
+    <div style="background-color:#DCDDDE;" class="responsive-margin">
+       <div class="container pt-5">
+            <div id="cajaLibros" class="row text-center" >
                  @foreach($libros as $item)
                      <div class="cajon col-md-3 wow fadeInUp">
-                <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
-                    <img height="200px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="">
-                    <hr>
-                    <a href="{{route('detalle.libros',$item->id)}}" class="btnDetalle">Ver detalle</a>
-                </div>
+                        <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
+                            <img src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="" style="height: 200px; object-fit: cover; max-width: 200px">
+                            <hr>
+                            <a href="{{route('detalle.libros',$item->id)}}" class="btnDetalle">Ver detalle</a>
+                        </div>
                      </div>
                 @endforeach
             </div>
            <br>
-           <div style="text-align: center; font-size: 1.5em; margin: auto;">
+           <div style="font-size: 1.5em;" class="text-center">
                <a href="{{route('libros.colecciones')}}">Ver todo</a>
            </div>
            <br>
         </div>
     </div>
-    <div class="container">
-        <br>
-        <br>
-        <h1 class="h1 text-center">SERVICIOS</h1>
-        <div class="row align-content-center text-center" style="width: 80%; margin: auto;text-align: center;">
-                @foreach($servicios as $item)
-                <div class="col-md-4 iconoservicios">
-                        <figure>
-                            <img src="{{asset('images/servicios')}}/{{ $item->image }}" alt="{{ $item->name }}" data-backdrop="false" data-toggle="modal" data-target="#servicios_modal" data-title="{{ $item->name }}" data-id="{{ $item->id }}" data-text="{!! $item->text !!}" >
-                            <figcaption>{{ $item->name }}</figcaption>
-                        </figure>
-                </div>
-                @endforeach()
 
+    <div class="container-fluid py-5">
+        <h1 class="h1 text-center">SERVICIOS</h1>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="row text-center">
+                    @foreach($servicios as $item)
+                        <div class="col-12 col-sm-6 col-md-3 iconoservicios">
+                            <figure>
+                                <img src="{{asset('images/servicios')}}/{{ $item->image }}" alt="{{ $item->name }}" data-backdrop="false" data-toggle="modal" data-target="#servicios_modal" data-title="{{ $item->name }}" data-id="{{ $item->id }}" data-text="{!! $item->text !!}"  style="width: 100px; height: 100px; object-fit: cover">
+                                <figcaption>{{ $item->name }}</figcaption>
+                            </figure>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
-    <div class="separador"></div>
+
     <div class="container">
         <div class="row">
-            <div class="col-md-8" style="margin: auto;">
+            <div class="col-md-8 offset-md-2">
                 <figure>
                     <img style="width: 110%" class="img-fluid" src="{{ URL::to('/') }}/images/img_ref.jpg">
-                    <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
                         <div class="col-md-12">
-                            <figcaption class="figImagen">
-                                Descarga el PDF aquí &nbsp;
-                                <img width="20px" src="{{ URL::to('/') }}/images/iconos/iconodescarga.png" alt="">
-                            </figcaption>
+                            <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
+                                <figcaption class="figImagen">
+                                    Descarga el PDF aquí &nbsp;
+                                    <img width="20px" src="{{ URL::to('/') }}/images/iconos/iconodescarga.png" alt="">
+                                </figcaption>
+                            </a>
                         </div>
-                    </a>
                 </figure>
             </div>
         </div>
     </div>
+
     <div class="separador"></div>
-    <div style="background-color:#DCDDDE;">
-        <div class="container" style="background-color:#DCDDDE;padding:50px 0 50px 0;">
-        <div class="text-center"><h1 class="h1" style="color:#00949c; font-size: 15vh;">TALLERES</h1></div>
-            <div class="row text-center">
-                @foreach($talleres as $taller)
-                <div class="card" style="width: 22rem;margin:auto;">
-                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/{{$taller->imagen}}" alt="Card image cap">
-                        <div class="card-body" onclick="reveal({{$taller->id}})" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
-                              <h5 class="card-title">{{$taller->titulo}}</h5>
-                              <i class="fas fa-sort-down"></i>
-                              <div class="card-text text-card-{{$taller->id}}" style="text-align:justify; display:none;">{!! $taller->descripcion !!}</div>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                              <li class="list-group-item"><strong>Duración:</strong><br>{{$taller->duracion}}</li>
-                              <!-- <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li> -->
-                              <li style="display:none;" class="list-group-item text-card-{{$taller->id}}"><strong>Sede:</strong><br> {{$taller->sede}}</li>
-                        </ul>
-                        <div style="display:none;" class="card-body text-card-{{$taller->id}}">
-                              Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
-                        </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    <div class="contaier">
+    
+    <div class="container-fluid">
         <div class="row">
-            <img class="img-fluid col-md-12" src="{{ URL::to('/') }}/images/elementum_jardin.png" alt="jardin colon">
+            <img class="" src="{{ URL::to('/') }}/images/elementum_jardin.png" alt="jardin colon" style="object-fit: cover; width: 100%">
         </div>
     </div>
 
@@ -140,81 +119,110 @@
 
 @section('script_home')
     <script>
+
+    var w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth,
+        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
     $(document).ready(function() {
          $('.social_icons').css("border","2px solid #ffffff");
         $('.navigation').css({'position':'relative'},{'background-color':'red'});
+
+        if(x < 768){
+            $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+            $('#logoElementum1').hide();
+            $('#logoElementum2').show();
+            $('nav ul li a').css({'color':'#1d3b4f'});
+            $('nav ul li a').css({'font-weight':'bold'});
+            $('#iconos').css('border-bottom','#00374e');
+            $('#barraleft').css('border-left','1px solid #9FA09D');
+            $('.social_icons').css({'border':'2px solid #00364F'});
+            $('.social_icons').css({'color':'#1d3b4f'});
+        }
     });
         $(window).scroll(function() {
-            if ($(document).scrollTop() > 50) {
-                $('.navigation').css('position','sticky');
-                $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
-                $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
-                $('#blogid').css({'border-right':'1px solid #9FA09D'});
-                $('#iconos').css('border-bottom','#00374e');
-                $('#barraleft').css('border-left','1px solid #9FA09D');
-                $('.social_icons').css({'border':'2px solid #00364F'});
-                $('nav ul li a').css({'color':'#1d3b4f'});
-                $('nav ul li i').css({'color':'#1d3b4f'});
-                $('nav ul li a').css({'font-weight':'bold'});
-                $('#logoElementum1').hide();
-                $('#logoElementum2').show();
-                $('nav ul li a').hover(function(){
-                    $(this).css({'color':'#fff'})
-                },function() {
-                    $(this).css({'color':'#1d3b4f'})
-                });
 
-                $('.fa-twitter').hover(function(){
-                    $(this).css({'color':'#1a9abb'})
-                },function() {
-                    $(this).css({'color':'#1d3b4f'})
-                });
-                $('.fa-facebook-f').hover(function(){
-                    $(this).css({'color':'#1b46bb'})
-                },function() {
-                    $(this).css({'color':'#1d3b4f'})
-                });
-                $('.fa-instagram').hover(function(){
-                    $(this).css({'color':'#d1073e'})
-                },function() {
-                    $(this).css({'color':'#1d3b4f'})
-                });
-                // $(nav-container ul li a').css('color','#1b2d49');
+            if(x < 768){
+
+                $('.navigation').css('position','sticky');
+                
+
             } else {
 
-                $('.navigation').css('position','sticky');
-                $('.navigation').css({'background-color':'rgba(0, 0, 0, 0)'},{'border-bottom':'1px solid rgba(255, 255, 255, 0.85)'});
-                $('.navigation').css({'border-bottom':'1px solid #fff'});
-                $('#blogid').css({'border-right':'1px solid white'});
-                $('#iconos').css('border-bottom ','#1d3b4f');
-                $('#barraleft').css('border-left','1px solid white');
-                $('.social_icons').css({'border':'2px solid #ffffff'});
-                $('nav ul li a').css('color','white');
-                $('nav ul li i').css({'color':'white'});
-                $('nav ul li a').css({'font-weight':'normal'});
-                $('#logoElementum2').hide();
-                $('#logoElementum1').show();
-                $('nav ul li a').hover(function(){
-                    $(this).css({'color':'#fff'})
-                },function() {
-                    $(this).css({'color':'#fff5fd'})
-                });
+                if ($(document).scrollTop() > 50) {
+                    $('.navigation').css('position','sticky');
+                    $('.navigation').css({'background-color':'rgba(255, 255, 255, 1)'},{'color':'#1d3b4f'});
+                    $('.navigation').css({'border-bottom':'1px solid #9FA09D'});
+                    $('#blogid').css({'border-right':'1px solid #9FA09D'});
+                    $('#iconos').css('border-bottom','#00374e');
+                    $('#barraleft').css('border-left','1px solid #9FA09D');
+                    $('.social_icons').css({'border':'2px solid #00364F'});
+                    $('nav ul li a').css({'color':'#1d3b4f'});
+                    $('nav ul li i').css({'color':'#1d3b4f'});
+                    $('nav ul li a').css({'font-weight':'bold'});
+                    $('#logoElementum1').hide();
+                    $('#logoElementum2').show();
+                    $('nav ul li a').hover(function(){
+                        $(this).css({'color':'#fff'})
+                    },function() {
+                        $(this).css({'color':'#1d3b4f'})
+                    });
 
-                $('.fa-twitter').hover(function(){
-                    $(this).css({'color':'#1a9abb'})
-                },function() {
-                    $(this).css({'color':'#fff'})
-                });
-                $('.fa-facebook-f').hover(function(){
-                    $(this).css({'color':'#1b46bb'})
-                },function() {
-                    $(this).css({'color':'#fff'})
-                });
-                $('.fa-instagram').hover(function(){
-                    $(this).css({'color':'#d1073e'})
-                },function() {
-                    $(this).css({'color':'#fff'})
-                });
+                    $('.fa-twitter').hover(function(){
+                        $(this).css({'color':'#1a9abb'})
+                    },function() {
+                        $(this).css({'color':'#1d3b4f'})
+                    });
+                    $('.fa-facebook-f').hover(function(){
+                        $(this).css({'color':'#1b46bb'})
+                    },function() {
+                        $(this).css({'color':'#1d3b4f'})
+                    });
+                    $('.fa-instagram').hover(function(){
+                        $(this).css({'color':'#d1073e'})
+                    },function() {
+                        $(this).css({'color':'#1d3b4f'})
+                    });
+                    // $(nav-container ul li a').css('color','#1b2d49');
+                } else {
+
+                    $('.navigation').css('position','sticky');
+                    $('.navigation').css({'background-color':'rgba(0, 0, 0, 0)'},{'border-bottom':'1px solid rgba(255, 255, 255, 0.85)'});
+                    $('.navigation').css({'border-bottom':'1px solid #fff'});
+                    $('#blogid').css({'border-right':'1px solid white'});
+                    $('#iconos').css('border-bottom ','#1d3b4f');
+                    $('#barraleft').css('border-left','1px solid white');
+                    $('.social_icons').css({'border':'2px solid #ffffff'});
+                    $('nav ul li a').css('color','white');
+                    $('nav ul li i').css({'color':'white'});
+                    $('nav ul li a').css({'font-weight':'normal'});
+                    $('#logoElementum2').hide();
+                    $('#logoElementum1').show();
+                    $('nav ul li a').hover(function(){
+                        $(this).css({'color':'#fff'})
+                    },function() {
+                        $(this).css({'color':'#fff5fd'})
+                    });
+
+                    $('.fa-twitter').hover(function(){
+                        $(this).css({'color':'#1a9abb'})
+                    },function() {
+                        $(this).css({'color':'#fff'})
+                    });
+                    $('.fa-facebook-f').hover(function(){
+                        $(this).css({'color':'#1b46bb'})
+                    },function() {
+                        $(this).css({'color':'#fff'})
+                    });
+                    $('.fa-instagram').hover(function(){
+                        $(this).css({'color':'#d1073e'})
+                    },function() {
+                        $(this).css({'color':'#fff'})
+                    });
+                }
             }
         });
        function reveal(a){

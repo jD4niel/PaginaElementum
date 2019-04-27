@@ -30,7 +30,7 @@
                     <input class="btn-enviar" type="submit" value="Enviar">
                 </form>
             </div>
-            <div class="col-md-6 text-center" style="vertical-align:middle; margin-top: 60px">
+            <div class="col-md-6 text-center py-5 py-md-0" style="vertical-align:middle; margin-top: 60px">
                 <div class="map-responsive">
                     <iframe style="border-radius: 15px;"
                             src="{{ $elementum->addr }}"
@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <img id="imgContacto" src="{{ URL::to('/') }}/images/fotocontacto.jpg" alt="">
+    <img id="imgContacto" src="{{ URL::to('/') }}/images/fotocontacto.jpg" alt="" style="width: 100%; object-fit: cover">
 
 
     <!-- Modal -->
