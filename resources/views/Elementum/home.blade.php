@@ -86,6 +86,31 @@
         </div>
     </div>
 
+    <div class="container-fluid py-5">
+        <div class="row">
+            <h1 class="h1" style="color:#00949c; font-size: 15vw;margin:auto;float:none;">TALLERES</h1>
+        </div> <br>
+        <div class="row text-center">
+            @foreach($talleres as $taller)
+                <div class="card" style="width: 22rem;margin:3em auto;">
+                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/{{$taller->imagen}}" alt="Card image cap">
+                        <div class="card-body" onclick="reveal({{$taller->id}})" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
+                              <h5 class="card-title">{{$taller->titulo}}</h5>
+                              <i class="fas fa-sort-down"></i>
+                              <div class="card-text text-card-{{$taller->id}}" style="text-align:justify; display:none;">{!! $taller->descripcion !!}</div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                              <li class="list-group-item"><strong>Duración:</strong><br>{{$taller->duracion}}</li>
+                              <li style="display:none;" class="list-group-item text-card-{{$taller->id}}"><strong>Sede:</strong><br> {{$taller->sede}}</li>
+                        </ul>
+                        <div style="display:none;" class="card-body text-card-{{$taller->id}}">
+                              Informes e inscripciones: {{ $taller-> informes }}
+                        </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
     <div class="separador"></div>
     
     <div class="container-fluid">
