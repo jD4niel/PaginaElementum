@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="margin-top: -80px;">
-                <div class="input-group mb-3">
+                <div class="input-group mb-2">
                     <input  id="buscartxt" type="text" class="form-control simplebox" placeholder="Búsqueda" aria-label="Recipient's username" aria-describedby="basic-addon2" style="background-color:#e9f2ef;border-top-left-radius: 15px;border-bottom-left-radius: 15px; height:45px;font-size: 20px; border:none;">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" onclick="buscarAutor()" type="button" style="background-color:#e9f2ef;font-size:20px;border-top-right-radius: 18px;border-bottom-right-radius: 18px;border:none;"><i class="fa fa-search"></i></button>
@@ -29,7 +29,7 @@
         <div class="row" id="cajaAutores">
         @foreach($autors as $item)
 
-                <div class="foto_autor col-md-4 text-center" style="margin: auto;padding-bottom: 150px;">
+                <div class="foto_autor col-12 col-sm-6 col-md-4 text-center pt-4" style="margin: auto;">
                     <div>
                         <br><br>
                         <figure class="fig_aut">
@@ -39,7 +39,7 @@
                         <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">
                         <div class="nombre_autor">{{$item->nombre}}&nbsp;{{$item->apellido_p}}</div>
                         <br>
-                        <div class="obra" style="height: 80px; width: 80%;margin: 0 auto;">{!! $item->breve_desc !!}</div>
+                        <div class="obra overflow-hidden" style="height: 80px; width: 80%;margin: 0 auto;">{!! $item->breve_desc !!}</div>
                         <br>
                         <a id="btn-id-{{$item->id}}" href="{{route('autores.detalle',$item->id)}}" style="text-decoration: none;"><button class="btn_contacto_autor">Acerca del autor</button></a>
 
