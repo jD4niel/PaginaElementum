@@ -144,7 +144,7 @@
     
     <div class="container-fluid">
         <div class="row">
-            <img class="" src="{{ URL::to('/') }}/images/elementum_jardin.png" alt="jardin colon" style="object-fit: cover; width: 100%">
+            <img class="" src="{{ URL::to('/') }}/images/elementum_jardin.jpg" alt="jardin colon" style="object-fit: cover; width: 100%">
         </div>
     </div>
 

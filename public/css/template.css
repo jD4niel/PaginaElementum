@@ -111,7 +111,13 @@ nav ul li ul li a {
     height: 70px;
     width: 70px;
 }
+#cuerpo_blog{
+    padding:0 55px !important;
+}
 @media only screen and (max-width: 798px) {
+    #cuerpo_blog{
+    	padding:0 25px !important;
+    }
     .nav-mobile {
         display: block;
     }
