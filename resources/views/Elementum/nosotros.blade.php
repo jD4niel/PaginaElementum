@@ -1,7 +1,14 @@
 @extends('template')
 @section('home')
     <div class="image-container-crop">
-      <img  class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$nosotros->image}}" alt="1280 x 700">
+      <a href="{{$nosotros->url}}">
+      </a>
+      <img
+      @if($nosotros->url != '' && isset($nosotros->url))
+       onclick="openInNewTab('{{$nosotros->url}}')"
+       style="cursor:pointer;"
+      @endif
+       class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$nosotros->image}}" alt="1280 x 700">
     </div>
     <div class="separador"></div>
 

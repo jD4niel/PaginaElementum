@@ -27,15 +27,17 @@ function readInputFile(input) {
 }
 function upload_image(tab_name) {
 	var foto = $("#input_file_img");
+  var url = $('#call_to_action').val();
 	var myFormData = new FormData();
 	if(foto[0]!=null){
 		myFormData.append('file', foto[0]['files'][0]);
+    myFormData.append('url', url);
 	}
 	myFormData.append('tab_name', tab_name);
 	var url_before = String(window.location).replace(tab_name,"");
 	var url = url_before + 'subir/imagen'
 	swal({
-	  title: "¿Agregar imagen?",
+	  title: "¿Guardar cambios?",
 	  text: "Los cambios se verán reflejados automaticamente en la portada",
 	  icon: "warning",
 	  buttons: true,
@@ -53,11 +55,19 @@ function upload_image(tab_name) {
               contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
               processData: false, // NEEDED, DON'T OMIT THIS
               success: function (response, file) {
+                  // mostrar errores si
                   console.log(response);
-                  window.location.reload();
+                  console.log("-----")
+                  console.log('file:',file)
+                  if(response == 1){
+                    window.location.reload();
+                  }else {
+                     swal('Error',response,'warning');
+                  }
               },
               error: function (jqXHR, textStatus, errorThrown) {
-                  alert('Error en el servidor! /n Intente con otro formato de imagen')
+                  
+                  swal('Error [ajax server]',errorThrown,'warning');
                   console.log(errorThrown)
                   console.log(textStatus)
               }

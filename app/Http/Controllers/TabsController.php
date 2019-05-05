@@ -74,27 +74,42 @@ class TabsController extends Controller
     }
 
     public function uploadTabImage(Request $request){
+        if(!isset($request)){
+            return "Error!\n El servidor no pudo obtener los datos enviados";
+        }
+        $data = $request;
          try{
             if (($request->hasFile('file'))) {
-            $data = $request;
-            $file = $data["file"];
-            $filename_img = $file->getClientOriginalName();
-            $mime = $file->getMimeType();
-            if (($mime == 'image/jpeg' || $mime == 'image/jpg' )) {
-
-                $destinationPath = public_path() . '/images/tabs_banners';
-                $filename_img = "foto_".$data->tab_name.".jpg";
-                $destinationPath1 = $destinationPath . '/' . $filename_img;
-                DB::table('tabs_images')->where('tab_name','=',$data->tab_name)->update(['image'=>$filename_img]);
-                copy($file, $destinationPath1);
-                return $data;
-            } else {
-                return $mime."Error";
-                abort(500);
-            }
+                $file = $data["file"];
+                $filename_img = $file->getClientOriginalName();
+                $mime = $file->getMimeType();
+                if (($mime == 'image/jpeg' || $mime == 'image/jpg' || $mime == 'image/JPG' || $mime == 'image/JPEG' || $mime == 'image/png' || $mime == 'image/PNG')) {
+                    $destinationPath = public_path() . '/images/tabs_banners';
+                    $filename_img = "foto_".$data->tab_name.".jpg";
+                    $destinationPath1 = $destinationPath . '/' . $filename_img;
+                    DB::table('tabs_images')->where('tab_name','=',$data->tab_name)
+                        ->update(['image'=>$filename_img,
+                            'url'=>$data->url
+                        ]);
+                    try{
+                        copy($file, $destinationPath1);
+                    }
+                    catch (\Exception $e){
+                        return "Error on function 'copy': \n".$e;
+                    }
+                    return 1;
+                } else {
+                    return "Formato incorrecto (".$mime.")";
+                    abort(500);
+                }
+        }else{
+            DB::table('tabs_images')->where('tab_name','=',$data->tab_name)
+                ->update(['url'=>$data->url
+                ]);
+            return 1;
         }
         }catch (\Exception $e){
-            return $e . "mal";
+            return "Error! \n server error, catch error: \n".$e;
         }
     }
     public function preview($name,Request $request)

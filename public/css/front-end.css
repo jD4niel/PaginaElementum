@@ -291,10 +291,6 @@
 }
 #show_button{
   display: none;
-  top: 10px;
-  right: 0;
-  position: absolute;
-  z-index: 1000;
 }
 /*Información Elementum*/
 #elementum-info{
