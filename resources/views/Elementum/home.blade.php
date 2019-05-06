@@ -142,10 +142,8 @@
 
     <div class="separador"></div>
     
-    <div class="container-fluid">
-        <div class="row">
-            <img class="" src="{{ URL::to('/') }}/images/elementum_jardin.jpg" alt="jardin colon" style="object-fit: cover; width: 100%">
-        </div>
+    <div class="container-fluid" style="padding: 0">
+            <img class="img-fluid" src="{{ URL::to('/') }}/images/elementum_jardin.jpg" alt="jardin colon">
     </div>
 
   <!-- Modal -->
