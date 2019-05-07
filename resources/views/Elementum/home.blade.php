@@ -9,7 +9,7 @@
         <div class="carousel-inner">
             @foreach($slider as $item)
             <div class="carousel-item @if($item->id == $first) active @endif responsive-slider">
-                <img class="d-block w-100 " src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
+                <img class="d-block w-100 h-100" src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
             </div>
             @endforeach
         </div>
