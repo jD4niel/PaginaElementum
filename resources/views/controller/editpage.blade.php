@@ -137,7 +137,7 @@
                     <div id="namePDF" style="display: none;"></div>
                 </div>
                 <div class="col-md-12" style="margin: auto;padding: 6px;">
-                    <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
+                    <a target="_blank" href="{{ URL::to('/') }}/elementum.pdf">
                         <button class="btn-hover color-5">Ver PDF <i class="far fa-file-pdf"></i></button>
                     </a>
                 </div>
@@ -280,22 +280,18 @@
                         processData: false, // NEEDED, DON'T OMIT THIS
                         success: function (response, file) {
                             console.log('success: ' + response);
-                            if (response == 0){
-                                swal("No se modificaron cambios", "No agrego PDF ni imagen",{
-                                    icon: "warning"
-                                });
-                            }else {
-                                console.log('----------------------')
-                                console.log(response)
-                                console.log('----------------------')
+                            if(response==1){                                
                                 swal("PDF/Imagen agregados correctamente", " ",{
                                         icon: "success"
                                     }).then((value) => {
-                                     //window.location.reload();
+                                     window.location.reload();
                                 });
+                            }else{
+                                swal("Error! \n",response,"warning");
                             }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
+                            swal('Error [ajax server]',errorThrown,'warning');
                             console.log(textStatus + ': ' + errorThrown);
                         }
                     });

@@ -56,16 +56,37 @@ class ControlController extends Controller
     }
     public function uploadPDF(Request $request){
         if ($request['foto'] != 'nothing') {
+            $mime = $request['foto']->getMimeType();
+            if (($mime != 'image/jpeg' || $mime != 'image/jpg' || $mime != 'image/JPG' || $mime != 'image/JPEG' || $mime != 'image/png' || $mime != 'image/PNG')) {
+                return "Formato de imagen incorrecto [".$mime."]";
+            }
             $destinationPath = public_path() . '/images';
             $destinationPath1 = $destinationPath . '/img_ref.jpg';
-            copy($request['foto'], $destinationPath1);
+            try{
+                copy($request['foto'], $destinationPath1);
+            }
+            catch (\Exception $e){
+                return "Error on function 'copy': \n".$e;
+            }
         }
         if ($request['pdf'] != 'nothing') {
+            $pdf_mime = $request['pdf']->getMimeType();
+            if($pdf_mime != 'application/pdf'){
+                 return "Formato de PDF incorrecto [".$pdf_mime."]";
+            }
             $destinationPath = public_path();
-            $destinationPath1 = $destinationPath . '/descarga.pdf';
-            copy($request['pdf'], $destinationPath1);
+            $destinationPath1 = $destinationPath . '/elementum.pdf';
+            if(file_exists($destinationPath1)){
+                unlink($destinationPath1);
+            }
+            try{
+                copy($request['pdf'], $destinationPath1);
+            }
+            catch (\Exception $e){
+                return "Error on function 'copy': \n".$e;
+            }
         }
-        return $request;
+        return 1;
     }
     public function uploadNewImage(Request $request){
         $id =DB::table('slider')->max('id');

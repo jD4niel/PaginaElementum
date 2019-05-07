@@ -120,7 +120,7 @@
     <div class="container-fluid">
         <div class="row">
             @if(Auth::user())
-            <div id="template-nav">
+            <div id="template-nav" class="hidden-xs hidden-sm hidden-md">
                 <div>
                     
                     <div id="user-img" title="Cambia la imagen del usuario actual">
@@ -190,7 +190,7 @@
                     </ul>
                 </div>
             </div>
-            <div id="template-content" class="col-md-10">
+            <div id="template-content" class="col-lg-10">
                 @yield('content')
             </div>
            
