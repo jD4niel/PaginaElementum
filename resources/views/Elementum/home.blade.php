@@ -8,14 +8,14 @@
         </ol>
         <div class="carousel-inner">
             @foreach($slider as $item)
-            <div class="carousel-item @if($item->id == $first) active @endif responsive-slider">
-                <img class="d-block w-100 h-100" src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
+            <div class="carousel-item @if($item->id == $first) active @endif h-100">
+                <img class="d-block w-100" src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
             </div>
             @endforeach
         </div>
     </div>
 
-    <div class="container d-none d-md-block" style="margin-top: -70px">
+    <div class="container d-md-block" style="margin-top: -70px">
         <div class="row">
             <div class="col-12">
                 <div class="input-group mb-3">
@@ -37,7 +37,7 @@
                         <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">
                             <img src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}" alt="" style="height: 200px; object-fit: cover; max-width: 200px">
                             <hr>
-                            <a href="{{route('detalle.libros',$item->id)}}" class="btnDetalle">Ver detalle</a>
+                            <a href="{{route('detalle.libros',$item->id)}}" target="_blank"  class="btnDetalle">Ver detalle</a>
                         </div>
                      </div>
                 @endforeach
@@ -68,32 +68,6 @@
         </div>
     </div>
 
-    
-    <div style="background-color:#DCDDDE;">
-        <div class="container" style="background-color:#DCDDDE;padding:50px 0 50px 0;">
-        <div class="text-center"><h1 class="h1" style="color:#00949c; font-size: 4.5rem;">TALLERES</h1></div>
-            <div class="row text-center">
-                @foreach($talleres as $taller)
-                <div class="card mt-5 mt-md-0" style="width: 18rem;margin:auto;">
-                        <img class="card-img-top" src="{{ URL::to('/') }}/images/talleres/{{$taller->imagen}}" alt="Card image cap">
-                        <div class="card-body" onclick="reveal({{$taller->id}})" style="cursor:pointer; background:rgba(255, 255, 255, 0.52)">
-                              <h5 class="card-title">{{$taller->titulo}}</h5>
-                              <i class="fas fa-sort-down"></i>
-                              <div class="card-text text-card-{{$taller->id}}" style="text-align:justify; display:none;">{!! $taller->descripcion !!}</div>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                              <li class="list-group-item"><strong>Duración:</strong><br>{{$taller->duracion}}</li>
-                              <!-- <li class="list-group-item"><strong>Inversión:</strong><br>$1,100</li> -->
-                              <li style="display:none;" class="list-group-item text-card-{{$taller->id}}"><strong>Sede:</strong><br> {{$taller->sede}}</li>
-                        </ul>
-                        <div style="display:none;" class="card-body text-card-{{$taller->id}}">
-                              Informes e inscripciones a <a href="tallereselementum@hotmail.com">tallereselementum@hotmail.com</a>
-                        </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
     <div class="contaier">
 
 
@@ -103,7 +77,7 @@
                 <figure>
                     <img style="width: 110%" class="img-fluid" src="{{ URL::to('/') }}/images/img_ref.jpg">
                         <div class="col-md-12">
-                            <a target="_blank" href="{{ URL::to('/') }}/descarga.pdf">
+                            <a target="_blank" href="{{ URL::to('/') }}/elementum.pdf">
                                 <figcaption class="figImagen">
                                     Descarga el PDF aquí &nbsp;
                                     <img width="20px" src="{{ URL::to('/') }}/images/iconos/iconodescarga.png" alt="">
@@ -142,8 +116,8 @@
 
     <div class="separador"></div>
     
-    <div class="container-fluid" style="padding: 0">
-            <img class="img-fluid" src="{{ URL::to('/') }}/images/elementum_jardin.jpg" alt="jardin colon">
+    <div class="container-fluid" style="padding: 0;width:100%;">
+            <img class="img-fluid" width="100%" src="{{ URL::to('/') }}/images/elementum_jardin.png" alt="jardin colon">
     </div>
 
   <!-- Modal -->

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="tab-banner-image" onclick="triggerInputFile('input_file_img',true)">
-            <img id="nosotros_img" src="{{ asset('images/tabs_banners') }}/{{ $nosotros->image }}" alt="imagen-nosotros">
+            <img id="nosotros_img" src="{{ asset('images/tabs_banners') }}/{{ $nosotros->image }}?{{rand(5,25)}}" alt="imagen-nosotros">
             <div><span>CAMBIAR IMAGEN</span></div>
         </div>
         <input name="file" type="file" id="input_file_img" onchange="readInputFile(this)" hidden style="display: none">

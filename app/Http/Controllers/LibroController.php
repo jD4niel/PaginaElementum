@@ -134,7 +134,8 @@ class LibroController extends Controller
     }
     public function colecciones(){
         $colecciones = DB::table('tabs_images')->where('tab_name','=','colecciones')->first();
-        $libros= Libro::orderBy('fecha', 'desc')->get();
+        //$libros= Libro::orderBy('fecha', 'ASC')->get();
+	$libros = DB::table('libros')->latest('fecha')->orderBy('fecha')->get();
         $elementum = DB::table('elementum_info')->where('id','=',1)->first();
         $collection = DB::table('collections')->get();
         //dd($libros->imagen);

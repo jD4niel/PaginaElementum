@@ -8,7 +8,7 @@
        style="cursor:pointer;"
       @endif
        
-       class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$colecciones->image}}" alt="1280 x 700">
+       class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$colecciones->image}}?{{rand(5,25)}}" alt="1280 x 700">
 </div>
     <div class="separador"></div>
 
@@ -33,7 +33,7 @@
                 <div id="imgboxId{{$item->id}}" class="imgbox col-md-3 align-content-center text-center" onmouseleave="salir({{$item->id}})" onmouseover="ver({{$item->id}})" style="padding-top: 30px;padding-bottom: 20px;">
                     <a href="{{route("detalle.libros",$item->id)}}">
                     <figure>
-                         <img width="250px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}">
+                         <img width="250px" src="{{ URL::to('/') }}/images/libros/{{$item->imagen}}?{{rand(5,25)}}">
                           <figcaption>ver</figcaption>
                     </figure>
                     </a>
@@ -84,6 +84,7 @@
         }
         function cambio(a){
            var current_url=window.location.href;
+	    console.log('collection_id',a);
             //$('#contenedor_libros').slideUp(500);
             $('.contenedor_colecciones').css({'background-color':'#e3e3e3'})
             $('#collectionID'+a).css({'background-color':generate()})

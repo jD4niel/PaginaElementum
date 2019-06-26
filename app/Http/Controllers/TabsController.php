@@ -92,7 +92,15 @@ class TabsController extends Controller
                             'url'=>$data->url
                         ]);
                     try{
-                        copy($file, $destinationPath1);
+			if(file_exists($destinationPath1)){
+             		   unlink($destinationPath1);
+                	   if(!copy($file,$destinationPath1)){
+				return "Error al copiar  la imagen \n 2512: server error";
+			   }
+			   copy($file, $destinationPath1);
+			}else{
+			return "El archivo no existe";
+			}
                     }
                     catch (\Exception $e){
                         return "Error on function 'copy': \n".$e;
@@ -106,7 +114,7 @@ class TabsController extends Controller
             DB::table('tabs_images')->where('tab_name','=',$data->tab_name)
                 ->update(['url'=>$data->url
                 ]);
-            return 1;
+            return 2;
         }
         }catch (\Exception $e){
             return "Error! \n server error, catch error: \n".$e;

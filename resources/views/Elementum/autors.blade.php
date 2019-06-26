@@ -9,7 +9,7 @@
        onclick="openInNewTab('{{$autores->url}}')"
        style="cursor:pointer;"
       @endif
-      class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$autores->image}}" alt="1280 x 700">
+      class="image-tab-crop" src="{{ URL::to('/') }}/images/tabs_banners/{{$autores->image}}?{{rand(5,25)}}" alt="1280 x 700">
     </div>
     <div class="container ">
     </div>
@@ -39,7 +39,7 @@
                     <div>
                         <br><br>
                         <figure class="fig_aut">
-                            <img class="img-fluid img-autor" onclick="trigger_a({{$item->id}})" width="70%" src="{{ URL::to('/') }}/images/fotos_autores/{{$item->imagen}}" alt="">
+                            <img class="img-fluid img-autor" onclick="trigger_a({{$item->id}})" width="70%" src="{{ URL::to('/') }}/images/fotos_autores/{{$item->imagen}}?{{rand(5,25)}}" alt="">
                         </figure>
                         
                         <hr style="background-color: rgba(52,73,88,0.58);width: 40%;">

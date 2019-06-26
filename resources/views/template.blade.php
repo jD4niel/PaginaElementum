@@ -267,7 +267,8 @@
     function buscar(){
         var nombre = $('#buscartxt').val();
         var route = "{{ route("buscar.libros")}}";
-        var currentLocation = window.location+'/colecciones/';
+        var currentLocation = window.location+'colecciones/';
+	console.log(currentLocation);
         $.ajax({
             url: route,
             data: {'nombre': nombre},
@@ -280,12 +281,13 @@
                     $('#cajaLibros').html('<h4 style="margin: 50px auto 0 auto;">No se encontraron libros</h4>');
                 }else{
                     for(i in data){
+			var new_url = currentLocation+data[i]['id']; 
                         $('#cajaLibros').append('' +
                             '  <div class="cajon col-md-3 wow fadeInUp">\n' +
                             '                <div class="cajas align-content-center text-center" style="padding-top: 30px;padding-bottom: 20px;">\n' +
                             '                    <img height="200px" src="{{ URL::to('/') }}/images/libros/'+data[i]["imagen"]+'" alt="">\n' +
                             '                    <hr>\n' +
-                            '                    <a href=""'+currentLocation+data[i]["id"]+'"  class="btnDetalle">Ver detalle</a>\n' +
+                            '                    <a href="'+new_url+'" target="_blank" class="btnDetalle">Ver detalle</a>\n' +
                             '                </div>\n' +
                             '                     </div>' +
                             '')

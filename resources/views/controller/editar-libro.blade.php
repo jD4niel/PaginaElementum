@@ -80,7 +80,7 @@
 
                 <input type="file" onchange="readURL(this)" id="fileUp" style="display: none;">
                 <div class="col-md-12">
-                <img id="preview-img" src="{{ asset('/images/libros/') }}/{{ $libro->imagen }}" alt="" style="width: 200px">
+                <img id="preview-img" src="{{ asset('/images/libros/') }}/{{ $libro->imagen }}?{{rand(5,25)}}" alt="" style="width: 200px">
                 </div>
                {{-- <div id="temp" class="img-temp col-md-12">
                     <div>585 x 830</div>

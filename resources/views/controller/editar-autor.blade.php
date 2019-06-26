@@ -76,7 +76,7 @@
                     <label class="form-control-label col-md-2" for="semblanza">Breve descripción:</label>
                     <div class="form-group text-center">
                         <div class="form-group col-md-12 text-center">
-                            <textarea class="form-control" id="summary-ckeditor2">{!! $autor->breve_desc !!}</textarea>
+                            <textarea class="form-control" id="summary-ckeditor">{!! $autor->breve_desc !!}</textarea>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                 <label class="form-control-label col-md-2" for="semblanza">Semblanza:</label>
                 <div class="form-group text-center">
                     <div class="form-group col-md-12 text-center">
-                        <textarea class="form-control" id="summary-ckeditor">{!! $autor->semblanza !!}</textarea>
+                        <textarea class="form-control" id="summary-ckeditor2">{!! $autor->semblanza !!}</textarea>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 @extends('template')
 @section('autores')
 
-<div style="height: 100px;"></div>
+<div style="height: 30px;"></div>
 <div class="container">
      @foreach($section_obj as $indexKey => $item)
         <div class="row">

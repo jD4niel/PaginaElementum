@@ -57,9 +57,7 @@ class ControlController extends Controller
     public function uploadPDF(Request $request){
         if ($request['foto'] != 'nothing') {
             $mime = $request['foto']->getMimeType();
-            if (($mime != 'image/jpeg' || $mime != 'image/jpg' || $mime != 'image/JPG' || $mime != 'image/JPEG' || $mime != 'image/png' || $mime != 'image/PNG')) {
-                return "Formato de imagen incorrecto [".$mime."]";
-            }
+            if (($mime == 'image/jpeg' || $mime == 'image/jpg' || $mime == 'image/JPG' || $mime == 'image/JPEG' || $mime == 'image/png' || $mime == 'image/PNG')) {
             $destinationPath = public_path() . '/images';
             $destinationPath1 = $destinationPath . '/img_ref.jpg';
             try{
@@ -68,6 +66,9 @@ class ControlController extends Controller
             catch (\Exception $e){
                 return "Error on function 'copy': \n".$e;
             }
+	  }else{
+		return "Formato de imagen incorrecto [".$mime."]";	
+	}
         }
         if ($request['pdf'] != 'nothing') {
             $pdf_mime = $request['pdf']->getMimeType();

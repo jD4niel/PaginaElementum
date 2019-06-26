@@ -10,7 +10,7 @@
                 @if($libros->precio>0)
                     @if($libros->url=='')
                         <div class="" style="margin-top: 15px;">
-                            <button data-toggle="modal" data-target="#comprarModal" class="btn btn-warning btn-block ">Comprar</button>
+                            Agotado
                         </div>
                     @else
                         <div style="margin-top: 15px;">
@@ -28,15 +28,17 @@
             <h1>{{$libros->nombre}}</h1>
             <h5>{{$libros->subtitulo}}</h5>
             <p style="text-align: justify;">{!!$libros->semblanza!!} </p>
+		@if(strtoupper($libros->autor->apellido_p) != "EXTERNO")
             <div>
                 <strong>Autor: </strong><span>{{$libros->autor->nombre}}&nbsp;{{$libros->autor->apellido_p}}&nbsp;{{$libros->autor->apellido_m}}</span>
             </div>
+		@endif
             <br>
             <div>
                 @if($libros->precio>0)
                 <h2>${{$libros->precio}}</h2>
                 @else
-                <h2 style="color:rgb(0, 163, 255)">Encuéntralo en Elementario</h2>
+                <h2 style="color:rgb(0, 163, 255)">{{ $libros->url }}</h2>
                 @endif
             </div>
             <br>

@@ -92,10 +92,8 @@ class AutorController extends Controller
                     $destinationPath = public_path() . '/images/fotos_autores/';
                     $destinationPath1 = $destinationPath . $request->file('file')->getClientOriginalName();
                     copy($request->file('file'), $destinationPath1);
-                    if ($taller>0) {
-                        DB::table('autors')->where('id','=',$request->id)->update(['imagen'=>$request->file('file')->getClientOriginalName()]);
-                    }
-                    return $request;
+                    DB::table('autors')->where('id','=',$request->id)->update(['imagen'=>$request->file('file')->getClientOriginalName()]);
+                    return "Image uploaded".$request;
                 }else {
                     return "funciona \n\n".$taller;
                 }

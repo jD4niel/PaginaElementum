@@ -1,3 +1,93 @@
+.btn_in_slider_home{
+    transition: all .2s ease-in-out;
+}
+.btn_in_slider_home:hover{
+    filter: contrast(1.1) brightness(1.1);
+}  
+
+/*Buttons gradient style*/
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-1 {
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+.btn-hover.color-2 {
+    background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+    box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+.btn-hover.color-3 {
+    background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+.btn-hover.color-4 {
+    background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+    box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
+}
+.btn-hover.color-5 {
+    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+}
+.btn-hover.color-6 {
+    background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+    box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
+}
+.btn-hover.color-7 {
+    background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+    box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+}
+.btn-hover.color-8 {
+    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+.btn-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+.btn-hover.color-10 {
+        background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+    box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+.btn-hover.color-11 {
+       background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+}
+/*iframe style for blog*/
+iframe{
+    width: 100%;
+}
+/*end*/
+
+em{
+    font-style: italic !important;
+}
 .links{
 }
 .personal_el{
@@ -114,9 +204,13 @@ nav ul li ul li a {
 #cuerpo_blog{
     padding:0 55px !important;
 }
-@media only screen and (max-width: 798px) {
+@media only screen and (max-width: 799px) {
     #cuerpo_blog{
     	padding:0 25px !important;
+    }
+    #cuerpo_blog img{
+       width: 100% !important;
+       margin: auto !important;
     }
     .nav-mobile {
         display: block;
@@ -124,7 +218,10 @@ nav ul li ul li a {
     nav {
         width: 100%;
         padding: 90px 0 15px;
-
+	
+    }
+    #Slider{
+	margin-top:100px;
     }
     nav ul {
         display: none;
@@ -143,7 +240,7 @@ nav ul li ul li a {
         position: static;
     }
 }
-@media screen and (min-width: 799px) {
+@media screen and (min-width: 798px) {
     .nav-list {
         display: block !important;
     }
@@ -575,15 +672,19 @@ footer{
     font-size: 20px;
 }
 .fig_aut{
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
     border-radius: 50%;
-    object-fit: cover;
+    text-align: center;
+    margin: 0 auto;
 }
 .img-autor{
-    object-fit: cover;
+    /*object-fit: cover;*/
     transition-duration: 0.1s;
-    border-radius: 50%;
-    min-height: 245px; 
-    min-width: 245px;"
+    /*border-radius: 50%;*/
+    min-height: 300px; 
+    min-width: 300px;"
 }
 .img-autor:hover{
     filter: brightness(102%) contrast(118%);
@@ -805,9 +906,10 @@ footer{
 }
 .personal-element{
     text-align: center;
-    font-size: 3vw;
+    font-size: 35px;
     margin: 1vh auto;
 }
+
 .personal-element span{
     padding: 10px;
 }
@@ -912,7 +1014,7 @@ footer{
         margin-top: 100px;
     }
     .responsive-margin {
-        margin-top: -100px;
+       /* margin-top: -100px;*/
     }
     .nav-list {
         background-color: white;
