@@ -88,11 +88,9 @@
                           <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
                         </span>
                         <br>
-                        <div class="fb-like" data-href="http://localhost:8000/blog/entrada/{{$entrada->id}}"
+                        <div class="fb-like" data-href="{{url()->current()}}"
                              data-layout="box_count" data-action="like" data-size="small" data-show-faces="true"
                              data-share="false"></div>
-                        {{--<span style="font-size: 1.5em">Likes <input type="text" id="likes" size="2" value="200"--}}
-                        {{--style="background: transparent; border: none;"></span>--}}
                     </div>
                 </div>
 
@@ -149,7 +147,7 @@
         <div id="fb-root"></div>
         <div class="row" align="center">
             <div class="col-md-12" style="padding-top: 20px; min-width: 100%">
-                <div class="fb-comments" data-href="http://localhost:8000/blog/entrada/{{$entrada->id}}"
+                <div class="fb-comments" data-href="{{url()->current()}}"
                      data-width="950" data-numposts="5" data-colorscheme="light"></div>
             </div>
         </div>
