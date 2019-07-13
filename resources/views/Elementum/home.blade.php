@@ -10,7 +10,30 @@
             @foreach($slider as $item)
             <div class="carousel-item @if($item->id == $first) active @endif h-100">
                 <img class="d-block w-100" src="{{ URL::to('/') }}/images/slider/{{$item->nombre}}" alt="">
-            </div>
+                   @if($item->show_btn == 1)
+                    <div style="text-align: center; position: absolute;bottom: 11vh;left: 50%;">
+                        <div style="position: relative;left: -50%;" class="relative_box_btn">
+                            <a href="{{ $item->btn_url }}"  target="_blank">
+                                <button 
+                                     @if($item->btn_color != '#000000')
+                                        style="background-color:{{$item->btn_color}};
+                                        @if(isset($item->btn_text_size))
+                                            font-size: {{$item->btn_text_size}}px;
+                                        @endif
+                                        @if(isset($item->btn_text_color))
+                                            color: {{$item->btn_text_color}};
+                                        @endif
+                                        " 
+                                        class="btn btn_in_slider_home" 
+                                      @else 
+                                        class="btn-hover color-9"
+                                      @endif
+                                >{{ $item->btn_text }}</button>
+                            </a>
+                        </div>
+                    </div>
+                @endif
+	    </div>
             @endforeach
         </div>
     </div>

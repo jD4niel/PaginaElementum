@@ -18,7 +18,7 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libros= Libro::orderBy('id', 'desc')->take(8)->get();
+        $libros= Libro::latest('fecha')->orderBy('fecha')->take(8)->get();
         //dd($libros->imagen);
         $slider = DB::table('slider')->get();
         $first =DB::table('slider')->min('id');

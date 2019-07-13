@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container text-center">
-        <form action="" id="book_form" class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
+        <form autocomplete="off" action="" id="book_form" class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
             <div class="form-group text-center">
                 <h1>AGREGAR NUEVO LIBRO</h1>
             </div>

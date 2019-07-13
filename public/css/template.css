@@ -205,6 +205,12 @@ nav ul li ul li a {
     padding:0 55px !important;
 }
 @media only screen and (max-width: 799px) {
+    .relative_box_btn{
+	top: 17px !important;
+    }
+    .btn_in_slider_home{
+	font-size:3vw !important;
+    }
     #cuerpo_blog{
     	padding:0 25px !important;
     }

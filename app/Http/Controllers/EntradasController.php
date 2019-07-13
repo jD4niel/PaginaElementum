@@ -23,7 +23,8 @@ class EntradasController extends Controller
      */
     public function index()
     {
-        $entradas = Entradas::all();
+        $entrada_sections = DB::table('entrada_sections')->where('entradas_id','>',0)->pluck('entradas_id')->all();
+        $entradas = Entradas::whereNotIn('id',$entrada_sections)->get();
         $elementum = DB::table('elementum_info')->where('id', '=', 1)->first();
 
         return view('blog.entrada', compact('entradas', 'entradas'));
@@ -259,6 +260,10 @@ class EntradasController extends Controller
     public function destroy($id)
     {
         Entradas::destroy($id);
+	$entrada_sections = DB::table('entrada_sections')->where('entradas_id','=',$id)->get();
+        if(isset($entrada_sections)){
+		return redirect()->route('elementario.index.controller')->with('status', '¡Entrada eliminada con éxito!');
+	}
         return redirect()->route('entradas')->with('status', '¡Entrada eliminada con éxito!');
     }
 }

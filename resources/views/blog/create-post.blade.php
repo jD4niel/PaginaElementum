@@ -55,7 +55,7 @@
                     <h3> Sección {{ $section_obj->name }} </h3>
                 </div>
             @endif
-            <form method="post" id="form-entrada" enctype="multipart/form-data">
+            <form autocomplete="off"  method="post" id="form-entrada" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                 <div class="panel panel-default">
@@ -95,7 +95,7 @@
                                     <div class="col-md-10">
                                         <div class="form-group" id="select-autor">
                                             <select name="user_id" id="user_id" class="form-control">
-                                                <option value="" disabled selected>Seleccione un Autor</option>
+                                                <option value="999" disabled selected>Seleccione un Autor</option>
                                                 @foreach($autores->where('is_blog_writer',1) as $item)
                                                     <option value="{{$item->id}}">{{$item->nombre.' '.$item->apellido_p.' '.$item->apellido_m}}</option>
                                                 @endforeach
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="form-group hidden" id="check-autor">
                                             <input id="autor_externo" type="text" class="form-control"
-                                                   name="autor_externo" placeholder="Nombre de Colaborador Externo">
+                                                   name="autor_externo" value="Editorial Elementum"  placeholder="Nombre de Colaborador Externo">
                                         </div>
                                     </div>
 
@@ -176,16 +176,48 @@
 
         $('#form-entrada').on('submit', function (event) {
             event.preventDefault();
-            var formData = new FormData(this);
-            formData.set('texto', CKEDITOR.instances['texto'].getData());
+            var allow = true;
+	    var formData = new FormData(this);
+	    if($('#user_id option:selected').val()==999){
+		console.log('is extern autor')
+		$('#confirm_ce').attr('selected','selected');
+	    }
+	    formData.set('texto', CKEDITOR.instances['texto'].getData());
             if (formData.has('autor_ex')) {
                 formData.append('user_id', formData.get('autor_ex'));
                 formData.delete('autor_ex');
-            }
-
+            }else{
+	   	formData.append('user_id',999);
+	     }
+            @if(!empty($seccion_id))
+                console.log('seccion_id',{{$seccion_id}});
+                formData.append('seccion_id',{{$seccion_id}});
+            @endif
+ 
+		console.log('form data ===> ',formData);
             for (var pair of formData.entries()) {
                 console.log(pair[0] + ', ' + pair[1]);
+		if(pair[0] == 'file'){
+	           console.log('has image = ',isFileImage(pair[1]));
+		   if(!isFileImage(pair[1])){
+			Swal.fire({
+                        type: 'error',
+                        title: 'Campos requeridos',
+                        text: 'La entrada no tiene una imagen de portada',
+                        })
+                    allow = false;
+		   }
+		}
+		if(pair[1] == ''){
+		    Swal.fire({
+  			type: 'error',
+			title: 'Campos requeridos',
+ 		        text: `Debes de llenar el campo ${pair[0]} de la entrada`,
+			})
+		    allow = false;
+		}
             }
+	    if(allow == true){
             Swal.fire({
                 title: "¿Guardar entrada?",
                 type: "warning",
@@ -217,19 +249,24 @@
                     });
                 }
             });
+	  }
         });
         $('#confirm_ce').change(function () {
             if ($(this).is(":checked")) {
                 $('#select-autor').addClass('hidden');
                 $('#check-autor').removeClass('hidden');
                 $('#autor_ex').removeAttr('disabled');
+		$('#autor_ex').attr('required');
             } else {
+		$('#autor_ex').removeAttr('required');
                 $('#autor_ex').attr('disabled');
                 $('#select-autor').removeClass('hidden');
                 $('#check-autor').addClass('hidden');
             }
         });
-
+	function isFileImage(file) {
+ 	   return file && file['type'].split('/')[0] === 'image';
+	}
 
         function aumentar() {
             var a = 1;

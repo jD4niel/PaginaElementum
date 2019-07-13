@@ -49,7 +49,7 @@
 @section('content')
     <div class="container" style="background-color: white">
         <div class="row">
-            <form method="post" id="form-entrada" enctype="multipart/form-data">
+            <form autocomplete="off" method="post" id="form-entrada" enctype="multipart/form-data">
                 <div class="panel panel-default">
                     <div class="row">
                         <p class="h1 text-center">Nueva entrada:

@@ -1,3 +1,28 @@
+.add_btn_container{
+    text-align: center;
+    margin-bottom: 12px;
+}
+.add_btn_to_carousel{
+    margin: auto;
+}
+.body_container_btn{
+    display: none;
+    text-align: center;
+    background-color: #F0EFEF;
+    border-radius: 5px;
+    box-shadow: 6px 10px 5px -4px rgba(91, 91, 91, 0.38);
+    padding:20px;
+}
+.color_btn_add_color{
+    padding: 0;
+}
+.color_btn_add_color:hover{
+    cursor: pointer !important;
+}
+.color_btn_add_color input:hover{
+    cursor: pointer !important;
+}
+
 .btn-add-new{
     color: white;
     border: none;

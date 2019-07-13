@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container text-center">
-        <form action="{{route('save.autor')}}" method="post" enctype="multipart/form-data">
+        <form autocomplete="off" action="{{route('save.autor')}}" method="post" enctype="multipart/form-data">
                 <input type="hidden" value="{{ csrf_token() }}" name="_token">
                 <div class="row text-left" style="border: 10px solid rgba(97,97,97,0.68);padding: 50px 50px 70px 50px;">
                 <div class="form-group text-center">

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 class ControlController extends Controller
 {
     /**
@@ -345,4 +346,28 @@ class ControlController extends Controller
             return redirect()->to('/editar');
         }
     }
+    public function uploadBtnInfo(){
+        $input = Input::all();
+        $show_btn = 0;
+        if(isset($input['show_btn'])){
+            if ($input['show_btn']=='on') {
+                $show_btn = 1;
+            }
+        }
+        try{
+            $slider = DB::table('slider')->where('id',$input['id'])->update([
+                'show_btn' => $show_btn,
+                'btn_color' => $input['btn_color'],
+                'btn_url' => $input['btn_url'],
+                'btn_text' => $input['btn_text'],
+                'btn_text_color' => $input['btn_text_color'],
+                'btn_text_size' => $input['btn_text_size'],
+            ]);
+            return redirect()->back();
+        } catch (Exception $e) {
+            return Redirect::back()->withErrors($validator);
+        }
+
+    }
+
 }

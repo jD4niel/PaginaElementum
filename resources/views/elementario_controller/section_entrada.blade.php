@@ -2,9 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if(isset($section_obj->name))
     <div class="row text-center">
         <h1> {{$section_obj->name}} </h1>
     </div>
+   @endif
     <div class="row btn-entry-container">
         <a href="{{ route('section.entry', $seccion_id) }}" target="_blank"><button class="btn-hover color-9" style="position:absolute;right: 0;">CREAR ENTRADA</button></a>
     </div>
@@ -53,6 +55,7 @@
         });
 
         function borrar(link) {
+	    console.log(link);
             Swal.fire({
                 title: "¿Estas Seguro de borrar esta entrada?",
                 text: "Esta acción es irreversible.",
@@ -64,7 +67,8 @@
                 confirmButtonText: 'Si'
             }).then((result) => {
                 if (result.value) {
-                    $(location).attr('href',link);
+                    //$(location).attr('href',link);
+		   window.location.href = window.location.origin + '/borrar/entrada/' + link
                 }
             });
         }

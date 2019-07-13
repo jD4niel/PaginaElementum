@@ -1,4 +1,4 @@
-|@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <script>
@@ -19,6 +19,60 @@
                         </div>
                         <div onclick="eliminar({{$item->id}})" class="anuncio"><i class="far fa-trash-alt"></i></div>
                     </div>
+
+		      <div class="add_btn_container">
+                        <button 
+                            id="btn_to_carousel_{{$item->id}}"
+                            onclick="show_container({{$item->id}})" 
+                            class="btn btn-default add_btn_to_carousel"
+                            @if($item->btn_color != '#000000') 
+                                style="background-color:{{$item->btn_color}};
+                                @if(isset($item->btn_text_color))
+                                    color: {{$item->btn_text_color}};
+                                @endif
+                                " 
+                            @endif
+                            >
+                            @if($item->btn_text != '') {{$item->btn_text}} @else Agregar botón @endif
+                        </button> <br>
+                        <div id="container_to_carousel_{{$item->id}}" class="body_container_btn">
+                            <form id="form_{{$item->id}}"action="{{route('btn.info')}}" method="post">
+                                
+                                <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                                <input type="hidden" value="{{$item->id}}" name="id">
+                                <div class="input-group" style="margin-top: 10px;">
+                                    <input type="text" placeholder="Texto y color" value="{{$item->btn_text}}" id="btn_text_{{$item->id}}" name="btn_text" oninput="text_write({{$item->id}})" class="form-control">
+                                    <span class="input-group-addon color_btn_add_color"><input type="color" id="btn_text_color_{{$item->id}}" oninput="text_color_change({{$item->id}})" name="btn_text_color" value="{{$item->btn_text_color}}"/></span>
+                                 </div>
+                                 <br>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">URL</span>
+                                    <input type="text" class="form-control" name="btn_url" value="{{$item->btn_url}}" placeholder="https://www.google.com/">
+                                  </div>
+                                  <div class="input-group">
+                                    <span class="input-group-addon">Fondo</span>
+                                    <input type="color" class="form-control" name="btn_color" id="btn_color_{{$item->id}}" oninput="color_change({{$item->id}})" value="{{$item->btn_color}}">
+                                  </div>
+                                  <div class="input-group">
+                                    <span class="input-group-addon">Tamaño</span>
+                                    <input type="number" min="9" max="42" class="form-control" name="btn_text_size" id="btn_text_size_{{$item->id}}" oninput="btn_text_size_change({{$item->id}})" value="{{$item->btn_text_size}}" placeholder="16">
+                                  </div>
+                                <div class="form-group">
+                                  <label for="checkbox_add_{{$item->id}}" style="display: inline; width: 50%;">Mostrar botón</label>
+                                  <input 
+                                        id="checkbox_add_{{$item->id}}" 
+                                        name="show_btn" 
+                                        type="checkbox" 
+                                        style="height: 20px;display: inline;"
+                                        @if($item->show_btn == 1) checked @endif>
+                                </div>
+                                <button class="btn btn-warning" type="submit" style="margin-top: 15px;"><i class="far fa-save"></i> Guardar cambios</button>
+
+                            </form>
+                        </div>
+                    </div>
+
+
                 </div>
             @endforeach
             <div class="col-md-12" style="margin-top: 35px;">
@@ -226,6 +280,26 @@
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script>
+
+	function btn_text_size_change(id) {
+            let size = $('#btn_text_size_'+id).val();
+            $('#btn_to_carousel_'+id).css('font-size',size+'px');
+        }
+        function color_change(id) {
+            let color = $('#btn_color_'+id).val();
+            $('#btn_to_carousel_'+id).css('background-color',color);
+        }
+        function text_color_change(id) {
+            let color = $('#btn_text_color_'+id).val();
+            $('#btn_to_carousel_'+id).css('color',color);
+        }
+        function text_write(id) {
+            $('#btn_to_carousel_'+id).text($('#btn_text_'+id).val())
+        }
+        function show_container(id){
+            $('#container_to_carousel_'+id).toggle()
+        }
+
         function imgChange() {
             $('#changeImg').trigger('click');
         }

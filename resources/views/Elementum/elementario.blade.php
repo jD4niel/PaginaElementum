@@ -64,7 +64,7 @@
                 <hr class="hr-sec"/>
                 <hr>
             </div>
-            <div class="row section_uno">
+            <div class="col-md-12 section_uno">
 
                 @foreach($entrada_sections as $row)
                     @if($row->section_obj_id == $item->id)

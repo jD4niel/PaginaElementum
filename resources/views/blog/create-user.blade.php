@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <form action="" class="form-horizontal col-md-8 form-registry">
+        <form autocomplete="off" action="" class="form-horizontal col-md-8 form-registry">
             <h1 class="h1 text-center">Registrar nuevo usuario</h1>
             <hr>
             <div class="form-group row">

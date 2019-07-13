@@ -143,3 +143,7 @@ Route::get('/actividades/seccion/{id}', 'ElementarioController@section')->name('
 //Aviso de Privacidad
 Route::get('/aviso-de-privacidad', 'ControlController@politicaCompleta')->name('politica');
 Route::post('/politica/editar/{id}', 'ControlController@editarPolitica')->name('politica.edit')->middleware('auth');
+
+//Agregar botones a slider
+Route::post('/editar/add-button-to-slider','ControlController@uploadBtnInfo')->name('btn.info')->middleware('auth','editor');
+

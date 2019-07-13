@@ -5,7 +5,7 @@
         <div class="row col-md-8 text-center" style="margin: auto;float: none;">
             <div class="col-md-12">
                 <br>
-                <form class="taller-form form" action="{{route('new.taller.send')}}" method="post" enctype="multipart/form-data">
+                <form autocomplete="off" class="taller-form form" action="{{route('new.taller.send')}}" method="post" enctype="multipart/form-data">
                     <h1>CREAR TALLER</h1>
                     <br>
                     <hr>
