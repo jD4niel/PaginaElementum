@@ -1,12 +1,21 @@
 @extends('template')
+@section('dynamic_meta')
 
+    <meta property="og:url" content="{{url()->current()}}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{$entrada->nombre}}"/>
+    <meta property="og:description" content="{{$entrada->intro}}"/>
+    <meta property="og:image" content="{{asset("images/entradas/")}}/{{$entrada->imagen}}"/>
+
+@endsection
 @section('home')
     <div class="container-fluid">
         <div class="row pt-2">
             <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1 offset-xl-1">
                 <div class="row">
                     <div class="col-12 d-none d-sm-none d-md-none d-lg-block d-xl-block">
-                        <div class="" style="background: linear-gradient(0deg,rgba(32,34,33,0.89),rgba(68,76,87,0.73)),url('{{asset("images/entradas/")}}/{{$entrada->imagen}}');background-repeat: no-repeat;color:white;padding: 100px;text-align:center;background-color: #1d3b4f;height: 300px; background-size: cover;">
+                        <div class=""
+                             style="background: linear-gradient(0deg,rgba(32,34,33,0.89),rgba(68,76,87,0.73)),url('{{asset("images/entradas/")}}/{{$entrada->imagen}}');background-repeat: no-repeat;color:white;padding: 100px;text-align:center;background-color: #1d3b4f;height: 300px; background-size: cover;">
                             <h4>{{$entrada->intro}}</h4>
                         </div>
                     </div>
@@ -17,7 +26,8 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-12 d-block d-sm-block d-md-block d-lg-none d-xl-none">
-                        <img src="{{asset("images/entradas/")}}/{{$entrada->imagen}}" alt="" class="img-fluid" style="max-height: 300px; object-fit: cover; min-width: 100%">
+                        <img src="{{asset("images/entradas/")}}/{{$entrada->imagen}}" alt="" class="img-fluid"
+                             style="max-height: 300px; object-fit: cover; min-width: 100%">
                     </div>
                 </div>
             </div>
@@ -26,7 +36,9 @@
 
     <div class="container">
         <div class="row">
-            <div id="cuerpo_blog" class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1 offset-xl-1 shadow-lg" style="margin-top: -50px; background-color: white;">
+            <div id="cuerpo_blog"
+                 class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1 offset-xl-1 shadow-lg"
+                 style="margin-top: -50px; background-color: white;">
                 <div class="row">
                     <div class="col-12" style="color: rgba(29,59,79,0.23)">
                         <p class="text-right pt-2">
@@ -46,10 +58,13 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
-                                <h1 class="serif display-4 d-none d-md-block d-lg-block d-xl-block" style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h1>
-                                <h3 class="serif d-block d-sm-block d-md-none" style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h3>
-                            @if($entrada->user_id != 999)
-                                    <div>Escrito por <b style="color:#1d3b4f;"><a href="{{ route('autores.detalle', $entrada->user_id) }}">{{$entrada->autor}}</a></b>,
+                                <h1 class="serif display-4 d-none d-md-block d-lg-block d-xl-block"
+                                    style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h1>
+                                <h3 class="serif d-block d-sm-block d-md-none"
+                                    style="color:#1d3b4f;margin-bottom: 20px;">{{$entrada->nombre}}</h3>
+                                @if($entrada->user_id != 999)
+                                    <div>Escrito por <b style="color:#1d3b4f;"><a
+                                                    href="{{ route('autores.detalle', $entrada->user_id) }}">{{$entrada->autor}}</a></b>,
                                         {{$entrada->fecha}} &middot; No. de Visita: {{$entrada->visitas}}</div>
                                 @else
                                     <div>Escrito por <b style="color:#1d3b4f;">{{$entrada->autor_externo}}</b>,
@@ -84,42 +99,43 @@
 
                 <hr class="shine">
                 <div class="row py-5">
-                @if($autor->id != 999)
-                    <div class="col-10 offset-1">
-                        <div class="row">
-                            <div class="col-8 col-sm-8 col-md-3  offset-2 offset-sm-2 offset-md-0 py-4 py-sm-4 py-md-0" >
-                                <img class="img-fluid rounded-circle shadow"
-                                     src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="">
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-9">
-                                <a href="{{ route('autores.detalle', $autor->id) }}">
-                                    <h3 class="text-center text-sm-center text-md-left">{{$autor->nombre}}{{$autor->apellido_p}}&nbsp;{{$autor->apellido_m}}</h3></a>
-                                <p style="font-size: 1em; text-align: justify;text-justify: inter-word;">{!! $autor->breve_desc!!}</p>
+                    @if($autor->id != 999)
+                        <div class="col-10 offset-1">
+                            <div class="row">
+                                <div class="col-8 col-sm-8 col-md-3  offset-2 offset-sm-2 offset-md-0 py-4 py-sm-4 py-md-0">
+                                    <img class="img-fluid rounded-circle shadow"
+                                         src="{{ URL::to('/') }}/images/fotos_autores/{{$autor->imagen}}" alt="">
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-9">
+                                    <a href="{{ route('autores.detalle', $autor->id) }}">
+                                        <h3 class="text-center text-sm-center text-md-left">{{$autor->nombre}}{{$autor->apellido_p}}
+                                            &nbsp;{{$autor->apellido_m}}</h3></a>
+                                    <p style="font-size: 1em; text-align: justify;text-justify: inter-word;">{!! $autor->breve_desc!!}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12" align="right">
-                        @if($autor->facebook != "not_")
-                            <i onclick="openInNewTab('{{$autor->facebook}}')"
-                               class="fab social_icons fa-facebook-f link"
-                               style="color: rgb(29, 59, 79); border: 2px solid rgba(29,59,79, 0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
-                        @endif
-                        @if($autor->twitter != "not_")
-                            <i onclick="openInNewTab('https://twitter.com/{{$autor->twitter}}')"
-                               class="fab social_icons fa-twitter link"
-                               style="color: rgb(29, 59, 79); border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
-                        @endif
-                        @if($autor->instagram != "not_")
-                            <i onclick="openInNewTab('https://instagram.com/{{$autor->instagram}}')"
-                               class="fab social_icons fa-instagram link"
-                               style="color: rgba(29, 59, 79); border: 2px solid rgba(29,59,79,0.23); color: rgb(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
-                        @endif
-                    </div>
-                @else
-                    <div class="col-10 offset-1">
-                        Autor: <h3>{{$entrada->autor_externo}}</h3>
-                    </div>
-                @endif
+                        <div class="col-md-12" align="right">
+                            @if($autor->facebook != "not_")
+                                <i onclick="openInNewTab('{{$autor->facebook}}')"
+                                   class="fab social_icons fa-facebook-f link"
+                                   style="color: rgb(29, 59, 79); border: 2px solid rgba(29,59,79, 0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
+                            @endif
+                            @if($autor->twitter != "not_")
+                                <i onclick="openInNewTab('https://twitter.com/{{$autor->twitter}}')"
+                                   class="fab social_icons fa-twitter link"
+                                   style="color: rgb(29, 59, 79); border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
+                            @endif
+                            @if($autor->instagram != "not_")
+                                <i onclick="openInNewTab('https://instagram.com/{{$autor->instagram}}')"
+                                   class="fab social_icons fa-instagram link"
+                                   style="border: 2px solid rgba(29,59,79,0.23); color: rgba(29,59,79,0.23); font-size: 15px; padding-top:6px;height: 30px; width: 30px;"></i>
+                            @endif
+                        </div>
+                    @else
+                        <div class="col-10 offset-1">
+                            Autor: <h3>{{$entrada->autor_externo}}</h3>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
