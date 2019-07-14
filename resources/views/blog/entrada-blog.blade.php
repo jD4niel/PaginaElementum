@@ -7,6 +7,16 @@
     <meta property="og:description" content="{{$entrada->intro}}"/>
     <meta property="og:image" content="{{asset("images/entradas/")}}/{{$entrada->imagen}}"/>
 
+    @section('style')
+        <style>
+            #u_0_3 {
+                display: none;
+            }
+        </style>
+
+    @endsection
+
+
 @endsection
 @section('home')
     <div class="container-fluid">
@@ -39,8 +49,8 @@
             <div id="cuerpo_blog"
                  class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1 offset-xl-1 shadow-lg"
                  style="margin-top: -50px; background-color: white;">
-                <div class="row">
-                    <div class="col-12" style="color: rgba(29,59,79,0.23)">
+                <div class="row pt-3">
+                    <div class="col-12 " style="color: rgba(29,59,79,0.23)">
                         <p class="text-right pt-2">
                             Compartir:
                             <a class="compartir_"
@@ -82,15 +92,20 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12" align="center">
-                        <span class="fa-stack fa-2x">
-                          <i class="fas fa-circle fa-stack-2x"></i>
-                          <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <br>
-                        <div class="fb-like" data-href="{{url()->current()}}"
-                             data-layout="box_count" data-action="like" data-size="small" data-show-faces="true"
-                             data-share="false"></div>
+                    <div class="col-6 offset-3" align="center">
+                        <div class="row">
+                            <div class="col-6 text-right pr-1 align-self-center">
+                            <span class="fa-stack fa-2x" style="font-size: 1.5rem">
+                              <i class="fas fa-circle fa-stack-2x"></i>
+                              <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
+                            </span>
+                            </div>
+                            <div class="col-6 text-left align-self-center pl-1">
+                                <div class="fb-like" data-href="{{url()->current()}}"
+                                     data-layout="box_count" data-action="like" data-size="small" data-show-faces="true"
+                                     data-share="false"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -141,7 +156,7 @@
             <div class="col-md-10" align="right" style="padding-top: 1em; margin: 0 auto 0;">
                 <h3>Etiquetas</h3>
                 <hr class="hr-tags">
-                <div id="etiquetas" style="padding-top: 15px"></div>
+                <div id="etiquetas" class="pt-4"></div>
             </div>
         </div>
         <div id="fb-root"></div>
@@ -252,6 +267,11 @@
         // $(document).on('click', '#tag-value', function (event) {
         //    console.log($('#tag-value').data('tag'));
         // });
+
+        // Likes
+
+
+
     </script>
     <script>(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];

@@ -125,9 +125,13 @@
                                     </div>
                                     <div class="row ">
                                         <div class="col-12">
-                                            <p>
-                                                Escrito por <a href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}},</b></a> {{$item->fecha}}
-                                            </p>
+                                            @if($item->user_id != 999)
+                                                <p>
+                                                    Escrito por <a href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}},</b></a> {{$item->fecha}}
+                                                </p>
+                                            @else
+                                                <p>Escrito por <b>{{$item->autor_externo}},</b> {{$item->fecha}}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row ">
@@ -173,14 +177,16 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="row pt-4">
+                    <div class="row py-4">
                         <div class="col-12">
                             <h4>Nube de Etiquetas</h4>
                             <hr>
                             @for($i = 0; $i < count($nube) && $i < 20; $i++)
-                                <a href="/blog/entradas/{{$nube[$i]}}" style="color: white; cursor:pointer;">
-                                    <span class="etiqueta my-2" style="background-color: #00394C;">{{$nube[$i]}}</span>
-                                </a>
+                                @if($nube[$i] != "")
+                                    <a href="/blog/entradas/{{$nube[$i]}}" style="color: white; cursor:pointer;">
+                                        <span class="etiqueta my-2" style="background-color: #00394C;">{{$nube[$i]}}</span>
+                                    </a>
+                                @endif
                             @endfor
                         </div>
                     </div>
@@ -193,52 +199,55 @@
         </div>
 
         @foreach($sections->where('id','>',1) as $section)
-            <div id="section-{{$section->id}}">
-                <div class="row" style="padding-top: 50px">
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-10"><h3>{{$section->tipo}}</h3></div>
-                            <div class="col-md-2"><a href="{{ route('blog.secciones',$section->id) }}">Ver más
-                                    <span class="dropdown-toggle"></span></a></div>
-                        </div>
-                        <hr>
-                        @foreach($entradas->where('clasificacion_id', $section->id)->take(4) as $item)
+            @if(count($entradas->where('clasificacion_id', $section->id)) > 0)
+                <div id="section-{{$section->id}}">
+                    <div class="row" style="padding-top: 50px">
+                        <div class="col-md-8">
                             <div class="row">
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-                                    <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
-                                                src="{{asset("images/entradas")}}/{{$item->imagen}}" alt=""
-                                                class="img-fluid center-cropped pb-2" ></a>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <a href="{{ route('blog.entrada.elementum',$item->id) }}">
-                                                <h3 class="serif" style="color:#1d3b4f;">{{$item->nombre}}</h3>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            @if($item->user_id != 999)
-                                                <p>
-                                                    Escrito por <a href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}},</b></a> {{$item->fecha}}
-                                                </p>
-                                            @else
-                                                <p>Escrito por <b>{{$item->autor_externo}},</b> {{$item->fecha}}</p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p>{{substr($item->intro,0,150)}}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="col-md-10"><h3>{{$section->tipo}}</h3></div>
+                                <div class="col-md-2"><a href="{{ route('blog.secciones',$section->id) }}">Ver más
+                                        <span class="dropdown-toggle"></span></a></div>
                             </div>
-                        @endforeach
+                            <hr>
+                            @foreach($entradas->where('clasificacion_id', $section->id)->take(4) as $item)
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                        <a href="{{ route('blog.entrada.elementum',$item->id) }}"><img
+                                                    src="{{asset("images/entradas")}}/{{$item->imagen}}" alt=""
+                                                    class="img-fluid center-cropped pb-2" ></a>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a href="{{ route('blog.entrada.elementum',$item->id) }}">
+                                                    <h3 class="serif" style="color:#1d3b4f;">{{$item->nombre}}</h3>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                @if($item->user_id != 999)
+                                                    <p>
+                                                        Escrito por <a href="{{ route('autores.detalle',$item->user_id) }}"><b>{{$item->autor}},</b></a> {{$item->fecha}}
+                                                    </p>
+                                                @else
+                                                    <p>Escrito por <b>{{$item->autor_externo}},</b> {{$item->fecha}}</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p>{{substr($item->intro,0,150)}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
+
         @endforeach
 
     </div>
